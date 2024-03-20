@@ -1,6 +1,6 @@
 import { MonolineLogo } from "../../MonolineLogo"
 
-export const Header = () => {
+export const AuthHeader = () => {
   return (
     <div>
         <MonolineLogo/>

@@ -14,9 +14,9 @@ export const signUpFormValidator = yup.object({
     .string()
     .required("password is required")
     .min(6, "password must have atleast 6 characters")
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/\d/, "Password must contain at least one number"),
+    .matches(/[a-z]/, "Password must contain a lowercase letter")
+    .matches(/[A-Z]/, "Password must contain an uppercase letter")
+    .matches(/\d/, "Password must contain a number"),
   confirm_password: yup
     .string()
     .required("confirm password")

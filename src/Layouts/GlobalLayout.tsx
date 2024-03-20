@@ -1,3 +1,11 @@
+import { Outlet } from "react-router-dom";
+
 export const GlobalLayout = () => {
-  return <div className="text-primaryColor-light bg-textColor-light">GlobalLayout</div>;
+  return (
+    <div>
+      <header></header>
+      <main> <Outlet/> </main>
+      <footer></footer>
+    </div>
+  );
 };
