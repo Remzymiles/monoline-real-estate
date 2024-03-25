@@ -4,7 +4,7 @@ export const signUpFormValidator = yup.object({
   fullname: yup
     .string()
     .required("fullname is required")
-    .min(6, "fullname must have atleast 6 characters"),
+    .min(4, "fullname must have atleast 4 characters"),
   email_address: yup
     .string()
     .required("email address is required")
