@@ -1,9 +1,9 @@
-import { MonolineLogo } from "../../MonolineLogo"
+import { MonolineLogo } from "../../MonolineLogo";
 
 export const AuthHeader = () => {
   return (
-    <div>
-        <MonolineLogo/>
+    <div className="flex justify-center items-center">
+      <MonolineLogo/>
     </div>
-  )
-}
+  );
+};

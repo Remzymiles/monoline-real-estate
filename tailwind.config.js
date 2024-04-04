@@ -7,18 +7,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        'textColor': {
-          'light': '#1E2F4E',
-          'dark': '#101929'
-        },
         'primaryColor': {
           'light': '#89935ee8',
-          'dark': '#6C744A'
+          'dark': '#6C744A',
+          'cream': '#e9ebe0',
+          'lightCream': '#f4f5ef'
+        },
+        'secondaryColor': {
+          'light': '#1E2F4E',
+          'lighter': '#7e9acd',
+          'dark': '#101929'
         }
       },
       screens: {
-        'mobile': {'min':'320px', 'max':'600px'},
-        'tablet': {'min':'640px', 'max':'950px'},
+        'mobile': { 'min': '320px', 'max': '630px' },
+        'mobile-above': { 'min': '320px' },
+        'tablet-below': { 'max': '950px' },
+        'tablet': { 'min': '640px', 'max': '950px' },
         'laptop': '1024px',
       },
     },

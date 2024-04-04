@@ -21,7 +21,7 @@ export const Input = ({
     <>
       <div className="relative">
         <label
-          className="mb-1 capitalize text-textColor-light"
+          className="mb-1 capitalize text-secondaryColor-light"
           htmlFor={htmlFor}
         >
           {nameOfInput}
@@ -30,7 +30,7 @@ export const Input = ({
           name={name}
           type={passwordVisibility ? "text" : inputType}
           placeholder={placeholder}
-          className={`px-4 py-3 bg-gray-100 w-full focus:border-b-2 focus:border-textColor-dark focus:outline-none focus:bg-gray-200 ${extraStyle}`}
+          className={`px-4 py-3 bg-gray-100 w-full focus:border-b-2 focus:border-secondaryColor-dark focus:outline-none focus:bg-gray-200 ${extraStyle}`}
           id={id}
           {...register(name)}
         />

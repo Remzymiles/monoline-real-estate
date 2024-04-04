@@ -5,7 +5,7 @@ import { AuthHeader } from "../Components/Pages/Auth/Header";
 export const AuthLayout = () => {
   return (
     <div className="flex flex-col h-[100vh] min-w-[320px]">
-        <AuthHeader />
+      <AuthHeader />
       <main className="flex-1">
         <Outlet />
       </main>

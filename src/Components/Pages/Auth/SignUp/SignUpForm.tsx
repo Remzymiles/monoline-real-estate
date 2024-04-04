@@ -28,7 +28,7 @@ export const SignUpForm = () => {
       noValidate
       onSubmit={handleSubmit(handleCreateAccount)}
     >
-      <div className="text-center text-2xl font-semibold text-textColor-dark capitalize">
+      <div className="text-center text-2xl font-semibold text-secondaryColor-dark capitalize">
         <h1>Create account</h1>
       </div>
 
@@ -121,8 +121,11 @@ export const SignUpForm = () => {
       </div>
       {/*  */}
       <FormButton name="Sign up" />
-      <p className="text-center text-textColor-light">
-        already have an account? <Link to={"/login"} className="text-blue-900">Login</Link>
+      <p className="text-center text-secondaryColor-light">
+        already have an account?{" "}
+        <Link to={"/auth/login"} className="text-blue-900">
+          Login
+        </Link>
       </p>
     </form>
   );
