@@ -1,0 +1,602 @@
+[
+  {
+    "property_id": 1,
+    "description": "Remodeled! New flooring, Master bath fully remodeled, carpet replaced 2021, A/c's replaced, new roof Additional information coming Waiting on Kitchen counters installation",
+    "price": 1350000,
+    "mortgage": 7572,
+    "location": {
+      "address": "7636 E Rose Garden Ln",
+      "city": "Scottsdale, AZ",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 5,
+      "baths": 4,
+      "sqft": 3489
+    },
+    "photos": [
+      "/images/E-Rose-Garden-Ln-1.webp",
+      "/images/E-Rose-Garden-Ln-2.webp",
+      "/images/E-Rose-Garden-Ln-3.webp",
+      "/images/E-Rose-Garden-Ln-4.webp",
+      "/images/E-Rose-Garden-Ln-5.webp"
+    ]
+  },
+  {
+    "property_id": 2,
+    "description": "FULLY REMODELED EXQUISITE LUXURY HOME! Soaring 14' ceilings in great room, 12' in FR, Kitchen & MBR. Dramatic 15' x 8' stacking slider revealing views from entry thru to back yard as you enter. Converted from 3BR to 4BR/3BA, wet bar, 3 fireplaces. Massive Chef kitchen with island, breakfast room, 155 bottle wine cabinet. Formal dining room & Living Room. New LowE3 windows & patio door. Shaker cabinets, quartz counter tops, under cabinet lighting, plug molds. Master has Curb-less Shower AND Soaking Tub, 10' vanities w/ LED mirrors, plus make-up area, private commode/bidet, huge custom closet. Split floor plan. Generous laundry. Over-height 3-Car garage w/ cabinets. Outdoor BBQ next to pool/jacuzzi/waterfall. Come home to your private oasis!! Priced UNDER current appraisal!",
+    "price": 1415000,
+    "mortgage": 7897,
+    "location": {
+      "address": "10994 N 123rd St",
+      "city": "Scottsdale, AZ",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 4,
+      "baths": 3,
+      "sqft": 3094
+    },
+    "photos": [
+      "/images/10994-N-123rd-St-1.webp",
+      "/images/10994-N-123rd-St-2.webp",
+      "/images/10994-N-123rd-St-3.webp",
+      "/images/10994-N-123rd-St-4.webp",
+      "/images/10994-N-123rd-St-5.webp"
+    ]
+  },
+  {
+    "property_id": 3,
+    "description": "This 3 bedroom 2 bathroom home is nestled into a quiet cul-de-sac in sunny Scottsdale! Located near Old Town Scottsdale, Papago Park, the Phoenix Zoo and the Desert Botanical Gardens!",
+    "price": 619999,
+    "mortgage": 3481,
+    "location": {
+      "address": "7514 E Beatrice St",
+      "city": "Scottsdale, AZ",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 2,
+      "sqft": 1356
+    },
+    "photos": [
+      "/images/27615-N-137th-St-1.jpeg",
+      "/images/27615-N-137th-St-2.webp",
+      "/images/27615-N-137th-St-3.webp",
+      "/images/27615-N-137th-St-4.webp",
+      "/images/27615-N-137th-St-5.webp"
+    ]
+  },
+  {
+    "property_id": 4,
+    "description": "Nestled in the serene rural area east of Troon, this custom-built home exudes a genuine Southwestern ambiance. The great room, split floor plan, adorned with tile floors showcases a thoughtfully designed layout. Southwest-inspired accents and delightful details enhance the overall charm. Revel in the breathtaking panoramic views of the surrounding mountain ranges from this tranquil abode, ideally situated in a small neighborhood just south of Dynamite Road. The backyard oasis beckons with mesmerizing vistas, featuring a delightful pool and a soothing water feature for serene evenings outdoors. Meticulously maintained, this residence boasts fresh interior and exterior paint, presenting a turnkey opportunity. The home features a paver circular drive in front, an EV charger & 3 car garage",
+    "price": 975000,
+    "mortgage": 5431,
+    "location": {
+      "address": "27615 N 137th St",
+      "city": "Scottsdale, AZ",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 3,
+      "sqft": 2668
+    },
+    "photos": [
+      "/images/4704-Sunset-1.webp",
+      "/images/4704-Sunset-2.webp",
+      "/images/4704-Sunset-3.webp",
+      "/images/4704-Sunset-4.webp",
+      "/images/4704-Sunset-5.webp"
+    ]
+  },
+  {
+    "property_id": 5,
+    "description": "Located in South Scottsdale in between Old Town Scottsdale and ASU and is right in center of everything! This spacious 3 bedroom, 2 bathroom property isn't merely a house, it's a home! The open floor plan opens into the living room that's large enough for the whole family to enjoy movie night. The kitchen invites you to the island for a snack as you head out back to enjoy the sunny weather for yard games!",
+    "price": 609999,
+    "mortgage": 3425,
+    "location": {
+      "address": "7531 E Polk St",
+      "city": "Scottsdale, AZ",
+      "state": "Arizona",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 2,
+      "sqft": 1148
+    },
+    "photos": [
+      "/images/9821-Milton-Albert-Way-1.webp",
+      "/images/9821-Milton-Albert-Way-2.webp",
+      "/images/9821-Milton-Albert-Way-3.webp",
+      "/images/9821-Milton-Albert-Way-4.webp",
+      "/images/9821-Milton-Albert-Way-5.webp"
+    ]
+  },
+  {
+    "property_id": 6,
+    "description": "Gorgeous 2 bedroom, 2 bath, top floor, corner unit in The Grange Condominiums complex. Walking distance to Central Market, Blackswan Yoga, Juiceland, Regal Westgate Movie Theater, Austin Bouldering Project, Flow Yoga, and several restaurants. Only a few minutes drive from The Sunset Valley Farmers Market, Milk + Honey spa, South Lamar, and anything you could ever need! Truly a gem of a spot in the heart of 78745. Unit features vaulted ceilings, modern kitchen with island and farmhouse style sink, and recessed lighting with ample natural light as well. Features a wide patio overlooking the central courtyard. Units in this complex aren’t available often! Great opportunity to call south Austin home.",
+    "price": 519000,
+    "mortgage": 3710,
+    "location": {
+      "address": "4704 Sunset",
+      "city": "Austin, TX",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 2,
+      "baths": 2,
+      "sqft": 1073
+    },
+    "photos": [
+      "/images/7608-Journeyville-Dr-1.webp",
+      "/images/7608-Journeyville-Dr-2.webp",
+      "/images/7608-Journeyville-Dr-3.webp",
+      "/images/7608-Journeyville-Dr-4.webp",
+      "/images/7608-Journeyville-Dr-5.webp"
+    ]
+  },
+  {
+    "property_id": 7,
+    "description": "Nestled just off Slaughter Lane in South Austin, Messinger unveils its crown jewel: a stunning West-facing residence presenting the epitome of modern luxury living. Embrace the tranquility of your surroundings as this immaculate home backs up to the community's picturesque walking path. Step into sophistication with this two-story sanctuary, boasting 3 bedrooms and 2.5 bathrooms. Entertain in grandeur as the spacious living, dining, and kitchen areas effortlessly converge, delineated only by the kitchen island, adorned with luxurious quartz countertops and 42” shaker style cabinets. Your attached two-car garage is complemented by additional storage space for seamless organization. Features a walk-in pantry, an upstairs game room, and a secluded Owner’s Suite adorned with an abundance of windows. Indulge in the vibrant local scene, with an array of popular hot spots and shopping centers just moments away, including Moontower, Armadillo Den, HEB, Southpark Meadows, Mary Moore Searight Park, and beyond. Seize the opportunity to make Messinger your own, with estimated completion slated for May 2024. Don't miss your chance to secure your slice of South Austin paradise—schedule your private tour today!",
+    "price": 454999,
+    "mortgage": 3039,
+    "location": {
+      "address": "9821 Milton Albert Way",
+      "city": "Austin, TX",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 3,
+      "sqft": 1900
+    },
+    "photos": [
+      "/images/510-Sunny Ln-A-1.webp",
+      "/images/510-Sunny Ln-A-2.webp",
+      "/images/510-Sunny Ln-A-3.webp",
+      "/images/510-Sunny Ln-A-4.webp",
+      "/images/510-Sunny Ln-A-5.webp"
+    ]
+  },
+  {
+    "property_id": 8,
+    "description": "Upon arrival at this incredibly well-appointed Executive Home you will be greeted by a One-of-a-Kind Front Door that is a WORK OF ART, and brand new garage door that beautifully coordinates! Nestled conveniently within minutes to YETI, St. Andrew's, Intel, AMD, Barton Creek Greenbelt & more plus ample shopping/dining & 15 min to DT. This Exceptionally well taken care of home, by original owners, is upgraded beyond the norm for the neighborhood & tastefully finished to impress guests yet still offer cozy repose. The Primary Suite is over-sized, away from the living spaces, has it's own access to the back Patio and Spa and offers a massive Retreat/Bonus Room for a gym/nursery/sanctuary. The open Primary Bathroom has a jetted tub, separate shower, dual vanities, a large walk-in closet and linen closet. The large open Kitchen with grand island seating and gas cooktop will have everyone gathering in the heart of the home where there is a Butler's Pantry w/new wine fridge & storage. Inviting light flows in from the multiple windows at the back of the home and draws your attention towards the incredible Outdoor Seating and Dining Spaces by the relaxing Spa, complete with automatic solar screens that draw down for privacy and weather protection along with recessed lighting that creates an incredible ambiance. Upstairs, the over-sized Game Room, complete with pool table, offers a large gathering place for friends and family to gather and celebrate, or to relax and snuggle up for family time. Off the game room, the Sunroom offers a quiet space to unwind and enjoy the lovely views. Outside the sunroom is a beautiful Observation Deck with recessed lighting and endless views. There are two large bedrooms and two full bathrooms upstairs & a large Flex Room, perfect for a theater/private office/guest room, and a cozy Reading Area off the landing complete with ample built-in bookshelves and storage. The grand staircase, glistening chandeliers & beautiful floors welcome you home!",
+    "price": 1399999,
+    "mortgage": 8757,
+    "location": {
+      "address": "7608 Journeyville Dr",
+      "city": "Austin, TX",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 4,
+      "baths": 4,
+      "sqft": 4490
+    },
+    "photos": [
+      "/images/1491-Arden-Ave-1.webp",
+      "/images/1491-Arden-Ave-2.webp",
+      "/images/1491-Arden-Ave-3.webp",
+      "/images/1491-Arden-Ave-4.webp",
+      "/images/1491-Arden-Ave-5.webp"
+    ]
+  },
+  {
+    "property_id": 9,
+    "description": "New construction in Travis Heights with grand downtown views. 3 bed 3.5 baths with a nice loft area. Backyard pergola area overlooking the city. Walk out to Lady Bird Trail, Cidercade, Rainey Street, SoCo and much more. Right next to downtown.",
+    "price": 1775000,
+    "mortgage": 11051,
+    "location": {
+      "address": "510 Sunny Ln #A",
+      "city": "Austin, TX",
+      "state": "Texas",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 4,
+      "sqft": 2305
+    },
+    "photos": [
+      "/images/60-Reading-Ave-1.webp",
+      "/images/60-Reading-Ave-2.webp",
+      "/images/60-Reading-Ave-3.webp",
+      "/images/60-Reading-Ave-4.webp",
+      "/images/60-Reading-Ave-5.webp"
+    ]
+  },
+  {
+    "property_id": 10,
+    "description": "Beautifully maintained 4 bedroom, 3 bath Cape located in SE Annadale. Step into an open concept Living, Dining + Island EIK. This main living room has tons of natural light with French doors that lead to large family room w/vaulted ceilings (legal extension) with SGD to large back and side yards. First floor features 2 bedrooms, 1 full bath; Second floor offers 2 additional bedrooms, & full bath. Full finished basement w/3/4 bath plus access to side yard. Home is meticulously maintained and features new boiler (5 zone heating), central air, newer windows, trex decking. Close to shopping, schools &",
+    "price": 809999,
+    "mortgage": 4725,
+    "location": {
+      "address": "1491 Arden Ave",
+      "city": "Staten Island, NY",
+      "state": "New York",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 4,
+      "baths": 3,
+      "sqft": 1545
+    },
+    "photos": [
+      "/images/12-Nehring-Ave-1.webp",
+      "/images/12-Nehring-Ave-2.webp",
+      "/images/12-Nehring-Ave-3.webp",
+      "/images/12-Nehring-Ave-4.webp",
+      "/images/12-Nehring-Ave-5.webp"
+    ]
+  },
+  {
+    "property_id": 11,
+    "description": "Three-bedroom corner property, colonial-style semi-attached home. Features hardwood floors throughout, two zones hot water heating, central AC, Living room with wood-burning fireplace, dining room, eat-in kitchen with cherry wood cabinets and granite countertops, sliders to the yard with deck and pool, finished basement with 3/4 bath and an additional kitchen and laundry area. Located in a great neighborhood on the South Shore. Near shopping and transportation. Close to the Verrazzano bridge. Home needs TLC.",
+    "price": 650000,
+    "mortgage": 3806,
+    "location": {
+      "address": "60 Reading Ave",
+      "city": "Staten Island, NY",
+      "state": "New York",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 3,
+      "sqft": 1360
+    },
+    "photos": [
+      "/images/15-Kenyon-St-1.webp",
+      "/images/15-Kenyon-St-2.webp",
+      "/images/15-Kenyon-St-3.webp",
+      "/images/15-Kenyon-St-4.webp",
+      "/images/15-Kenyon-St-5.webp"
+    ]
+  },
+  {
+    "property_id": 12,
+    "description": "NWelcome home to this charming one-family semi-attached residence, offering the perfect blend of comfort and convenience. Boasting 3 bedrooms and 2 bathrooms, including a newly renovated bath, this property is designed to meet your every need. Discover newly installed flooring throughout, adding a touch of modern elegance to the space. The highlight of this home is the inviting hospitality suite complete with a separate entrance, ideal for guests or as a private retreat. Entertain effortlessly in the",
+    "price": 749999,
+    "mortgage": 4380,
+    "location": {
+      "address": "12 Nehring Ave",
+      "city": "Staten Island, NY",
+      "state": "New York",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 2,
+      "sqft": 1768
+    },
+    "photos": [
+      "/images/84-Eldredge-St-1.webp",
+      "/images/84-Eldredge-St-2.webp",
+      "/images/84-Eldredge-St-3.webp",
+      "/images/84-Eldredge-St-4.webp",
+      "/images/84-Eldredge-St-5.webp"
+    ]
+  },
+  {
+    "property_id": 13,
+    "description": "A chance to own a charming house on a large level double lot in much sought after Newton! On a quiet dead-end street, this house features a detached garage and ample off-street parking for four vehicles. Period details such as lead glass window, working fireplace, elegant blond hardwood floors, and a distinctive coffered ceiling are complemented by modern amenities such as a gas heating system and 100 amp circuit breakers. Other features include a cozy loft with a skylight, 1 1/2 baths, a convenient laundry room complete with a soapstone sink. Newer roof and windows as well as recent professionally updated stucco exterior. Great location for work and play with easy access to Rt 128/95, Pike, and the commuter rail; near Dolan Pond conservation area, the Cove recreation area, walking trails, Auburndale Village, West Newton Village and Burr Elementary School. Just 1.5 miles from the vibrant dining scene on Waltham's Moody Street! Group showings: Monday April 8th 6pm, April 9th noon.",
+    "price": 929000,
+    "mortgage": 5568,
+    "location": {
+      "address": "15 Kenyon St",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 2,
+      "sqft": 1263
+    },
+    "photos": [
+      "/images/50-Grafton-St-1.webp",
+      "/images/50-Grafton-St-2.webp",
+      "/images/50-Grafton-St-3.webp",
+      "/images/50-Grafton-St-4.webp",
+      "/images/50-Grafton-St-5.webp"
+    ]
+  },
+  {
+    "property_id": 14,
+    "description": "Here's your chance to live in the historic Pomroy House. Beautiful former estate converted to 7 unique homes. The property sits proudly at the corner of Church & Eldredge Streets in the Farlow Hill District. Across from the recently restored Farlow Park, and minutes to Boston by car or transportation, this home offers so much. Spacious and modern condo features large open living dining area with plenty of room for entertaining. Renovated kitchen features two dishwashers, plenty of cabinetry, a large pantry for even more storage, double wall ovens, gas range, & French door fridge with ice/water in the door. Additional room off living area can serve as home office or additional play space. Washer dryer are conveniently located in the family bath. Main bedroom features, walk-in closet, custom bathroom with double vanities and spacious glass, surround shower. Two additional bedrooms, each with good closet space. Three additional spacious hall closets, add to the storage space for the unit.",
+    "price": 879000,
+    "mortgage": 5835,
+    "location": {
+      "address": "84 Eldredge St ",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 3,
+      "baths": 3,
+      "sqft": 1905
+    },
+    "photos": [
+      "/images/45-Fox-Hill-Rd-1.webp",
+      "/images/45-Fox-Hill-Rd-2.webp",
+      "/images/45-Fox-Hill-Rd-3.webp",
+      "/images/45-Fox-Hill-Rd-4.webp",
+      "/images/45-Fox-Hill-Rd-5.webp"
+    ]
+  },
+  {
+    "property_id": 15,
+    "description": "First offering in over 56 years! Turn of the century antique home offering tremendous space and opportunity. Entertain in your front to back formal living room with beamed ceilings and fireplace. Gather for the holidays in the oversized dining room with built-in hutch, chair rail, and additional fireplace. A large eat-in kitchen with separate seating area, half bathroom, and a sun porch complete the first floor. The grand staircase leads you to the second floor featuring 3 large bedrooms (2 additional fireplaces), a bonus office, and a full bath. The third level has 2 additional bedrooms, another full bath, several walk-in closets, and a bonus office/playroom. Need more space? The home has a finished lower level with a large open concept playroom and an oversized laundry room with ample cabinets. Separate addition offers ideal space for in-law or au-pair complete with bedroom, bath, and living room. Gas utilities, modern Buderus heating system, central air.",
+    "price": 1895000,
+    "mortgage": 11280,
+    "location": {
+      "address": "50 Grafton St",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 6,
+      "baths": 4,
+      "sqft": 5627
+    },
+    "photos": [
+      "/images/117-Mount-Vernon-St-1.webp",
+      "/images/117-Mount-Vernon-St-2.webp",
+      "/images/117-Mount-Vernon-St-3.webp",
+      "/images/117-Mount-Vernon-St-4.webp",
+      "/images/117-Mount-Vernon-St-5.webp"
+    ]
+  },
+  {
+    "property_id": 16,
+    "description": "Location is Key! Modern Luxury meets Classic design with coffered ceilings, Waine's coating, custom closets, cabinets and woodwork. This pristine Colonial was built by one of the area's foremost and experienced builders. An amazing home that boasts 6 bedrooms with 6 bathrooms on three levels. The primary BR has double walk-in closets and three additional bedrooms on the second level are all en suite. In addition to formal living and dining areas, the kitchen is equipped with State-of-the-art appliances such as Wolf & Subzero, fit for a chef. Spectacular Quartz countertops hug the oversized Kitchen Island, counters, and Wet Bar. Two fireplaces and large windows beam in plenty of sunlight and warm vibes. The home sits on .27 acres (about twice the area of a basketball court) perfect for entertainment. The paved driveway leads to a large attached two-car garage. Energy efficient and a fantastic Metro West location close proximity to schools, highway access and much more.",
+    "price": 4188000,
+    "mortgage": 24839,
+    "location": {
+      "address": "45 Fox Hill Rd",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 6,
+      "baths": 6,
+      "sqft": 5243
+    },
+    "photos": [
+      "/images/35-Washburn-St-1.webp",
+      "/images/35-Washburn-St-2.webp",
+      "/images/35-Washburn-St-3.webp",
+      "/images/35-Washburn-St-4.webp",
+      "/images/35-Washburn-St-5.webp"
+    ]
+  },
+  {
+    "property_id": 17,
+    "description": "Welcome to this exceptional 4 bedroom, 3 full 1 half bath fully-renovated Newton townhome! An abundance of natural light, soaring ceilings, and an open-concept floor plan create an expansive and welcoming ambiance. Oak hardwood floors, a Thermador-equipped kitchen with an exit to the private deck & capacious living and dining area. This main floor is completed by two bedrooms with two built-out closets in each, and 1 full 1 half baths. The upper level boasts a family room, an office, a bedroom, a full bathroom and flows into the primary part of the house with a spacious bathroom, a walk-in closet, and a generously sized bedroom. There is an additional storage in the garage. A Nest thermostat, smart locks and a doorbell, exquisite light fixtures, and bespoke tilework. Conveniently located. Don't miss out on this exceptional opportunity!",
+    "price": 1598000,
+    "mortgage": 9724,
+    "location": {
+      "address": "117 Mount Vernon St",
+      "city": "West Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 4,
+      "baths": 4,
+      "sqft": 3200
+    },
+    "photos": [
+      "/images/26-Evergreen-Ave-1.webp",
+      "/images/26-Evergreen-Ave-2.webp",
+      "/images/26-Evergreen-Ave-3.webp",
+      "/images/26-Evergreen-Ave-4.webp",
+      "/images/26-Evergreen-Ave-5.webp"
+    ]
+  },
+  {
+    "property_id": 18,
+    "description": "This meticulously maintained Colonial with a center entrance is nestled on a tranquil side street in the sought-after Newton neighborhood. The sun-drenched first floor boasts polished hardwood floors, a wood fireplace in the spacious front-to-back living room, a formal dining room, an eat-in kitchen, a half bath, a 3-season porch, and original gumwood trim throughout. Upstairs, discover four corner bedrooms, all bright and welcoming, a full bath, and a walk-in cedar closet. The unfinished basement has ceiling height and potential for expansion. Cherished by its owner for the past 50 years, this delightful home offers a rare chance to enter the Newton real estate market. In addition to its charming features, the property is conveniently situated near shopping, restaurants, transportation, and schools, making it an ideal location for a comfortable and convenient lifestyle.",
+    "price": 999999,
+    "mortgage": 5988,
+    "location": {
+      "address": "35 Washburn St",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 4,
+      "baths": 2,
+      "sqft": 1865
+    },
+    "photos": [
+      "/images/45-Cross-Hill-Rd-1.webp",
+      "/images/45-Cross-Hill-Rd-2.webp",
+      "/images/45-Cross-Hill-Rd-3.webp",
+      "/images/45-Cross-Hill-Rd-4.webp",
+      "/images/45-Cross-Hill-Rd-5.webp"
+    ]
+  },
+  {
+    "property_id": 19,
+    "description": "Located just outside Auburndale Center in Newton is this beautiful center entrance colonial built in 2013. This home sits on a level lot and has great interior flow with direct access to a deck and a few steps down to a flat yard. Step up from the oversized two-car garage into a Mudroom with a half bath directly into the eat-in kitchen and family room. The first floor also features a large dining room and living room directly off of the foyer. The second floor features an oversized primary suite with a walk-in closet and generous bathroom. Three additional bedrooms, one with its own on-suite bathroom, and two others share a Jack and Jill bathroom. The lower level has a large playroom, additional gym, music room, or office, and a full bathroom. This is a great commuter location with quick access to Rt. 95 and MA Pike.",
+    "price": 2299000,
+    "mortgage": 13670,
+    "location": {
+      "address": "26 Evergreen Ave",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 4,
+      "baths": 5,
+      "sqft": 4239
+    },
+    "photos": [
+      "/images/988-Dedham-St-1.webp",
+      "/images/988-Dedham-St-2.webp",
+      "/images/988-Dedham-St-3.webp",
+      "/images/988-Dedham-St-4.webp",
+      "/images/988-Dedham-St-5.webp"
+    ]
+  },
+  {
+    "property_id": 20,
+    "description": "Set on the top of Oak Hill with beautiful sunset views and manicured landscaped grounds, this stunning new construction home is the definition of luxury. Custom built in 2023, this property showcases a well-designed floor plan executed with top-tier finishes. With 6600 sq.ft. of living space across three levels, the first floor boasts a flexible floor plan with an open chef’s Italian kitchen, spacious dining and family rooms, formal living space and a much sought after first floor bedroom suite or home office. The kitchen area opens to a backyard oasis, offering gorgeous hardscape, an outdoor kitchen and lush grassland. The second level has four bedrooms, including an impressive primary suite with gas fireplace and en suite bath, with soaking tub and oversized shower. Additional highlights include a finished lower level family with wet bar, exercise room and guest suite, high ceilings throughout and an attached, three-car heated garage equipped with EV charging station.",
+    "price": 4899000,
+    "mortgage": 29044,
+    "location": {
+      "address": "45 Cross Hill Rd",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 6,
+      "baths": 7,
+      "sqft": 6603
+    },
+    "photos": [
+      "/images/12-Antonellis-Cir-1.webp",
+      "/images/12-Antonellis-Cir-2.webp",
+      "/images/12-Antonellis-Cir-3.webp",
+      "/images/12-Antonellis-Cir-4.webp",
+      "/images/12-Antonellis-Cir-5.webp"
+    ]
+  },
+  {
+    "property_id": 21,
+    "description": "Experience the epitome of modern elegance in this trendsetting home located in South Newton, designed and built by Trio Development. From the moment you enter, you’ll be in awe of the 10’ ceilings, an architecturally innovative staircase with oversized windows, and the sleek slat wall separating the dining room. The first floor presents a seamless flow of spaces with a family room featuring a modern linear fireplace, a beverage center, and oversized slider to your covered patio for indoor/outdoor living. The kitchen is a culinary enthusiast's dream with a large island, Subzero/Wolf appliances, sleek grey cabinets, and a butler's pantry. The primary bedroom has its own private deck, a fireplace, a massive walk-in closet, and a luxurious bathroom. The lower level features a sitting area with a wet bar and a fireplace, bonus spaces perfect for a movie theater or gym, and a wine closet. The finished attic is the perfect au-pair or teen suite featuring a bedroom, full bath, and a wet bar.",
+    "price": 3888000,
+    "mortgage": 23066,
+    "location": {
+      "address": "988 Dedham St",
+      "city": "Newton Center, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 7,
+      "baths": 9,
+      "sqft": 6930 
+    },
+    "photos": [
+      "/images/1256-Commonwealth-Ave-1.webp",
+      "/images/1256-Commonwealth-Ave-2.webp",
+      "/images/1256-Commonwealth-Ave-3.webp",
+      "/images/1256-Commonwealth-Ave-4.webp",
+      "/images/1256-Commonwealth-Ave-5.webp"
+    ]
+  },
+  {
+    "property_id": 22,
+    "description": "Design with today’s lifestyle in mind! This residence stands poised to impress the discerning buyer. Superior construction & stunning interior design on 4 bright and well-appointed levels. 1st floor design offers effortless flow for gatherings: truly open spaces, soaring ceilings, oversized windows, gorgeous staircase. Elegant chef's kitchen with sleek contemporary cabinets, quartz countertops, top-of-the-line appliances, two-tiered waterfall island with wood accents and chic pendants. Bathed in generous streams of natural sunlight, the living and dining area extends through the imposing French door to the private yard. Desired 1st level suite/home office, en-suite bath. 2nd floor with 9’ ceilings offers 4 spacious bedrooms. The lavish master suite with his & her walking closets and sunlit bath. 3rd floor consists of a finished space/walkout to an expansive rooftop balcony: spectacular view of the conservation land. Lower level offers a bedroom, en-suite bath, and flexible space for entertaining.",
+    "price": 3499000,
+    "mortgage": 20765,
+    "location": {
+      "address": "12 Antonellis Cir",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 6,
+      "baths": 7,
+      "sqft": 5700
+    },
+    "photos": [
+      "/images/53-Glen-Ave-1.webp",
+      "/images/53-Glen-Ave-2.webp",
+      "/images/53-Glen-Ave-3.webp",
+      "/images/53-Glen-Ave-4.webp",
+      "/images/53-Glen-Ave-5.webp"
+    ]
+  },
+  {
+    "property_id": 23,
+    "description": "A masterpiece of contemporary architecture that graces Commonwealth Avenue with its striking curb appeal. This residence is a testament to exquisite design, boasting a well-thought-out floor plan adorned with premium finishes at every turn. Soaring ceilings & floor-to-ceiling oversized windows create an ambiance of sophistication & light. Designed for both grand entertaining & intimate gatherings, each space features meticulous attention to detail. The main level sets a remarkable standard with its 10-ft ceilings, showcasing a state-of-the-art kitchen, a spacious family room centered around a gas fireplace, a guest bedroom/office, full bath, & a powder room. The second floor features four generously sized bedrooms, including a magnificent primary suite that offers a spa-like bathroom, walk-in closets, providing comfort & luxury. The attic level presents a versatile playroom, a half bath. The expansive walk-out lower level features a home theater & gym and spaces for memorable moments.",
+    "price": 3749000,
+    "mortgage": 22382,
+    "location": {
+      "address": "1256 Commonwealth Ave",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 6,
+      "baths": 7,
+      "sqft": 6377
+    },
+    "photos": [
+      "/images/75-Clinton-Pl-1.webp",
+      "/images/75-Clinton-Pl-2.webp",
+      "/images/75-Clinton-Pl-3.webp",
+      "/images/75-Clinton-Pl-4.webp",
+      "/images/75-Clinton-Pl-5.webp"
+    ]
+  },
+  {
+    "property_id": 24,
+    "description": "Positioned in the heart of Newton Center, 53 Glen boasts the privacy and scale of a single-family residence, while providing the luxury and modern amenities of a new townhome. This custom-built, energy-efficient home marries sophistication with contemporary convenience, offering a refined living experience. Upon entry, sunlight floods the interiors through skylights and picture windows, creating a warm and inviting atmosphere. The kitchen is equipped with high-end Betrazzoni and Miele appliances, open to the beautiful family room with gas fireplace. A powder room and mudroom complete this level. The Brazilian walnut staircase, with its tasteful design elements, serves as a focal point, seamlessly connecting each floor. 4 bedrooms and 3 and 1 half bath, all with stunning finishes, plus a fantastic lower level flex space. Private patio and Brazilian walnut deck provide a charming outdoor space for gatherings or quiet moments. Direct entry garage and private driveway.",
+    "price": 2188800,
+    "mortgage": 13304,
+    "location": {
+      "address": "53 Glen Ave",
+      "city": "Newton Center, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 4,
+      "baths": 4,
+      "sqft": 3379
+    },
+    "photos": [
+      "/images/5335-Mount-Vernon-Pkwy-1.webp",
+      "/images/5335-Mount-Vernon-Pkwy-2.webp",
+      "/images/5335-Mount-Vernon-Pkwy-3.webp",
+      "/images/5335-Mount-Vernon-Pkwy-4.webp",
+      "/images/5335-Mount-Vernon-Pkwy-5.webp"
+    ]
+  },
+  {
+    "property_id": 25,
+    "description": "This beautiful home sits on a level oversized lot in a coveted Newton Ctr location under half a mile to the Newton Centre Playground and about 3/4 of a mile to the village/Green Line. It offers a 2 car garage, central AC and a superbly renovated kitchen & bathrooms. The home seamlessly merges a traditional floor plan with more modern finishes & high ceilings. A welcoming foyer has French doors to the large living room with bays of windows, a fireplace & doors to a sun-filled den. Across the foyer is an airy dining room, large enough to host any holiday. At the back of the house is an amazing kitchen with high-end appliances, an island & built-in window seats. Off the kitchen is a nice mudroom, plus steps to the patio, fenced yard & garage. A stylish powder room completes this level. On the second floor is an enviable primary suite with a walk-in closet and en suite bathroom, plus 3 more great bedrooms & another full bath. Partially finished lower level w/bonus room & full bath.",
+    "price": 1995000,
+    "mortgage": 11872,
+    "location": {
+      "address": "75 Clinton Pl",
+      "city": "Newton, MA",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    "details": {
+      "beds": 4,
+      "baths": 4,
+      "sqft": 2730
+    },
+    "photos": [
+      "/images/624-Windsor-Pkwy-NE-1.webp",
+      "/images/624-Windsor-Pkwy-NE-2.webp",
+      "/images/624-Windsor-Pkwy-NE-3.webp",
+      "/images/624-Windsor-Pkwy-NE-4.webp",
+      "/images/624-Windsor-Pkwy-NE-5.webp"
+    ]
+  }
+]

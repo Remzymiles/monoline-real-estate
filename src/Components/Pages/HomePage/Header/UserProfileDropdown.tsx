@@ -14,7 +14,7 @@ export const UserProfileDropdown = () => {
         className="flex gap-3 items-center bg-white px-3 py-1.5 rounded-full border hover:shadow-lg transition-shadow duration-300"
       >
         <BarsIcon />
-        <UserProfileIcon />
+        <UserProfileIcon extraStyle="bg-gray-400"  />
       </button>
       {isVisible && <DropdownContent />}
     </div>

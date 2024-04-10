@@ -1,116 +1,18 @@
+import { FooterContents } from "./FooterContents";
+import { NavigationTab } from "./NavigationTab";
+
 export const HomepageFooter = () => {
+  //
+
   return (
     <footer className="bg-primaryColor-cream mt-5 w-full">
-      <div className="mobile:mx-1 tablet:mx-8 laptop:mx-16 mt-5">
-        <div className="grid grid-cols-5 gap-6">
-          <div>
-            <h1 className="uppercase text-lg font-extrabold mb-5">
-              monoline real estate
-            </h1>
-            <p className="hover:underline hover:text-secondaryColor-lighter mb-1">
-              08164228668
-            </p>
-            <p className="hover:underline hover:text-secondaryColor-lighter">
-              Remzymiles@gmail.com
-            </p>
-          </div>
-          {/*  */}
-          <div className="mt-1">
-            <h3 className="capitalize font-bold mb-3 text-sm">general</h3>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                contact us
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                FAQs
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                sitemap
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                fraud alert
-              </span>
-            </p>
-          </div>
-          {/*  */}
-          <div>
-            <h3 className="capitalize font-bold mb-3 text-sm">resource</h3>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                home seller resources
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                home buyer resources
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                real estate glossary
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                mortgage calculators
-              </span>
-            </p>
-          </div>
-          {/*  */}
-          <div>
-            <h3 className="capitalize font-bold mb-3 text-sm">
-              about monoline real estate
-            </h3>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                company profile
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                about us
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                in the news
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                philanthropy
-              </span>
-            </p>
-          </div>
-          {/*  */}
-          <div>
-            <h3 className="capitalize font-bold mb-3 text-sm">join monoline</h3>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                why monoline
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                real estate careers
-              </span>
-            </p>
-            <p className="text-xs mb-2">
-              <span className=" capitalize hover:underline hover:text-secondaryColor-lighter">
-                franchise
-              </span>
-            </p>
-          </div>
+      <div className="mobile:mx-1 tablet-above:mx-8 tablet:mx-8 laptop:mx-16 mt-5 tablet-below:mb-[75px]">
+        <div>
+          <FooterContents />
         </div>
         {/*  */}
         <div className="mb-2">
-          <div className="flex justify-center mt-10 gap-2">
+          <div className="flex justify-center mt-10 gap-2 flex-wrap">
             <span className="capitalize font-bold text-lg text-secondaryColor-dark underline hover:no-underline hover:text-[#1877F2]">
               facebook
             </span>{" "}
@@ -135,7 +37,7 @@ export const HomepageFooter = () => {
           </p>
         </div>
         {/*  */}
-        <div className="border mt-10 border-t-slate-500 border-b-slate-500 mb-5 py-6 flex justify-center gap-10">
+        <div className="border mt-10 border-t-slate-500 border-b-slate-500 mb-5 py-6 flex justify-center gap-10 flex-wrap mobile:flex-col mobile:justify-start mobile:mx-3">
           <p className="underline capitalize hover:text-secondaryColor-lighter">
             privacy policy
           </p>
@@ -166,6 +68,8 @@ export const HomepageFooter = () => {
           </p>
         </div>
       </div>
+      {/*  */}
+      <NavigationTab/>
     </footer>
   );
 };

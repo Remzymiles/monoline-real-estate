@@ -1,3 +1,5 @@
 export const PropertyDetailsIndex = () => {
-  return <div>PropertyDetailsIndex</div>;
+  return <div>
+    kdguyui
+  </div>;
 };

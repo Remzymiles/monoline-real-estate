@@ -26,13 +26,13 @@ export const SearchBar = () => {
       >
         {isFocused ? (
           <>
-            <SearchIcon />
+            <SearchIcon textColor="text-white" />
             <span className="text-white pl-2 font-bold transition-all duration-300">
               Search
             </span>
           </>
         ) : (
-          <SearchIcon />
+          <SearchIcon textColor="text-white" />
         )}
       </button>
     </form>

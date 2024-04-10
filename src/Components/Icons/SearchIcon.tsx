@@ -1,13 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-export const SearchIcon = () => {
+export const SearchIcon = ({textColor}:{textColor:string}) => {
   return (
-    <div className="">
-      <FontAwesomeIcon
-        icon={faMagnifyingGlass}
-        className="text-lg text-white"
-      />
+    <div>
+      <FontAwesomeIcon icon={faMagnifyingGlass} className={`text-lg ${textColor}`} />
     </div>
-  );
+  )
 };
