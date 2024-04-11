@@ -15,7 +15,7 @@ export const PropertyCard = () => {
     <>
       {Properties.map((property, index) => (
         <Link
-          to={`/property-details/${property.location.address}/${property.location.city}/${property.location.state}/${property.location.country}/id=${property.property_id}`}
+        to={`/property-details/address=${encodeURIComponent(property.location.address)}&city=${property.location.city}&state=${property.location.state}&country=${property.location.country}&id=${property.property_id}`}
           key={index}
           className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card"
           onMouseEnter={() => setHoveredIndex(index)}
