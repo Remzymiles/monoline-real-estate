@@ -42,8 +42,8 @@ export const PropertyCard = () => {
               ))}
             </Swiper>
 
-            <div className="absolute top-3 right-3">
-              <HeartIcon color="text-primaryColor-light" />
+            <div className="absolute top-3 right-3 z-10">
+              <HeartIcon color="text-primaryColor-dark" />
             </div>
           </div>
           <div className="mt-1 mx-1">

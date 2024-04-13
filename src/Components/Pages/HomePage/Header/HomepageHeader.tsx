@@ -1,12 +1,14 @@
 import { MonolineLogo } from "../../../Logos/MonolineLogo";
-import { FilterButton } from "./FilterButton";
+import { FilterButton } from "./FilterDropdown/FilterButton";
 import { SearchBar } from "./SearchBar";
-import { UserProfileDropdown } from "./UserProfileDropdown";
+import { UserProfileDropdown } from "./UserProfile/UserProfileDropdown";
 
 export const HomepageHeader = () => {
+  //
+
   return (
-    <header className="border-b-2 border-slate-200 bg-primaryColor-lightCream pb-3 fixed w-full z-10 top-0">
-      <div className="mobile:mx-2 between-mobile-and-tablet:mx-5 tablet-above:mx-8 laptop-below:grid laptop-below:grid-cols-2 laptop-below:justify-between flex laptop:mx-16 laptop:gap-10 items-center laptop:justify-between">
+    <header className="border-b-2 border-slate-200 bg-primaryColor-lightCream pb-3 fixed w-full z-20 top-0">
+      <div className=" mobile:mx-2 between-mobile-and-tablet:mx-5 tablet-above:mx-8 laptop-below:grid laptop-below:grid-cols-2 laptop-below:justify-between flex laptop:mx-16 laptop:gap-10 items-center laptop:justify-between">
         <div>
           <MonolineLogo />
         </div>
@@ -18,9 +20,7 @@ export const HomepageHeader = () => {
         <div className="flex items-center justify-end gap-2">
           <FilterButton />
           {/*  */}
-          <div className="relative">
-            <UserProfileDropdown />
-          </div>
+          <UserProfileDropdown />
         </div>
       </div>
     </header>

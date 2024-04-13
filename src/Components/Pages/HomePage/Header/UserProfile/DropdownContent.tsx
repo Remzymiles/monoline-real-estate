@@ -1,8 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 
-export const DropdownContent = () => {
+export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
   return (
-    <div className="border rounded-lg absolute top-11 right-0 w-[210px] bg-white flex flex-col">
+    <div
+      className={`border rounded-lg absolute top-[80px] right-16 w-[210px] bg-white flex flex-col ${extraStyle}`}
+    >
       <Link
         to={"/auth/sign-up"}
         className="capitalize pl-4 text-md text-secondaryColor-dark py-1 hover:bg-slate-100 transition-colors duration-300 px-2"
