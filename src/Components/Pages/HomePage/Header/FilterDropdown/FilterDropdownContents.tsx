@@ -1,12 +1,15 @@
+import { FilterBedsAndBaths } from "./FilterBedsAndBaths";
+import { FilterByLocation } from "./FilterByLocation";
+import { FilterPrice } from "./FilterPrice";
+
 export const FilterDropdownContents = () => {
   return (
-    <div className={`py-4 px-3`}>
-      <div className="" >
-        drtjhtkyjgvjhgnmhg,yjgcnmvjhgnmh,b
-      </div>
-      <div className="fixed bottom-0 py">
-        <hr />
-      </div>
+    <div className="pt-4 px-4 max-h-[80%] overflow-y-auto">
+      <FilterByLocation />
+      {/*  */}
+      <FilterBedsAndBaths />
+      {/*  */}
+      <FilterPrice/>
     </div>
   );
 };

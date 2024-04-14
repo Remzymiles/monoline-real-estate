@@ -21,7 +21,7 @@ export default {
         }
       },
       screens: {
-        'mobile': { 'min': '320px', 'max': '630px' },
+        'mobile': { 'min': '320px', 'max': '639px' },
         'big-screen-mobile-below': {'max':'540px'},
         'between-mobile-and-tablet': {'min':'541px','max':'949px' },
         'tablet-below': { 'max': '950px' },
