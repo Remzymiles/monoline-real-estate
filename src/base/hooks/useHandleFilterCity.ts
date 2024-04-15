@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-
 export const useHandleFilterCity = () => {
-  // 
   const [isClickedCity, setIsClickedCity] = useState<boolean>(false);
   const [selectedCity, setSelectedCity] = useState<string>("");
 
@@ -12,5 +10,11 @@ export const useHandleFilterCity = () => {
   };
 
 
-  return {setIsClickedCity,isClickedCity,selectedCity,handleCityClick};
+  return {
+    setIsClickedCity,
+    isClickedCity,
+    selectedCity,
+    handleCityClick,
+    setSelectedCity,
+  };
 };

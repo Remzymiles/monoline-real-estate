@@ -1,15 +1,10 @@
-import { useState } from "react";
 import { ChevronArrowUp } from "../../../../Icons/ChevronArrowUp";
 import { ChevronArrowDown } from "../../../../Icons/ChevronArrowDown";
+import { useHandleFilterPrice } from "../../../../../base/hooks/useHandleFilterPrice";
 
 export const FilterPrice = () => {
-  const [isClickedPrice, setIsClickedPrice] = useState<boolean>(false);
-  const [selectedPrice, setSelectedPrice] = useState<string>("");
-
-  const handlePriceClick = (price: string) => {
-    setSelectedPrice(price);
-    setIsClickedPrice(false); 
-  };
+  // 
+  const {handlePriceClick,isClickedPrice,selectedPrice,setIsClickedPrice} = useHandleFilterPrice()
 
   return (
     <div>

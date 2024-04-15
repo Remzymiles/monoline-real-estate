@@ -11,7 +11,7 @@ export const NavigationTab = () => {
   const [isProfileActive, setIsProfileActive] = useState(false);
   //
   return (
-    <div className="fixed bottom-0 flex bg-white justify-center gap-10 pt-2 w-full border-t-2 tablet-above:hidden z-50">
+    <div className="fixed bottom-0 flex bg-white justify-center gap-10 pt-2 w-full border-t-2 tablet-above:hidden z-10">
       <NavLink
         to={"/"}
         className="text-center font-semibold text-sm "
