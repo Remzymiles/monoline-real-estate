@@ -14,7 +14,7 @@ export const FilterDropdownContents = () => {
     isClickedCity,
     selectedCity,
     handleCityClick,
-    setSelectedCity
+    setSelectedCity,
   } = useHandleFilterCity();
   //
   const {
@@ -22,7 +22,7 @@ export const FilterDropdownContents = () => {
     isClickedState,
     selectedState,
     handleStateClick,
-    setSelectedState
+    setSelectedState,
   } = useHandleFilterState();
   //
   const {
@@ -33,16 +33,27 @@ export const FilterDropdownContents = () => {
     clearSelectedPriceRange,
   } = useHandleFilterPrice();
 
-  const uniqueCities: string[] = [];
   const [selectedBedIndex, setSelectedBedIndex] = useState(-1);
   const [selectedBathIndex, setSelectedBathIndex] = useState(-1);
+
+  const handleFilterClick = () => {
+    const selectedBed =
+      selectedBedIndex === -1 ? "Any" : uniqueBeds[selectedBedIndex];
+    const selectedBath =
+      selectedBathIndex === -1 ? "Any" : uniqueBaths[selectedBathIndex];
+    console.log("Selected Beds:", selectedBed);
+    console.log("Selected Baths:", selectedBath);
+    console.log("Selected City:", selectedCity);
+    console.log("Selected State:", selectedState);
+    console.log("Selected Price:", selectedPrice);
+  };
 
   const clearSelectedFilters = () => {
     setSelectedBedIndex(-1);
     setSelectedBathIndex(-1);
-    clearSelectedPriceRange()
-    setSelectedCity("")
-    setSelectedState("")
+    clearSelectedPriceRange();
+    setSelectedCity("");
+    setSelectedState("");
   };
 
   const handleSelectBedNumber = (index: number) => {
@@ -52,9 +63,10 @@ export const FilterDropdownContents = () => {
     setSelectedBathIndex(index);
   };
 
+  const uniqueCities: string[] = [];
+  const uniqueState: string[] = [];
   const uniqueBeds: number[] = [];
   const uniqueBaths: number[] = [];
-  const uniqueState: string[] = [];
 
   PropertyDetails.forEach((bed) => {
     if (!uniqueBeds.includes(bed.details.beds)) {
@@ -280,7 +292,10 @@ export const FilterDropdownContents = () => {
         >
           clear all
         </button>
-        <button className="capitalize bg-black/85 px-5 py-2 text-white rounded-lg font-bold hover:bg-black transition-colors duration-300">
+        <button
+          className="capitalize bg-black/85 px-5 py-2 text-white rounded-lg font-bold hover:bg-black transition-colors duration-300"
+          onClick={handleFilterClick}
+        >
           filter
         </button>
       </div>
