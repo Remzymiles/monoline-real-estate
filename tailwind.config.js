@@ -28,7 +28,7 @@ export default {
         'tablet': { 'min': '640px', 'max': '950px' },
         'tablet-above': { 'min': '950px' },
         'laptop': '1024px',
-        'laptop-below': {'max': '1020px'},
+        'laptop-below': {'max': '1023px'},
       },
     },
   },

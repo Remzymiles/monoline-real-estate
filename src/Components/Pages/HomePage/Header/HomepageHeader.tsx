@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { MonolineLogo } from "../../../Logos/MonolineLogo";
 import { FilterButton } from "./FilterDropdown/FilterButton";
 import { SearchBar } from "./SearchBar";
@@ -7,6 +8,7 @@ export const HomepageHeader = () => {
   //
 
   return (
+    <Link to={"/"}>
     <header className="border-b-2 border-slate-200 bg-primaryColor-lightCream pb-3 fixed w-full z-20 top-0">
       <div className=" mobile:mx-2 between-mobile-and-tablet:mx-5 tablet-above:mx-8 laptop-below:grid laptop-below:grid-cols-2 laptop-below:justify-between flex laptop:mx-16 laptop:gap-10 items-center laptop:justify-between">
         <div>
@@ -23,6 +25,6 @@ export const HomepageHeader = () => {
           <UserProfileDropdown />
         </div>
       </div>
-    </header>
+    </header></Link>
   );
 };

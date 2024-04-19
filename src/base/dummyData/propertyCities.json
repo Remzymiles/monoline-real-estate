@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "city": "Scottsdale, AZ"
+  },
+  {
+    "id": 2,
+    "city": "Austin, TX"
+  },
+  {
+    "id": 3,
+    "city": "Staten Island, NY"
+  },
+  {
+    "id": 4,
+    "city": "Newton, MA"
+  },
+  {
+    "id": 5,
+    "city": "West Newton, MA"
+  },
+  {
+    "id": 6,
+    "city": "Newton Center, MA"
+  }
+]

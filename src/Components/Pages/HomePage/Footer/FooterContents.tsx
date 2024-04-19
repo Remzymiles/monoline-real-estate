@@ -39,8 +39,8 @@ export const FooterContents = () => {
           </button>
 
           <div
-            className={`${
-              isGeneralVisible ? "visible" : "tablet-below:hidden"
+            className={`transition-all duration-300 ${
+              isGeneralVisible ? "visible h-[120px]" : "h-0 tablet-below:invisible tablet-below:opacity-0"
             }`}
           >
             <p className="text-xs mb-2 tablet-above:text-center tablet-below:ml-2">
@@ -77,8 +77,8 @@ export const FooterContents = () => {
             </span>
           </button>
           <div
-            className={`${
-              isResourceVisible ? "visible" : "tablet-below:hidden"
+            className={`transition-all duration-300 ${
+              isResourceVisible ? "visible h-[120px]" : "h-0 tablet-below:invisible tablet-below:opacity-0"
             }`}
           >
             <p className="text-xs mb-2 tablet-above:text-center tablet-below:ml-2">
@@ -120,8 +120,8 @@ export const FooterContents = () => {
             </span>
           </button>
           <div
-            className={`${
-              isAboutMonolineVisible ? "visible" : "tablet-below:hidden"
+            className={`transition-all duration-300 ${
+              isAboutMonolineVisible ? "visible h-[120px]" : "h-0 tablet-below:invisible tablet-below:opacity-0"
             }`}
           >
             <p className="text-xs mb-2 tablet-above:text-center tablet-below:ml-2">
@@ -162,8 +162,8 @@ export const FooterContents = () => {
             </span>
           </button>
           <div
-            className={`${
-              isJoinMonolineVisible ? "visible" : "tablet-below:hidden"
+            className={`transition-all duration-300 ${
+              isJoinMonolineVisible ? "visible h-[90px]" : "h-0 tablet-below:invisible tablet-below:opacity-0"
             }`}
           >
             <p className="text-xs mb-2 tablet-above:text-center tablet-below:ml-2">

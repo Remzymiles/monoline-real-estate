@@ -7,11 +7,11 @@ export const HomepageFooter = () => {
   return (
     <footer className="bg-primaryColor-cream mt-5 w-full">
       <div className="mobile:mx-1 tablet-above:mx-8 tablet:mx-8 laptop:mx-16 mt-5 tablet-below:mb-[75px]">
-        <div>
+        <div className="tablet-above:mb-[100px]">
           <FooterContents />
         </div>
         {/*  */}
-        <div className="mb-2">
+        <div className="mb-2 mt">
           <div className="flex justify-center mt-10 gap-2 flex-wrap">
             <span className="capitalize font-bold text-lg text-secondaryColor-dark underline hover:no-underline hover:text-[#1877F2]">
               facebook
