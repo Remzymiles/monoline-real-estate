@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import properties from "../../../base/dummyData/properties.json";
-import { useSearchValueStore } from "../../../base/store/useSearchValueStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -12,20 +11,26 @@ import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 export const SearchedPropertiesCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   //
-  const { searchValue } = useSearchValueStore((state) => ({
-    searchValue: state.searchValue,
-  }));
+  const [query] = useSearchParams();
+  const searchValue = query.get("search");
 
-  const filterSearchedProperties = properties.filter((property) => {
-    property.location.state === searchValue
-  });
-  console.log(filterSearchedProperties);
-  
+  const filteredSearchedProperties = searchValue
+    ? properties.filter((property) => {
+        return (
+          property.location.state
+            .toLowerCase()
+            .includes(searchValue.toLowerCase()) ||
+          property.location.city
+            .toLowerCase()
+            .includes(searchValue.toLowerCase())
+        );
+      })
+    : [];
 
   //
   return (
     <>
-      {properties.map((property, index) => (
+      {filteredSearchedProperties.map((property, index) => (
         <Link
           to={`/property-details/address=${property.location.address}&city=${property.location.city}&state=${property.location.state}&country=${property.location.country}&id=${property.property_id}`}
           key={property.property_id}
@@ -40,7 +45,7 @@ export const SearchedPropertiesCard = () => {
               slidesPerView={1}
               navigation={hoveredIndex === index}
               pagination={{ clickable: true }}
-              onSwiper={(swiper) => console.log(swiper)}
+              onSwiper={(swiper) => {}}
               onSlideChange={() => console.log("slide change")}
             >
               {property.photos.map((photo, photoIndex) => (
