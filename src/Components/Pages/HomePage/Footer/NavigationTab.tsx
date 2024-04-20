@@ -25,7 +25,7 @@ export const NavigationTab = () => {
         }}
       >
         <SearchIcon
-          textColor={`${
+          extraStyle={`${
             isExploreActive ? "text-primaryColor-light" : "text-gray-400"
           }`}
         />{" "}

@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import { AuthLayout } from "./Layouts/AuthLayout";
 import { GlobalLayout } from "./Layouts/GlobalLayout";
-import { SignUpPage } from "./Pages/SignUpPage";
-import { LoginPage } from "./Pages/LoginPage";
 import { HomePage } from "./Pages/HomePage";
-import { Wishlist } from "./Pages/Wishlist";
+import { LoginPage } from "./Pages/LoginPage";
 import { ProfilePage } from "./Pages/ProfilePage";
 import { PropertyDetails } from "./Pages/PropertyDetails";
+import { SearchPage } from "./Pages/SearchPage";
+import { SignUpPage } from "./Pages/SignUpPage";
+import { Wishlist } from "./Pages/Wishlist";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist/>} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/property-details/:propertyId" element={<PropertyDetails/>} />
+          <Route path="/search-properties/:searchDetail" element={<SearchPage/>} />
         </Route>
         {/*  */}
         <Route path="/auth" element={<AuthLayout />}>
