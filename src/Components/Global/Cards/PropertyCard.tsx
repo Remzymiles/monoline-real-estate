@@ -73,8 +73,6 @@ export const PropertyCard = () => {
                 slidesPerView={1}
                 navigation={hoveredIndex === index}
                 pagination={{ clickable: true }}
-                onSwiper={(swiper) => {}}
-                onSlideChange={() => console.log("slide change")}
               >
                 {property.photos.map((photo, photoIndex) => (
                   <SwiperSlide key={photoIndex}>

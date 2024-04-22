@@ -14,7 +14,7 @@ export const GlobalLayout = () => {
       }`}
     >
       <HomepageHeader />
-      <main className="flex-1 pt-3 mobile:mx-4 tablet:mx-8 tablet-below:mt-[190px] tablet-above:mt-[120px] tablet-above:mx-8 laptop:mx-16">
+      <main className="flex-1 pt-3 mobile:mx-4 tablet:mx-8 laptop-below:mt-[190px] tablet-above:mt-[120px] tablet-above:mx-8 laptop:mx-16">
         <Outlet />
       </main>
       <HomepageFooter />
