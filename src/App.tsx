@@ -13,7 +13,8 @@ import { Wishlist } from "./Pages/Wishlist";
 function App() {
   return (
     
-      <Routes>
+     <div className="font-myFont">
+       <Routes>
         <Route path="/" element={<GlobalLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/wishlist" element={<Wishlist/>} />
@@ -28,6 +29,7 @@ function App() {
         </Route>
         {/*  */}
       </Routes>
+     </div>
     
   );
 }

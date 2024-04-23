@@ -20,6 +20,9 @@ export default {
           'dark': '#101929'
         }
       },
+      fontFamily:{
+        'myFont':'Lato'
+      },
       screens: {
         'mobile': { 'min': '320px', 'max': '639px' },
         'big-screen-mobile-below': {'max':'540px'},

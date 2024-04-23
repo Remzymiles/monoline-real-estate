@@ -41,7 +41,7 @@ export const FilterButton = () => {
           >
             <div className=" text-center capitalize font-extrabold text-lg flex my-3">
               <div className="ml-3">
-                <XIcon clicked={closeDropDown} />
+                <XIcon clicked={closeDropDown} extraStyle="text-sm" />
               </div>
               <div className="flex-grow">filters</div>
             </div>

@@ -20,3 +20,4 @@ export interface ILocation {
     state:   string;
     country: string;
 }
+
