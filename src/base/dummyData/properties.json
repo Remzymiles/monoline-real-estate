@@ -193,30 +193,6 @@
   },
   {
     "property_id": 9,
-    "description": "New construction in Travis Heights with grand downtown views. 3 bed 3.5 baths with a nice loft area. Backyard pergola area overlooking the city. Walk out to Lady Bird Trail, Cidercade, Rainey Street, SoCo and much more. Right next to downtown.",
-    "price": 1775000,
-    "mortgage": 11051,
-    "location": {
-      "address": "510 Sunny Ln #A",
-      "city": "Austin, TX",
-      "state": "Texas",
-      "country": "United States"
-    },
-    "details": {
-      "beds": 3,
-      "baths": 4,
-      "sqft": 2305
-    },
-    "photos": [
-      "/images/60-Reading-Ave-1.webp",
-      "/images/60-Reading-Ave-2.webp",
-      "/images/60-Reading-Ave-3.webp",
-      "/images/60-Reading-Ave-4.webp",
-      "/images/60-Reading-Ave-5.webp"
-    ]
-  },
-  {
-    "property_id": 10,
     "description": "Beautifully maintained 4 bedroom, 3 bath Cape located in SE Annadale. Step into an open concept Living, Dining + Island EIK. This main living room has tons of natural light with French doors that lead to large family room w/vaulted ceilings (legal extension) with SGD to large back and side yards. First floor features 2 bedrooms, 1 full bath; Second floor offers 2 additional bedrooms, & full bath. Full finished basement w/3/4 bath plus access to side yard. Home is meticulously maintained and features new boiler (5 zone heating), central air, newer windows, trex decking. Close to shopping, schools &",
     "price": 809999,
     "mortgage": 4725,
@@ -240,7 +216,7 @@
     ]
   },
   {
-    "property_id": 11,
+    "property_id": 10,
     "description": "Three-bedroom corner property, colonial-style semi-attached home. Features hardwood floors throughout, two zones hot water heating, central AC, Living room with wood-burning fireplace, dining room, eat-in kitchen with cherry wood cabinets and granite countertops, sliders to the yard with deck and pool, finished basement with 3/4 bath and an additional kitchen and laundry area. Located in a great neighborhood on the South Shore. Near shopping and transportation. Close to the Verrazzano bridge. Home needs TLC.",
     "price": 650000,
     "mortgage": 3806,
@@ -264,7 +240,7 @@
     ]
   },
   {
-    "property_id": 12,
+    "property_id": 11,
     "description": "NWelcome home to this charming one-family semi-attached residence, offering the perfect blend of comfort and convenience. Boasting 3 bedrooms and 2 bathrooms, including a newly renovated bath, this property is designed to meet your every need. Discover newly installed flooring throughout, adding a touch of modern elegance to the space. The highlight of this home is the inviting hospitality suite complete with a separate entrance, ideal for guests or as a private retreat. Entertain effortlessly in the",
     "price": 749999,
     "mortgage": 4380,
@@ -288,7 +264,7 @@
     ]
   },
   {
-    "property_id": 13,
+    "property_id": 12,
     "description": "A chance to own a charming house on a large level double lot in much sought after Newton! On a quiet dead-end street, this house features a detached garage and ample off-street parking for four vehicles. Period details such as lead glass window, working fireplace, elegant blond hardwood floors, and a distinctive coffered ceiling are complemented by modern amenities such as a gas heating system and 100 amp circuit breakers. Other features include a cozy loft with a skylight, 1 1/2 baths, a convenient laundry room complete with a soapstone sink. Newer roof and windows as well as recent professionally updated stucco exterior. Great location for work and play with easy access to Rt 128/95, Pike, and the commuter rail; near Dolan Pond conservation area, the Cove recreation area, walking trails, Auburndale Village, West Newton Village and Burr Elementary School. Just 1.5 miles from the vibrant dining scene on Waltham's Moody Street! Group showings: Monday April 8th 6pm, April 9th noon.",
     "price": 929000,
     "mortgage": 5568,
@@ -312,7 +288,7 @@
     ]
   },
   {
-    "property_id": 14,
+    "property_id": 13,
     "description": "Here's your chance to live in the historic Pomroy House. Beautiful former estate converted to 7 unique homes. The property sits proudly at the corner of Church & Eldredge Streets in the Farlow Hill District. Across from the recently restored Farlow Park, and minutes to Boston by car or transportation, this home offers so much. Spacious and modern condo features large open living dining area with plenty of room for entertaining. Renovated kitchen features two dishwashers, plenty of cabinetry, a large pantry for even more storage, double wall ovens, gas range, & French door fridge with ice/water in the door. Additional room off living area can serve as home office or additional play space. Washer dryer are conveniently located in the family bath. Main bedroom features, walk-in closet, custom bathroom with double vanities and spacious glass, surround shower. Two additional bedrooms, each with good closet space. Three additional spacious hall closets, add to the storage space for the unit.",
     "price": 879000,
     "mortgage": 5835,
@@ -336,7 +312,7 @@
     ]
   },
   {
-    "property_id": 15,
+    "property_id": 14,
     "description": "First offering in over 56 years! Turn of the century antique home offering tremendous space and opportunity. Entertain in your front to back formal living room with beamed ceilings and fireplace. Gather for the holidays in the oversized dining room with built-in hutch, chair rail, and additional fireplace. A large eat-in kitchen with separate seating area, half bathroom, and a sun porch complete the first floor. The grand staircase leads you to the second floor featuring 3 large bedrooms (2 additional fireplaces), a bonus office, and a full bath. The third level has 2 additional bedrooms, another full bath, several walk-in closets, and a bonus office/playroom. Need more space? The home has a finished lower level with a large open concept playroom and an oversized laundry room with ample cabinets. Separate addition offers ideal space for in-law or au-pair complete with bedroom, bath, and living room. Gas utilities, modern Buderus heating system, central air.",
     "price": 1895000,
     "mortgage": 11280,
@@ -360,7 +336,7 @@
     ]
   },
   {
-    "property_id": 16,
+    "property_id": 15,
     "description": "Location is Key! Modern Luxury meets Classic design with coffered ceilings, Waine's coating, custom closets, cabinets and woodwork. This pristine Colonial was built by one of the area's foremost and experienced builders. An amazing home that boasts 6 bedrooms with 6 bathrooms on three levels. The primary BR has double walk-in closets and three additional bedrooms on the second level are all en suite. In addition to formal living and dining areas, the kitchen is equipped with State-of-the-art appliances such as Wolf & Subzero, fit for a chef. Spectacular Quartz countertops hug the oversized Kitchen Island, counters, and Wet Bar. Two fireplaces and large windows beam in plenty of sunlight and warm vibes. The home sits on .27 acres (about twice the area of a basketball court) perfect for entertainment. The paved driveway leads to a large attached two-car garage. Energy efficient and a fantastic Metro West location close proximity to schools, highway access and much more.",
     "price": 4188000,
     "mortgage": 24839,
@@ -384,7 +360,7 @@
     ]
   },
   {
-    "property_id": 17,
+    "property_id": 16,
     "description": "Welcome to this exceptional 4 bedroom, 3 full 1 half bath fully-renovated Newton townhome! An abundance of natural light, soaring ceilings, and an open-concept floor plan create an expansive and welcoming ambiance. Oak hardwood floors, a Thermador-equipped kitchen with an exit to the private deck & capacious living and dining area. This main floor is completed by two bedrooms with two built-out closets in each, and 1 full 1 half baths. The upper level boasts a family room, an office, a bedroom, a full bathroom and flows into the primary part of the house with a spacious bathroom, a walk-in closet, and a generously sized bedroom. There is an additional storage in the garage. A Nest thermostat, smart locks and a doorbell, exquisite light fixtures, and bespoke tilework. Conveniently located. Don't miss out on this exceptional opportunity!",
     "price": 1598000,
     "mortgage": 9724,
@@ -408,7 +384,7 @@
     ]
   },
   {
-    "property_id": 18,
+    "property_id": 17,
     "description": "This meticulously maintained Colonial with a center entrance is nestled on a tranquil side street in the sought-after Newton neighborhood. The sun-drenched first floor boasts polished hardwood floors, a wood fireplace in the spacious front-to-back living room, a formal dining room, an eat-in kitchen, a half bath, a 3-season porch, and original gumwood trim throughout. Upstairs, discover four corner bedrooms, all bright and welcoming, a full bath, and a walk-in cedar closet. The unfinished basement has ceiling height and potential for expansion. Cherished by its owner for the past 50 years, this delightful home offers a rare chance to enter the Newton real estate market. In addition to its charming features, the property is conveniently situated near shopping, restaurants, transportation, and schools, making it an ideal location for a comfortable and convenient lifestyle.",
     "price": 999999,
     "mortgage": 5988,
@@ -432,7 +408,7 @@
     ]
   },
   {
-    "property_id": 19,
+    "property_id": 18,
     "description": "Located just outside Auburndale Center in Newton is this beautiful center entrance colonial built in 2013. This home sits on a level lot and has great interior flow with direct access to a deck and a few steps down to a flat yard. Step up from the oversized two-car garage into a Mudroom with a half bath directly into the eat-in kitchen and family room. The first floor also features a large dining room and living room directly off of the foyer. The second floor features an oversized primary suite with a walk-in closet and generous bathroom. Three additional bedrooms, one with its own on-suite bathroom, and two others share a Jack and Jill bathroom. The lower level has a large playroom, additional gym, music room, or office, and a full bathroom. This is a great commuter location with quick access to Rt. 95 and MA Pike.",
     "price": 2299000,
     "mortgage": 13670,
@@ -456,7 +432,7 @@
     ]
   },
   {
-    "property_id": 20,
+    "property_id": 19,
     "description": "Set on the top of Oak Hill with beautiful sunset views and manicured landscaped grounds, this stunning new construction home is the definition of luxury. Custom built in 2023, this property showcases a well-designed floor plan executed with top-tier finishes. With 6600 sq.ft. of living space across three levels, the first floor boasts a flexible floor plan with an open chef’s Italian kitchen, spacious dining and family rooms, formal living space and a much sought after first floor bedroom suite or home office. The kitchen area opens to a backyard oasis, offering gorgeous hardscape, an outdoor kitchen and lush grassland. The second level has four bedrooms, including an impressive primary suite with gas fireplace and en suite bath, with soaking tub and oversized shower. Additional highlights include a finished lower level family with wet bar, exercise room and guest suite, high ceilings throughout and an attached, three-car heated garage equipped with EV charging station.",
     "price": 4899000,
     "mortgage": 29044,
@@ -480,7 +456,7 @@
     ]
   },
   {
-    "property_id": 21,
+    "property_id": 20,
     "description": "Experience the epitome of modern elegance in this trendsetting home located in South Newton, designed and built by Trio Development. From the moment you enter, you’ll be in awe of the 10’ ceilings, an architecturally innovative staircase with oversized windows, and the sleek slat wall separating the dining room. The first floor presents a seamless flow of spaces with a family room featuring a modern linear fireplace, a beverage center, and oversized slider to your covered patio for indoor/outdoor living. The kitchen is a culinary enthusiast's dream with a large island, Subzero/Wolf appliances, sleek grey cabinets, and a butler's pantry. The primary bedroom has its own private deck, a fireplace, a massive walk-in closet, and a luxurious bathroom. The lower level features a sitting area with a wet bar and a fireplace, bonus spaces perfect for a movie theater or gym, and a wine closet. The finished attic is the perfect au-pair or teen suite featuring a bedroom, full bath, and a wet bar.",
     "price": 3888000,
     "mortgage": 23066,
@@ -493,7 +469,7 @@
     "details": {
       "beds": 7,
       "baths": 7,
-      "sqft": 6930 
+      "sqft": 6930
     },
     "photos": [
       "/images/1256-Commonwealth-Ave-1.webp",
@@ -504,7 +480,7 @@
     ]
   },
   {
-    "property_id": 22,
+    "property_id": 21,
     "description": "Design with today’s lifestyle in mind! This residence stands poised to impress the discerning buyer. Superior construction & stunning interior design on 4 bright and well-appointed levels. 1st floor design offers effortless flow for gatherings: truly open spaces, soaring ceilings, oversized windows, gorgeous staircase. Elegant chef's kitchen with sleek contemporary cabinets, quartz countertops, top-of-the-line appliances, two-tiered waterfall island with wood accents and chic pendants. Bathed in generous streams of natural sunlight, the living and dining area extends through the imposing French door to the private yard. Desired 1st level suite/home office, en-suite bath. 2nd floor with 9’ ceilings offers 4 spacious bedrooms. The lavish master suite with his & her walking closets and sunlit bath. 3rd floor consists of a finished space/walkout to an expansive rooftop balcony: spectacular view of the conservation land. Lower level offers a bedroom, en-suite bath, and flexible space for entertaining.",
     "price": 3499000,
     "mortgage": 20765,
@@ -528,7 +504,7 @@
     ]
   },
   {
-    "property_id": 23,
+    "property_id": 22,
     "description": "A masterpiece of contemporary architecture that graces Commonwealth Avenue with its striking curb appeal. This residence is a testament to exquisite design, boasting a well-thought-out floor plan adorned with premium finishes at every turn. Soaring ceilings & floor-to-ceiling oversized windows create an ambiance of sophistication & light. Designed for both grand entertaining & intimate gatherings, each space features meticulous attention to detail. The main level sets a remarkable standard with its 10-ft ceilings, showcasing a state-of-the-art kitchen, a spacious family room centered around a gas fireplace, a guest bedroom/office, full bath, & a powder room. The second floor features four generously sized bedrooms, including a magnificent primary suite that offers a spa-like bathroom, walk-in closets, providing comfort & luxury. The attic level presents a versatile playroom, a half bath. The expansive walk-out lower level features a home theater & gym and spaces for memorable moments.",
     "price": 3749000,
     "mortgage": 22382,
@@ -552,7 +528,7 @@
     ]
   },
   {
-    "property_id": 24,
+    "property_id": 23,
     "description": "Positioned in the heart of Newton Center, 53 Glen boasts the privacy and scale of a single-family residence, while providing the luxury and modern amenities of a new townhome. This custom-built, energy-efficient home marries sophistication with contemporary convenience, offering a refined living experience. Upon entry, sunlight floods the interiors through skylights and picture windows, creating a warm and inviting atmosphere. The kitchen is equipped with high-end Betrazzoni and Miele appliances, open to the beautiful family room with gas fireplace. A powder room and mudroom complete this level. The Brazilian walnut staircase, with its tasteful design elements, serves as a focal point, seamlessly connecting each floor. 4 bedrooms and 3 and 1 half bath, all with stunning finishes, plus a fantastic lower level flex space. Private patio and Brazilian walnut deck provide a charming outdoor space for gatherings or quiet moments. Direct entry garage and private driveway.",
     "price": 2188800,
     "mortgage": 13304,
@@ -576,7 +552,7 @@
     ]
   },
   {
-    "property_id": 25,
+    "property_id": 24,
     "description": "This beautiful home sits on a level oversized lot in a coveted Newton Ctr location under half a mile to the Newton Centre Playground and about 3/4 of a mile to the village/Green Line. It offers a 2 car garage, central AC and a superbly renovated kitchen & bathrooms. The home seamlessly merges a traditional floor plan with more modern finishes & high ceilings. A welcoming foyer has French doors to the large living room with bays of windows, a fireplace & doors to a sun-filled den. Across the foyer is an airy dining room, large enough to host any holiday. At the back of the house is an amazing kitchen with high-end appliances, an island & built-in window seats. Off the kitchen is a nice mudroom, plus steps to the patio, fenced yard & garage. A stylish powder room completes this level. On the second floor is an enviable primary suite with a walk-in closet and en suite bathroom, plus 3 more great bedrooms & another full bath. Partially finished lower level w/bonus room & full bath.",
     "price": 1995000,
     "mortgage": 11872,

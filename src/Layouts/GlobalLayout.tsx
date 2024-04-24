@@ -6,7 +6,7 @@ export const GlobalLayout = () => {
   //
 
   return (
-    <div className={`relative flex flex-col h-[100vh] min-w-[320px]`}>
+    <div className={` flex flex-col h-[100vh] min-w-[320px]`}>
       <HomepageHeader />
       <main className="flex-1">
         <Outlet />

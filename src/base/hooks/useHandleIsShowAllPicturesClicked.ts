@@ -1,8 +1,9 @@
 import { useState } from "react";
 
 export const useHandleIsShowAllPicturesClicked = () => {
-  const [isShowPicturesClicked, setIsShowPictureClicked] = useState(false);
-
+  const [isShowPicturesClicked, setIsShowPictureClicked] =
+    useState<boolean>(false);
+  //
   const handleOpenAllPicturesModal = () => {
     !isShowPicturesClicked ? setIsShowPictureClicked(true) : null;
     window.document.body.style.overflow = "hidden";
@@ -11,6 +12,7 @@ export const useHandleIsShowAllPicturesClicked = () => {
     isShowPicturesClicked ? setIsShowPictureClicked(false) : null;
     window.document.body.style.overflow = "";
   };
+  //
   //
   return {
     isShowPicturesClicked,
