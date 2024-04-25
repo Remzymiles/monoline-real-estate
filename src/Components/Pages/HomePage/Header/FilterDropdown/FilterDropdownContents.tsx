@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useFilterStore } from "../../../../../base/store/useFilterStore";
 import { FilterByLocation } from "../FilterDropdown/FilterByLocation";
 import { closeFilterModalContext } from "./FilterButton";
@@ -7,20 +7,21 @@ import { FilterByPrice } from "./FilterByPrice";
 
 export const FilterDropdownContents = () => {
   //
-  const { updateFilterOptions, clearFilterOptions,filterOptions } = useFilterStore(
-    (state) => ({
+  const [isFilterButtonClicked, setIsFilterButtonClicked] = useState(false);
+  //
+  const { filterOptions, updateFilterOptions, clearFilterOptions } =
+    useFilterStore((state) => ({
       updateFilterOptions: state.updateFilterOptions,
       clearFilterOptions: state.clearFilterOptions,
-      filterOptions: state.filterOptions
-    })
-  );
+      filterOptions: state.filterOptions,
+    }));
   //
   const closeFilterModal = useContext(closeFilterModalContext);
 
   return (
     <>
       <div className="px-4 max-h-[90%] pb-16 overflow-y-scroll z-20">
-        <FilterByLocation />
+        <FilterByLocation isFilterButtonClicked={isFilterButtonClicked} />
         {/*  */}
         <FilterByPrice />
         {/*  */}
@@ -36,10 +37,10 @@ export const FilterDropdownContents = () => {
         <button
           className="capitalize bg-black/85 px-5 py-2 text-white rounded-lg font-bold hover:bg-black transition-colors duration-300"
           onClick={() => {
-            updateFilterOptions;
             closeFilterModal();
+            setIsFilterButtonClicked(true);
+            updateFilterOptions;
             console.log(filterOptions);
-            
           }}
         >
           filter

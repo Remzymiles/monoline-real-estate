@@ -39,13 +39,13 @@ export const FilterByPrice = () => {
             </button>
             <div
               className={`absolute flex flex-col items-start mt-1 rounded-lg border bg-white border-black mobile:w-full w-[500px] transition-all duration-300 ${
-                isPricesDropDownOpen ? "h-[246px]" : "h-0 opacity-0 invisible"
+                isPricesDropDownOpen ? "h-48" : "h-0 opacity-0 invisible"
               }`}
             >
               {prices.map((price, index) => (
                 <button
                   key={price.id}
-                  className={`px-3 py-3 w-full text-start  ${
+                  className={`px-3 py-3 w-full text-start ${
                     index === prices.length - 1
                       ? "border-none"
                       : "border-b border-b-black"

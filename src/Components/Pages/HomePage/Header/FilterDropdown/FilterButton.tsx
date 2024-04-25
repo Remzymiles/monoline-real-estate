@@ -1,17 +1,14 @@
-import { FilterDropdownContents } from "./FilterDropdownContents";
+import { createContext } from "react";
+import { useHandleUserProfileDropdown } from "../../../../../base/hooks/useHandleDropdown";
 import { SettingsIcon } from "../../../../Icons/SettingsIcon";
 import { XIcon } from "../../../../Icons/XIcon";
-import { useHandleUserProfileDropdown } from "../../../../../base/hooks/useHandleDropdown";
-import { useIsFilterClicked } from "../../../../../base/hooks/useIsFilterClicked";
-import { createContext } from "react";
+import { FilterDropdownContents } from "./FilterDropdownContents";
 
 export const closeFilterModalContext = createContext<any>(() => {});
-// 
+//
 export const FilterButton = () => {
   const { isVisible, openDropDown, dropdownRef, closeDropDown } =
     useHandleUserProfileDropdown();
-  //
-  const { setIsFilterClicked } = useIsFilterClicked();
   //
 
   return (
@@ -21,7 +18,6 @@ export const FilterButton = () => {
           className="flex gap-3 items-center bg-white px-3 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black"
           onClick={() => {
             openDropDown();
-            setIsFilterClicked(true);
           }}
         >
           <SettingsIcon />

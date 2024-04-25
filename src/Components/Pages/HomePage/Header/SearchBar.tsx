@@ -35,10 +35,10 @@ export const SearchBar = () => {
         onClick={() => {
           clearInputValue();
         }}
-        className={`absolute right-3 top-2 bg-primaryColor-light rounded-full h-[52px] px-3 py-2 flex items-center hover:bg-primaryColor-dark transition-all duration-300 ${
+        className={`absolute right-3 top-2 bg-primaryColor-light rounded-full h-[%] px-3 py-2 flex items-center hover:bg-primaryColor-dark transition-all duration-300 ${
           isFocused
-            ? "w-[130px] big-screen-mobile-below:w-[90px]  big-screen-mobile-below:px-[4px] transition-[width] duration-300"
-            : "w-[52px]"
+            ? "w-[130px] big-screen-mobile-below:w-20 transition-[width] duration-300"
+            : "w-10"
         }`}
       >
         <SearchIcon

@@ -50,7 +50,7 @@ export const FilterByBedsAndBaths = () => {
           {/*  */}
           <div className="my-6">
             <h2 className="capitalize mb-2 text-sm">bathrooms</h2>
-            <div className="flex gap-2 mobile:overflow-x-auto">
+            <div className="flex gap-2 mobile:overflow-x-auto ">
               <div
                 className={`capitalize border rounded-2xl px-4 py-[5px] ${
                   filterOptions.selectedBaths === 0

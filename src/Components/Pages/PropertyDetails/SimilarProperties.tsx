@@ -16,7 +16,7 @@ export const SimilarProperties = ({selectedProperty,similarProperties}:ISimilarP
         <h1 className="font-bold text-2xl capitalize mb-5">
           new listings near {selectedProperty?.location.address}
         </h1>
-        <div className="flex min-w-full overflow-auto gap-x-3 min-h-[50vh]">
+        <div className="flex min-w-full overflow-auto gap-x-4 pb-5">
           {similarProperties.map((property, index) => {
             return (
               <Link

@@ -1,21 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cities from "../../../../../base/dummyData/propertyCities.json";
 import states from "../../../../../base/dummyData/propertyStates.json";
 import { useFilterStore } from "../../../../../base/store/useFilterStore";
 import { ChevronArrowDown } from "../../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../../Icons/ChevronArrowUp";
 
-export const FilterByLocation = () => {
+export const FilterByLocation = ({
+  isFilterButtonClicked,
+}: {
+  isFilterButtonClicked: boolean;
+}) => {
   //
   const [isCitiesDropDownOpen, setIsCitiesDropDownOpen] = useState(false);
   const [isStatesDropDownOpen, setIsStatesDropDownOpen] = useState(false);
-
-  const { updateFilterOptions, filterOptions } = useFilterStore((state) => ({
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  //
+  const { updateFilterOptions } = useFilterStore((state) => ({
     updateFilterOptions: state.updateFilterOptions,
-    filterOptions: state.filterOptions,
   }));
+  //
 
+  const handleCitySelect = (city: string) => {
+    setSelectedCity(city);
+    setIsCitiesDropDownOpen(false);
+  };
 
+  const handleStateSelect = (stateName: string) => {
+    setSelectedState(stateName);
+    setIsStatesDropDownOpen(false);
+  };
+  useEffect(() => {
+    if (isFilterButtonClicked) {
+      updateFilterOptions(selectedCity, "city");
+      updateFilterOptions(selectedState, "state");
+    }
+  }, [isFilterButtonClicked, selectedCity, selectedState]);
+  console.log(isFilterButtonClicked);
+  
   return (
     <>
       <div>
@@ -27,9 +49,7 @@ export const FilterByLocation = () => {
               className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsCitiesDropDownOpen(!isCitiesDropDownOpen)}
             >
-              {filterOptions.selectedCity
-                ? filterOptions.selectedCity
-                : "choose city"}{" "}
+              {selectedCity ? selectedCity : "choose city"}
               <span>
                 {isCitiesDropDownOpen ? (
                   <ChevronArrowDown />
@@ -40,20 +60,19 @@ export const FilterByLocation = () => {
             </button>
 
             <div
-              className={`flex-col items-start mt-1 rounded-lg border absolute bg-white border-black mobile:w-full w-[500px] transition-all duration-300 ${
-                isCitiesDropDownOpen ? "h-[367px]" : "h-0 opacity-0 invisible"
+              className={`flex-col items-start mt-2 rounded-lg border absolute bg-white border-black mobile:w-full w-[500px] transition-all duration-300 ${
+                isCitiesDropDownOpen ? "h-72" : "h-0 opacity-0 invisible"
               }`}
             >
               {cities.map((city, index) => (
                 <button
                   key={city.id}
                   className={`px-3 py-3 w-full text-start ${
-                    index === cities.length - 1 ? "border-none" : "border-b border-b-black"
+                    index === cities.length - 1
+                      ? "border-none"
+                      : "border-b border-b-black"
                   }`}
-                  onClick={() => {
-                    updateFilterOptions(city.city, "city");
-                    setIsCitiesDropDownOpen(false);
-                  }}
+                  onClick={() => handleCitySelect(city.city)}
                 >
                   {city.city}
                 </button>
@@ -72,9 +91,7 @@ export const FilterByLocation = () => {
               className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsStatesDropDownOpen(!isStatesDropDownOpen)}
             >
-              {filterOptions.selectedState
-                ? filterOptions.selectedState
-                : "choose state"}{" "}
+              {selectedState ? selectedState : "choose state"}
               <span className={`transition-all duration-1000`}>
                 {isStatesDropDownOpen ? (
                   <ChevronArrowDown />
@@ -85,7 +102,7 @@ export const FilterByLocation = () => {
             </button>
             <div
               className={`flex-col items-start mt-1 rounded-lg border border-black mobile:w-full w-[500px] absolute z-10 bg-white transition-all duration-300 ${
-                isStatesDropDownOpen ? "h-[245px]" : "h-0 opacity-0 invisible"
+                isStatesDropDownOpen ? "h-48" : "h-0 opacity-0 invisible"
               }`}
             >
               {states.map((state, index) => (
@@ -94,10 +111,7 @@ export const FilterByLocation = () => {
                   className={`px-3 py-3 w-full text-start ${
                     index === states.length - 1 ? "" : "border-b border-b-black"
                   }`}
-                  onClick={() => {
-                    updateFilterOptions(state.name, "state");
-                    setIsStatesDropDownOpen(false);
-                  }}
+                  onClick={() => handleStateSelect(state.name)}
                 >
                   {state.name}
                 </button>
