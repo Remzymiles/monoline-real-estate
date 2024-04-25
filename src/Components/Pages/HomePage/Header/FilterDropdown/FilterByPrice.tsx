@@ -1,17 +1,26 @@
-import { useState } from "react";
 import prices from "../../../../../base/dummyData/propertyPrices.json";
 import { useFilterStore } from "../../../../../base/store/useFilterStore";
 import { ChevronArrowDown } from "../../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../../Icons/ChevronArrowUp";
 
-export const FilterByPrice = () => {
+interface IPriceRange {
+  setIsPricesDropDownOpen: React.Dispatch<boolean>;
+  isPricesDropDownOpen: boolean;
+  selectedPrice: { min: number; max: number } | string;
+  setSelectedPrice: React.Dispatch<{ min: number; max: number } | string>;
+}
+
+export const FilterByPrice = ({
+  setIsPricesDropDownOpen,
+  isPricesDropDownOpen,
+  selectedPrice,
+  setSelectedPrice,
+}: IPriceRange) => {
   //
-  const [isPricesDropDownOpen, setIsPricesDropDownOpen] = useState(false);
-  //
-  const { updateFilterOptions, filterOptions } = useFilterStore((state) => ({
-    updateFilterOptions: state.updateFilterOptions,
-    filterOptions: state.filterOptions,
+  const { clearFilterOptions } = useFilterStore((state) => ({
+    clearFilterOptions: state.clearFilterOptions,
   }));
+  //
 
   return (
     <>
@@ -26,9 +35,9 @@ export const FilterByPrice = () => {
               className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsPricesDropDownOpen(!isPricesDropDownOpen)}
             >
-              {typeof filterOptions.selectedPrice === "string"
+              {typeof selectedPrice === "string"
                 ? "select price range"
-                : `$${filterOptions.selectedPrice?.min.toLocaleString()} - $${filterOptions.selectedPrice?.max.toLocaleString()}`}
+                : `$${selectedPrice.min.toLocaleString()} - $${selectedPrice.max.toLocaleString()}`}
               <span>
                 {isPricesDropDownOpen ? (
                   <ChevronArrowDown />
@@ -51,10 +60,10 @@ export const FilterByPrice = () => {
                       : "border-b border-b-black"
                   }`}
                   onClick={() => {
-                    updateFilterOptions(
-                      { min: price.price.min, max: price.price.max },
-                      "price"
-                    );
+                    setSelectedPrice({
+                      min: price.price.min,
+                      max: price.price.max,
+                    });
                     setIsPricesDropDownOpen(false);
                   }}
                 >

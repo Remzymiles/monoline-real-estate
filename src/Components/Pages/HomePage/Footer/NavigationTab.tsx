@@ -62,7 +62,7 @@ export const NavigationTab = () => {
             color: isActive ? "#89935ee8" : "black",
           };
         }}
-        className="flex justify-center flex-col items-center text-center font-semibold text-sm "
+        className="flex justify-center flex-col items-center text-center font-semibold text-sm"
       >
         <UserProfileIcon
           extraStyle={`pt-[2px] ${

@@ -1,13 +1,36 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useFilterStore } from "../../../../../base/store/useFilterStore";
-import { FilterByLocation } from "../FilterDropdown/FilterByLocation";
 import { closeFilterModalContext } from "./FilterButton";
 import { FilterByBedsAndBaths } from "./FilterByBedsAndBaths";
+import { FilterByLocation } from "./FilterByLocation";
 import { FilterByPrice } from "./FilterByPrice";
 
 export const FilterDropdownContents = () => {
   //
-  const [isFilterButtonClicked, setIsFilterButtonClicked] = useState(false);
+
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [isCitiesDropDownOpen, setIsCitiesDropDownOpen] = useState(false);
+  const [isStatesDropDownOpen, setIsStatesDropDownOpen] = useState(false);
+  //
+  const [selectedBeds, setSelectedBeds] = useState(0);
+  const [selectedBaths, setSelectedBaths] = useState(0);
+  //
+  const [isPricesDropDownOpen, setIsPricesDropDownOpen] = useState(false);
+  const [selectedPrice, setSelectedPrice] = useState<
+    { min: number; max: number } | string
+  >("");
+  //
+  const handleCitySelect = (city: string) => {
+    setSelectedCity(city);
+    setIsCitiesDropDownOpen(false);
+  };
+
+  const handleStateSelect = (stateName: string) => {
+    setSelectedState(stateName);
+    setIsStatesDropDownOpen(false);
+  };
+
   //
   const { filterOptions, updateFilterOptions, clearFilterOptions } =
     useFilterStore((state) => ({
@@ -17,15 +40,39 @@ export const FilterDropdownContents = () => {
     }));
   //
   const closeFilterModal = useContext(closeFilterModalContext);
+  //
+  useEffect(() => {
+    console.log(filterOptions);
+  }, [filterOptions]);
 
   return (
     <>
       <div className="px-4 max-h-[90%] pb-16 overflow-y-scroll z-20">
-        <FilterByLocation isFilterButtonClicked={isFilterButtonClicked} />
         {/*  */}
-        <FilterByPrice />
+        <FilterByLocation
+          handleCitySelect={handleCitySelect}
+          handleStateSelect={handleStateSelect}
+          isCitiesDropDownOpen={isCitiesDropDownOpen}
+          isStatesDropDownOpen={isStatesDropDownOpen}
+          selectedCity={selectedCity}
+          selectedState={selectedState}
+          setIsCitiesDropDownOpen={setIsCitiesDropDownOpen}
+          setIsStatesDropDownOpen={setIsStatesDropDownOpen}
+        />
         {/*  */}
-        <FilterByBedsAndBaths />
+        <FilterByPrice
+          isPricesDropDownOpen={isPricesDropDownOpen}
+          selectedPrice={selectedPrice}
+          setIsPricesDropDownOpen={setIsPricesDropDownOpen}
+          setSelectedPrice={setSelectedPrice}
+        />
+        {/*  */}
+        <FilterByBedsAndBaths
+          selectedBaths={selectedBaths}
+          selectedBeds={selectedBeds}
+          setSelectedBaths={setSelectedBaths}
+          setSelectedBeds={setSelectedBeds}
+        />
       </div>
       <div className="absolute z-50 bg-white bottom-0 border-t border-t-slate-300 w-full items-center pt-2 pb-5 px-4 flex justify-between">
         <button
@@ -38,9 +85,11 @@ export const FilterDropdownContents = () => {
           className="capitalize bg-black/85 px-5 py-2 text-white rounded-lg font-bold hover:bg-black transition-colors duration-300"
           onClick={() => {
             closeFilterModal();
-            setIsFilterButtonClicked(true);
-            updateFilterOptions;
-            console.log(filterOptions);
+            updateFilterOptions(selectedCity, "city");
+            updateFilterOptions(selectedState, "state");
+            updateFilterOptions(selectedBeds, "bed");
+            updateFilterOptions(selectedBaths, "baths");
+            updateFilterOptions(selectedPrice, "price");
           }}
         >
           filter

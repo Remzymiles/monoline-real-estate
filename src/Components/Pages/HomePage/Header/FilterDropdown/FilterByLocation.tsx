@@ -1,43 +1,32 @@
-import { useEffect, useState } from "react";
 import cities from "../../../../../base/dummyData/propertyCities.json";
 import states from "../../../../../base/dummyData/propertyStates.json";
-import { useFilterStore } from "../../../../../base/store/useFilterStore";
 import { ChevronArrowDown } from "../../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../../Icons/ChevronArrowUp";
 
+
+interface ILocation {
+  setIsCitiesDropDownOpen: React.Dispatch<boolean>;
+  isCitiesDropDownOpen: boolean;
+  handleCitySelect: (city: string) => void;
+  selectedCity: string;
+  setIsStatesDropDownOpen: React.Dispatch<boolean>;
+  isStatesDropDownOpen: boolean;
+  handleStateSelect: (stateName: string) => void;
+  selectedState: string;
+}
+
+
 export const FilterByLocation = ({
-  isFilterButtonClicked,
-}: {
-  isFilterButtonClicked: boolean;
-}) => {
+  setIsCitiesDropDownOpen,
+  isCitiesDropDownOpen,
+  handleCitySelect,
+  selectedCity,
+  setIsStatesDropDownOpen,
+  isStatesDropDownOpen,
+  selectedState,
+  handleStateSelect
+}:ILocation) => {
   //
-  const [isCitiesDropDownOpen, setIsCitiesDropDownOpen] = useState(false);
-  const [isStatesDropDownOpen, setIsStatesDropDownOpen] = useState(false);
-  const [selectedCity, setSelectedCity] = useState("");
-  const [selectedState, setSelectedState] = useState("");
-  //
-  const { updateFilterOptions } = useFilterStore((state) => ({
-    updateFilterOptions: state.updateFilterOptions,
-  }));
-  //
-
-  const handleCitySelect = (city: string) => {
-    setSelectedCity(city);
-    setIsCitiesDropDownOpen(false);
-  };
-
-  const handleStateSelect = (stateName: string) => {
-    setSelectedState(stateName);
-    setIsStatesDropDownOpen(false);
-  };
-  useEffect(() => {
-    if (isFilterButtonClicked) {
-      updateFilterOptions(selectedCity, "city");
-      updateFilterOptions(selectedState, "state");
-    }
-  }, [isFilterButtonClicked, selectedCity, selectedState]);
-  console.log(isFilterButtonClicked);
-  
   return (
     <>
       <div>

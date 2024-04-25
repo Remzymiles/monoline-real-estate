@@ -1,13 +1,19 @@
 import propertyBaths from "../../../../../base/dummyData/propertyBaths.json";
 import propertyBeds from "../../../../../base/dummyData/propertyBeds.json";
-import { useFilterStore } from "../../../../../base/store/useFilterStore";
 
-export const FilterByBedsAndBaths = () => {
-  //
-  const { updateFilterOptions, filterOptions } = useFilterStore((state) => ({
-    updateFilterOptions: state.updateFilterOptions,
-    filterOptions: state.filterOptions,
-  }));
+interface IBedsAndBaths {
+  selectedBaths: number;
+  selectedBeds: number;
+  setSelectedBaths: React.Dispatch<number>;
+  setSelectedBeds: React.Dispatch<number>;
+}
+
+export const FilterByBedsAndBaths = ({
+  selectedBaths,
+  selectedBeds,
+  setSelectedBaths,
+  setSelectedBeds,
+}:IBedsAndBaths) => {
   //
 
   return (
@@ -20,12 +26,12 @@ export const FilterByBedsAndBaths = () => {
             <div className="flex gap-2 mobile:overflow-x-auto">
               <div
                 className={`capitalize border rounded-2xl px-4 py-[5px] ${
-                  filterOptions.selectedBeds === 0
+                  selectedBeds === 0
                     ? "bg-black text-white"
                     : "bg-white text-black"
                 } hover:border-black`}
                 onClick={() => {
-                  updateFilterOptions(0, "bed");
+                  setSelectedBeds(0);
                 }}
               >
                 any
@@ -34,12 +40,12 @@ export const FilterByBedsAndBaths = () => {
                 <div
                   key={bed.id}
                   className={`border hover:border-black rounded-2xl px-[23px] py-[5px] ${
-                    filterOptions.selectedBeds === bed.beds
+                    selectedBeds === bed.beds
                       ? "bg-black text-white"
                       : "bg-white text-black"
                   }`}
                   onClick={() => {
-                    updateFilterOptions(bed.beds, "bed");
+                    setSelectedBeds(bed.beds);
                   }}
                 >
                   {bed.beds}
@@ -53,12 +59,12 @@ export const FilterByBedsAndBaths = () => {
             <div className="flex gap-2 mobile:overflow-x-auto ">
               <div
                 className={`capitalize border rounded-2xl px-4 py-[5px] ${
-                  filterOptions.selectedBaths === 0
+                  selectedBaths === 0
                     ? "bg-black text-white"
                     : "bg-white text-black"
                 } hover:border-black`}
                 onClick={() => {
-                  updateFilterOptions(0, "baths");
+                  setSelectedBaths(0);
                 }}
               >
                 any
@@ -67,12 +73,12 @@ export const FilterByBedsAndBaths = () => {
                 <div
                   key={bath.id}
                   className={`border hover:border-black rounded-2xl px-[23px] py-[5px] ${
-                    filterOptions.selectedBaths === bath.baths
+                    selectedBaths === bath.baths
                       ? "bg-black text-white"
                       : "bg-white text-black"
                   }`}
                   onClick={() => {
-                    updateFilterOptions(bath.baths, "baths");
+                    setSelectedBaths(bath.baths);
                   }}
                 >
                   {bath.baths}
