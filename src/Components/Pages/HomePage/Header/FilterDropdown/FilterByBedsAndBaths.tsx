@@ -1,19 +1,13 @@
 import propertyBaths from "../../../../../base/dummyData/propertyBaths.json";
 import propertyBeds from "../../../../../base/dummyData/propertyBeds.json";
-
-interface IBedsAndBaths {
-  selectedBaths: number;
-  selectedBeds: number;
-  setSelectedBaths: React.Dispatch<number>;
-  setSelectedBeds: React.Dispatch<number>;
-}
+import { IFilterByBedsAndBaths } from "../../../../../base/interface/IFilterByBedsAndBaths";
 
 export const FilterByBedsAndBaths = ({
   selectedBaths,
   selectedBeds,
   setSelectedBaths,
   setSelectedBeds,
-}:IBedsAndBaths) => {
+}: IFilterByBedsAndBaths) => {
   //
 
   return (
@@ -23,7 +17,7 @@ export const FilterByBedsAndBaths = ({
         <div className="mt-3">
           <div>
             <h2 className="capitalize mb-2 text-sm">bedrooms</h2>
-            <div className="flex gap-2 mobile:overflow-x-auto">
+            <div className="flex gap-2 mobile:overflow-x-auto no-scrollbar">
               <div
                 className={`capitalize border rounded-2xl px-4 py-[5px] ${
                   selectedBeds === 0
@@ -56,7 +50,7 @@ export const FilterByBedsAndBaths = ({
           {/*  */}
           <div className="my-6">
             <h2 className="capitalize mb-2 text-sm">bathrooms</h2>
-            <div className="flex gap-2 mobile:overflow-x-auto ">
+            <div className="flex gap-2 mobile:overflow-x-auto no-scrollbar">
               <div
                 className={`capitalize border rounded-2xl px-4 py-[5px] ${
                   selectedBaths === 0

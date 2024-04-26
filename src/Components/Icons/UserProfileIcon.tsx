@@ -1,10 +1,16 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const UserProfileIcon = ({ extraStyle }: { extraStyle: string }) => {
+export const UserProfileIcon = ({
+  extraStyle,
+  iconStyle
+}: {
+  extraStyle: string;
+  iconStyle: string
+}) => {
   return (
-    <div className={`h-[30px] w-[30px]  rounded-full  ${extraStyle}`}>
-      <FontAwesomeIcon icon={faUser} className="text-sm text-white" />
+    <div className={`rounded-full  ${extraStyle} text-center`}>
+      <FontAwesomeIcon icon={faUser} className= {`text-sm text-white ${iconStyle}`} />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { HomepageFooter } from "../Components/Pages/HomePage/Footer/HomepageFooter";
 import { HomepageHeader } from "../Components/Pages/HomePage/Header/HomepageHeader";
+import { NavigationTab } from "../Components/Pages/HomePage/Footer/NavigationTab";
 
 export const GlobalLayout = () => {
   //
@@ -10,6 +11,7 @@ export const GlobalLayout = () => {
       <HomepageHeader />
       <main className="flex-1">
         <Outlet />
+        <NavigationTab />
       </main>
       <HomepageFooter />
     </div>

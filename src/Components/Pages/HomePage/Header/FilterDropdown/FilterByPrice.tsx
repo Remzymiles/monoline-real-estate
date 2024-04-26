@@ -1,21 +1,15 @@
 import prices from "../../../../../base/dummyData/propertyPrices.json";
+import { IFilterByPriceRange } from "../../../../../base/interface/IFilterByPriceRange";
 import { useFilterStore } from "../../../../../base/store/useFilterStore";
 import { ChevronArrowDown } from "../../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../../Icons/ChevronArrowUp";
-
-interface IPriceRange {
-  setIsPricesDropDownOpen: React.Dispatch<boolean>;
-  isPricesDropDownOpen: boolean;
-  selectedPrice: { min: number; max: number } | string;
-  setSelectedPrice: React.Dispatch<{ min: number; max: number } | string>;
-}
 
 export const FilterByPrice = ({
   setIsPricesDropDownOpen,
   isPricesDropDownOpen,
   selectedPrice,
   setSelectedPrice,
-}: IPriceRange) => {
+}: IFilterByPriceRange) => {
   //
   const { clearFilterOptions } = useFilterStore((state) => ({
     clearFilterOptions: state.clearFilterOptions,

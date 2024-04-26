@@ -1,20 +1,10 @@
+import { useEffect } from "react";
 import cities from "../../../../../base/dummyData/propertyCities.json";
 import states from "../../../../../base/dummyData/propertyStates.json";
+import { IFilterByLocation } from "../../../../../base/interface/IFilterByLocation";
+import { useFilterStore } from "../../../../../base/store/useFilterStore";
 import { ChevronArrowDown } from "../../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../../Icons/ChevronArrowUp";
-
-
-interface ILocation {
-  setIsCitiesDropDownOpen: React.Dispatch<boolean>;
-  isCitiesDropDownOpen: boolean;
-  handleCitySelect: (city: string) => void;
-  selectedCity: string;
-  setIsStatesDropDownOpen: React.Dispatch<boolean>;
-  isStatesDropDownOpen: boolean;
-  handleStateSelect: (stateName: string) => void;
-  selectedState: string;
-}
-
 
 export const FilterByLocation = ({
   setIsCitiesDropDownOpen,
@@ -24,9 +14,10 @@ export const FilterByLocation = ({
   setIsStatesDropDownOpen,
   isStatesDropDownOpen,
   selectedState,
-  handleStateSelect
-}:ILocation) => {
+  handleStateSelect,
+}: IFilterByLocation) => {
   //
+  
   return (
     <>
       <div>

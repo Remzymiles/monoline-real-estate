@@ -1,76 +1,74 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { HeartIcon } from "../../../Icons/HeartIcon";
 import { SearchIcon } from "../../../Icons/SearchIcon";
 import { UserProfileIcon } from "../../../Icons/UserProfileIcon";
-import { useState } from "react";
 
 export const NavigationTab = () => {
   //
-  const [isExploreActive, setIsExploreActive] = useState(false);
-  const [isWishlistActive, setIsWishlistActive] = useState(false);
-  const [isProfileActive, setIsProfileActive] = useState(false);
+  //
+  const location = useLocation();
+
   //
   return (
-    <div className="fixed bottom-0 flex bg-white justify-center gap-10 pt-2 w-full border-t-2 tablet-above:hidden z-10">
-      <NavLink
-        to={"/"}
-        className="text-center font-semibold text-sm "
-        style={({ isActive }) => {
-          {
-            isActive ? setIsExploreActive(true) : setIsExploreActive(false);
-          }
-          return {
-            color: isActive ? "#89935ee8" : "black",
-          };
-        }}
-      >
-        <SearchIcon
-          extraStyle={`${
-            isExploreActive ? "text-primaryColor-light" : "text-gray-400"
+    <div className="fixed bottom-0 flex bg-white justify-center gap-10 pt-3 w-full border-t-2 tablet-above:hidden z-10">
+      <div>
+        <NavLink
+          to={"/"}
+          className={`text-center font-semibold text-sm ${
+            location.pathname === "/" ? "text-primaryColor-light" : "text-black"
           }`}
-        />{" "}
-        Explore
-      </NavLink>
+        >
+          <SearchIcon
+            extraStyle={`${
+              location.pathname === "/"
+                ? "text-primaryColor-light"
+                : "text-gray-400"
+            }`}
+          />{" "}
+          Explore
+        </NavLink>
+      </div>
       {/*  */}
-      <NavLink
-        to={"/wishlist"}
-        className="text-center font-semibold text-sm"
-        style={({ isActive }) => {
-          {
-            isActive ? setIsWishlistActive(true) : setIsWishlistActive(false);
-          }
-          return {
-            color: isActive ? "#89935ee8" : "black",
-          };
-        }}
-      >
-        <HeartIcon
-          color={`${
-            isWishlistActive ? "text-primaryColor-light" : "text-gray-400"
+      <div>
+        <NavLink
+          to={"/wishlist"}
+          className={`text-center font-semibold text-sm ${
+            location.pathname === "/wishlist"
+              ? "text-primaryColor-light"
+              : "text-black"
           }`}
-        />{" "}
-        Wishlists
-      </NavLink>
+        >
+          <HeartIcon
+            color={`${
+              location.pathname === "/wishlist"
+                ? "text-primaryColor-light"
+                : "text-gray-400"
+            }`}
+          />{" "}
+          Wishlists
+        </NavLink>
+      </div>
       {/*  */}
-      <NavLink
-        to={"/profile"}
-        style={({ isActive }) => {
-          {
-            isActive ? setIsProfileActive(true) : setIsProfileActive(false);
-          }
-          return {
-            color: isActive ? "#89935ee8" : "black",
-          };
-        }}
-        className="flex justify-center flex-col items-center text-center font-semibold text-sm"
-      >
-        <UserProfileIcon
-          extraStyle={`pt-[2px] ${
-            isProfileActive ? "bg-primaryColor-light" : "bg-gray-400"
+      <div className="-translate-y-[2px]">
+        <NavLink
+          to={"/profile"}
+          className={`flex flex-col items-center gap-0 ${
+            location.pathname === "/profile"
+              ? "text-primaryColor-light"
+              : "text-black"
           }`}
-        />
-        Profile
-      </NavLink>
+        >
+          <UserProfileIcon
+            iconStyle="-translate-y-[1px]"
+            extraStyle={`h-[27px] w-[27px] ${
+              location.pathname === "/profile"
+                ? "bg-primaryColor-light"
+                : "bg-gray-400"
+            }`}
+          />
+          <span className="text-sm font-semibold">Profile</span>
+        </NavLink>
+      </div>
     </div>
   );
 };

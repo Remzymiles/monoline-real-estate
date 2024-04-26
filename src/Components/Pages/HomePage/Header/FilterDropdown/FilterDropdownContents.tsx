@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useFilterStore } from "../../../../../base/store/useFilterStore";
 import { closeFilterModalContext } from "./FilterButton";
 import { FilterByBedsAndBaths } from "./FilterByBedsAndBaths";
 import { FilterByLocation } from "./FilterByLocation";
 import { FilterByPrice } from "./FilterByPrice";
 
+
+export const UseFilterContext = createContext<any>({})
 export const FilterDropdownContents = () => {
   //
-
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [isCitiesDropDownOpen, setIsCitiesDropDownOpen] = useState(false);
@@ -74,10 +75,17 @@ export const FilterDropdownContents = () => {
           setSelectedBeds={setSelectedBeds}
         />
       </div>
-      <div className="absolute z-50 bg-white bottom-0 border-t border-t-slate-300 w-full items-center pt-2 pb-5 px-4 flex justify-between">
+      <div className="absolute mobile:fixed z-50 bg-white bottom-0 border-t border-t-slate-300 w-full items-center pt-2 pb-5 px-4 flex justify-between">
         <button
           className="capitalize font-bold text-lg hover:bg-slate-200 rounded-lg py-2 px-2 transition-colors duration-300"
-          onClick={clearFilterOptions}
+          onClick={()=>{
+            clearFilterOptions
+            setSelectedCity("")
+            setSelectedState("")
+            setSelectedPrice("")
+            setSelectedBeds(0)
+            setSelectedBaths(0)
+          }}
         >
           clear all
         </button>
