@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { MonolineLogo } from "../../../Logos/MonolineLogo";
-import { FilterButton } from "./FilterDropdown/FilterButton";
 import { SearchBar } from "./SearchBar";
 import { UserProfileDropdown } from "./UserProfile/UserProfileDropdown";
+import { CartIcon } from "../../../Icons/CartIcon";
 
 export const HomepageHeader = () => {
   //
@@ -18,8 +18,10 @@ export const HomepageHeader = () => {
         </div>
         {/*  */}
         <div className="flex items-center justify-end gap-2">
-          <FilterButton />
           {/*  */}
+         <Link to={"/cart-page"} className="hidden tablet-above:block bg-white px-2 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black">
+         <CartIcon extraStyle="fill-black/70"/>
+         </Link>
           <UserProfileDropdown />
         </div>
       </div>

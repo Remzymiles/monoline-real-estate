@@ -8,6 +8,7 @@ import { PropertyDetails } from "./Pages/PropertyDetails";
 import { SearchPage } from "./Pages/SearchPage";
 import { SignUpPage } from "./Pages/SignUpPage";
 import { Wishlist } from "./Pages/Wishlist";
+import { CartPage } from "./Pages/CartPage";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
        <Routes>
         <Route path="/" element={<GlobalLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="/cart-page" element={<CartPage/>} />
           <Route path="/wishlist" element={<Wishlist/>} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/property-details/:propertyId" element={<PropertyDetails/>} />

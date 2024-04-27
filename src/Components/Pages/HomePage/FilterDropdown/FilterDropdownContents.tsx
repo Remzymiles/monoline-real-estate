@@ -1,12 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useFilterStore } from "../../../../../base/store/useFilterStore";
+import { createContext, useContext, useState } from "react";
+import { useFilterStore } from "../../../../base/store/useFilterStore";
 import { closeFilterModalContext } from "./FilterButton";
 import { FilterByBedsAndBaths } from "./FilterByBedsAndBaths";
 import { FilterByLocation } from "./FilterByLocation";
 import { FilterByPrice } from "./FilterByPrice";
 
-
-export const UseFilterContext = createContext<any>({})
+export const UseFilterContext = createContext<any>({});
 export const FilterDropdownContents = () => {
   //
   const [selectedCity, setSelectedCity] = useState("");
@@ -33,22 +32,20 @@ export const FilterDropdownContents = () => {
   };
 
   //
-  const { filterOptions, updateFilterOptions, clearFilterOptions } =
-    useFilterStore((state) => ({
+  const { updateFilterOptions, clearFilterOptions } = useFilterStore(
+    (state) => ({
       updateFilterOptions: state.updateFilterOptions,
       clearFilterOptions: state.clearFilterOptions,
       filterOptions: state.filterOptions,
-    }));
+    })
+  );
   //
   const closeFilterModal = useContext(closeFilterModalContext);
   //
-  useEffect(() => {
-    console.log(filterOptions);
-  }, [filterOptions]);
 
   return (
     <>
-      <div className="px-4 max-h-[90%] pb-16 overflow-y-scroll z-20">
+      <div className="px-4 max-h-[92%] big-screen-mobile-below:max-h-[86%] pb-16 overflow-y-scroll z-20">
         {/*  */}
         <FilterByLocation
           handleCitySelect={handleCitySelect}
@@ -78,13 +75,13 @@ export const FilterDropdownContents = () => {
       <div className="absolute mobile:fixed z-50 bg-white bottom-0 border-t border-t-slate-300 w-full items-center pt-2 pb-5 px-4 flex justify-between">
         <button
           className="capitalize font-bold text-lg hover:bg-slate-200 rounded-lg py-2 px-2 transition-colors duration-300"
-          onClick={()=>{
-            clearFilterOptions
-            setSelectedCity("")
-            setSelectedState("")
-            setSelectedPrice("")
-            setSelectedBeds(0)
-            setSelectedBaths(0)
+          onClick={() => {
+            clearFilterOptions;
+            setSelectedCity("");
+            setSelectedState("");
+            setSelectedPrice("");
+            setSelectedBeds(0);
+            setSelectedBaths(0);
           }}
         >
           clear all

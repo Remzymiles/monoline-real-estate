@@ -1,8 +1,8 @@
-import prices from "../../../../../base/dummyData/propertyPrices.json";
-import { IFilterByPriceRange } from "../../../../../base/interface/IFilterByPriceRange";
-import { useFilterStore } from "../../../../../base/store/useFilterStore";
-import { ChevronArrowDown } from "../../../../Icons/ChevronArrowDown";
-import { ChevronArrowUp } from "../../../../Icons/ChevronArrowUp";
+import prices from "../../../../base/dummyData/propertyPrices.json";
+import { IFilterByPriceRange } from "../../../../base/interface/IFilterByPriceRange";
+import { useFilterStore } from "../../../../base/store/useFilterStore";
+import { ChevronArrowDown } from "../../../Icons/ChevronArrowDown";
+import { ChevronArrowUp } from "../../../Icons/ChevronArrowUp";
 
 export const FilterByPrice = ({
   setIsPricesDropDownOpen,

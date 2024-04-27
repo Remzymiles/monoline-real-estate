@@ -1,35 +1,41 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IUseHandleUserProfileDropdown } from "../interface/IUseHandleUserProfileDropdown";
 
+export const useHandleUserProfileDropdown =
+  (): IUseHandleUserProfileDropdown => {
+    const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
+    const userProfileDropdownRef = useRef<HTMLDivElement>(null);
 
-export const useHandleUserProfileDropdown = ():IUseHandleUserProfileDropdown => {
-  const [isVisible, setIsVisible] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const openDropDown = (): void => {
-    setIsVisible(true);
-  };
-
-  const closeDropDown = (): void => {
-    setIsVisible(false);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | Event): void => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        closeDropDown();
-      }
+    const handleOpenUserProfileDropDown = (): void => {
+      setIsUserProfileVisible(true);
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+    const handleCloseUserProfileDropDown = (): void => {
+      setIsUserProfileVisible(false);
     };
-  }, []);
 
-  return { isVisible, openDropDown, closeDropDown, dropdownRef, setIsVisible };
-};
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent | Event): void => {
+        if (
+          userProfileDropdownRef.current &&
+          !userProfileDropdownRef.current.contains(event.target as Node)
+        ) {
+          handleCloseUserProfileDropDown();
+        }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
+
+    return {
+      isUserProfileVisible,
+      handleOpenUserProfileDropDown,
+      handleCloseUserProfileDropDown,
+      userProfileDropdownRef,
+      setIsUserProfileVisible,
+    };
+  };

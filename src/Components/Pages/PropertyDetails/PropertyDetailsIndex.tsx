@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import properties from "../../../base/dummyData/properties.json";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
+import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
@@ -26,8 +27,18 @@ export const PropertyDetailsIndex = () => {
   const similarProperties = properties.filter((similarProperty) => {
     return selectedProperty?.location.city === similarProperty.location.city;
   });
-  console.log(selectedProperty);
-
+  //
+  const { propertyIds, updatePropertyId } = useCartPropertyIdsStore((state) => ({
+    propertyIds: state.propertyIds,
+    updatePropertyId: state.updatePropertyIds,
+  }));
+  //
+  const addPropertyToCart = () => {
+    !propertyIds.includes(Number(propertyId))
+      ? updatePropertyId(Number(propertyId))
+      : null;
+  };
+  //
   return (
     <div className="relative">
       <ShowAllPicturesModal
@@ -83,7 +94,10 @@ export const PropertyDetailsIndex = () => {
                 <button className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 text-sm">
                   Inspect The property
                 </button>
-                <button className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 text-sm">
+                <button
+                  className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 text-sm"
+                  onClick={addPropertyToCart}
+                >
                   Add to cart
                 </button>
                 <button className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm">

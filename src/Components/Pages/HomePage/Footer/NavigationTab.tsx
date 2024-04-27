@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
+import { CartIcon } from "../../../Icons/CartIcon";
 import { HeartIcon } from "../../../Icons/HeartIcon";
 import { SearchIcon } from "../../../Icons/SearchIcon";
 import { UserProfileIcon } from "../../../Icons/UserProfileIcon";
@@ -10,7 +11,7 @@ export const NavigationTab = () => {
 
   //
   return (
-    <div className="fixed bottom-0 flex bg-white justify-center gap-10 pt-3 w-full border-t-2 tablet-above:hidden z-10">
+    <div className="fixed px-2 bottom-0 flex bg-white justify-between gap-x-2 pt-3 w-full border-t-2 tablet-above:hidden z-10">
       <div>
         <NavLink
           to={"/"}
@@ -26,6 +27,26 @@ export const NavigationTab = () => {
             }`}
           />{" "}
           Explore
+        </NavLink>
+      </div>
+      {/*  */}
+      <div className="">
+        <NavLink
+          to={"/cart-page"}
+          className={` font-semibold text-sm ${
+            location.pathname === "/cart-page"
+              ? "text-primaryColor-light"
+              : "text-black"
+          }`}
+        >
+          <CartIcon
+            extraStyle={` text-center ${
+              location.pathname === "/cart-page"
+                ? "fill-primaryColor-light"
+                : "fill-gray-400"
+            }`}
+          />
+          <p>Cart</p>
         </NavLink>
       </div>
       {/*  */}

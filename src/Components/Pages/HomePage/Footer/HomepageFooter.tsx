@@ -69,6 +69,7 @@ export const HomepageFooter = () => {
         </div>
       </div>
       {/*  */}
+      <NavigationTab/>
     </footer>
   );
 };

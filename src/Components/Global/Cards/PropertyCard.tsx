@@ -4,6 +4,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Properties from "../../../base/dummyData/properties.json";
 import { useFilterStore } from "../../../base/store/useFilterStore";
+import { useWishListStore } from "../../../base/store/useWishListStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -15,7 +16,19 @@ export const PropertyCard = () => {
   const { filterOptions } = useFilterStore((state) => ({
     filterOptions: state.filterOptions,
   }));
-
+  //
+  const { wishlistPropertyIds, updatePropertyIds } = useWishListStore(
+    (state) => ({
+      wishlistPropertyIds: state.wishlistPropertyIds,
+      updatePropertyIds: state.updateWishlistPropertyIds,
+    })
+  );
+  const addPropertyToWishlist = Properties.filter((property) => {
+    !wishlistPropertyIds.includes(property.property_id)
+      ? updatePropertyIds(property.property_id)
+      : null;
+  });
+  //
   const filterProperties = () => {
     const {
       selectedBeds,

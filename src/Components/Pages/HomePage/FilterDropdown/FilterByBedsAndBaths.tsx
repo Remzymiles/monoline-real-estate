@@ -1,6 +1,6 @@
-import propertyBaths from "../../../../../base/dummyData/propertyBaths.json";
-import propertyBeds from "../../../../../base/dummyData/propertyBeds.json";
-import { IFilterByBedsAndBaths } from "../../../../../base/interface/IFilterByBedsAndBaths";
+import propertyBaths from "../../../../base/dummyData/propertyBaths.json";
+import propertyBeds from "../../../../base/dummyData/propertyBeds.json";
+import { IFilterByBedsAndBaths } from "../../../../base/interface/IFilterByBedsAndBaths";
 
 export const FilterByBedsAndBaths = ({
   selectedBaths,
