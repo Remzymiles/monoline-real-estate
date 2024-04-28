@@ -98,7 +98,10 @@ export const PropertyCard = () => {
                 ))}
               </Swiper>
 
-              <div className="absolute top-3 right-3 z-10">
+              <div className="absolute top-3 right-3 z-10 bg-white/30 px-2 py-1 rounded-full" onClick={()=>{
+                console.log("me and you", property.property_id);
+                
+              }}>
                 <HeartIcon color="text-primaryColor-dark" />
               </div>
             </div>
@@ -114,15 +117,15 @@ export const PropertyCard = () => {
               <div className="mt-1 flex gap-3">
                 <span className="flex gap-1 text-sm text-secondaryColor-dark">
                   <BedIcon extraStyle="text-gray-500 text-[15px]" />{" "}
-                  {property.details.beds}bd
+                  <span className="font-extrabold">{property.details.beds}</span>bd
                 </span>
                 <span className="flex gap-1 text-sm text-secondaryColor-dark">
                   <BathIcon extraStyle="text-gray-500 text-[15px]" />{" "}
-                  {property.details.baths}ba
+                  <span className="font-extrabold">{property.details.baths}</span>ba
                 </span>
                 <span className="flex gap-1 text-sm text-secondaryColor-dark">
                   <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
-                  {property.details.sqft.toLocaleString()} sqft
+                  <span className="font-extrabold">{property.details.sqft.toLocaleString()}</span>sqft
                 </span>
               </div>
               <p className="capitalize text-[15px]">

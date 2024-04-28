@@ -6,11 +6,8 @@ export const HomePageIndex = () => {
     <div
       className={`pt-2 mobile:mx-4 tablet:mx-8 laptop-below:mt-[190px] tablet-above:mt-[120px] tablet-above:mx-8 laptop:mx-28 `}
     >
-      <div className="flex justify-between mb-2">
-        <p className="text-lg font-bold">Filter products:</p>
-        <FilterButton />
-      </div>
-      <div className="flex justify-center flex-wrap gap-5 min-h-[50vh]">
+      <FilterButton />
+      <div className="flex justify-center flex-wrap gap-5 min-h-[50vh] mt-[55px] laptop:mt-[70px]">
         <PropertyCard />
       </div>
     </div>

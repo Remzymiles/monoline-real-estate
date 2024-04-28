@@ -67,15 +67,15 @@ export const PropertyDetailsIndex = () => {
                   <div className="mt-1 flex gap-3">
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <BedIcon extraStyle="text-gray-500 text-[10px]" />{" "}
-                      {selectedProperty?.details.beds}bd
+                      <span className="font-extrabold">{selectedProperty?.details.beds}</span>bd
                     </span>
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <BathIcon extraStyle="text-gray-500 text-[10px]" />{" "}
-                      {selectedProperty?.details.baths}ba
+                      <span className="font-extrabold">{selectedProperty?.details.baths}</span>ba
                     </span>
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
-                      {selectedProperty?.details.sqft.toLocaleString()}sqft
+                      <span className="font-extrabold">{selectedProperty?.details.sqft.toLocaleString()}</span>sqft
                     </span>
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export const PropertyDetailsIndex = () => {
                     ${selectedProperty?.price.toLocaleString()}
                   </h1>
                   <p className="text-xs">
-                    Est. Mortgage ${selectedProperty?.mortgage.toLocaleString()}
+                    Est. Mortgage <span className="font-extrabold">${selectedProperty?.mortgage.toLocaleString()}</span>
                     /mo*
                   </p>
                 </div>

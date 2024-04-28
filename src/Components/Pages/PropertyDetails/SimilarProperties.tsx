@@ -14,7 +14,7 @@ export const SimilarProperties = ({selectedProperty,similarProperties}:ISimilarP
     <>
       <div className="mt-5">
         <h1 className="font-bold text-2xl capitalize mb-5">
-          new listings near {selectedProperty?.location.address}
+          new listings in {selectedProperty?.location.city}
         </h1>
         <div className="flex min-w-full overflow-auto gap-x-4 pb-5">
           {similarProperties.map((property, index) => {
@@ -61,15 +61,15 @@ export const SimilarProperties = ({selectedProperty,similarProperties}:ISimilarP
                   <div className="mt-1 flex gap-3">
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <BedIcon extraStyle="text-gray-500 text-[15px]" />{" "}
-                      {property.details.beds}bd
+                      <span className="font-extrabold">{property.details.beds}</span>bd
                     </span>
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <BathIcon extraStyle="text-gray-500 text-[15px]" />{" "}
-                      {property.details.baths}ba
+                      <span className="font-extrabold">{property.details.baths}</span>ba
                     </span>
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
-                      {property.details.sqft.toLocaleString()} sqft
+                      <span className="font-extrabold">{property.details.sqft.toLocaleString()}</span>sqft
                     </span>
                   </div>
                   <p className="capitalize text-[15px]">

@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
   return (
     <div
-      className={`border rounded-lg absolute mobile:right-1 between-mobile-and-tablet:right-5 tablet-above:right-8 top-[80px] laptop:right-16 w-[210px] big-screen-mobile-below:w-[166px] bg-white flex flex-col ${extraStyle}`}
+      className={`border rounded-lg absolute z-50 mobile:right-1 between-mobile-and-tablet:right-5 tablet-above:right-8 top-[80px] laptop:right-16 w-[210px] big-screen-mobile-below:w-[166px] bg-white flex flex-col ${extraStyle}`}
     >
       <Link
         to={"/auth/sign-up"}

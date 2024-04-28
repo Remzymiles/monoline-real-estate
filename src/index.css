@@ -24,7 +24,7 @@
 .swiper-pagination-bullet-active {
   background: white;
 }
-.landingPage{
+.minMax{
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

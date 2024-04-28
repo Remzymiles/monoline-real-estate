@@ -45,7 +45,7 @@ export const FilterDropdownContents = () => {
 
   return (
     <>
-      <div className="px-4 max-h-[92%] big-screen-mobile-below:max-h-[86%] pb-16 overflow-y-scroll z-20">
+      <div className="px-4 max-h-[87%] big-screen-mobile-below:max-h-[91%] overflow-y-scroll z-20">
         {/*  */}
         <FilterByLocation
           handleCitySelect={handleCitySelect}
@@ -72,7 +72,7 @@ export const FilterDropdownContents = () => {
           setSelectedBeds={setSelectedBeds}
         />
       </div>
-      <div className="absolute mobile:fixed z-50 bg-white bottom-0 border-t border-t-slate-300 w-full items-center pt-2 pb-5 px-4 flex justify-between">
+      <div className="absolute mobile:fixed z-50 bg-white bottom-0 border-t border-t-slate-300 mobile:w-full tablet:w-[540px] tablet-above:w-[540px] laptop:w-[550px] items-center pt-2 pb-5 px-4 flex justify-between">
         <button
           className="capitalize font-bold text-lg hover:bg-slate-200 rounded-lg py-2 px-2 transition-colors duration-300"
           onClick={() => {
