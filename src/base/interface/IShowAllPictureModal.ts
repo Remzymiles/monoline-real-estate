@@ -4,4 +4,5 @@ export interface IShowAllPicturesModal {
   selectedProperty: IProperty | undefined;
   isShowPicturesClicked: boolean;
   handleCloseAllPicturesModal: () => void;
+  propertyId: number;
 }

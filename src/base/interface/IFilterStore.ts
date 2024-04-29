@@ -1,10 +1,10 @@
 export interface IFilterStore {
-  filterOptions: Partial<IOptions>;
+  filterOptions: Partial<IFilterOptions>;
   updateFilterOptions: (value: string | number | { min: number; max: number }, type: IValueType) => void;
   clearFilterOptions: () => void;
 }
 
-interface IOptions {
+export interface IFilterOptions {
   selectedBeds: number;
   selectedBaths: number;
   selectedCity: string;

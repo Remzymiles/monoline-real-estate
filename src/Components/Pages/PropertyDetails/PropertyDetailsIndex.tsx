@@ -28,20 +28,24 @@ export const PropertyDetailsIndex = () => {
     return selectedProperty?.location.city === similarProperty.location.city;
   });
   //
-  const { propertyIds, updatePropertyId } = useCartPropertyIdsStore((state) => ({
-    propertyIds: state.propertyIds,
-    updatePropertyId: state.updatePropertyIds,
-  }));
+  const { propertyIds, updatePropertyId } = useCartPropertyIdsStore(
+    (state) => ({
+      propertyIds: state.propertyIds,
+      updatePropertyId: state.updatePropertyIds,
+    })
+  );
   //
   const addPropertyToCart = () => {
     !propertyIds.includes(Number(propertyId))
       ? updatePropertyId(Number(propertyId))
       : null;
   };
+  
   //
   return (
     <div className="relative">
       <ShowAllPicturesModal
+        propertyId={Number(propertyId)}
         isShowPicturesClicked={isShowPicturesClicked}
         handleCloseAllPicturesModal={handleCloseAllPicturesModal}
         selectedProperty={selectedProperty}
@@ -53,6 +57,7 @@ export const PropertyDetailsIndex = () => {
             <PropertyPictures
               handleOpenAllPicturesModal={handleOpenAllPicturesModal}
               selectedProperty={selectedProperty}
+              propertyId={Number(propertyId)}
             />
             {/*  */}
             <div className="flex tablet-below:flex-col justify-center tablet-above:gap-x-16 mt-4">
@@ -67,15 +72,24 @@ export const PropertyDetailsIndex = () => {
                   <div className="mt-1 flex gap-3">
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <BedIcon extraStyle="text-gray-500 text-[10px]" />{" "}
-                      <span className="font-extrabold">{selectedProperty?.details.beds}</span>bd
+                      <span className="font-extrabold">
+                        {selectedProperty?.details.beds}
+                      </span>
+                      bd
                     </span>
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <BathIcon extraStyle="text-gray-500 text-[10px]" />{" "}
-                      <span className="font-extrabold">{selectedProperty?.details.baths}</span>ba
+                      <span className="font-extrabold">
+                        {selectedProperty?.details.baths}
+                      </span>
+                      ba
                     </span>
                     <span className="flex gap-1 text-sm text-secondaryColor-dark">
                       <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
-                      <span className="font-extrabold">{selectedProperty?.details.sqft.toLocaleString()}</span>sqft
+                      <span className="font-extrabold">
+                        {selectedProperty?.details.sqft.toLocaleString()}
+                      </span>
+                      sqft
                     </span>
                   </div>
                 </div>
@@ -84,7 +98,10 @@ export const PropertyDetailsIndex = () => {
                     ${selectedProperty?.price.toLocaleString()}
                   </h1>
                   <p className="text-xs">
-                    Est. Mortgage <span className="font-extrabold">${selectedProperty?.mortgage.toLocaleString()}</span>
+                    Est. Mortgage{" "}
+                    <span className="font-extrabold">
+                      ${selectedProperty?.mortgage.toLocaleString()}
+                    </span>
                     /mo*
                   </p>
                 </div>

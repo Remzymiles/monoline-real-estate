@@ -40,6 +40,7 @@ export const SearchBar = () => {
         }
         onClick={() => {
           clearInputValue();
+          setIsFocused(false)
         }}
         className={`absolute right-3 top-2 bg-primaryColor-light rounded-full h-[%] px-3 py-2 flex items-center hover:bg-primaryColor-dark transition-all duration-300 ${
           isFocused

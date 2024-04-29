@@ -32,11 +32,9 @@ export const FilterDropdownContents = () => {
   };
 
   //
-  const { updateFilterOptions, clearFilterOptions } = useFilterStore(
+  const { updateFilterOptions } = useFilterStore(
     (state) => ({
       updateFilterOptions: state.updateFilterOptions,
-      clearFilterOptions: state.clearFilterOptions,
-      filterOptions: state.filterOptions,
     })
   );
   //
@@ -76,7 +74,6 @@ export const FilterDropdownContents = () => {
         <button
           className="capitalize font-bold text-lg hover:bg-slate-200 rounded-lg py-2 px-2 transition-colors duration-300"
           onClick={() => {
-            clearFilterOptions;
             setSelectedCity("");
             setSelectedState("");
             setSelectedPrice("");

@@ -1,11 +1,27 @@
 import { IPropertyPictures } from "../../../base/interface/IPropertyPictures";
+import { useWishListStore } from "../../../base/store/useWishListStore";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { PhotoIcon } from "../../Icons/PhotoIcon";
 
 export const PropertyPictures = ({
   handleOpenAllPicturesModal,
   selectedProperty,
+  propertyId,
 }: IPropertyPictures) => {
+  //
+  const { wishlistPropertyIds, updateWishlistPropertyId } = useWishListStore(
+    (state) => ({
+      wishlistPropertyIds: state.wishlistPropertyIds,
+      updateWishlistPropertyId: state.updateWishlistPropertyIds,
+    })
+  );
+
+  const handleAddToWishlist = (propertyId: number) => {
+    !wishlistPropertyIds.includes(propertyId)
+      ? updateWishlistPropertyId(propertyId)
+      : null;
+  };
+  //
   return (
     <>
       <div className="flex justify-center items-center gap-3 tablet-below:gap-0">
@@ -13,7 +29,10 @@ export const PropertyPictures = ({
           <p className="uppercase bg-white px-[5px] absolute top-2 left-3 rounded-sm font-bold text-primaryColor-dark text-[10px]">
             for sale
           </p>
-          <div className="capitalize absolute top-2 right-2 flex gap-2 bg-white text-primaryColor-dark px-3 py-1 rounded-sm font-bold text-sm tablet-above:hidden">
+          <div
+            className="capitalize absolute top-2 right-2 flex gap-2 bg-white text-primaryColor-dark px-3 py-1 rounded-sm font-bold text-sm tablet-above:hidden"
+            onClick={() => handleAddToWishlist(propertyId)}
+          >
             <HeartIcon color="text-primaryColor-dark text-sm" />
             save
           </div>
@@ -34,7 +53,10 @@ export const PropertyPictures = ({
         </div>
         <div className="flex flex-col items-center gap-3">
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">
-            <div className="capitalize absolute top-2 right-2 flex gap-2 bg-white text-primaryColor-dark px-3 py-1 rounded-sm font-bold text-sm">
+            <div
+              className="capitalize absolute top-2 right-2 flex gap-2 bg-white text-primaryColor-dark px-3 py-1 rounded-sm font-bold text-sm"
+              onClick={() => handleAddToWishlist(propertyId)}
+            >
               <HeartIcon color="text-primaryColor-dark text-sm" />
               save
             </div>

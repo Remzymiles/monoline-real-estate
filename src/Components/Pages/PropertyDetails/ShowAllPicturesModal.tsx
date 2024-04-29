@@ -1,4 +1,5 @@
 import { IShowAllPicturesModal } from "../../../base/interface/IShowAllPictureModal";
+import { useWishListStore } from "../../../base/store/useWishListStore";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";
 
@@ -6,7 +7,21 @@ export const ShowAllPicturesModal = ({
   selectedProperty,
   isShowPicturesClicked,
   handleCloseAllPicturesModal,
+  propertyId
 }: IShowAllPicturesModal) => {
+  //
+  const { wishlistPropertyIds, updateWishlistPropertyId } = useWishListStore(
+    (state) => ({
+      wishlistPropertyIds: state.wishlistPropertyIds,
+      updateWishlistPropertyId: state.updateWishlistPropertyIds,
+    })
+  );
+
+  const handleAddToWishlist = (propertyId: number) => {
+    !wishlistPropertyIds.includes(propertyId)
+      ? updateWishlistPropertyId(propertyId)
+      : null;
+  };
   //
   return (
     <>
@@ -33,7 +48,10 @@ export const ShowAllPicturesModal = ({
               </div>
               <div className="flex gap-7 justify-center items-center">
                 <div>
-                  <div className="capitalize border border-gray-200 flex gap-2 transition-all duration-300 bg-white hover:bg-gray-200  text-primaryColor-dark px-4 py-2 rounded-lg font-bold text-sm">
+                  <div
+                    className="capitalize border border-gray-200 flex gap-2 transition-all duration-300 bg-white hover:bg-gray-200  text-primaryColor-dark px-4 py-2 rounded-lg font-bold text-sm"
+                    onClick={() => handleAddToWishlist(propertyId)}
+                  >
                     <HeartIcon color="text-primaryColor-dark text-sm" />
                     save
                   </div>
