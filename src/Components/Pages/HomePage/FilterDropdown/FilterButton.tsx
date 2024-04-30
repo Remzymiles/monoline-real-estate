@@ -36,7 +36,7 @@ export const FilterButton = () => {
         {isFilterVisible && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 flex justify-center items-center">
             <div
-              className="mobile:w-full laptop:w-[550px] h-[95%] mobile:h-[82%] rounded-t-xl bg-white"
+              className="mobile:w-full laptop:w-[550px] h-[90%] mobile:h-[82%] rounded-t-xl bg-white"
               ref={filterDropdownRef}
             >
               <div className="text-center capitalize font-extrabold text-lg flex my-3">

@@ -1,20 +1,28 @@
 import { useState } from "react";
 
 export const useHandleFilterCity = () => {
-  const [isClickedCity, setIsClickedCity] = useState<boolean>(false);
-  const [selectedCity, setSelectedCity] = useState<string>("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [isCitiesDropDownOpen, setIsCitiesDropDownOpen] = useState(false);
+  const [isStatesDropDownOpen, setIsStatesDropDownOpen] = useState(false);
 
-  const handleCityClick = (city: string) => {
-    setIsClickedCity(!isClickedCity);
+  const handleCitySelect = (city: string) => {
     setSelectedCity(city);
+    setIsCitiesDropDownOpen(false);
   };
 
-
+  const handleStateSelect = (stateName: string) => {
+    setSelectedState(stateName);
+    setIsStatesDropDownOpen(false);
+  };
   return {
-    setIsClickedCity,
-    isClickedCity,
+    isCitiesDropDownOpen,
+    selectedState,
     selectedCity,
-    handleCityClick,
-    setSelectedCity,
+    isStatesDropDownOpen,
+    handleCitySelect,
+    handleStateSelect,
+    setIsCitiesDropDownOpen,
+    setIsStatesDropDownOpen
   };
 };

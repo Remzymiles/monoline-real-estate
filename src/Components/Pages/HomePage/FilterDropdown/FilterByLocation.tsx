@@ -1,6 +1,7 @@
 import cities from "../../../../base/dummyData/propertyCities.json";
 import states from "../../../../base/dummyData/propertyStates.json";
 import { IFilterByLocation } from "../../../../base/interface/IFilterByLocation";
+import { useFilterStore } from "../../../../base/store/useFilterStore";
 import { ChevronArrowDown } from "../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../Icons/ChevronArrowUp";
 
@@ -16,6 +17,10 @@ export const FilterByLocation = ({
 }: IFilterByLocation) => {
   //
 
+  const { filterOptions } = useFilterStore((state) => ({
+    filterOptions: state.filterOptions,
+  }));
+
   return (
     <>
       <div>
@@ -27,7 +32,11 @@ export const FilterByLocation = ({
               className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsCitiesDropDownOpen(!isCitiesDropDownOpen)}
             >
-              {selectedCity ? selectedCity : "choose city"}
+              {filterOptions.selectedCity
+                ? filterOptions.selectedCity
+                : selectedCity
+                ? selectedCity
+                : "choose city"}
               <span>
                 {isCitiesDropDownOpen ? (
                   <ChevronArrowDown />
@@ -69,7 +78,11 @@ export const FilterByLocation = ({
               className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsStatesDropDownOpen(!isStatesDropDownOpen)}
             >
-              {selectedState ? selectedState : "choose state"}
+              {filterOptions.selectedState
+                ? filterOptions.selectedState
+                : selectedState
+                ? selectedState
+                : "choose state"}
               <span className={`transition-all duration-1000`}>
                 {isStatesDropDownOpen ? (
                   <ChevronArrowDown />
