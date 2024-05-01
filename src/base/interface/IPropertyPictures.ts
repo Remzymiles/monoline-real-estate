@@ -4,4 +4,5 @@ export interface IPropertyPictures {
   handleOpenAllPicturesModal: () => void;
   selectedProperty: IProperty | undefined;
   propertyId: number;
+  showMessage: boolean
 }

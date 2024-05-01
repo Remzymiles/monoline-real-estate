@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import properties from "../../../base/dummyData/properties.json";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
@@ -35,12 +36,18 @@ export const PropertyDetailsIndex = () => {
     })
   );
   //
+  const [showMessage, setShowMessage] = useState(false);
+
   const addPropertyToCart = () => {
-    !propertyIds.includes(Number(propertyId))
-      ? updatePropertyId(Number(propertyId))
-      : null;
+    if (!propertyIds.includes(Number(propertyId))) {
+      updatePropertyId(Number(propertyId));
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
+    }
   };
-  
+
   //
   return (
     <div className="relative">
@@ -55,10 +62,12 @@ export const PropertyDetailsIndex = () => {
         <div className="tablet-below:relative">
           <div className="mb-3">
             <PropertyPictures
+              showMessage={showMessage}
               handleOpenAllPicturesModal={handleOpenAllPicturesModal}
               selectedProperty={selectedProperty}
               propertyId={Number(propertyId)}
             />
+
             {/*  */}
             <div className="flex tablet-below:flex-col justify-center tablet-above:gap-x-16 mt-4">
               <div className="flex tablet-below:justify-between big-screen-mobile-below:flex-col tablet-above:gap-x-28 tablet-below:mb-5">

@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
+import { useCartPropertyIdsStore } from "../../../../base/store/useCartPropertyIdsStore";
 import { CartIcon } from "../../../Icons/CartIcon";
 import { HeartIcon } from "../../../Icons/HeartIcon";
 import { SearchIcon } from "../../../Icons/SearchIcon";
@@ -6,8 +7,11 @@ import { UserProfileIcon } from "../../../Icons/UserProfileIcon";
 
 export const NavigationTab = () => {
   //
-  //
   const location = useLocation();
+  //
+  const { propertyIds } = useCartPropertyIdsStore((state) => ({
+    propertyIds: state.propertyIds,
+  }));
 
   //
   return (
@@ -33,7 +37,7 @@ export const NavigationTab = () => {
       <div className="">
         <NavLink
           to={"/cart-page"}
-          className={` font-semibold text-sm ${
+          className={`relative font-semibold text-sm ${
             location.pathname === "/cart-page"
               ? "text-primaryColor-light"
               : "text-black"
@@ -47,6 +51,11 @@ export const NavigationTab = () => {
             }`}
           />
           <p>Cart</p>
+          {propertyIds.length > 0 && (
+            <p className="absolute -top-2 -right-2 font-extrabold bg-primaryColor-light rounded-full px-[5px] text-xs text-white">
+              {propertyIds.length}
+            </p>
+          )}
         </NavLink>
       </div>
       {/*  */}

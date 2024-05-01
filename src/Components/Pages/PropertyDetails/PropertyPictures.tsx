@@ -7,6 +7,7 @@ export const PropertyPictures = ({
   handleOpenAllPicturesModal,
   selectedProperty,
   propertyId,
+  showMessage,
 }: IPropertyPictures) => {
   //
   const { wishlistPropertyIds, updateWishlistPropertyId } = useWishListStore(
@@ -50,6 +51,11 @@ export const PropertyPictures = ({
             alt="img"
             className="w-[100%] h-[100%] rounded-l-lg tablet-below:rounded-md big-screen-mobile-below:object-cover"
           />
+          {showMessage && (
+            <div className="absolute top-[50%] big-screen-mobile-below:left-[25%] left-[35%] bg-primaryColor-light/80 rounded-md capitalize text-lg text-white px-2 py-2">
+              Property added to cart
+            </div>
+          )}
         </div>
         <div className="flex flex-col items-center gap-3">
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">

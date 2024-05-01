@@ -9,6 +9,11 @@ export const useCartPropertyIdsStore = create<ICartPropertyIdsStore>((set) => ({
       propertyIds: [...state.propertyIds, newPropertyId],
     })),
 
+  removePropertyId: (propertyId) =>
+    set((state) => ({
+      propertyIds: state.propertyIds.filter(id => id !== propertyId),
+    })),
+
   clearPropertyIds: () =>
     set(() => ({
       propertyIds: [],

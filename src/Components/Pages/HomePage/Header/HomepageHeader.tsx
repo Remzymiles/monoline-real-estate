@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
+import { useCartPropertyIdsStore } from "../../../../base/store/useCartPropertyIdsStore";
+import { CartIcon } from "../../../Icons/CartIcon";
 import { MonolineLogo } from "../../../Logos/MonolineLogo";
 import { SearchBar } from "./SearchBar";
 import { UserProfileDropdown } from "./UserProfile/UserProfileDropdown";
-import { CartIcon } from "../../../Icons/CartIcon";
 
 export const HomepageHeader = () => {
+  //
+  const { propertyIds } = useCartPropertyIdsStore((state) => ({
+    propertyIds: state.propertyIds,
+  }));
   //
   return (
     <header className="border-b-4 border-slate-200 bg-primaryColor-lightCream pb-3 fixed w-full z-30 top-0">
@@ -19,9 +24,17 @@ export const HomepageHeader = () => {
         {/*  */}
         <div className="flex items-center justify-end gap-2">
           {/*  */}
-         <Link to={"/cart-page"} className="hidden tablet-above:block bg-white px-2 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black">
-         <CartIcon extraStyle="fill-black/70"/>
-         </Link>
+          <Link
+            to={"/cart-page"}
+            className="hidden relative tablet-above:block bg-white px-2 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black"
+          >
+            <CartIcon extraStyle="fill-black/70" />
+            {propertyIds.length > 0 && (
+              <p className="absolute -top-3 -right-2 font-extrabold text-white bg-primaryColor-light rounded-full px-[8px] text-xs py-[2px]">
+                {propertyIds.length}
+              </p>
+            )}
+          </Link>
           <UserProfileDropdown />
         </div>
       </div>
