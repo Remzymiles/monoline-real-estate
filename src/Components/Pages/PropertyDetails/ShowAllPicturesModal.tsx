@@ -7,20 +7,23 @@ export const ShowAllPicturesModal = ({
   selectedProperty,
   isShowPicturesClicked,
   handleCloseAllPicturesModal,
-  propertyId
+  propertyId,
 }: IShowAllPicturesModal) => {
   //
-  const { wishlistPropertyIds, updateWishlistPropertyId } = useWishListStore(
-    (state) => ({
-      wishlistPropertyIds: state.wishlistPropertyIds,
-      updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    })
-  );
+  const {
+    wishlistPropertyIds,
+    updateWishlistPropertyId,
+    removeWishlistPropertyId,
+  } = useWishListStore((state) => ({
+    wishlistPropertyIds: state.wishlistPropertyIds,
+    updateWishlistPropertyId: state.updateWishlistPropertyIds,
+    removeWishlistPropertyId: state.removeWishlistPropertyId,
+  }));
 
   const handleAddToWishlist = (propertyId: number) => {
     !wishlistPropertyIds.includes(propertyId)
       ? updateWishlistPropertyId(propertyId)
-      : null;
+      : removeWishlistPropertyId(propertyId);
   };
   //
   return (
@@ -49,11 +52,27 @@ export const ShowAllPicturesModal = ({
               <div className="flex gap-7 justify-center items-center">
                 <div>
                   <div
-                    className="capitalize border border-gray-200 flex gap-2 transition-all duration-300 bg-white hover:bg-gray-200  text-primaryColor-dark px-4 py-2 rounded-lg font-bold text-sm"
+                    className={`capitalize border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-2 rounded-lg font-bold text-sm ${
+                      wishlistPropertyIds.includes(propertyId)
+                        ? "bg-primaryColor-light text-white hover:bg-primaryColor-dark"
+                        : "bg-white text-primaryColor-dark hover:bg-gray-200"
+                    }`}
                     onClick={() => handleAddToWishlist(propertyId)}
                   >
-                    <HeartIcon color="text-primaryColor-dark text-sm" />
-                    save
+                    <HeartIcon
+                      color={`text-sm ${
+                        wishlistPropertyIds.includes(
+                          Number(selectedProperty?.property_id)
+                        )
+                          ? "text-white"
+                          : "text-primaryColor-dark"
+                      }`}
+                    />
+                    {wishlistPropertyIds.includes(
+                      Number(selectedProperty?.property_id)
+                    )
+                      ? "saved"
+                      : "save"}
                   </div>
                 </div>
                 <div>

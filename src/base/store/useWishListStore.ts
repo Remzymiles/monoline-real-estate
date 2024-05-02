@@ -12,6 +12,13 @@ export const useWishListStore = create<IWishlistStore>((set) => ({
       ],
     })),
 
+  removeWishlistPropertyId: (propertyId) =>
+    set((state) => ({
+      wishlistPropertyIds: state.wishlistPropertyIds.filter(
+        (id) => id !== propertyId
+      ),
+    })),
+
   clearWishlistPropertyIds: () =>
     set(() => ({
       wishlistPropertyIds: [],

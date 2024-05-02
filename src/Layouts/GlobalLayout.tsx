@@ -14,7 +14,7 @@ export const GlobalLayout = () => {
     });
   }, [pathname]);
 
-  // 
+  //
   return (
     <div className={` flex flex-col h-[100vh] min-w-[320px]`}>
       <HomepageHeader />

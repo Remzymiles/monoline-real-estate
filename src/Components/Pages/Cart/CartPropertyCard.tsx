@@ -21,17 +21,16 @@ export const CartPropertyCard = () => {
     0
   );
   //
-  const { wishlistPropertyIds, updateWishlistPropertyId } = useWishListStore(
-    (state) => ({
-      wishlistPropertyIds: state.wishlistPropertyIds,
-      updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    })
-  );
+  const {wishlistPropertyIds,updateWishlistPropertyId,removeWishlistPropertyId,} = useWishListStore((state) => ({
+    wishlistPropertyIds: state.wishlistPropertyIds,
+    updateWishlistPropertyId: state.updateWishlistPropertyIds,
+    removeWishlistPropertyId: state.removeWishlistPropertyId,
+  }));
 
   const handleAddToWishlist = (propertyId: number) => {
     !wishlistPropertyIds.includes(propertyId)
       ? updateWishlistPropertyId(propertyId)
-      : null;
+      : removeWishlistPropertyId(propertyId);
   };
 
   //
@@ -86,10 +85,14 @@ export const CartPropertyCard = () => {
                     <button
                       className="w-full bg-primaryColor-light big-screen-mobile-below:py-2 py-1 px-2 hover:bg-primaryColor-dark transition-colors duration-300 rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold"
                       onClick={() => {
-                        handleAddToWishlist(0);
+                        handleAddToWishlist(cartProperty.property_id);
                       }}
                     >
-                      save for later
+                      {wishlistPropertyIds.includes(
+                        Number(cartProperty.property_id)
+                      )
+                        ? "saved"
+                        : "save for later"}
                     </button>
                   </div>
                 </div>

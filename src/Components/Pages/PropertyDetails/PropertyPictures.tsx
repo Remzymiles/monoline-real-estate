@@ -10,17 +10,20 @@ export const PropertyPictures = ({
   showMessage,
 }: IPropertyPictures) => {
   //
-  const { wishlistPropertyIds, updateWishlistPropertyId } = useWishListStore(
-    (state) => ({
-      wishlistPropertyIds: state.wishlistPropertyIds,
-      updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    })
-  );
+  const {
+    wishlistPropertyIds,
+    updateWishlistPropertyIds,
+    removeWishlistPropertyId,
+  } = useWishListStore((state) => ({
+    wishlistPropertyIds: state.wishlistPropertyIds,
+    updateWishlistPropertyIds: state.updateWishlistPropertyIds,
+    removeWishlistPropertyId: state.removeWishlistPropertyId,
+  }));
 
   const handleAddToWishlist = (propertyId: number) => {
     !wishlistPropertyIds.includes(propertyId)
-      ? updateWishlistPropertyId(propertyId)
-      : null;
+      ? updateWishlistPropertyIds(propertyId)
+      : removeWishlistPropertyId(propertyId);
   };
   //
   return (
@@ -31,11 +34,27 @@ export const PropertyPictures = ({
             for sale
           </p>
           <div
-            className="capitalize absolute top-2 right-2 flex gap-2 bg-white text-primaryColor-dark px-3 py-1 rounded-sm font-bold text-sm tablet-above:hidden"
+            className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm tablet-above:hidden ${
+              wishlistPropertyIds.includes(
+                Number(selectedProperty?.property_id)
+              )
+                ? "bg-primaryColor-dark text-white"
+                : "bg-white text-primaryColor-dark"
+            }`}
             onClick={() => handleAddToWishlist(propertyId)}
           >
-            <HeartIcon color="text-primaryColor-dark text-sm" />
-            save
+            <HeartIcon
+              color={`text-sm ${
+                wishlistPropertyIds.includes(
+                  Number(selectedProperty?.property_id)
+                )
+                  ? "text-white"
+                  : "text-primaryColor-dark"
+              }`}
+            />
+            {wishlistPropertyIds.includes(Number(selectedProperty?.property_id))
+              ? "saved"
+              : "save"}
           </div>
           <div
             className="absolute bottom-2 right-2 bg-white/90 text-sm flex gap-2 p-2 capitalize rounded-sm hover:bg-white tablet-above:hidden mobile:text-xs"
@@ -60,11 +79,29 @@ export const PropertyPictures = ({
         <div className="flex flex-col items-center gap-3">
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">
             <div
-              className="capitalize absolute top-2 right-2 flex gap-2 bg-white text-primaryColor-dark px-3 py-1 rounded-sm font-bold text-sm"
+              className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm ${
+                wishlistPropertyIds.includes(
+                  Number(selectedProperty?.property_id)
+                )
+                  ? "bg-primaryColor-dark text-white"
+                  : "bg-white text-primaryColor-dark"
+              }`}
               onClick={() => handleAddToWishlist(propertyId)}
             >
-              <HeartIcon color="text-primaryColor-dark text-sm" />
-              save
+              <HeartIcon
+                color={`text-sm ${
+                  wishlistPropertyIds.includes(
+                    Number(selectedProperty?.property_id)
+                  )
+                    ? "text-white"
+                    : "text-primaryColor-dark"
+                }`}
+              />
+              {wishlistPropertyIds.includes(
+                Number(selectedProperty?.property_id)
+              )
+                ? "saved"
+                : "save"}
             </div>
             <img
               src={selectedProperty?.photos[1]}
