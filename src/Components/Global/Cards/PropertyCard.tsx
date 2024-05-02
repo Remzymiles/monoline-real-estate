@@ -22,13 +22,13 @@ export const PropertyCard = () => {
   //
   const handleAddToWishlist = (propertyId: number) => {
     !wishlistPropertyIds.includes(propertyId)
-    ? updateWishlistPropertyId(propertyId)
-    : null;
+      ? updateWishlistPropertyId(propertyId)
+      : null;
   };
-  
-    const { filterOptions } = useFilterStore((state) => ({
-      filterOptions: state.filterOptions,
-    }));
+
+  const { filterOptions } = useFilterStore((state) => ({
+    filterOptions: state.filterOptions,
+  }));
   //
   const filterProperties = () => {
     const {

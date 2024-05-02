@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Properties from "../../../base/dummyData/properties.json";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
 import { useWishListStore } from "../../../base/store/useWishListStore";
@@ -47,13 +48,16 @@ export const CartPropertyCard = () => {
             return (
               <div key={cartProperty.property_id}>
                 <div className="grid grid-cols-4 big-screen-laptop:justify-around gap-x-5 big-screen-mobile-below:flex big-screen-mobile-below:flex-col my-3">
-                  <div className="w-[250px] col-span-2 h-[200px] flex gap-x-4 big-screen-mobile-below:w-[100%] big-screen-mobile-below:h-[250px] big-screen-mobile-below:flex-col big-screen-mobile-below:mb-2">
+                  <Link
+                    to={`/property-details/address=${cartProperty.location.address}&city=${cartProperty.location.city}&state=${cartProperty.location.state}&country=${cartProperty.location.country}&?id=${cartProperty.property_id}`}
+                    className="w-[250px] col-span-2 h-[200px] flex gap-x-4 big-screen-mobile-below:w-[100%] big-screen-mobile-below:h-[250px] big-screen-mobile-below:flex-col big-screen-mobile-below:mb-2"
+                  >
                     <img
                       src={cartProperty.photos[0]}
                       alt="img"
                       className="w-[100%] h-[100%] object-cover rounded-md"
                     />
-                  </div>
+                  </Link>
                   <div className="py-2">
                     <p className="font-semibold capitalize mb-2 break-words text-md">
                       {cartProperty.location.address}
@@ -119,13 +123,22 @@ export const CartPropertyCard = () => {
           </div>
           <hr />
           <div>
+            <div className="flex justify-between gap-x-4 my-4">
+              <p className="capitalize font-bold">tax</p>:
+              <p className="font-extrabold break-all">
+                ${(totalCartPrice / 50).toLocaleString()}
+              </p>
+            </div>
+            {/*  */}
             <div className="flex justify-between gap-x-4 my-3">
               <p className="capitalize font-bold">total price</p>:
               <p className="font-extrabold break-all">
-                ${totalCartPrice.toLocaleString()}
+                ${(totalCartPrice + totalCartPrice / 50).toLocaleString()}
               </p>
             </div>
-            <button className="bg-primaryColor-light w-full py-2 rounded-md capitalize text-white text-lg font-extrabold hover:bg-primaryColor-dark transition-colors duration-300">
+            <hr />
+            {/*  */}
+            <button className="mt-3 bg-primaryColor-light w-full py-2 rounded-md capitalize text-white text-lg font-extrabold hover:bg-primaryColor-dark transition-colors duration-300">
               checkout
             </button>
           </div>
