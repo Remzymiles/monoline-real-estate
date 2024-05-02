@@ -4,7 +4,7 @@ export const MonolineLogo = () => {
   return (
     <div>
       <div className="w-[100%] h-[100%]">
-        <div className="h-[90px] w-[90px]">
+        <div className="h-[100px] w-[100px] big-screen-mobile-below:w-[70px] big-screen-mobile-below:h-[70px]">
           <img
             src={Monoline_Logo}
             alt="monoline logo"

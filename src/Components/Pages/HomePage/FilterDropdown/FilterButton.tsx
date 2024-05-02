@@ -17,9 +17,9 @@ export const FilterButton = () => {
 
   return (
     <closeFilterModalContext.Provider value={handleCloseFilterModal}>
-      <div className={`fixed top-[117px] laptop-below:top-[168px] left-0 w-full ${isFilterVisible ? "z-40": "z-20"}`} >
-        <div className={`flex laptop-below:justify-around justify-evenly items-center bg-white py-2 border-b-2 laptop-below:py-3`} >
-          <p className="text-lg font-bold capitalize">Filter properties:</p>
+      <div className={`fixed big-screen-mobile-below:top-[140px] laptop:top-[117px] between-mobile-and-tablet:top-[170px] tablet-above:top-[170px] left-0 w-full ${isFilterVisible ? "z-40": "z-20"}`} >
+        <div className={`flex justify-between items-center bg-white py-2 border-b-2 laptop-below:py-3 tablet-above:px-8 laptop:px-28 mobile:px-4 tablet:px-8`} >
+          <p className="text-lg font-light capitalize">Filter properties:</p>
           <button
             className="flex gap-3 items-center bg-white px-3 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black laptop-below:translate-y-[5px]"
             onClick={() => {
@@ -27,7 +27,7 @@ export const FilterButton = () => {
             }}
           >
             <SettingsIcon />
-            <p className="font-bold text-sm big-screen-mobile-below:hidden">
+            <p className="text-sm big-screen-mobile-below:hidden">
               Filters
             </p>
           </button>

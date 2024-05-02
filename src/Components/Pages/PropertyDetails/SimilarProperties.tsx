@@ -16,17 +16,17 @@ export const SimilarProperties = ({
   //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   //
-  const { wishlistPropertyIds, updateWishlistPropertyId } = useWishListStore(
-    (state) => ({
+  const { wishlistPropertyIds, updateWishlistPropertyId, removeWishlistId } =
+    useWishListStore((state) => ({
       wishlistPropertyIds: state.wishlistPropertyIds,
       updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    })
-  );
+      removeWishlistId: state.removeWishlistPropertyId,
+    }));
 
   const handleAddToWishlist = (propertyId: number) => {
     !wishlistPropertyIds.includes(propertyId)
       ? updateWishlistPropertyId(propertyId)
-      : null;
+      : removeWishlistId(propertyId);
   };
   //
 
@@ -110,12 +110,22 @@ export const SimilarProperties = ({
                 </Link>
                 {/*  */}
                 <div
-                  className="absolute top-3 right-3 z-10 bg-white/60 px-2 py-1 rounded-full cursor-pointer"
+                  className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
+                    wishlistPropertyIds.includes(property.property_id)
+                      ? "bg-white/70"
+                      : "bg-white/30"
+                  }`}
                   onClick={() => {
                     handleAddToWishlist(property.property_id);
                   }}
                 >
-                  <HeartIcon color="text-primaryColor-dark" />
+                  <HeartIcon
+                    color={`${
+                      wishlistPropertyIds.includes(property.property_id)
+                        ? "text-primaryColor-light"
+                        : "text-white"
+                    }`}
+                  />
                 </div>
               </div>
             );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,16 +15,21 @@ export const SearchedPropertiesCard = () => {
   const [query] = useSearchParams();
   const searchValue = query.get("search");
 
-  const { wishlistPropertyIds, updateWishlistPropertyId } = useWishListStore(
-    (state) => ({
-      wishlistPropertyIds: state.wishlistPropertyIds,
-      updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    })
-  );
+  const {
+    wishlistPropertyIds,
+    updateWishlistPropertyId,
+    removeWishlistPropertyId,
+  } = useWishListStore((state) => ({
+    wishlistPropertyIds: state.wishlistPropertyIds,
+    updateWishlistPropertyId: state.updateWishlistPropertyIds,
+    removeWishlistPropertyId: state.removeWishlistPropertyId,
+  }));
   //
-  useEffect(() => {
-    console.log(wishlistPropertyIds);
-  }, [wishlistPropertyIds]);
+  const handleAddToWishlist = (propertyId: number) => {
+    !wishlistPropertyIds.includes(propertyId)
+      ? updateWishlistPropertyId(propertyId)
+      : removeWishlistPropertyId(propertyId);
+  };
   //
   const filteredSearchedProperties = searchValue
     ? properties.filter((property) => {
@@ -38,12 +43,6 @@ export const SearchedPropertiesCard = () => {
         );
       })
     : [];
-  //
-  const handleAddToWishlist = ( propertyId: number) => {
-    !wishlistPropertyIds.includes(propertyId)
-      ? updateWishlistPropertyId(propertyId)
-      : null;
-  };
   //
   return (
     <>
@@ -117,12 +116,22 @@ export const SearchedPropertiesCard = () => {
               </div>
             </Link>
             <div
-              className="absolute top-3 right-3 z-10 bg-white/60 px-2 py-1 rounded-full cursor-pointer"
+              className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
+                wishlistPropertyIds.includes(property.property_id)
+                  ? "bg-white/70"
+                  : "bg-white/30"
+              }`}
               onClick={() => {
-                handleAddToWishlist( property.property_id);
+                handleAddToWishlist(property.property_id);
               }}
             >
-              <HeartIcon color="text-primaryColor-dark" />
+              <HeartIcon
+                color={`${
+                  wishlistPropertyIds.includes(property.property_id)
+                    ? "text-primaryColor-light"
+                    : "text-white"
+                }`}
+              />
             </div>
           </div>
         ))
