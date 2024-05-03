@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import cities from "../../../../base/dummyData/propertyCities.json";
 import states from "../../../../base/dummyData/propertyStates.json";
 import { IFilterByLocation } from "../../../../base/interface/IFilterByLocation";
@@ -20,7 +21,15 @@ export const FilterByLocation = ({
   const { filterOptions } = useFilterStore((state) => ({
     filterOptions: state.filterOptions,
   }));
-
+  useEffect(() => {
+    filterOptions.selectedState
+      ? handleStateSelect(filterOptions.selectedState)
+      : handleStateSelect("");
+    filterOptions.selectedCity
+      ? handleCitySelect(filterOptions.selectedCity)
+      : handleCitySelect("");
+  }, [filterOptions]);
+  //
   return (
     <>
       <div>
@@ -32,11 +41,7 @@ export const FilterByLocation = ({
               className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsCitiesDropDownOpen(!isCitiesDropDownOpen)}
             >
-              {filterOptions.selectedCity
-                ? filterOptions.selectedCity
-                : selectedCity
-                ? selectedCity
-                : "choose city"}
+              {selectedCity ? selectedCity : "choose city"}
               <span>
                 {isCitiesDropDownOpen ? (
                   <ChevronArrowDown />
@@ -78,11 +83,7 @@ export const FilterByLocation = ({
               className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsStatesDropDownOpen(!isStatesDropDownOpen)}
             >
-              {filterOptions.selectedState
-                ? filterOptions.selectedState
-                : selectedState
-                ? selectedState
-                : "choose state"}
+              {selectedState ? selectedState : "choose state"}
               <span className={`transition-all duration-1000`}>
                 {isStatesDropDownOpen ? (
                   <ChevronArrowDown />

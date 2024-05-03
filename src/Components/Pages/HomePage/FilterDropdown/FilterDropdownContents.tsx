@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useFilterStore } from "../../../../base/store/useFilterStore";
 import { closeFilterModalContext } from "./FilterButton";
 import { FilterByBedsAndBaths } from "./FilterByBedsAndBaths";
@@ -32,15 +32,12 @@ export const FilterDropdownContents = () => {
   };
 
   //
-  const { updateFilterOptions, clearFilterOptions, filterOptions } =
-    useFilterStore((state) => ({
-      filterOptions: state.filterOptions,
+  const { updateFilterOptions, clearFilterOptions } = useFilterStore(
+    (state) => ({
       updateFilterOptions: state.updateFilterOptions,
       clearFilterOptions: state.clearFilterOptions,
-    }));
-  useEffect(() => {
-    console.log(filterOptions);
-  }, [filterOptions]);
+    })
+  );
   //
   const closeFilterModal = useContext(closeFilterModalContext);
   //

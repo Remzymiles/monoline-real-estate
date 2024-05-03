@@ -19,7 +19,6 @@ export const SignUpForm = () => {
   //
   const handleCreateAccount: SubmitHandler<IUser> = (userData) => {
     reset();
-    console.log(userData);
   };
 
   return (

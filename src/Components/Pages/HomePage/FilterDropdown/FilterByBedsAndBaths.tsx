@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import propertyBaths from "../../../../base/dummyData/propertyBaths.json";
 import propertyBeds from "../../../../base/dummyData/propertyBeds.json";
 import { IFilterByBedsAndBaths } from "../../../../base/interface/IFilterByBedsAndBaths";
+import { useFilterStore } from "../../../../base/store/useFilterStore";
 
 export const FilterByBedsAndBaths = ({
   selectedBaths,
@@ -9,6 +11,19 @@ export const FilterByBedsAndBaths = ({
   setSelectedBeds,
 }: IFilterByBedsAndBaths) => {
   //
+  const { filterOptions } = useFilterStore((state) => ({
+    filterOptions: state.filterOptions,
+    clearFilterOptions: state.clearFilterOptions,
+  }));
+
+  useEffect(() => {
+    filterOptions.selectedBeds
+      ? setSelectedBeds(filterOptions.selectedBeds)
+      : setSelectedBeds(0);
+    filterOptions.selectedBaths
+      ? setSelectedBaths(filterOptions.selectedBaths)
+      : setSelectedBaths(0);
+  }, [filterOptions]);
 
   return (
     <>

@@ -21,7 +21,6 @@ export const LoginForm = () => {
     Pick<IUser, "email_address" | "password">
   > = (userData) => {
     reset();
-    console.log(userData);
   };
 
   return (

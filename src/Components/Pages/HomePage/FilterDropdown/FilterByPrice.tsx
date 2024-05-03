@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import prices from "../../../../base/dummyData/propertyPrices.json";
 import { IFilterByPriceRange } from "../../../../base/interface/IFilterByPriceRange";
+import { useFilterStore } from "../../../../base/store/useFilterStore";
 import { ChevronArrowDown } from "../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../Icons/ChevronArrowUp";
 
@@ -10,7 +12,14 @@ export const FilterByPrice = ({
   setSelectedPrice,
 }: IFilterByPriceRange) => {
   //
-
+  const { filterOptions } = useFilterStore((state) => ({
+    filterOptions: state.filterOptions,
+  }));
+  useEffect(() => {
+    filterOptions.selectedPrice
+      ? setSelectedPrice(filterOptions.selectedPrice)
+      : setSelectedPrice("");
+  }, [filterOptions]);
   return (
     <>
       <div>
