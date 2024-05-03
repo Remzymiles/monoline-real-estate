@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Properties from "../../../base/dummyData/properties.json";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
@@ -21,7 +22,11 @@ export const CartPropertyCard = () => {
     0
   );
   //
-  const {wishlistPropertyIds,updateWishlistPropertyId,removeWishlistPropertyId,} = useWishListStore((state) => ({
+  const {
+    wishlistPropertyIds,
+    updateWishlistPropertyId,
+    removeWishlistPropertyId,
+  } = useWishListStore((state) => ({
     wishlistPropertyIds: state.wishlistPropertyIds,
     updateWishlistPropertyId: state.updateWishlistPropertyIds,
     removeWishlistPropertyId: state.removeWishlistPropertyId,
@@ -32,6 +37,12 @@ export const CartPropertyCard = () => {
       ? updateWishlistPropertyId(propertyId)
       : removeWishlistPropertyId(propertyId);
   };
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [propertyIds]);
 
   //
   return (

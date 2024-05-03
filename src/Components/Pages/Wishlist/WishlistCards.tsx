@@ -2,17 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Properties from "../../../base/dummyData/properties.json";
-import { useFilterStore } from "../../../base/store/useFilterStore";
+import properties from "../../../base/dummyData/properties.json";
+import { IProperty } from "../../../base/interface/IProperty";
 import { useWishListStore } from "../../../base/store/useWishListStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 
-export const PropertyCard = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
+export const WishlistCards = () => {
   //
+  const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   const {
     wishlistPropertyIds,
     updateWishlistPropertyId,
@@ -28,56 +28,22 @@ export const PropertyCard = () => {
       ? updateWishlistPropertyId(propertyId)
       : removeWishlistPropertyId(propertyId);
   };
+  const wishlistProperties = properties.filter((property: IProperty) => {
+    return wishlistPropertyIds.includes(property.property_id);
+  });
 
-  const { filterOptions } = useFilterStore((state) => ({
-    filterOptions: state.filterOptions,
-  }));
-  //
-  const filterProperties = () => {
-    const {
-      selectedBeds,
-      selectedBaths,
-      selectedCity,
-      selectedPrice,
-      selectedState,
-    } = filterOptions;
-
-    return Properties.filter((property) => {
-      if (selectedCity && property.location.city !== selectedCity) {
-        return;
-      }
-      //
-      if (selectedState && property.location.state !== selectedState) {
-        return;
-      }
-      //
-      if (selectedBeds && property.details.beds !== selectedBeds) {
-        return;
-      }
-      //
-      if (selectedBaths && property.details.baths !== selectedBaths) {
-        return;
-      }
-      //
-      if (selectedPrice && typeof selectedPrice === "object") {
-        const { min, max } = selectedPrice;
-        if (property.price < min || property.price > max) {
-          return;
-        }
-      }
-      return true;
-    });
-  };
-  const filteredProperties = filterProperties();
   //
   return (
-    <>
-      {filteredProperties.length > 0 ? (
-        filteredProperties.map((property, index) => (
-          <div
-            key={index}
-            className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card relative"
-          >
+    <div
+      className={`tablet-below:flex tablet-below:justify-center tablet-below:flex-wrap tablet-below:gap-5 ${
+        wishlistPropertyIds.length > 0
+          ? "minMax"
+          : " flex justify-center items-center min-h-[30vh]"
+      }`}
+    >
+      {wishlistPropertyIds.length > 0 ? (
+        wishlistProperties.map((property, index) => (
+          <div className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[235px] tablet-above:w-[400px] relative">
             <Link
               to={`/property-details/address=${property.location.address}&city=${property.location.city}&state=${property.location.state}&country=${property.location.country}&?id=${property.property_id}`}
               className="w-full h-[270px] relative"
@@ -130,7 +96,7 @@ export const PropertyCard = () => {
                   <span className="flex gap-1 text-sm text-secondaryColor-dark">
                     <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
                     <span className="font-extrabold">
-                      {property.details.sqft.toLocaleString()}
+                      {property.details.sqft}
                     </span>
                     sqft
                   </span>
@@ -142,30 +108,26 @@ export const PropertyCard = () => {
               </div>
             </Link>
             <div
-              className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
-                wishlistPropertyIds.includes(property.property_id)
-                  ? "bg-white/70"
-                  : "bg-white/30"
-              }`}
+              className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer bg-white`}
               onClick={() => {
                 handleAddToWishlist(property.property_id);
               }}
             >
               <HeartIcon
-                color={`${
-                  wishlistPropertyIds.includes(property.property_id)
-                    ? "text-primaryColor-light"
-                    : "text-white"
-                }`}
+                color={`text-primaryColor-dark`}
               />
             </div>
           </div>
         ))
       ) : (
-        <p className="font-bold text-xl m-auto capitalize">
-          No properties match the selected filters.
-        </p>
+        <>
+          <p className="text-xl font-extrabold capitalize">
+            wishlist is empty. add properties
+          </p>
+        </>
       )}
-    </>
+
+      {/*  */}
+    </div>
   );
 };

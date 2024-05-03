@@ -28,7 +28,7 @@ export const HomepageHeader = () => {
             to={"/cart-page"}
             className="hidden relative tablet-above:block bg-white px-2 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black"
           >
-            <CartIcon extraStyle="fill-black/70" />
+            <CartIcon extraStyle="fill-black/80" />
             {propertyIds.length > 0 && (
               <p className="absolute -top-3 -right-2 font-extrabold text-white bg-primaryColor-light rounded-full px-[8px] text-xs py-[2px]">
                 {propertyIds.length}

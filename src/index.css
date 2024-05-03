@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,16 +24,20 @@
 .swiper-pagination-bullet-active {
   background: white;
 }
-.minMax{
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  justify-content: center;
-}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@media screen and (min-width: 950px) {
+  .minMax {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    justify-content: center;
+  }
 }

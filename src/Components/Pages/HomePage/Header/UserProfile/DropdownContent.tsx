@@ -1,30 +1,47 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useWishListStore } from "../../../../../base/store/useWishListStore";
 
 export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
+  const { WishlistPropertyIds } = useWishListStore((state) => ({
+    WishlistPropertyIds: state.wishlistPropertyIds,
+  }));
+  //
+  const currentLocation = useLocation();
+  //
   return (
     <div
-      className={`border rounded-lg absolute z-50 mobile:right-1 between-mobile-and-tablet:right-5 tablet-above:right-8 top-[80px] laptop:right-16 w-[120px] bg-white flex flex-col ${extraStyle}`}
+      className={`border rounded-lg absolute z-50 right-0  top-[52px] w-[140px] bg-white flex flex-col ${extraStyle}`}
     >
       <Link
         to={"/auth/sign-up"}
-        className="capitalize pl-4 text-md text-secondaryColor-dark py-1 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className="capitalize pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
       >
         sign up
       </Link>
       <hr />
       <Link
         to={"/auth/login"}
-        className="capitalize pl-4 text-md text-secondaryColor-dark py-1 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className="capitalize pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
       >
         login
       </Link>
-      <hr className="my-1" />
-      <NavLink
+      <hr />
+      <Link
         to={"/wishlist"}
-        className="capitalize pl-4 text-md text-secondaryColor-dark py-1 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className="relative capitalize pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
       >
         wishlist
-      </NavLink>
+        {WishlistPropertyIds.length > 0 && (
+          <div
+            className={`${
+              currentLocation.pathname === "/wishlist" ? "hidden" : "block"
+            }`}
+          >
+            <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primaryColor-light opacity-75 top-3 right-3"></span>
+            <span className="h-2 w-2 bg-primaryColor-light rounded-full absolute top-3 right-3"></span>
+          </div>
+        )}
+      </Link>
     </div>
   );
 };
