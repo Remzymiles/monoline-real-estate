@@ -1,9 +1,9 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { IUser } from "../../../../base/interface/IUser";
 import { FormButton } from "../../../Global/FormComponents/Button";
 import { Input } from "../../../Global/FormComponents/Input";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { IUser } from "../../../../base/interface/IUser";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpFormValidator } from "./signUpFormValidator";
 
 export const SignUpForm = () => {
@@ -19,6 +19,7 @@ export const SignUpForm = () => {
   //
   const handleCreateAccount: SubmitHandler<IUser> = (userData) => {
     reset();
+    console.log(userData);
   };
 
   return (

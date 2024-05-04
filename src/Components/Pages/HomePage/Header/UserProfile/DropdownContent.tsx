@@ -42,6 +42,13 @@ export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
           </div>
         )}
       </Link>
+      <hr />
+      <Link
+        to={"/profile"}
+        className="capitalize pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+      >
+        profile
+      </Link>
     </div>
   );
 };

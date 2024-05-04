@@ -10,7 +10,7 @@ export const UserProfileIcon = ({
 }) => {
   return (
     <div className={`rounded-full  ${extraStyle} text-center`}>
-      <FontAwesomeIcon icon={faUser} className= {`text-sm text-white ${iconStyle}`} />
+      <FontAwesomeIcon icon={faUser} className= {` text-white ${iconStyle}`} />
     </div>
   );
 };

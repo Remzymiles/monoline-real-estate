@@ -7,4 +7,5 @@ export interface IInput {
   name: string;
   register: any;
   extraStyle: string;
+  value?: string
 }

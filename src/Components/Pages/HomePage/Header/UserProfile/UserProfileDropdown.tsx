@@ -33,7 +33,7 @@ export const UserProfileDropdown = () => {
       >
         <BarsIcon />
         <UserProfileIcon
-          iconStyle="text"
+          iconStyle="text-sm"
           extraStyle="bg-black/80 h-[30px] w-[30px] big-screen-mobile-below:hidden"
         />
       </button>
