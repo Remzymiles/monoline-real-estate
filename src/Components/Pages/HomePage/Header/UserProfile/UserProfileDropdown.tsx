@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useHandleUserProfileDropdown } from "../../../../../base/hooks/useHandleDropdown";
+import { useProfilePhotoStore } from "../../../../../base/store/useProfilePhotoStore";
 import { useWishListStore } from "../../../../../base/store/useWishListStore";
 import { BarsIcon } from "../../../../Icons/BarsIcon";
 import { UserProfileIcon } from "../../../../Icons/UserProfileIcon";
@@ -19,6 +20,11 @@ export const UserProfileDropdown = () => {
     WishlistPropertyIds: state.wishlistPropertyIds,
   }));
   //
+  const { profilePhotoUrl } = useProfilePhotoStore((state) => ({
+    profilePhotoUrl: state.profilePhotoUrl,
+  }));
+
+  //
   return (
     <div
       ref={userProfileDropdownRef}
@@ -32,10 +38,21 @@ export const UserProfileDropdown = () => {
         className="flex gap-3 items-center bg-white px-3 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black"
       >
         <BarsIcon />
-        <UserProfileIcon
-          iconStyle="text-sm"
-          extraStyle="bg-black/80 h-[30px] w-[30px] big-screen-mobile-below:hidden"
-        />
+
+        {profilePhotoUrl ? (
+          <div className="h-[32px] w-[32px]">
+            <img
+              src={profilePhotoUrl}
+              alt="image"
+              className="h-[100%] w-[100%] rounded-full object-cover"
+            />
+          </div>
+        ) : (
+          <UserProfileIcon
+            iconStyle="text-sm"
+            extraStyle="bg-black/80 h-[30px] w-[30px] big-screen-mobile-below:hidden"
+          />
+        )}
       </button>
       <DropdownContent extraStyle={isUserProfileVisible ? "block" : "hidden"} />
       {WishlistPropertyIds.length > 0 && (
