@@ -7,9 +7,12 @@ export const ProfileImage = () => {
   //
   const [selectedFile, setSelectedFile] = useState<string | File>("");
 
-  const { updateProfilePhotoUrl } = useProfilePhotoStore((state) => ({
-    updateProfilePhotoUrl: state.updateProfilePhotoUrl,
-  }));
+  const { updateProfilePhotoUrl, profilePhotoUrl } = useProfilePhotoStore(
+    (state) => ({
+      updateProfilePhotoUrl: state.updateProfilePhotoUrl,
+      profilePhotoUrl: state.profilePhotoUrl,
+    })
+  );
   //
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -23,17 +26,13 @@ export const ProfileImage = () => {
 
   //
   return (
-    <>
+    <div className="flex flex-col gap-y-16 items-center">
       <div className="tablet-above:w-[300px] tablet-above:h-[300px] w-[250px] h-[250px] bg-black rounded-full flex justify-center relative">
         <div className="text-9xl text-white">
-          {selectedFile ? (
+          {profilePhotoUrl ? (
             <div className="w-[250px] h-[250px] tablet-above:w-[300px] tablet-above:h-[300px]">
               <img
-                src={
-                  typeof selectedFile === "string"
-                    ? selectedFile
-                    : URL.createObjectURL(selectedFile)
-                }
+                src={profilePhotoUrl}
                 alt="img"
                 className="w-[100%] h-[100%] object-cover rounded-full"
               />
@@ -59,6 +58,24 @@ export const ProfileImage = () => {
           onChange={handleFileChange}
         />
       </div>
-    </>
+      <div className="hidden">
+        <div className="flex gap-x-2 mb-2">
+          <p className="text-lg font-extrabold capitalize">name</p>:
+          <p className="text-lg font-bold capitalize">
+            Nwankwo Somtochukwu Stanley
+          </p>
+        </div>
+        <div className="flex gap-x-2 mb-2">
+          <p className="text-lg font-extrabold capitalize">phone number</p>:
+          <p className="text-lg font-bold capitalize">08164228668</p>
+        </div>
+        <div className="flex gap-x-2 mb-2">
+          <p className="text-lg font-extrabold capitalize">address</p>:
+          <p className="text-lg font-bold capitalize">
+            no 1 amaigbo lane, ziks avenue, enugu
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };

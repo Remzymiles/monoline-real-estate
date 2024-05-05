@@ -26,7 +26,10 @@ export const PropertyDetailsIndex = () => {
   });
   //
   const similarProperties = properties.filter((similarProperty) => {
-    return selectedProperty?.location.city === similarProperty.location.city;
+    return (
+      similarProperty.location.city === selectedProperty?.location.city &&
+      similarProperty.property_id !== selectedProperty?.property_id
+    );
   });
   //
   const { propertyIds, updatePropertyId } = useCartPropertyIdsStore(
@@ -58,9 +61,7 @@ export const PropertyDetailsIndex = () => {
         selectedProperty={selectedProperty}
       />
       {/*  */}
-      <div
-        className="pt-3 mobile:mx-4 tablet:mx-8 big-screen-mobile-below:mt-[150px] tablet-above:mt-[180px] mt-[180px] laptop:mt-[120px] tablet-above:mx-8 laptop:mx-16"
-      >
+      <div className="pt-3 mobile:mx-4 tablet:mx-8 big-screen-mobile-below:mt-[150px] tablet-above:mt-[180px] mt-[180px] laptop:mt-[120px] tablet-above:mx-8 laptop:mx-16">
         <div className="tablet-below:relative">
           <div className="mb-3">
             <PropertyPictures

@@ -9,19 +9,19 @@ export const EditEmailAndPassword = () => {
     isEditEmailVisible
       ? setIsEditEmailVisible(false)
       : setIsEditEmailVisible(true);
-      !isEditEmailVisible && setIsEditPasswordVisible(false)
+    !isEditEmailVisible && setIsEditPasswordVisible(false);
   };
   const handleEditPassword = () => {
     isEditPasswordVisible
       ? setIsEditPasswordVisible(false)
       : setIsEditPasswordVisible(true);
-      !isEditPasswordVisible && setIsEditEmailVisible(false)
+    !isEditPasswordVisible && setIsEditEmailVisible(false);
   };
 
   //
   return (
     <div>
-      <div className="mb-3 relative">
+      <div className="mb-3">
         <h1 className="capitalize font-bold text-lg">email</h1>
         <div className="flex gap-x-5 items-end">
           <p className="text-sm tracking-wide">remzymiles@gmail.com</p>
@@ -32,8 +32,9 @@ export const EditEmailAndPassword = () => {
             Edit
           </button>
         </div>
-        <div
-        className={`border rounded-md px-3 py-2 bg-white transition-all duration-300 absolute z-10 top-16 w-full ${
+      </div>
+      <div
+        className={`border rounded-md px-3 py-2 bg-white transition-all duration-300 ${
           isEditEmailVisible
             ? "h-[27vh] opacity-100 mb-5"
             : "invisible h-0 opacity-0"
@@ -65,8 +66,7 @@ export const EditEmailAndPassword = () => {
           />
         </div>
       </div>
-      </div>
-      
+
       {/*  */}
       <div className="mb-4">
         <h1 className="capitalize font-bold text-lg">password</h1>

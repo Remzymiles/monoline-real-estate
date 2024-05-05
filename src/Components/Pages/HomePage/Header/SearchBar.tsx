@@ -16,19 +16,26 @@ export const SearchBar = () => {
       inputRef.current.value = "";
     }
   };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    window.location.href = `/search-properties/searchDetail/?search=${inputRef.current?.value}`;
+    clearInputValue();
+    setIsFocused(false);
+  };
 
   return (
     <form
       className="relative"
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
+      onSubmit={handleSubmit}
     >
       <input
         type="text"
         ref={inputRef}
         placeholder="City, Area, ZIP"
         id="input"
-        className={`border w-[100%] py-3.5 px-7 rounded-full shadow-lg transition-transform duration-300 ${
+        className={`border w-[100%] py-3.5 px-7 rounded-full shadow-lg transition-transform duration-300 outline-none ${
           isFocused ? "border-primaryColor-light outline-none shadow-2xl" : ""
         }`}
       />
@@ -40,11 +47,11 @@ export const SearchBar = () => {
         }
         onClick={() => {
           clearInputValue();
-          setIsFocused(false)
+          setIsFocused(false);
         }}
         className={`absolute right-3 top-2 bg-primaryColor-light rounded-full h-[%] px-3 py-2 flex items-center hover:bg-primaryColor-dark transition-all duration-300 ${
           isFocused
-            ? "w-[130px] big-screen-mobile-below:w-20 transition-[width] duration-300"
+            ? "w-[130px] big-screen-mobile-below:w-20 transition-all duration-300"
             : "w-10"
         }`}
       >
