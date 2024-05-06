@@ -30,6 +30,7 @@ export default {
         'tablet-below': { 'max': '949px' },
         'tablet': { 'min': '640px', 'max': '950px' },
         'tablet-above': { 'min': '950px' },
+        'tablet-to-laptop': { 'min': '950px', 'max':'1023px' },
         'laptop-below': {'max': '1023px'},
         'laptop': {'min':'1024px'},
         'big-screen-laptop': {'min': '1150px'},

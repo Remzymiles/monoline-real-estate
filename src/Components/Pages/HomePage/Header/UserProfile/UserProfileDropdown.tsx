@@ -44,7 +44,7 @@ export const UserProfileDropdown = () => {
             <img
               src={profilePhotoUrl}
               alt="image"
-              className="h-[100%] w-[100%] rounded-full object-cover"
+              className="h-[100%] w-[100%] rounded-full object-cover border"
             />
           </div>
         ) : (

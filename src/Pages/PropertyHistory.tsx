@@ -1,9 +1,9 @@
-import { PropertyHistoryIndex } from "../Components/Pages/PropertyHistory/PropertyHistoryIndex";
+import { PropertyOrderHistoryIndex } from "../Components/Pages/PropertyHistory/PropertyOrderHistoryIndex";
 
 export const PropertyHistory = () => {
   return (
     <>
-      <PropertyHistoryIndex />
+      <PropertyOrderHistoryIndex />
     </>
   );
 };

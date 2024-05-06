@@ -6,7 +6,9 @@
 :root {
   --swiper-navigation-size: 13px;
 }
-
+.clamp {
+  font-size: clamp(13px, 4vw, 16px);
+}
 .swiper-button-prev,
 .swiper-button-next {
   background-color: white;

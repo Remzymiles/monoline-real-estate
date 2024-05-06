@@ -10,25 +10,25 @@ export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
   //
   return (
     <div
-      className={`border rounded-lg absolute z-50 right-0  top-[52px] w-[140px] bg-white flex flex-col ${extraStyle}`}
+      className={`border rounded-lg absolute z-50 right-0  top-[52px] w-[160px] bg-white flex flex-col ${extraStyle}`}
     >
       <Link
         to={"/auth/sign-up"}
-        className="capitalize pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
       >
         sign up
       </Link>
       <hr />
       <Link
         to={"/auth/login"}
-        className="capitalize pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
       >
         login
       </Link>
       <hr />
       <Link
         to={"/wishlist"}
-        className="relative capitalize pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className="relative capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
       >
         wishlist
         {WishlistPropertyIds.length > 0 && (
@@ -45,9 +45,16 @@ export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
       <hr />
       <Link
         to={"/profile"}
-        className="capitalize pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
       >
         profile
+      </Link>{" "}
+      <hr />
+      <Link
+        to={"/order-history"}
+        className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+      >
+        order history
       </Link>
     </div>
   );
