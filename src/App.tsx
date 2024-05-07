@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { AuthLayout } from "./Layouts/AuthLayout";
 import { GlobalLayout } from "./Layouts/GlobalLayout";
 import { CartPage } from "./Pages/CartPage";
+import { CheckoutPage } from "./Pages/CheckoutPage";
 import { HomePage } from "./Pages/HomePage";
 import { LoginPage } from "./Pages/LoginPage";
 import { ProfilePage } from "./Pages/ProfilePage";
@@ -23,6 +24,7 @@ function App() {
           <Route path="/property-details/:propertyId" element={<PropertyDetails />}  />
           <Route path="/search-properties/:searchDetail" element={<SearchPage />}  />
           <Route path="/order-history" element={<PropertyHistory />} />
+          <Route path="/checkout" element={<CheckoutPage/>} />
         </Route>
         {/*  */}
         <Route path="/auth" element={<AuthLayout />}>

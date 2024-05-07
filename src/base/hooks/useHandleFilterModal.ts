@@ -15,10 +15,9 @@ export const useHandleFilterModal = () => {
     };
 
     useEffect(() => {
-      const handleClickOutside = (event: MouseEvent | Event): void => {
+      const handleClickOutside = (): void => {
         if (
-          filterDropdownRef.current &&
-          !filterDropdownRef.current.contains(event.target as Node)
+          filterDropdownRef.current 
         ) {
           handleCloseFilterModal();
         }

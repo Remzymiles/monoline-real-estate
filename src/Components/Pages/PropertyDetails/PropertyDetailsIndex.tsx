@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import properties from "../../../base/dummyData/properties.json";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
@@ -129,9 +129,9 @@ export const PropertyDetailsIndex = () => {
                 >
                   Add to cart
                 </button>
-                <button className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm">
+                <Link to={"/checkout"} className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm text-center">
                   Buy now
-                </button>
+                </Link>
               </div>
             </div>
           </div>

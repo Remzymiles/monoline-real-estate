@@ -8,4 +8,5 @@ export interface IInput {
   register: any;
   extraStyle: string;
   value?: string
+  pattern?: string
 }
