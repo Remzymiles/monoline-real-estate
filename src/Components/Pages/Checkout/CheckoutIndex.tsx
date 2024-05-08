@@ -1,6 +1,8 @@
 import Properties from "../../../base/dummyData/properties.json";
 import { useHandleCheckoutPropertyPicturesClick } from "../../../base/hooks/useHandleCheckoutPropertyPicturesClick";
+import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
+import { useOrderHistoryStore } from "../../../base/store/useOrderHistoryStore";
 import { Input } from "../../Global/FormComponents/Input";
 import { CheckoutPropertyInfo } from "./CheckoutPropertyInfo";
 import { ShowCheckoutPropertyPicturesModal } from "./ShowCheckoutPropertyPicturesModal";
@@ -14,8 +16,9 @@ export const CheckoutIndex = () => {
     clickedProperty,
   } = useHandleCheckoutPropertyPicturesClick();
   //
-  const { checkoutIds } = useCheckoutStore((state) => ({
+  const { checkoutIds, isPropertyFromCart } = useCheckoutStore((state) => ({
     checkoutIds: state.checkoutIds,
+    isPropertyFromCart: state.isPropertyFromCart,
   }));
   //
   const checkoutProperties = Properties.filter((property) => {
@@ -25,8 +28,27 @@ export const CheckoutIndex = () => {
   const subTotal = checkoutProperties.reduce((acc, property) => {
     return acc + property.price;
   }, 0);
-  //
   const estimatedTotal = subTotal + subTotal / 50;
+  //
+  const { updateOrderHistoryIds, orderHistoryPropertyIds } =
+    useOrderHistoryStore((state) => ({
+      orderHistoryPropertyIds: state.orderHistoryPropertyIds,
+      updateOrderHistoryIds: state.updateOrderHistoryPropertyIds,
+    }));
+  //
+  const { clearCartPropertyIds } = useCartPropertyIdsStore((state) => ({
+    clearCartPropertyIds: state.clearCartPropertyIds,
+  }));
+  //
+  const handleOrderHistoryAndClearCartProperties = () => {
+    const updatedIds =
+      typeof checkoutIds === "number"
+        ? [...orderHistoryPropertyIds, checkoutIds]
+        : [...orderHistoryPropertyIds, ...checkoutIds];
+    updateOrderHistoryIds(updatedIds);
+    isPropertyFromCart === true && clearCartPropertyIds()
+  };
+
   //
   return (
     <div className="flex gap-x-2 justify-center tablet-below:flex-col tablet-below:gap-y-7 relative">
@@ -84,7 +106,7 @@ export const CheckoutIndex = () => {
                 id="exp_date"
                 name="exp_date"
                 nameOfInput="exp date"
-                placeholder="mm/yy"
+                placeholder="MM/YY"
                 inputType="number"
                 register={() => {}}
                 extraStyle={``}
@@ -97,14 +119,17 @@ export const CheckoutIndex = () => {
                 id="cvv"
                 name="cvv"
                 nameOfInput="cvv"
-                placeholder="cvv"
+                placeholder="CVV"
                 inputType="number"
                 register={() => {}}
                 extraStyle={``}
               />
             </div>
           </div>
-          <button className="bg-primaryColor-light py-2 px-2 w-full text-white capitalize big-screen-mobile-below:text-[16px] between-mobile-and-tablet:text-[18px] tablet-above:text-[19px] font-bold rounded-lg hover:bg-primaryColor-dark transition-colors duration-300">
+          <button
+            className="bg-primaryColor-light py-2 px-2 w-full text-white capitalize big-screen-mobile-below:text-[16px] between-mobile-and-tablet:text-[18px] tablet-above:text-[19px] font-bold rounded-lg hover:bg-primaryColor-dark transition-colors duration-300"
+            onClick={handleOrderHistoryAndClearCartProperties}
+          >
             pay ${estimatedTotal.toLocaleString()}
           </button>
         </div>

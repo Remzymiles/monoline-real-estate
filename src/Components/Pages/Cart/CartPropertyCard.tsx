@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Properties from "../../../base/dummyData/properties.json";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
+import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { useWishListStore } from "../../../base/store/useWishListStore";
 import { TrashCanIcon } from "../../Icons/TrashCanIcon";
-import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 
 export const CartPropertyCard = () => {
   const { propertyIds, removePropertyId } = useCartPropertyIdsStore(
@@ -22,11 +22,19 @@ export const CartPropertyCard = () => {
     (accumulator, currentValue) => accumulator + currentValue.price,
     0
   );
-  // 
-  const {updateCheckoutIds} = useCheckoutStore((state)=>({
-    checkoutId: state.checkoutIds,
-    updateCheckoutIds: state.updateCheckoutIds
-  }))
+  //
+  const { updateCheckoutIds, setIsPropertyFromCart } = useCheckoutStore(
+    (state) => ({
+      setIsPropertyFromCart: state.setIsPropertyFromCart,
+      updateCheckoutIds: state.updateCheckoutIds,
+    })
+  );
+  const handleCheckoutPropertyIds = () => {
+    if (cartProperties.length > 0) {
+      updateCheckoutIds(propertyIds);
+      setIsPropertyFromCart(true);
+    }
+  };
   //
   const {
     wishlistPropertyIds,
@@ -143,7 +151,7 @@ export const CartPropertyCard = () => {
           </div>
           <hr />
           <div>
-          <div className="flex justify-between gap-x-4 my-4">
+            <div className="flex justify-between gap-x-4 my-4">
               <p className="capitalize font-bold">subTotal</p>:
               <p className="font-extrabold break-all">
                 ${totalCartPrice.toLocaleString()}
@@ -160,14 +168,15 @@ export const CartPropertyCard = () => {
             <div className="flex justify-between gap-x-4 my-3">
               <p className="capitalize font-bold">total price</p>:
               <p className="font-extrabold break-all">
-                ${(totalCartPrice + (totalCartPrice / 50)).toLocaleString()}
+                ${(totalCartPrice + totalCartPrice / 50).toLocaleString()}
               </p>
             </div>
             <hr />
             {/*  */}
-            <Link to={"/checkout"} onClick={()=>{
-              updateCheckoutIds(propertyIds)
-            }}>
+            <Link
+              to={`${cartProperties.length > 0 ? "/checkout" : "/cart-page"}`}
+              onClick={handleCheckoutPropertyIds}
+            >
               <button className="mt-3 bg-primaryColor-light w-full py-2 rounded-md capitalize text-white text-lg font-extrabold hover:bg-primaryColor-dark transition-colors duration-300">
                 checkout
               </button>

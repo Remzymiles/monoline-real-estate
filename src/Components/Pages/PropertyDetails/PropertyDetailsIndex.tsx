@@ -37,7 +37,7 @@ export const PropertyDetailsIndex = () => {
   const { propertyIds, updatePropertyId } = useCartPropertyIdsStore(
     (state) => ({
       propertyIds: state.propertyIds,
-      updatePropertyId: state.updatePropertyIds,
+      updatePropertyId: state.updateCartPropertyIds,
     })
   );
   //
@@ -51,9 +51,12 @@ export const PropertyDetailsIndex = () => {
       }, 2000);
     }
   };
-  const { updateCheckoutIds } = useCheckoutStore((state) => ({
-    updateCheckoutIds: state.updateCheckoutIds,
-  }));
+  const { updateCheckoutIds, setIsPropertyFromCart, isPropertyFromCart } =
+    useCheckoutStore((state) => ({
+      updateCheckoutIds: state.updateCheckoutIds,
+      setIsPropertyFromCart: state.setIsPropertyFromCart,
+      isPropertyFromCart: state.isPropertyFromCart,
+    }));
 
   //
   return (
@@ -138,6 +141,7 @@ export const PropertyDetailsIndex = () => {
                   className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm text-center"
                   onClick={() => {
                     updateCheckoutIds(Number(propertyId));
+                    setIsPropertyFromCart(false);
                   }}
                 >
                   Buy now
