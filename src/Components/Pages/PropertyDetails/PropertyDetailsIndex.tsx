@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import properties from "../../../base/dummyData/properties.json";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
+import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
@@ -12,6 +13,7 @@ import { ShowAllPicturesModal } from "./ShowAllPicturesModal";
 import { SimilarProperties } from "./SimilarProperties";
 
 export const PropertyDetailsIndex = () => {
+  const [showMessage, setShowMessage] = useState(false);
   const {
     isShowPicturesClicked,
     handleOpenAllPicturesModal,
@@ -39,7 +41,6 @@ export const PropertyDetailsIndex = () => {
     })
   );
   //
-  const [showMessage, setShowMessage] = useState(false);
 
   const addPropertyToCart = () => {
     if (!propertyIds.includes(Number(propertyId))) {
@@ -50,6 +51,9 @@ export const PropertyDetailsIndex = () => {
       }, 2000);
     }
   };
+  const { updateCheckoutIds } = useCheckoutStore((state) => ({
+    updateCheckoutIds: state.updateCheckoutIds,
+  }));
 
   //
   return (
@@ -129,7 +133,13 @@ export const PropertyDetailsIndex = () => {
                 >
                   Add to cart
                 </button>
-                <Link to={"/checkout"} className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm text-center">
+                <Link
+                  to={"/checkout"}
+                  className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm text-center"
+                  onClick={() => {
+                    updateCheckoutIds(Number(propertyId));
+                  }}
+                >
                   Buy now
                 </Link>
               </div>

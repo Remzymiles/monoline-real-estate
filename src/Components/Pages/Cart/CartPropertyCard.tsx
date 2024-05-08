@@ -4,6 +4,7 @@ import Properties from "../../../base/dummyData/properties.json";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
 import { useWishListStore } from "../../../base/store/useWishListStore";
 import { TrashCanIcon } from "../../Icons/TrashCanIcon";
+import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 
 export const CartPropertyCard = () => {
   const { propertyIds, removePropertyId } = useCartPropertyIdsStore(
@@ -21,6 +22,11 @@ export const CartPropertyCard = () => {
     (accumulator, currentValue) => accumulator + currentValue.price,
     0
   );
+  // 
+  const {updateCheckoutIds} = useCheckoutStore((state)=>({
+    checkoutId: state.checkoutIds,
+    updateCheckoutIds: state.updateCheckoutIds
+  }))
   //
   const {
     wishlistPropertyIds,
@@ -137,6 +143,13 @@ export const CartPropertyCard = () => {
           </div>
           <hr />
           <div>
+          <div className="flex justify-between gap-x-4 my-4">
+              <p className="capitalize font-bold">subTotal</p>:
+              <p className="font-extrabold break-all">
+                ${totalCartPrice.toLocaleString()}
+              </p>
+            </div>
+            {/*  */}
             <div className="flex justify-between gap-x-4 my-4">
               <p className="capitalize font-bold">tax</p>:
               <p className="font-extrabold break-all">
@@ -147,14 +160,18 @@ export const CartPropertyCard = () => {
             <div className="flex justify-between gap-x-4 my-3">
               <p className="capitalize font-bold">total price</p>:
               <p className="font-extrabold break-all">
-                ${(totalCartPrice + totalCartPrice / 50).toLocaleString()}
+                ${(totalCartPrice + (totalCartPrice / 50)).toLocaleString()}
               </p>
             </div>
             <hr />
             {/*  */}
-            <button className="mt-3 bg-primaryColor-light w-full py-2 rounded-md capitalize text-white text-lg font-extrabold hover:bg-primaryColor-dark transition-colors duration-300">
-              checkout
-            </button>
+            <Link to={"/checkout"} onClick={()=>{
+              updateCheckoutIds(propertyIds)
+            }}>
+              <button className="mt-3 bg-primaryColor-light w-full py-2 rounded-md capitalize text-white text-lg font-extrabold hover:bg-primaryColor-dark transition-colors duration-300">
+                checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>
