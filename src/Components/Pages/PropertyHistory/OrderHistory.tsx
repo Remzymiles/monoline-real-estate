@@ -1,6 +1,6 @@
 import properties from "../../../base/dummyData/properties.json";
+import { IProperty } from "../../../base/interface/IProperty";
 import { useOrderHistoryStore } from "../../../base/store/useOrderHistoryStore";
-import Image from "/images/10994-N-123rd-St-4.webp";
 
 export const OrderHistory = () => {
   const currentDate = new Date();
@@ -12,16 +12,25 @@ export const OrderHistory = () => {
   const { orderHistoryPropertyIds } = useOrderHistoryStore((state) => ({
     orderHistoryPropertyIds: state.orderHistoryPropertyIds,
   }));
+  
 
-  const orderHistoryProperties = properties.filter((property) => {
-    return orderHistoryPropertyIds.includes(property.property_id);
+  const orderHistoryProperties:IProperty[] = [];
+
+  orderHistoryPropertyIds.forEach((id) => {
+    const property = properties.find((property) => property.property_id === id);
+    if (property) {
+      orderHistoryProperties.push(property);
+    }
   });
 
   return (
     <div className="grid grid-cols-2 laptop:gap-10 tablet-to-laptop:gap-x-3 tablet:gap-x-4 tablet:gap-y-8 mobile:grid-cols-1 mobile:gap-y-5">
       {/*  */}
       {orderHistoryProperties.map((orderHistoryProperty) => (
-        <div className="tablet-to-laptop:w-[100%] tablet-to-laptop:h-[300px] tablet-below:h-auto bg-primaryColor-cream tablet-above:border-l-4 border-primaryColor-light tablet-below:border-t-4 px-3 pb-3" key={orderHistoryProperty.property_id}>
+        <div
+          className="tablet-to-laptop:w-[100%] tablet-to-laptop:h-[300px] tablet-below:h-auto bg-primaryColor-cream tablet-above:border-l-4 border-primaryColor-light tablet-below:border-t-4 px-3 pb-3"
+          key={orderHistoryProperty.property_id}
+        >
           <div className="flex justify-between">
             <p className="text-xs py-1 text-gray-500 capitalize font-bold">
               purchased on: {day} {month}, {year}{" "}
@@ -39,8 +48,12 @@ export const OrderHistory = () => {
               />
             </div>
             <div className="flex flex-col laptop:gap-8 laptop:h-[280px] tablet-to-laptop:h-[240px] tablet-to-laptop:gap-4 break-all tablet-below:gap-2 tablet-below:w-full">
-              <h1 className="text-lg font-bold">{orderHistoryProperty.location.address}</h1>
-              <p className="text-lg font-bold">${orderHistoryProperty.price.toLocaleString()}</p>
+              <h1 className="text-lg font-bold">
+                {orderHistoryProperty.location.address}
+              </h1>
+              <p className="text-lg font-bold">
+                ${orderHistoryProperty.price.toLocaleString()}
+              </p>
               <button className="capitalize py-1.5 px-1.5 bg-primaryColor-light transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold clamp">
                 view property details
               </button>
