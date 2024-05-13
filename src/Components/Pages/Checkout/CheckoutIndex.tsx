@@ -30,23 +30,32 @@ export const CheckoutIndex = () => {
   }, 0);
   const estimatedTotal = subTotal + subTotal / 50;
   //
-  const { updateOrderHistoryIds, orderHistoryPropertyIds } =
-    useOrderHistoryStore((state) => ({
-      orderHistoryPropertyIds: state.orderHistoryPropertyIds,
-      updateOrderHistoryIds: state.updateOrderHistoryPropertyIds,
-    }));
+  const { updateOrderHistoryProperties } = useOrderHistoryStore((state) => ({
+    updateOrderHistoryProperties: state.updateOrderHistoryProperties,
+  }));
   //
   const { clearCartPropertyIds } = useCartPropertyIdsStore((state) => ({
     clearCartPropertyIds: state.clearCartPropertyIds,
   }));
   //
   const handleOrderHistoryAndClearCartProperties = () => {
-    const updatedIds =
-      typeof checkoutIds === "number"
-        ? [...orderHistoryPropertyIds, checkoutIds]
-        : [...orderHistoryPropertyIds, ...checkoutIds];
-    updateOrderHistoryIds(updatedIds);
-    isPropertyFromCart === true && clearCartPropertyIds()
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const month = currentDate.toLocaleString("default", { month: "long" });
+    const year = currentDate.getFullYear();
+    let hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes().toString().padStart(2, "0");
+    const meridiem = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+    const time = `${hours}:${minutes} ${meridiem}`;
+
+    checkoutProperties.forEach((property) => {
+      updateOrderHistoryProperties({
+        ...property,
+        orderDate: `${day} - ${month} - ${year} ${time}`,
+      });
+    });
+    isPropertyFromCart === true && clearCartPropertyIds();
   };
 
   //

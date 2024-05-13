@@ -1,14 +1,17 @@
-import create from "zustand";
+import { create } from "zustand";
 import { IOrderHistoryStore } from "../interface/IOrderHistoryStore";
+import { IProperty } from "../interface/IProperty";
 
 export const useOrderHistoryStore = create<IOrderHistoryStore>((set) => ({
-  orderHistoryPropertyIds: [],
+  orderHistoryProperties: [],
 
-  updateOrderHistoryPropertyIds: (newOrderHistoryPropertyId) =>
+  updateOrderHistoryProperties: (newProperty: IProperty) =>
     set((state) => ({
-      orderHistoryPropertyIds:
-        typeof newOrderHistoryPropertyId === "number"
-          ? [...state.orderHistoryPropertyIds, newOrderHistoryPropertyId]
-          : newOrderHistoryPropertyId,
+      orderHistoryProperties: [...state.orderHistoryProperties, newProperty],
+    })),
+
+  clearOrderHistoryProperties: () =>
+    set(() => ({
+      orderHistoryProperties: [],
     })),
 }));
