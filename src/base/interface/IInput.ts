@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 export interface IInput {
   inputType: string;
   placeholder: string;
@@ -7,6 +9,8 @@ export interface IInput {
   name: string;
   register: any;
   extraStyle: string;
-  value?: string
-  pattern?: string
+  value?: string;
+  pattern?: string;
+  onChange?: (e: string | ChangeEvent<HTMLInputElement>) => void;
+  maxLength?: number;
 }
