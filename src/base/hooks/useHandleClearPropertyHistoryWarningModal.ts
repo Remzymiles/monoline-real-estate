@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export const useHandleClearPropertyHistoryWarningModal = () => {
-  const clearFilterModalRef = useRef<HTMLDivElement>(null);
-  // 
+  //
   const [
     isClearPropertyHistoryWarningVisible,
     setIsClearPropertyHistoryWarningVisible,
@@ -21,24 +20,10 @@ export const useHandleClearPropertyHistoryWarningModal = () => {
     window.document.body.style.overflow = "";
   };
 
-  useEffect(() => {
-    const handleClickOutside = (): void => {
-      if (clearFilterModalRef.current) {
-        handleCloseClearPropertyHistoryWarning();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
   //
   return {
     isClearPropertyHistoryWarningVisible,
     handleShowClearPropertyHistoryWarning,
     handleCloseClearPropertyHistoryWarning,
-    clearFilterModalRef,
   };
 };

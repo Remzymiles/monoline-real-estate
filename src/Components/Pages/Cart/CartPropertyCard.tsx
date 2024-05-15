@@ -126,7 +126,7 @@ export const CartPropertyCard = () => {
             );
           })}
         </div>
-        <div className="bg-primaryColor-lightCream px-3 py-3 big-screen-laptop:w-[30%] h-fit shadow-xl border rounded-lg">
+        <div className="bg-primaryColor-lightCream px-3 py-3 big-screen-laptop:w-[30%] h-fit shadow-xl border rounded-lg sticky top-0">
           <h1 className="capitalize font-bold text-xl mb-2 text-center">
             summary
           </h1>

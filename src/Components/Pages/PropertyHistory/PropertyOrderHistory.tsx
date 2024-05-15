@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useHandleClearPropertyHistoryWarningModal } from "../../../base/hooks/useHandleClearPropertyHistoryWarningModal";
 import { useOrderHistoryStore } from "../../../base/store/useOrderHistoryStore";
 
@@ -7,7 +8,6 @@ export const PropertyOrderHistory = () => {
     isClearPropertyHistoryWarningVisible,
     handleShowClearPropertyHistoryWarning,
     handleCloseClearPropertyHistoryWarning,
-    clearFilterModalRef,
   } = useHandleClearPropertyHistoryWarningModal();
   const { orderHistoryProperties, clearOrderHistoryProperties } =
     useOrderHistoryStore((state) => ({
@@ -23,14 +23,13 @@ export const PropertyOrderHistory = () => {
       }`}
     >
       {orderHistoryProperties.length > 0 ? (
-        <div className="max-w-[1100px] m-auto bg-primaryColor-lightCream px-4 py-2 pb-3">
+        <div className="max-w-[1100px] m-auto w-full bg-primaryColor-lightCream px-4 py-2 pb-3">
           <div
-            className={`absolute bg-black/30 w-[100%] h-[100%] z-50 top-0 left-0 flex justify-center items-center ${
+            className={`absolute bg-black/30 w-[100%] h-[1000vh] z-50 top-0 left-0 flex justify-center items-center ${
               isClearPropertyHistoryWarningVisible ? "block" : "hidden"
             }`}
-            ref={clearFilterModalRef}
           >
-            <div className="max-w-[600px] h-fit mobile:mx-5 bg-white px-4 py-3 rounded-lg">
+            <div className="max-w-[600px] h-fit mobile:mx-5 bg-white px-4 py-3 rounded-lg fixed top-[35%]">
               <p className="font-bold mb-2">
                 Are you sure you want to clear your order history? This action
                 will permanently remove all records of your previous purchases.
@@ -39,7 +38,7 @@ export const PropertyOrderHistory = () => {
               </p>
               <div className="flex justify-between">
                 <button
-                  className="capitalize py-1 px-2 text-sm w-[40%] bg-primaryColor-light transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
+                  className="capitalize py-1 px-2 text-sm w-[40%] bg-red-500 transition-colors duration-300 hover:bg-red-700 text-white rounded font-bold"
                   onClick={clearOrderHistoryProperties}
                 >
                   clear history
@@ -65,7 +64,7 @@ export const PropertyOrderHistory = () => {
                   </p>
                 </div>
                 <div className="flex items-center gap-x-4 big-screen-mobile-below:gap-x-3">
-                  <div className="w-[220px] sm:w-[300px] md:w-[250px] h-[200px] ">
+                  <div className="w-[190px] between-mobile-and-tablet:w-[270px] md:w-[250px] h-[200px] mobile:h-[170px] ">
                     <img
                       src={orderHistoryProperty.photos[0]}
                       alt="image"
@@ -73,15 +72,18 @@ export const PropertyOrderHistory = () => {
                     />
                   </div>
                   <div className="flex md:w-[550px] lg:w-[700px] flex-col md:flex-row justify-between gap-y-5">
-                    <p className="big-screen-mobile-below:break-all big-screen-mobile-below:text-sm lg:text-lg font-bold">
+                    <p className="big-screen-mobile-below:break-all tablet-below:text-sm lg:text-base font-bold">
                       {orderHistoryProperty.location.address}
                     </p>
-                    <p className="big-screen-mobile-below:break-all big-screen-mobile-below:text-sm lg:text-lg font-bold">
+                    <p className="big-screen-mobile-below:break-all tablet-below:text-sm lg:text-base font-extrabold">
                       ${orderHistoryProperty.price.toLocaleString()}
                     </p>
-                    <button className="capitalize py-1 px-1 sm:px-2 sm:py-1.5 text-sm bg-primaryColor-light transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold">
+                    <Link
+                      to={`/property-details/address=${orderHistoryProperty.location.address}&city=${orderHistoryProperty.location.city}&state=${orderHistoryProperty.location.state}&country=${orderHistoryProperty.location.country}&?id=${orderHistoryProperty.property_id}`}
+                      className="capitalize text-center py-1 px-1 sm:px-2 tablet-below:py-0.5 text-sm bg-primaryColor-light transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
+                    >
                       view property
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -91,7 +93,7 @@ export const PropertyOrderHistory = () => {
           {/*  */}
           <div className="text-end">
             <button
-              className="capitalize py-1 px-2 text-sm bg-primaryColor-light transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
+              className="capitalize py-1 px-2 text-sm bg-red-500 transition-colors duration-300 hover:bg-red-700 text-white rounded font-bold"
               onClick={handleShowClearPropertyHistoryWarning}
             >
               clear history

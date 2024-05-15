@@ -10,7 +10,6 @@ export interface IInput {
   register: any;
   extraStyle: string;
   value?: string;
-  pattern?: string;
   onChange?: (e: string | ChangeEvent<HTMLInputElement>) => void;
   maxLength?: number;
 }

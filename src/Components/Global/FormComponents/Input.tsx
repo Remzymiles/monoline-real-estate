@@ -24,8 +24,8 @@ export const Input = ({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     let updatedValue: string = e.target.value;
 
-    if (inputType === "tel" && updatedValue.length > 0) {
-      updatedValue = updatedValue.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
+    if (id === "card_number" && updatedValue.length > 4 && updatedValue.length !== 19 ) {
+      updatedValue = updatedValue.replace(/\D/g, "").replace(/(.{4})/g, "$1-");
     }
 
     setInputValue(updatedValue); 

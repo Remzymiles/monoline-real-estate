@@ -29,7 +29,7 @@ export const ShowCheckoutPropertyPicturesModal = ({
   return (
     <>
       <div
-        className={`absolute bg-black/30 w-[100vw] h-[100%] tablet-above:h-[100vh] tablet-above:-top-[135px] flex justify-center tablet-below:items-end tablet-above:items-center -right-16 tablet-to-laptop:-right-8 tablet:-right-8 mobile:-right-4 -top-44 z-50 ${
+        className={`absolute bg-black/30 w-[100vw] h-[100%] tablet-above:h-[1000vh] tablet-above:-top-[135px] flex justify-center tablet-below:items-end tablet-above:items-center -right-16 tablet-to-laptop:-right-8 tablet:-right-8 mobile:-right-4 -top-44 z-50 ${
           isShowCheckoutPropertyPicturesClicked ? "block" : "hidden"
         }`}
       >

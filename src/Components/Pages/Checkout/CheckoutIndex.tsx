@@ -1,28 +1,19 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import Properties from "../../../base/dummyData/properties.json";
 import { useHandleCheckoutPropertyPicturesClick } from "../../../base/hooks/useHandleCheckoutPropertyPicturesClick";
-import { useHandleOrderHistoryDateAndTime } from "../../../base/hooks/useHandleOrderHistoryDateAndTime";
-import { IDebitCard } from "../../../base/interface/IDebitCard";
+import { useHandlePaymentSuccessModal } from "../../../base/hooks/useHandlePaymentSuccessModal";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
-import { FormButton } from "../../Global/FormComponents/Button";
-import { Input } from "../../Global/FormComponents/Input";
+import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutPropertyInfo } from "./CheckoutPropertyInfo";
-import { DebitCardFormValidator } from "./DebitCardFormValidator";
 import { ShowCheckoutPropertyPicturesModal } from "./ShowCheckoutPropertyPicturesModal";
 
 export const CheckoutIndex = () => {
   //
-  const { handleOrderHistoryAndClearCartProperties } =
-    useHandleOrderHistoryDateAndTime();
-  //
   const {
-    register,
-    formState: { errors },
-    reset,
-    handleSubmit,
-  } = useForm<IDebitCard>({ resolver: yupResolver(DebitCardFormValidator) });
+    handleOpenPaymentSuccessModal,
+    isPaymentSuccessful,
+    handleClosePaymentSuccessModal,
+  } = useHandlePaymentSuccessModal();
   //
   const {
     isShowCheckoutPropertyPicturesClicked,
@@ -39,137 +30,46 @@ export const CheckoutIndex = () => {
     return checkoutIds.includes(property.property_id);
   });
   //
-  const subTotal = checkoutProperties.reduce((acc, property) => {
-    return acc + property.price;
-  }, 0);
-  const estimatedTotal = subTotal + subTotal / 50;
-
-  const handleSubmitForm = () => {
-    handleOrderHistoryAndClearCartProperties();
-    reset();
-  };
 
   //
   return (
-    <div className="flex gap-x-2 justify-center tablet-below:flex-col tablet-below:gap-y-7 relative">
-      <ShowCheckoutPropertyPicturesModal
-        clickedCheckoutProperty={clickedProperty}
-        handleCloseCheckoutPicturesModal={handleCloseCheckoutPicturesModal}
-        isShowCheckoutPropertyPicturesClicked={
-          isShowCheckoutPropertyPicturesClicked
-        }
-        clickedCheckoutPropertyId={clickedProperty?.property_id}
-      />
-      <CheckoutPropertyInfo
-        checkoutProperties={checkoutProperties}
-        handleOpenCheckoutPicturesModal={handleOpenCheckoutPicturesModal}
-      />
-      {/*  */}
-      <div className="w-[500px] rounded-lg py-2 px-2 mobile:px-0 tablet-below:w-full tablet-above:sticky tablet-above:top-[120px] h-fit">
-        <h1 className="big-screen-mobile-below:text-[20px] between-mobile-and-tablet:text-[22px] tablet-above:text-[25px] font-extrabold text-center capitalize">
-          payment information
-        </h1>
-        <p className="border-2 border-primaryColor-light w-fit px-1 py-1 rounded-lg capitalize font-bold bg-slate-100 m-auto my-4 big-screen-mobile-below:text-[15px] between-mobile-and-tablet:text-[17px] tablet-above:text-[18px]">
-          credit/debit card
-        </p>
-        <form
-          className="w-full px-2 mobile:px-0"
-          onSubmit={handleSubmit(handleSubmitForm)}
-          noValidate
-        >
-          <div className="mb-4">
-            <Input
-              htmlFor="card_number"
-              id="card_number"
-              name="card_number"
-              nameOfInput="card number"
-              placeholder="card number"
-              inputType="tel"
-              register={register}
-              extraStyle={`tracking-widest ${
-                errors.card_number
-                  ? "border-b-2 border-red-600 focus:border-red-600"
-                  : "border-black"
-              }`}
-              maxLength={19}
-            />
-            {errors.card_number && (
-              <p className="text-right mt-1 text-sm text-red-500">
-                {errors?.card_number.message}
-              </p>
-            )}
-          </div>
-          {/*  */}
-          <div className="mb-4">
-            <Input
-              htmlFor="cardHolder-name"
-              id="cardHolder-name"
-              name="cardHolder-name"
-              nameOfInput="cardHolder name"
-              placeholder="card holder name"
-              inputType="text"
-              register={register}
-              extraStyle={`${
-                errors.cardHolder_name
-                  ? "border-b-2 border-red-600 focus:border-red-600"
-                  : "border-black"
-              }`}
-            />
-            {errors.cardHolder_name && (
-              <p className="text-right mt-1 text-sm text-red-500">
-                {errors?.cardHolder_name.message}
-              </p>
-            )}
-          </div>
-          {/*  */}
-          <div className="flex justify-between items-center">
-            <div className="mb-4 w-[45%]">
-              <Input
-                htmlFor="exp_date"
-                id="exp_date"
-                name="exp_date"
-                nameOfInput="exp date"
-                placeholder="MM/YY"
-                inputType="number"
-                register={register}
-                extraStyle={`${
-                  errors.exp_date
-                    ? "border-b-2 border-red-600 focus:border-red-600"
-                    : "border-black"
-                }`}
-              />
-              {errors.exp_date && (
-                <p className="text-right mt-1 text-sm text-red-500">
-                  {errors?.exp_date.message}
-                </p>
-              )}
-            </div>
-            {/*  */}
-            <div className="mb-4 w-[30%]">
-              <Input
-                htmlFor="cvv"
-                id="cvv"
-                name="cvv"
-                nameOfInput="CVV"
-                placeholder="CVV"
-                inputType="tel"
-                register={register}
-                extraStyle={`${
-                  errors.cvv
-                    ? "border-b-2 border-red-600 focus:border-red-600"
-                    : "border-black"
-                }`}
-                maxLength={3}
-              />
-              {errors.cvv && (
-                <p className="text-right mt-1 text-sm text-red-500">
-                  {errors?.cvv.message}
-                </p>
-              )}
-            </div>
-          </div>
-          <FormButton name={`pay $${estimatedTotal.toLocaleString()}`} />
-        </form>
+    <div>
+      <div
+        className={`absolute bg-black/30 w-[100%] h-[1000vh] top-0 left-0 z-50 flex justify-center items-center ${
+          isPaymentSuccessful ? "block" : "hidden"
+        }`}
+      >
+        <div className="min-w-[300px] h-[200px] mobile:mx-5 bg-white px-4 py-3 rounded-lg fixed top-[35%] flex flex-col justify-center gap-y-5 capitalize">
+          <p className="font-bold mb-2">
+            payment successful. congrats on your new home
+          </p>
+          <Link to={`/`}
+            className="capitalize py-1 px-2 text-sm w-full bg-primaryColor-light transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold text-center"
+            onClick={handleClosePaymentSuccessModal}
+          >
+            Check out more properties
+          </Link>
+        </div>
+      </div>
+
+      <div className="flex gap-x-2 justify-center tablet-below:flex-col tablet-below:gap-y-7 relative">
+        <ShowCheckoutPropertyPicturesModal
+          clickedCheckoutProperty={clickedProperty}
+          handleCloseCheckoutPicturesModal={handleCloseCheckoutPicturesModal}
+          isShowCheckoutPropertyPicturesClicked={
+            isShowCheckoutPropertyPicturesClicked
+          }
+          clickedCheckoutPropertyId={clickedProperty?.property_id}
+        />
+        <CheckoutPropertyInfo
+          checkoutProperties={checkoutProperties}
+          handleOpenCheckoutPicturesModal={handleOpenCheckoutPicturesModal}
+        />
+        {/*  */}
+        <CheckoutForm
+          checkoutProperties={checkoutProperties}
+          handleOpenPaymentSuccessModal={handleOpenPaymentSuccessModal}
+        />
       </div>
     </div>
   );
