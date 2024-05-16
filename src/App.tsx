@@ -21,10 +21,16 @@ function App() {
           <Route path="/cart-page" element={<CartPage />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/property-details/:propertyId" element={<PropertyDetails />}  />
-          <Route path="/search-properties/:searchDetail" element={<SearchPage />}  />
+          <Route
+            path="/property-details/:propertyId"
+            element={<PropertyDetails />}
+          />
+          <Route
+            path="/search-properties/:searchDetail"
+            element={<SearchPage />}
+          />
           <Route path="/order-history" element={<PropertyHistory />} />
-          <Route path="/checkout" element={<CheckoutPage/>} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Route>
         {/*  */}
         <Route path="/auth" element={<AuthLayout />}>
