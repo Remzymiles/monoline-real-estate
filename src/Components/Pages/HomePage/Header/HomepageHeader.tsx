@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useCartPropertyIdsStore } from "../../../../base/store/useCartPropertyIdsStore";
 import { useDarkModeStore } from "../../../../base/store/useDarkModeStore";
 import { CartIcon } from "../../../Icons/CartIcon";
+import { ToggleDarkModeIcon } from "../../../Icons/ToggleDarkModeIcon";
 import { MonolineLogo } from "../../../Logos/MonolineLogo";
 import { SearchBar } from "./SearchBar";
 import { UserProfileDropdown } from "./UserProfile/UserProfileDropdown";
@@ -61,15 +62,11 @@ export const HomepageHeader = () => {
           <UserProfileDropdown />
         </div>
       </div>
-
-      <button
-        className="dark:text-white text-xl text-black"
-        onClick={() => {
+      <ToggleDarkModeIcon
+        clicked={() => {
           toggleTheme();
         }}
-      >
-        Fucking Toggle this thing
-      </button>
+      />
     </header>
   );
 };
