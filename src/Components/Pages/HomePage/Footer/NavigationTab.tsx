@@ -20,18 +20,20 @@ export const NavigationTab = () => {
 
   //
   return (
-    <div className="fixed px-2 bottom-0 flex bg-white justify-between gap-x-2 pt-3 w-full border-t-2 tablet-above:hidden z-10">
+    <div className="fixed px-2 bottom-0 flex bg-white dark:bg-secondaryColor-light  justify-between gap-x-2 pt-3 w-full border-t-2 dark:border-gray-400 tablet-above:hidden z-10">
       <div>
         <NavLink
           to={"/"}
           className={`text-center font-semibold text-sm ${
-            location.pathname === "/" ? "text-primaryColor-light" : "text-black"
+            location.pathname === "/"
+              ? "text-primaryColor-light dark:text-primaryColorDarkMode"
+              : "text-black dark:text-gray-400"
           }`}
         >
           <SearchIcon
             extraStyle={`${
               location.pathname === "/"
-                ? "text-primaryColor-light"
+                ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                 : "text-gray-400"
             }`}
           />{" "}
@@ -44,14 +46,14 @@ export const NavigationTab = () => {
           to={"/cart-page"}
           className={`relative font-semibold text-sm ${
             location.pathname === "/cart-page"
-              ? "text-primaryColor-light"
-              : "text-black"
+              ? "text-primaryColor-light dark:text-primaryColorDarkMode"
+              : "text-black dark:text-gray-400"
           }`}
         >
           <CartIcon
             extraStyle={` text-center ${
               location.pathname === "/cart-page"
-                ? "fill-primaryColor-light"
+                ? "fill-primaryColor-light dark:fill-primaryColorDarkMode"
                 : "fill-gray-400"
             }`}
           />
@@ -69,14 +71,14 @@ export const NavigationTab = () => {
           to={"/wishlist"}
           className={`text-center font-semibold text-sm ${
             location.pathname === "/wishlist"
-              ? "text-primaryColor-light"
-              : "text-black"
+              ? "text-primaryColor-light dark:text-primaryColorDarkMode"
+              : "text-black dark:text-gray-400"
           }`}
         >
           <HeartIcon
             color={`${
               location.pathname === "/wishlist"
-                ? "text-primaryColor-light"
+                ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                 : "text-gray-400"
             }`}
           />{" "}
@@ -99,15 +101,15 @@ export const NavigationTab = () => {
           to={"/profile"}
           className={`flex flex-col items-center gap-0 ${
             location.pathname === "/profile"
-              ? "text-primaryColor-light"
-              : "text-black"
+              ? "text-primaryColor-light dark:text-primaryColorDarkMode"
+              : "text-black dark:text-gray-400"
           }`}
         >
           <UserProfileIcon
             iconStyle="-translate-y-[1px]"
             extraStyle={`h-[27px] w-[27px] ${
               location.pathname === "/profile"
-                ? "bg-primaryColor-light"
+                ? "bg-primaryColor-light dark:bg-primaryColorDarkMode"
                 : "bg-gray-400"
             }`}
           />

@@ -53,8 +53,9 @@
 
 
 .toggle {
-  width: 30px;
-  height: 30px;
+  background-color: white;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -88,7 +89,6 @@
 #switch:checked ~ .icon--sun {
   transition-delay: 200ms;
   transform: scale(1) rotate(360deg);
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;

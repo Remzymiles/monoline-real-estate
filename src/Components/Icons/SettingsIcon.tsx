@@ -6,7 +6,7 @@ export const SettingsIcon = () => {
     <div>
       <FontAwesomeIcon
         icon={faSliders}
-        className="text-sm text-secondaryColor-dark"
+        className="text-sm text-secondaryColor-dark dark:text-zinc-400"
       />
     </div>
   )

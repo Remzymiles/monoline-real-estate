@@ -30,7 +30,7 @@ export const FilterByPrice = ({
           </p>
           <div className="mt-3 relative">
             <button
-              className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
+              className="border border-black dark:border-gray-400 py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsPricesDropDownOpen(!isPricesDropDownOpen)}
             >
               {typeof selectedPrice === "string"
@@ -45,17 +45,17 @@ export const FilterByPrice = ({
               </span>
             </button>
             <div
-              className={`absolute flex flex-col items-start mt-1 rounded-lg border bg-white border-black mobile:w-full w-[500px] transition-all duration-300 ${
+              className={`absolute flex flex-col items-start mt-1 rounded-lg border bg-white dark:bg-secondaryColor-dark border-black dark:border-gray-400 mobile:w-full w-[500px] transition-all duration-300 ${
                 isPricesDropDownOpen ? "h-48" : "h-0 opacity-0 invisible"
               }`}
             >
               {prices.map((price, index) => (
                 <button
                   key={price.id}
-                  className={`px-3 py-3 w-full text-start ${
+                  className={`px-3 py-3 w-full text-start dark:hover:bg-secondaryColor-light/30 ${
                     index === prices.length - 1
                       ? "border-none"
-                      : "border-b border-b-black"
+                      : "border-b border-b-black dark:border-gray-400"
                   }`}
                   onClick={() => {
                     setSelectedPrice({

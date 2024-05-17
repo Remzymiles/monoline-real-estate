@@ -6,7 +6,7 @@ export const BarsIcon = () => {
     <div>
       <FontAwesomeIcon
         icon={faBars}
-        className="text-sm text-secondaryColor-dark"
+        className="text-[18px] text-secondaryColor-dark"
       />
     </div>
   );

@@ -44,7 +44,7 @@ export const FilterDropdownContents = () => {
 
   return (
     <>
-      <div className="px-4 max-h-[87%] big-screen-mobile-below:max-h-[91%] overflow-y-scroll z-20">
+      <div className="px-4 max-h-[87%] big-screen-mobile-below:max-h-[91%] overflow-y-scroll z-20 no-scrollbar">
         {/*  */}
         <FilterByLocation
           handleCitySelect={handleCitySelect}
@@ -71,9 +71,9 @@ export const FilterDropdownContents = () => {
           setSelectedBeds={setSelectedBeds}
         />
       </div>
-      <div className="absolute mobile:fixed z-50 bg-white bottom-4 mobile:bottom-0 border-t border-t-slate-300 mobile:w-full tablet:w-[540px] tablet-above:w-[540px] laptop:w-[550px] items-center pt-2 pb-5 px-4 flex justify-between mobile:rounded-b-none rounded-b-lg">
+      <div className="absolute mobile:fixed z-50 bg-white dark:bg-secondaryColor-light bottom-4 mobile:bottom-0 border-t border-t-slate-300 dark:border-gray-400 mobile:w-full tablet:w-[540px] tablet-above:w-[540px] laptop:w-[550px] items-center pt-2 pb-5 px-4 flex justify-between mobile:rounded-b-none rounded-b-lg">
         <button
-          className="capitalize font-bold text-lg hover:bg-slate-200 rounded-lg py-2 px-2 transition-colors duration-300"
+          className="capitalize font-bold text-lg hover:bg-slate-200 dark:hover:bg-secondaryColor-dark/30  rounded-lg py-2 px-2 transition-colors duration-300"
           onClick={() => {
             clearFilterOptions();
           }}
@@ -81,7 +81,7 @@ export const FilterDropdownContents = () => {
           clear all
         </button>
         <button
-          className="capitalize bg-black/85 px-5 py-2 text-white rounded-lg font-bold hover:bg-black transition-colors duration-300"
+          className="capitalize bg-black/85 dark:bg-secondaryColor-dark/80 dark:hover:bg-secondaryColor-dark px-5 py-2 text-white rounded-lg font-bold hover:bg-black transition-colors duration-300"
           onClick={() => {
             closeFilterModal();
             updateFilterOptions(selectedCity, "city");

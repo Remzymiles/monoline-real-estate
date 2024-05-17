@@ -38,7 +38,7 @@ export const FilterByLocation = ({
           <p className="text-sm mt-2">search for a property by its city</p>
           <div className="mt-3 relative z-30">
             <button
-              className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
+              className="border border-black dark:border-gray-400 py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsCitiesDropDownOpen(!isCitiesDropDownOpen)}
             >
               {selectedCity ? selectedCity : "choose city"}
@@ -52,17 +52,17 @@ export const FilterByLocation = ({
             </button>
 
             <div
-              className={`flex-col items-start mt-2 rounded-lg border absolute bg-white border-black mobile:w-full w-[500px] transition-all duration-300 ${
+              className={`flex-col items-start mt-2 rounded-lg border absolute bg-white dark:bg-secondaryColor-dark border-black dark:border-gray-400 mobile:w-full w-[500px] transition-all duration-300 ${
                 isCitiesDropDownOpen ? "h-72" : "h-0 opacity-0 invisible"
               }`}
             >
               {cities.map((city, index) => (
                 <button
                   key={city.id}
-                  className={`px-3 py-3 w-full text-start ${
+                  className={`px-3 py-3 w-full text-start dark:hover:bg-secondaryColor-light/30 ${
                     index === cities.length - 1
                       ? "border-none"
-                      : "border-b border-b-black"
+                      : "border-b border-b-black dark:border-gray-400"
                   }`}
                   onClick={() => handleCitySelect(city.city)}
                 >
@@ -80,7 +80,7 @@ export const FilterByLocation = ({
           <p className="text-sm mt-2">search for a property by its state</p>
           <div className="mt-3 relative">
             <button
-              className="border border-black py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
+              className="border border-black dark:border-gray-400 py-3 px-3 mobile:w-full w-[500px] rounded-md capitalize text-start flex justify-between"
               onClick={() => setIsStatesDropDownOpen(!isStatesDropDownOpen)}
             >
               {selectedState ? selectedState : "choose state"}
@@ -93,15 +93,15 @@ export const FilterByLocation = ({
               </span>
             </button>
             <div
-              className={`flex-col items-start mt-1 rounded-lg border border-black mobile:w-full w-[500px] absolute z-10 bg-white transition-all duration-300 ${
+              className={`flex-col items-start mt-1 rounded-lg border border-black dark:border-gray-400 mobile:w-full w-[500px] absolute z-10 bg-white dark:bg-secondaryColor-dark transition-all duration-300 ${
                 isStatesDropDownOpen ? "h-48" : "h-0 opacity-0 invisible"
               }`}
             >
               {states.map((state, index) => (
                 <button
                   key={index}
-                  className={`px-3 py-3 w-full text-start ${
-                    index === states.length - 1 ? "" : "border-b border-b-black"
+                  className={`px-3 py-3 w-full text-start dark:hover:bg-secondaryColor-light/30 ${
+                    index === states.length - 1 ? "" : "border-b border-b-black dark:border-gray-400"
                   }`}
                   onClick={() => handleStateSelect(state.name)}
                 >

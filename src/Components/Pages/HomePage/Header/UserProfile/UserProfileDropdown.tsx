@@ -3,10 +3,15 @@ import { useHandleUserProfileDropdown } from "../../../../../base/hooks/useHandl
 import { useProfilePhotoStore } from "../../../../../base/store/useProfilePhotoStore";
 import { useWishListStore } from "../../../../../base/store/useWishListStore";
 import { BarsIcon } from "../../../../Icons/BarsIcon";
+import { ToggleDarkModeIcon } from "../../../../Icons/ToggleDarkModeIcon";
 import { UserProfileIcon } from "../../../../Icons/UserProfileIcon";
 import { DropdownContent } from "./DropdownContent";
 
-export const UserProfileDropdown = () => {
+export const UserProfileDropdown = ({
+  toggleTheme,
+}: {
+  toggleTheme: () => void;
+}) => {
   //
   const currentLocation = useLocation();
   const {
@@ -33,27 +38,34 @@ export const UserProfileDropdown = () => {
       }}
       className="relative"
     >
-      <button
-        onClick={handleOpenUserProfileDropDown}
-        className="flex gap-3 items-center bg-white px-3 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black"
-      >
-        <BarsIcon />
+      <div className="flex gap-x-1 items-center bg-white px-3 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border">
+        <button
+          className="flex gap-x-2 items-center border-r-2 pr-[5px]"
+          onClick={handleOpenUserProfileDropDown}
+        >
+          <BarsIcon />
 
-        {profilePhotoUrl ? (
-          <div className="h-[32px] w-[32px]">
-            <img
-              src={profilePhotoUrl}
-              alt="image"
-              className="h-[100%] w-[100%] rounded-full object-cover border"
+          {profilePhotoUrl ? (
+            <div className="h-[32px] w-[32px]">
+              <img
+                src={profilePhotoUrl}
+                alt="image"
+                className="h-[100%] w-[100%] rounded-full object-cover border"
+              />
+            </div>
+          ) : (
+            <UserProfileIcon
+              iconStyle="text-xs"
+              extraStyle="bg-black/80 h-[30px] w-[30px] big-screen-mobile-below:hidden"
             />
-          </div>
-        ) : (
-          <UserProfileIcon
-            iconStyle="text-sm"
-            extraStyle="bg-black/80 h-[30px] w-[30px] big-screen-mobile-below:hidden"
-          />
-        )}
-      </button>
+          )}
+        </button>
+        <ToggleDarkModeIcon
+          clicked={() => {
+            toggleTheme();
+          }}
+        />
+      </div>
       <DropdownContent extraStyle={isUserProfileVisible ? "block" : "hidden"} />
       {WishlistPropertyIds.length > 0 && (
         <div

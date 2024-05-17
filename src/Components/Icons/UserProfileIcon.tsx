@@ -9,7 +9,7 @@ export const UserProfileIcon = ({
   iconStyle: string
 }) => {
   return (
-    <div className={`rounded-full  ${extraStyle} text-center`}>
+    <div className={`rounded-full  ${extraStyle} flex justify-center items-center text-center`}>
       <FontAwesomeIcon icon={faUser} className= {` text-white ${iconStyle}`} />
     </div>
   );

@@ -18,7 +18,7 @@ export const GlobalLayout = () => {
   return (
     <div className={`flex flex-col h-[100vh] min-w-[320px]`}>
       <HomepageHeader />
-      <main className="flex-1">
+      <main className="flex-1 dark:bg-secondaryColor-dark/95 pb-16 dark:text-gray-400">
         <Outlet />
       </main>
       <HomepageFooter />

@@ -34,11 +34,11 @@ export const FilterByBedsAndBaths = ({
             <h2 className="capitalize mb-2 text-sm">bedrooms</h2>
             <div className="flex gap-2 mobile:overflow-x-auto no-scrollbar">
               <div
-                className={`capitalize border rounded-2xl px-4 py-[5px] ${
+                className={`capitalize border dark:border-gray-400 rounded-2xl px-4 py-[5px] ${
                   selectedBeds === 0
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:border-black`}
+                    ? "bg-black text-white dark:bg-secondaryColor-dark dark:text-white"
+                    : "bg-white text-black dark:bg-secondaryColor-lighter/90 dark:text-gray-300"
+                } hover:border-black dark:hover:border-gray-200`}
                 onClick={() => {
                   setSelectedBeds(0);
                 }}
@@ -48,10 +48,10 @@ export const FilterByBedsAndBaths = ({
               {propertyBeds.map((bed) => (
                 <div
                   key={bed.id}
-                  className={`border hover:border-black rounded-2xl px-[23px] py-[5px] ${
+                  className={`border hover:border-black dark:border-gray-400 dark:hover:border-gray-200 rounded-2xl px-[23px] py-[5px] ${
                     selectedBeds === bed.beds
-                      ? "bg-black text-white"
-                      : "bg-white text-black"
+                      ? "bg-black text-white dark:bg-secondaryColor-dark dark:text-white"
+                      : "bg-white text-black dark:bg-secondaryColor-lighter/90 dark:text-gray-300"
                   }`}
                   onClick={() => {
                     setSelectedBeds(bed.beds);
@@ -67,11 +67,11 @@ export const FilterByBedsAndBaths = ({
             <h2 className="capitalize mb-2 text-sm">bathrooms</h2>
             <div className="flex gap-2 mobile:overflow-x-auto no-scrollbar">
               <div
-                className={`capitalize border rounded-2xl px-4 py-[5px] ${
+                className={`capitalize border dark:border-gray-400 rounded-2xl px-4 py-[5px] ${
                   selectedBaths === 0
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:border-black`}
+                  ? "bg-black text-white dark:bg-secondaryColor-dark dark:text-white"
+                  : "bg-white text-black dark:bg-secondaryColor-lighter/90 dark:text-gray-300"
+                } hover:border-black dark:hover:border-gray-200`}
                 onClick={() => {
                   setSelectedBaths(0);
                 }}
@@ -83,8 +83,8 @@ export const FilterByBedsAndBaths = ({
                   key={bath.id}
                   className={`border hover:border-black rounded-2xl px-[23px] py-[5px] ${
                     selectedBaths === bath.baths
-                      ? "bg-black text-white"
-                      : "bg-white text-black"
+                    ? "bg-black text-white dark:bg-secondaryColor-dark dark:text-white"
+                    : "bg-white text-black dark:bg-secondaryColor-lighter/90 dark:text-gray-300"
                   }`}
                   onClick={() => {
                     setSelectedBaths(bath.baths);

@@ -20,12 +20,7 @@ export default {
           'lighter': '#7e9acd',
           'dark': '#101929'
         },
-        'primaryDarkModeColor': {
-          'light': '#ccc',
-          'dark': '#6C744A',
-          'cream': '#e9ebe0',
-          'lightCream': '#f4f5ef'
-        },
+        'primaryColorDarkMode': '#829925',
       },
       fontFamily: {
         'myFont': 'Lato'

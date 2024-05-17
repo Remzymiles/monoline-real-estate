@@ -35,8 +35,8 @@ export const SearchBar = () => {
         ref={inputRef}
         placeholder="City, Area, ZIP"
         id="input"
-        className={`border w-[100%] py-3.5 px-7 rounded-full shadow-lg transition-transform duration-300 outline-none ${
-          isFocused ? "border-primaryColor-light outline-none shadow-2xl" : ""
+        className={`border dark:border-gray-500 w-[100%] dark:text-gray-400 py-2.5 px-7 rounded-full shadow-lg transition-transform duration-300 outline-none dark:bg-secondaryColor-light ${
+          isFocused ? "border-primaryColor-light dark:border-primaryColorDarkMode outline-none shadow-2xl" : ""
         }`}
       />
       <Link
@@ -49,14 +49,14 @@ export const SearchBar = () => {
           clearInputValue();
           setIsFocused(false);
         }}
-        className={`absolute right-3 top-2 bg-primaryColor-light rounded-full h-[%] px-3 py-2 flex items-center hover:bg-primaryColor-dark transition-all duration-300 ${
+        className={`absolute right-3 top-[6px] bg-primaryColor-light dark:bg-primaryColorDarkMode/60 rounded-full h-[%] px-3 py-2 flex items-center hover:bg-primaryColorDarkMode/90 transition-all duration-300 ${
           isFocused
-            ? "w-[130px] big-screen-mobile-below:w-20 transition-all duration-300"
-            : "w-10"
+            ? "w-[115px] h-9 big-screen-mobile-below:w-20 transition-all duration-300"
+            : "w-9 h-9"
         }`}
       >
         <SearchIcon
-          extraStyle={`text-white ${
+          extraStyle={`text-white font-bold ${
             isFocused ? "big-screen-mobile-below:hidden" : "visible"
           }`}
         />

@@ -6,7 +6,7 @@ export const ChevronArrowUp = () => {
     <div>
       <FontAwesomeIcon
         icon={faChevronUp}
-        className="text-sm text-secondaryColor-dark"
+        className="text-sm text-secondaryColor-dark dark:text-gray-400"
       />
     </div>
   );
