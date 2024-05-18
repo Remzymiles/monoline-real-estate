@@ -51,12 +51,12 @@ export const PropertyDetailsIndex = () => {
       }, 2000);
     }
   };
-  const { updateCheckoutIds, setIsPropertyFromCart, isPropertyFromCart } =
-    useCheckoutStore((state) => ({
+  const { updateCheckoutIds, setIsPropertyFromCart } = useCheckoutStore(
+    (state) => ({
       updateCheckoutIds: state.updateCheckoutIds,
       setIsPropertyFromCart: state.setIsPropertyFromCart,
-      isPropertyFromCart: state.isPropertyFromCart,
-    }));
+    })
+  );
 
   //
   return (
@@ -89,21 +89,21 @@ export const PropertyDetailsIndex = () => {
                     {selectedProperty?.location.city}
                   </p>
                   <div className="mt-1 flex gap-3">
-                    <span className="flex gap-1 text-sm text-secondaryColor-dark">
+                    <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                       <BedIcon extraStyle="text-gray-500 text-[10px]" />{" "}
                       <span className="font-extrabold">
                         {selectedProperty?.details.beds}
                       </span>
                       bd
                     </span>
-                    <span className="flex gap-1 text-sm text-secondaryColor-dark">
+                    <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                       <BathIcon extraStyle="text-gray-500 text-[10px]" />{" "}
                       <span className="font-extrabold">
                         {selectedProperty?.details.baths}
                       </span>
                       ba
                     </span>
-                    <span className="flex gap-1 text-sm text-secondaryColor-dark">
+                    <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                       <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
                       <span className="font-extrabold">
                         {selectedProperty?.details.sqft.toLocaleString()}
@@ -126,19 +126,16 @@ export const PropertyDetailsIndex = () => {
                 </div>
               </div>
               {/*  */}
-              <div className="tablet-below:w-full bg-white tablet-above:border rounded-md tablet-above:px-5 pt-3 flex flex-col">
-                <button className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 text-sm">
-                  Inspect The property
-                </button>
+              <div className="tablet-below:w-full bg-white tablet-above:border dark:border-gray-400/20 rounded-md tablet-above:px-5 pt-3 flex flex-col dark:bg-secondaryColor-dark/10">
                 <button
-                  className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 text-sm"
+                  className="transition-all capitalize bg-primaryColor-light hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 duration-300 text-white dark:text-gray-300 font-bold mt-2 rounded-md px-10 py-2 text-sm"
                   onClick={addPropertyToCart}
                 >
-                  Add to cart
+                  Add to property cart
                 </button>
                 <Link
                   to={"/checkout"}
-                  className="bg-primaryColor-light hover:bg-primaryColor-dark transition-all duration-300 text-white font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm text-center"
+                  className="capitalize bg-primaryColor-light hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 transition-all duration-300 text-white dark:text-gray-300 font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm text-center"
                   onClick={() => {
                     updateCheckoutIds(Number(propertyId));
                     setIsPropertyFromCart(false);

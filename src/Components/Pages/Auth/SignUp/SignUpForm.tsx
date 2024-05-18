@@ -24,11 +24,11 @@ export const SignUpForm = () => {
 
   return (
     <form
-      className="px-6 pt-5 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5"
+      className="px-6 pt-5 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5 dark:bg-secondaryColor-light/40"
       noValidate
       onSubmit={handleSubmit(handleCreateAccount)}
     >
-      <div className="text-center text-2xl font-semibold text-secondaryColor-dark capitalize">
+      <div className="text-center text-2xl font-semibold text-secondaryColor-dark capitalize dark:text-gray-400">
         <h1>Create account</h1>
       </div>
 
@@ -121,9 +121,9 @@ export const SignUpForm = () => {
       </div>
       {/*  */}
       <FormButton name="Sign up" />
-      <p className="text-center text-secondaryColor-light">
+      <p className="text-center text-secondaryColor-light dark:text-gray-400 text-sm">
         already have an account?{" "}
-        <Link to={"/auth/login"} className="text-blue-900">
+        <Link to={"/auth/login"} className="text-blue-600">
           Login
         </Link>
       </p>

@@ -13,7 +13,7 @@ export const CheckoutPropertyInfo = ({
   const estimatedTotal = subTotal + tax;
   return (
     <>
-      <div className="w-[550px] tablet-below:w-full bg-primaryColor-lightCream rounded-lg pb-5 px-3 py-3 shadow-xl big-screen-mobile-below:px-0 big-screen-mobile-below:bg-white big-screen-mobile-below:shadow-none h-fit">
+      <div className="w-[550px] tablet-below:w-full bg-primaryColor-lightCream dark:bg-secondaryColor-light/70 rounded-lg pb-5 px-3 py-3 shadow-xl big-screen-mobile-below:px-0 big-screen-mobile-below:bg-white big-screen-mobile-below:dark:bg-transparent big-screen-mobile-below:shadow-none h-fit">
         <h1 className="capitalize big-screen-mobile-below:text-[20px] between-mobile-and-tablet:text-[22px] tablet-above:text-[25px] font-extrabold text-center mb-4">
           checkout informations
         </h1>

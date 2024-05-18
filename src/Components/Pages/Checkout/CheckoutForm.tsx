@@ -35,7 +35,7 @@ export const CheckoutForm = ({ checkoutProperties,handleOpenPaymentSuccessModal 
       <h1 className="big-screen-mobile-below:text-[20px] between-mobile-and-tablet:text-[22px] tablet-above:text-[25px] font-extrabold text-center capitalize">
         payment information
       </h1>
-      <p className="border-2 border-primaryColor-light w-fit px-1 py-1 rounded-lg capitalize font-bold bg-slate-100 m-auto my-4 big-screen-mobile-below:text-[15px] between-mobile-and-tablet:text-[17px] tablet-above:text-[18px]">
+      <p className="border-2 border-primaryColor-light dark:border-primaryColorDarkMode dark:bg-gray-300 text-black w-fit px-1 py-1 rounded-lg capitalize font-bold bg-slate-100 m-auto my-4 big-screen-mobile-below:text-[15px] between-mobile-and-tablet:text-[17px] tablet-above:text-[18px]">
         credit/debit card
       </p>
       <form

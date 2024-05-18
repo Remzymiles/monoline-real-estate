@@ -40,7 +40,7 @@ export const Input = ({
     <>
       <div className="relative">
         <label
-          className="mb-1 capitalize text-secondaryColor-light font-bold big-screen-mobile-below:text-[17px] between-mobile-and-tablet:text-[19px] tablet-above:text-[17px]"
+          className="mb-1 capitalize text-secondaryColor-light font-bold dark:text-gray-400 big-screen-mobile-below:text-[17px] between-mobile-and-tablet:text-[19px] tablet-above:text-[17px]"
           htmlFor={htmlFor}
         >
           {nameOfInput}
@@ -49,7 +49,7 @@ export const Input = ({
           name={name}
           type={passwordVisibility ? "text" : inputType}
           placeholder={placeholder}
-          className={`px-4 py-3 my-1 bg-gray-100 w-full focus:border-b-2 focus:border-secondaryColor-dark focus:outline-none focus:bg-gray-200 ${extraStyle}`}
+          className={`px-4 py-3 my-1 bg-gray-100 dark:bg-secondaryColor-lighter/30 w-full focus:border-b-2 focus:border-secondaryColor-dark dark:focus:border-gray-400 focus:outline-none focus:bg-gray-200 dark:focus:bg-secondaryColor-lighter/40 ${extraStyle}`}
           id={id}
           {...register(name)}
           maxLength={maxLength}
@@ -60,7 +60,7 @@ export const Input = ({
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute right-4 top-9"
+            className="absolute right-4 top-10"
           >
             {passwordVisibility ? (
               <PasswordVisibilityIcon />

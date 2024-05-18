@@ -10,7 +10,7 @@ export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
   //
   return (
     <div
-      className={`border rounded-lg absolute z-50 right-0  top-[52px] w-[160px] bg-white flex flex-col ${extraStyle}`}
+      className={`border rounded-lg absolute z-50 right-0  top-[52px] w-[160px] bg-white flex flex-col ${extraStyle} mt-1`}
     >
       <Link
         to={"/auth/sign-up"}

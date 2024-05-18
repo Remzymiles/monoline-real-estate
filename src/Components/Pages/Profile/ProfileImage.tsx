@@ -1,11 +1,11 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { useProfilePhotoStore } from "../../../base/store/useProfilePhotoStore";
 import { CameraIcon } from "../../Icons/CameraIcon";
 import { UserProfileIcon } from "../../Icons/UserProfileIcon";
 
 export const ProfileImage = () => {
   //
-  const [selectedFile, setSelectedFile] = useState<string | File>("");
+  // const [selectedFile, setSelectedFile] = useState<string | File>("");
 
   const { updateProfilePhotoUrl, profilePhotoUrl } = useProfilePhotoStore(
     (state) => ({
@@ -17,7 +17,7 @@ export const ProfileImage = () => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
+      // setSelectedFile(file);
       updateProfilePhotoUrl(URL.createObjectURL(file));
     } else {
       console.log("No file selected");
@@ -46,7 +46,7 @@ export const ProfileImage = () => {
         </div>
         <label
           htmlFor="fileInput"
-          className="border shadow-lg transition-colors duration-300 hover:bg-slate-100 flex gap-x-2 justify-center absolute -bottom-10 px-3 py-0.5 rounded-lg"
+          className="border dark:border-gray-400 shadow-lg transition-colors duration-300 hover:bg-slate-100 dark:hover:bg-secondaryColor-dark/80 flex gap-x-2 justify-center absolute -bottom-10 px-3 py-0.5 rounded-lg"
         >
           <CameraIcon /> <span className="capitalize font-bold">edit</span>
         </label>

@@ -23,13 +23,13 @@ export const PropertyOrderHistory = () => {
       }`}
     >
       {orderHistoryProperties.length > 0 ? (
-        <div className="max-w-[1100px] m-auto w-full bg-primaryColor-lightCream px-4 py-2 pb-3">
+        <div className="max-w-[1100px] m-auto w-full bg-primaryColor-lightCream dark:bg-secondaryColor-light/70 shadow-xl rounded-md px-4 py-2 pb-3">
           <div
             className={`absolute bg-black/30 w-[100%] h-[1000vh] z-50 top-0 left-0 flex justify-center items-center ${
               isClearPropertyHistoryWarningVisible ? "block" : "hidden"
             }`}
           >
-            <div className="max-w-[600px] h-fit mobile:mx-5 bg-white px-4 py-3 rounded-lg fixed top-[35%]">
+            <div className="max-w-[600px] h-fit mobile:mx-5 bg-white dark:bg-secondaryColor-dark dark:border dark:border-gray-300 px-4 py-3 rounded-lg fixed top-[35%]">
               <p className="font-bold mb-2">
                 Are you sure you want to clear your order history? This action
                 will permanently remove all records of your previous purchases.
@@ -44,7 +44,7 @@ export const PropertyOrderHistory = () => {
                   clear history
                 </button>
                 <button
-                  className="capitalize py-1 px-2 text-sm w-[40%] bg-primaryColor-light transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
+                  className="capitalize py-1 px-2 text-sm w-[40%] bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
                   onClick={handleCloseClearPropertyHistoryWarning}
                 >
                   don't clear
@@ -80,7 +80,7 @@ export const PropertyOrderHistory = () => {
                     </p>
                     <Link
                       to={`/property-details/address=${orderHistoryProperty.location.address}&city=${orderHistoryProperty.location.city}&state=${orderHistoryProperty.location.state}&country=${orderHistoryProperty.location.country}&?id=${orderHistoryProperty.property_id}`}
-                      className="capitalize text-center py-1 px-1 sm:px-2 tablet-below:py-0.5 text-sm bg-primaryColor-light transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
+                      className="capitalize text-center py-1 px-1 sm:px-2 tablet-below:py-0.5 text-sm bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
                     >
                       view property
                     </Link>

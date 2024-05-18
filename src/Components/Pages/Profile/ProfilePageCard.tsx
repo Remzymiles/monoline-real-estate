@@ -12,7 +12,7 @@ export const ProfilePageCard = () => {
       <div className="flex gap-20 justify-evenly tablet-below:flex-col tablet-below:justify-center tablet-below:items-center">
         <ProfileImage />
         {/*  */}
-        <div className="border rounded-md w-[600px] mobile:w-full  px-3 py-1 ">
+        <div className="border dark:border-gray-400 rounded-md w-[600px] mobile:w-full  px-3 py-1 ">
           <EditEmailAndPassword />
           {/*  */}
           <form>

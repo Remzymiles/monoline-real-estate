@@ -34,8 +34,8 @@ export const ShowAllPicturesModal = ({
         }`}
       >
         <div className="fixed tablet-above:top-10 flex justify-center big-screen-mobile-below:bottom-0 between-mobile-and-tablet:top-[240px]">
-          <div className=" bg-white tablet-below:w-full big-screen-mobile-below:h-[87vh] between-mobile-and-tablet:h-[73vh] h-[90vh] tablet-above:w-[95%] overflow-auto">
-            <div className="flex justify-between mobile:items-center px-3 py-3 bg-white w-full tablet-below:fixed big-screen-mobile-below:top-11 between-mobile-and-tablet:top-[185px] tablet-below:rounded-t-xl">
+          <div className="tablet-below:w-full dark:bg-secondaryColor-light bg-white  big-screen-mobile-below:h-[87vh] between-mobile-and-tablet:h-[73vh] h-[90vh] tablet-above:w-[95%] overflow-auto">
+            <div className="flex justify-between mobile:items-center px-3 py-3 bg-white dark:bg-secondaryColor-light w-full tablet-below:fixed big-screen-mobile-below:top-11 between-mobile-and-tablet:top-[185px] tablet-below:rounded-t-xl">
               <div className="capitalize font-bold text-center hidden mobile:block text-sm">
                 photos ({selectedProperty?.photos.length})
               </div>
@@ -54,7 +54,7 @@ export const ShowAllPicturesModal = ({
                   <div
                     className={`capitalize border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-2 rounded-lg font-bold text-sm ${
                       wishlistPropertyIds.includes(propertyId)
-                        ? "bg-primaryColor-light text-white hover:bg-primaryColor-dark"
+                        ? "bg-primaryColor-light dark:bg-primaryColorDarkMode/90 text-white hover:bg-primaryColor-dark dark:hover:bg-primaryColorDarkMode"
                         : "bg-white text-primaryColor-dark hover:bg-gray-200"
                     }`}
                     onClick={() => handleAddToWishlist(propertyId)}
@@ -65,7 +65,7 @@ export const ShowAllPicturesModal = ({
                           Number(selectedProperty?.property_id)
                         )
                           ? "text-white"
-                          : "text-primaryColor-dark"
+                          : "text-primaryColor-dark dark:text-primaryColorDarkMode"
                       }`}
                     />
                     {wishlistPropertyIds.includes(
@@ -78,7 +78,7 @@ export const ShowAllPicturesModal = ({
                 <div>
                   <XIcon
                     clicked={handleCloseAllPicturesModal}
-                    extraStyle="text-xl"
+                    extraStyle="text-xl dark:text-gray-400"
                   />
                 </div>
               </div>

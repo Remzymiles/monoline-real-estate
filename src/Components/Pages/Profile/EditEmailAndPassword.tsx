@@ -34,7 +34,7 @@ export const EditEmailAndPassword = () => {
         </div>
       </div>
       <div
-        className={`border rounded-md px-3 py-2 bg-white transition-all duration-300 ${
+        className={`border dark:border-gray-400 rounded-md px-3 py-2 bg-white dark:bg-secondaryColor-dark/10 transition-all duration-300 ${
           isEditEmailVisible
             ? "h-[27vh] opacity-100 mb-5"
             : "invisible h-0 opacity-0"
@@ -81,7 +81,7 @@ export const EditEmailAndPassword = () => {
         </div>
       </div>
       <div
-        className={`border rounded-md px-3 py-2 transition-all duration-300 ${
+        className={`border dark:border-gray-400 rounded-md px-3 py-2 transition-all duration-300 ${
           isEditPasswordVisible
             ? "h-[38vh] opacity-100 mb-5"
             : "invisible h-0 opacity-0"

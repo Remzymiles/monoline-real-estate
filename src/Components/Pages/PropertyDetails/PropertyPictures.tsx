@@ -30,7 +30,7 @@ export const PropertyPictures = ({
     <>
       <div className="flex justify-center items-center gap-3 tablet-below:gap-0">
         <div className="w-[700px] h-[500px] big-screen-mobile-below:h-[300px] relative tablet-below:w-full">
-          <p className="uppercase bg-white px-[5px] absolute top-2 left-3 rounded-sm font-bold text-primaryColor-dark text-[10px]">
+          <p className="uppercase bg-white px-[5px] absolute top-2 left-3 rounded-sm font-bold text-primaryColor-dark dark:text-primaryColorDarkMode text-[10px]">
             for sale
           </p>
           <div
@@ -38,8 +38,8 @@ export const PropertyPictures = ({
               wishlistPropertyIds.includes(
                 Number(selectedProperty?.property_id)
               )
-                ? "bg-primaryColor-dark text-white"
-                : "bg-white text-primaryColor-dark"
+                ? "bg-primaryColor- dark:bg-primaryColorDarkMode text-white"
+                : "bg-white text-primaryColor-dark dark:text-primaryColorDarkMode"
             }`}
             onClick={() => handleAddToWishlist(propertyId)}
           >
@@ -49,7 +49,7 @@ export const PropertyPictures = ({
                   Number(selectedProperty?.property_id)
                 )
                   ? "text-white"
-                  : "text-primaryColor-dark"
+                  : "text-primaryColor-dark dark:text-primaryColorDarkMode"
               }`}
             />
             {wishlistPropertyIds.includes(Number(selectedProperty?.property_id))
@@ -57,12 +57,12 @@ export const PropertyPictures = ({
               : "save"}
           </div>
           <div
-            className="absolute bottom-2 right-2 bg-white/90 text-sm flex gap-2 p-2 capitalize rounded-sm hover:bg-white tablet-above:hidden mobile:text-xs"
+            className="absolute bottom-2 right-2 bg-white/90 text-black text-sm flex gap-2 p-2 capitalize rounded-sm hover:bg-white tablet-above:hidden mobile:text-xs"
             onClick={() => {
               handleOpenAllPicturesModal();
             }}
           >
-            <PhotoIcon extraStyle="text-primaryColor-dark" />
+            <PhotoIcon extraStyle="text-primaryColor-dark dark:text-primaryColorDarkMode" />
             show all photos
           </div>
           <img
@@ -71,7 +71,7 @@ export const PropertyPictures = ({
             className="w-[100%] h-[100%] rounded-l-lg tablet-below:rounded-md big-screen-mobile-below:object-cover"
           />
           {showMessage && (
-            <div className="absolute top-[50%] big-screen-mobile-below:left-[25%] left-[35%] bg-primaryColor-light/80 rounded-md capitalize text-lg text-white px-2 py-2">
+            <div className="absolute top-[50%] big-screen-mobile-below:left-[25%] left-[35%] bg-primaryColor-light/80 dark:bg-primaryColorDarkMode rounded-md capitalize text-lg text-white px-2 py-2">
               Property added to cart
             </div>
           )}
@@ -83,8 +83,8 @@ export const PropertyPictures = ({
                 wishlistPropertyIds.includes(
                   Number(selectedProperty?.property_id)
                 )
-                  ? "bg-primaryColor-dark text-white"
-                  : "bg-white text-primaryColor-dark"
+                  ? "bg-primaryColor-dark dark:bg-primaryColorDarkMode text-white"
+                  : "bg-white text-primaryColor-dark dark:text-primaryColorDarkMode"
               }`}
               onClick={() => handleAddToWishlist(propertyId)}
             >
@@ -94,7 +94,7 @@ export const PropertyPictures = ({
                     Number(selectedProperty?.property_id)
                   )
                     ? "text-white"
-                    : "text-primaryColor-dark"
+                    : "text-primaryColor-dark dark:text-primaryColorDarkMode"
                 }`}
               />
               {wishlistPropertyIds.includes(
@@ -111,12 +111,12 @@ export const PropertyPictures = ({
           </div>
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">
             <div
-              className="absolute bottom-2 right-2 bg-white/90 text-sm flex gap-2 p-2 capitalize rounded-sm hover:bg-white"
+              className="absolute bottom-2 right-2 bg-white/90 text-black text-sm flex gap-2 p-2 capitalize rounded-sm hover:bg-white"
               onClick={() => {
                 handleOpenAllPicturesModal();
               }}
             >
-              <PhotoIcon extraStyle="text-primaryColor-dark" />
+              <PhotoIcon extraStyle="text-primaryColor-dark dark:text-primaryColorDarkMode" />
               show all photos
             </div>
             <img

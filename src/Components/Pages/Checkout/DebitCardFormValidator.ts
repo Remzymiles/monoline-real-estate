@@ -14,6 +14,6 @@ export const DebitCardFormValidator = yup.object({
     .required("Please provide card expiry date"),
   cvv: yup
     .string()
-    .length(3, "must be exactly 3 digits")
+    .length(3, "3 digits only")
     .required("this field is required")
 });

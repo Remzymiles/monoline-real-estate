@@ -69,7 +69,7 @@ export const PropertyCard = () => {
     });
   };
   const filteredProperties = filterProperties();
-  // 
+  //
   useLayoutEffect(() => {
     window.scroll({
       top: 0,
@@ -161,7 +161,7 @@ export const PropertyCard = () => {
               <HeartIcon
                 color={`${
                   wishlistPropertyIds.includes(property.property_id)
-                    ? "text-primaryColor-light"
+                    ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                     : "text-white"
                 }`}
               />

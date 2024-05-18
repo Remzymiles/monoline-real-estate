@@ -13,7 +13,7 @@ export const HomepageHeader = () => {
     propertyIds: state.propertyIds,
   }));
 
-  const { theme, toggleTheme } = useDarkModeStore((state) => ({
+  const { theme } = useDarkModeStore((state) => ({
     theme: state.theme,
     toggleTheme: state.toggleTheme,
   }));
@@ -53,12 +53,12 @@ export const HomepageHeader = () => {
           >
             <CartIcon extraStyle="fill-black/80" />
             {propertyIds.length > 0 && (
-              <p className="absolute -top-3 -right-2 font-extrabold text-white bg-primaryColor-light rounded-full px-[8px] text-xs py-[2px]">
+              <p className="absolute -top-3 -right-2 font-extrabold text-white bg-primaryColor-light dark:bg-primaryColorDarkMode dark:text-gray-200 rounded-full px-[8px] text-xs py-[2px]">
                 {propertyIds.length}
               </p>
             )}
           </Link>
-          <UserProfileDropdown toggleTheme={toggleTheme}/>
+          <UserProfileDropdown />
           {/*  */}
         </div>
       </div>

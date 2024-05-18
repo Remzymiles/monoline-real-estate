@@ -75,26 +75,26 @@ export const SimilarProperties = ({
                       <h1 className="font-bold tracking-wider">
                         ${property.price.toLocaleString()}
                       </h1>
-                      <p className="text-[11px] bg-primaryColor-cream m-1 py-[2px] px-1 rounded-md uppercase">
+                      <p className="text-[11px] bg-primaryColor-cream m-1 py-[2px] px-1 rounded-md uppercase text-black">
                         for sale
                       </p>
                     </div>
                     <div className="mt-1 flex gap-[2px]">
-                      <span className="flex gap-1 text-sm text-secondaryColor-dark">
+                      <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                         <BedIcon extraStyle="text-gray-500 text-[15px]" />{" "}
                         <span className="font-extrabold">
                           {property.details.beds}
                         </span>
                         bd
                       </span>
-                      <span className="flex gap-1 text-sm text-secondaryColor-dark">
+                      <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                         <BathIcon extraStyle="text-gray-500 text-[15px]" />{" "}
                         <span className="font-extrabold">
                           {property.details.baths}
                         </span>
                         ba
                       </span>
-                      <span className="flex gap-1 text-sm text-secondaryColor-dark">
+                      <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                         <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
                         <span className="font-extrabold">
                           {property.details.sqft.toLocaleString()}
@@ -122,7 +122,7 @@ export const SimilarProperties = ({
                   <HeartIcon
                     color={`${
                       wishlistPropertyIds.includes(property.property_id)
-                        ? "text-primaryColor-light"
+                        ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                         : "text-white"
                     }`}
                   />

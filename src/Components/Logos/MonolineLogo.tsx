@@ -1,5 +1,5 @@
 import  Monoline_Logo from "/images/Monoline-Real-Estate-Logo-no-bg.png";
-import MonolineLogoDarkMode from "../../../public/images/Monoline-Real-Estate-Logo-no-bg-dark-mode.png"
+import MonolineLogoDarkMode from "/images/Monoline-Real-Estate-Logo-no-bg-dark-mode.png"
 
 export const MonolineLogo = () => {
   return (

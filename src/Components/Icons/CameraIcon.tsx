@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const CameraIcon = () => {
   return (
     <div>
-      <FontAwesomeIcon icon={faCameraRetro} />
+      <FontAwesomeIcon icon={faCameraRetro} className="dark:text-primaryColorDarkMode" />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsS
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { useWishListStore } from "../../../base/store/useWishListStore";
 import { TrashCanIcon } from "../../Icons/TrashCanIcon";
+import { CartSummary } from "./CartSummary";
 
 export const CartPropertyCard = () => {
   const { propertyIds, removePropertyId } = useCartPropertyIdsStore(
@@ -18,10 +19,6 @@ export const CartPropertyCard = () => {
     propertyIds.includes(property.property_id)
   );
 
-  const totalCartPrice = cartProperties.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.price,
-    0
-  );
   //
   const { updateCheckoutIds, setIsPropertyFromCart } = useCheckoutStore(
     (state) => ({
@@ -64,7 +61,7 @@ export const CartPropertyCard = () => {
       <div className="flex flex-col big-screen-laptop:flex-row gap-14">
         <div className="big-screen-laptop:w-[60%]">
           {cartProperties.length <= 0 && (
-            <p className="text-xl font-extrabold flex justify-center items-center">
+            <p className="text-xl font-extrabold flex justify-center translate-y-44 big-screen-laptop:translate-x-52">
               Your cart is empty.
             </p>
           )}
@@ -92,7 +89,7 @@ export const CartPropertyCard = () => {
                   </div>
                   <div className="flex flex-col justify-between items-end h-[200px] big-screen-mobile-below:w-full py-2 big-screen-mobile-below:h-auto">
                     <div
-                      className="w-fit big-screen-mobile-below:flex big-screen-mobile-below:w-full bg-primaryColor-light big-screen-mobile-below:py-2 big-screen-mobile-below:justify-center big-screen-mobile-below:gap-x-3 big-screen-mobile-below:items-center big-screen-mobile-below:rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold rounded-full px-[7px] hover:bg-primaryColor-dark transition-colors duration-300"
+                      className="w-fit big-screen-mobile-below:flex big-screen-mobile-below:w-full bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 big-screen-mobile-below:py-2 big-screen-mobile-below:justify-center big-screen-mobile-below:gap-x-3 big-screen-mobile-below:items-center big-screen-mobile-below:rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold rounded-full px-[7px] hover:bg-primaryColor-dark transition-colors duration-300"
                       onClick={() => {
                         removePropertyId(cartProperty.property_id);
                       }}
@@ -101,14 +98,14 @@ export const CartPropertyCard = () => {
                         clicked={() => {
                           removePropertyId(cartProperty.property_id);
                         }}
-                        extraStyle="text-white"
+                        extraStyle="text-white dark:text-gray-200"
                       />{" "}
                       <span className="hidden big-screen-mobile-below:block">
                         remove property
                       </span>
                     </div>
                     <button
-                      className="w-full bg-primaryColor-light big-screen-mobile-below:py-2 py-1 px-2 hover:bg-primaryColor-dark transition-colors duration-300 rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold"
+                      className="w-full bg-primaryColor-light big-screen-mobile-below:py-2 py-1 px-2 dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 dark:text-gray-200 hover:bg-primaryColor-dark transition-colors duration-300 rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold"
                       onClick={() => {
                         handleAddToWishlist(cartProperty.property_id);
                       }}
@@ -126,63 +123,13 @@ export const CartPropertyCard = () => {
             );
           })}
         </div>
-        <div className="bg-primaryColor-lightCream px-3 py-3 big-screen-laptop:w-[30%] h-fit shadow-xl border rounded-lg sticky top-0">
-          <h1 className="capitalize font-bold text-xl mb-2 text-center">
-            summary
-          </h1>
-          <hr />
-          <div>
-            {cartProperties.map((cartProperty) => {
-              return (
-                <div
-                  key={cartProperty.property_id}
-                  className="flex justify-between gap-x-4 my-4"
-                >
-                  <p className="truncate capitalize">
-                    {cartProperty.location.address}
-                  </p>
-                  :
-                  <p className="font-extrabold">
-                    ${cartProperty.price.toLocaleString()}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-          <hr />
-          <div>
-            <div className="flex justify-between gap-x-4 my-4">
-              <p className="capitalize font-bold">subTotal</p>:
-              <p className="font-extrabold break-all">
-                ${totalCartPrice.toLocaleString()}
-              </p>
-            </div>
-            {/*  */}
-            <div className="flex justify-between gap-x-4 my-4">
-              <p className="capitalize font-bold">tax</p>:
-              <p className="font-extrabold break-all">
-                ${(totalCartPrice / 50).toLocaleString()}
-              </p>
-            </div>
-            {/*  */}
-            <div className="flex justify-between gap-x-4 my-3">
-              <p className="capitalize font-bold">total price</p>:
-              <p className="font-extrabold break-all">
-                ${(totalCartPrice + totalCartPrice / 50).toLocaleString()}
-              </p>
-            </div>
-            <hr />
-            {/*  */}
-            <Link
-              to={`${cartProperties.length > 0 ? "/checkout" : "/cart-page"}`}
-              onClick={handleCheckoutPropertyIds}
-            >
-              <button className="mt-3 bg-primaryColor-light w-full py-2 rounded-md capitalize text-white text-lg font-extrabold hover:bg-primaryColor-dark transition-colors duration-300">
-                checkout
-              </button>
-            </Link>
-          </div>
-        </div>
+        {
+          cartProperties.length > 0 && <CartSummary
+          cartProperties={cartProperties}
+          handleCheckoutPropertyIds={handleCheckoutPropertyIds}
+        />
+        }
+        
       </div>
     </>
   );

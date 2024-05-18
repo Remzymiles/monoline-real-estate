@@ -59,7 +59,7 @@ export const NavigationTab = () => {
           />
           <p>Cart</p>
           {propertyIds.length > 0 && (
-            <p className="absolute -top-2 -right-2 font-extrabold bg-primaryColor-light rounded-full px-[5px] text-xs text-white">
+            <p className="absolute -top-2 -right-2 font-extrabold bg-primaryColor-light dark:bg-primaryColorDarkMode dark:text-gray-200 rounded-full px-[5px] text-xs text-white">
               {propertyIds.length}
             </p>
           )}

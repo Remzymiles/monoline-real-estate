@@ -26,11 +26,11 @@ export const LoginForm = () => {
 
   return (
     <form
-      className="px-6 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5"
+      className="px-6 pt-5 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5 dark:bg-secondaryColor-light/40"
       noValidate
       onSubmit={handleSubmit(handleLogin)}
     >
-      <div className="text-center text-2xl font-semibold text-secondaryColor-dark capitalize">
+      <div className="text-center text-2xl font-semibold text-secondaryColor-dark capitalize dark:text-gray-400">
         <h1>Login</h1>
       </div>
 
@@ -80,9 +80,9 @@ export const LoginForm = () => {
       {/*  */}
       <FormButton name="Login" />
       {/*  */}
-      <p className="text-center text-secondaryColor-light">
+      <p className="text-center text-secondaryColor-light text-sm dark:text-gray-400">
         don't have an account?{" "}
-        <Link to={"/auth/sign-up"} className="text-blue-900">
+        <Link to={"/auth/sign-up"} className="text-blue-600">
           Sign up
         </Link>
       </p>

@@ -7,11 +7,7 @@ import { ToggleDarkModeIcon } from "../../../../Icons/ToggleDarkModeIcon";
 import { UserProfileIcon } from "../../../../Icons/UserProfileIcon";
 import { DropdownContent } from "./DropdownContent";
 
-export const UserProfileDropdown = ({
-  toggleTheme,
-}: {
-  toggleTheme: () => void;
-}) => {
+export const UserProfileDropdown = () => {
   //
   const currentLocation = useLocation();
   const {
@@ -38,7 +34,7 @@ export const UserProfileDropdown = ({
       }}
       className="relative"
     >
-      <div className="flex gap-x-1 items-center bg-white px-3 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border">
+      <div className="flex gap-x-1 items-center bg-white px-3 py-1.5 big-screen-mobile-below:py-1 rounded-xl big-screen-mobile-below:rounded-full border">
         <button
           className="flex gap-x-2 items-center border-r-2 pr-[5px]"
           onClick={handleOpenUserProfileDropDown}
@@ -60,11 +56,7 @@ export const UserProfileDropdown = ({
             />
           )}
         </button>
-        <ToggleDarkModeIcon
-          clicked={() => {
-            toggleTheme();
-          }}
-        />
+        <ToggleDarkModeIcon />
       </div>
       <DropdownContent extraStyle={isUserProfileVisible ? "block" : "hidden"} />
       {WishlistPropertyIds.length > 0 && (
@@ -73,8 +65,8 @@ export const UserProfileDropdown = ({
             currentLocation.pathname === "/wishlist" ? "hidden" : "block"
           }`}
         >
-          <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primaryColor-light opacity-75 top-0 right-0 big-screen-mobile-below:right-[3px] big-screen-mobile-below:top-[2px]"></span>
-          <span className="h-2 w-2 bg-primaryColor-light rounded-full absolute top-0 right-0 big-screen-mobile-below:right-[3px] big-screen-mobile-below:top-[2px]"></span>
+          <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primaryColor-light dark:bg-primaryColorDarkMode opacity-75 top-0 right-0 big-screen-mobile-below:right-[3px] big-screen-mobile-below:top-[2px]"></span>
+          <span className="h-2 w-2 bg-primaryColor-light dark:bg-primaryColorDarkMode rounded-full absolute top-0 right-0 big-screen-mobile-below:right-[3px] big-screen-mobile-below:top-[2px]"></span>
         </div>
       )}
     </div>
