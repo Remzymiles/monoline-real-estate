@@ -7,7 +7,11 @@ import { FormButton } from "../../Global/FormComponents/Button";
 import { Input } from "../../Global/FormComponents/Input";
 import { DebitCardFormValidator } from "./DebitCardFormValidator";
 
-export const CheckoutForm = ({ checkoutProperties,handleOpenPaymentSuccessModal }: ICheckoutForm) => {
+export const CheckoutForm = ({
+  checkoutProperties,
+  handleOpenPaymentSuccessModal,
+  setIsPaymentButtonClicked
+}: ICheckoutForm) => {
   //
   const { handleOrderHistoryAndClearCartProperties } =
     useHandleOrderHistoryDateAndTime();
@@ -20,9 +24,14 @@ export const CheckoutForm = ({ checkoutProperties,handleOpenPaymentSuccessModal 
   } = useForm<IDebitCard>({ resolver: yupResolver(DebitCardFormValidator) });
   //
   const handleSubmitForm = () => {
-    handleOrderHistoryAndClearCartProperties();
-    handleOpenPaymentSuccessModal()
-    reset();
+    setIsPaymentButtonClicked(true);
+
+    setTimeout(() => {
+      handleOrderHistoryAndClearCartProperties();
+      handleOpenPaymentSuccessModal();
+      reset();
+      setIsPaymentButtonClicked(false);
+    }, 2000);
   };
   //
   const subTotal = checkoutProperties.reduce((acc, property) => {

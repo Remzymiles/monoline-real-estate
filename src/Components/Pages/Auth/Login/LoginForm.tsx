@@ -1,13 +1,19 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Input } from "../../../Global/FormComponents/Input";
+import { Link, useNavigate } from "react-router-dom";
 import { IUser } from "../../../../base/interface/IUser";
 import { FormButton } from "../../../Global/FormComponents/Button";
-import { Link } from "react-router-dom";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Input } from "../../../Global/FormComponents/Input";
+import { WaveFormLoader } from "../../../Global/Loaders/WaveFormLoader";
 import { LoginFormValidator } from "./loginFormValidator";
 
 export const LoginForm = () => {
   //
+  const [isLoginButtonClicked, setIsLoginButtonClicked] = useState(false);
+  //
+  const redirect = useNavigate()
+  // 
   const {
     register,
     formState: { errors },
@@ -20,16 +26,27 @@ export const LoginForm = () => {
   const handleLogin: SubmitHandler<
     Pick<IUser, "email_address" | "password">
   > = (userData) => {
-    reset();
-    console.log(userData);
+    setIsLoginButtonClicked(true);
+
+    setTimeout(() => {
+      reset();
+      console.log(userData);
+      setIsLoginButtonClicked(false);
+      redirect('/')
+    }, 2000);
   };
 
   return (
     <form
-      className="px-6 pt-5 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5 dark:bg-secondaryColor-light/40"
+      className="px-6 pt-5 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5 dark:bg-secondaryColor-light/40 relative"
       noValidate
       onSubmit={handleSubmit(handleLogin)}
     >
+      {isLoginButtonClicked && (
+        <div className="absolute top-0 left-0 bg-black/50 z-50 w-[100%] h-[100%] flex justify-center items-center rounded-lg">
+          <WaveFormLoader />
+        </div>
+      )}
       <div className="text-center text-2xl font-semibold text-secondaryColor-dark capitalize dark:text-gray-400">
         <h1>Login</h1>
       </div>

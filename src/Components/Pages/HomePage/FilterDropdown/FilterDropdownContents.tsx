@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 import { useFilterStore } from "../../../../base/store/useFilterStore";
-import { WaveFormLoader } from "../../../Global/Loaders/WaveFormLoader";
 import { closeFilterModalContext } from "./FilterButton";
 import { FilterByBedsAndBaths } from "./FilterByBedsAndBaths";
 import { FilterByLocation } from "./FilterByLocation";
@@ -22,7 +21,7 @@ export const FilterDropdownContents = () => {
     { min: number; max: number } | string
   >("");
   //
-  const [isFilterButtonClicked, setIsFilterButtonClicked] = useState(false);
+  // const [isFilterButtonClicked, setIsFilterButtonClicked] = useState(false);
   //
   const handleCitySelect = (city: string) => {
     setSelectedCity(city);
@@ -35,37 +34,32 @@ export const FilterDropdownContents = () => {
   };
 
   //
-  const { updateFilterOptions, clearFilterOptions } = useFilterStore(
-    (state) => ({
+  const { updateFilterOptions, clearFilterOptions, setIsFilterButtonClicked } =
+    useFilterStore((state) => ({
       updateFilterOptions: state.updateFilterOptions,
       clearFilterOptions: state.clearFilterOptions,
-    })
-  );
+      setIsFilterButtonClicked: state.setIsFilterButtonClicked,
+    }));
   //
   const closeFilterModal = useContext(closeFilterModalContext);
   //
   const handleFilterButton = () => {
-    setIsFilterButtonClicked(true);
+    closeFilterModal();
+    setIsFilterButtonClicked("true");
 
     setTimeout(() => {
-      closeFilterModal();
       updateFilterOptions(selectedCity, "city");
       updateFilterOptions(selectedState, "state");
       updateFilterOptions(selectedBeds, "bed");
       updateFilterOptions(selectedBaths, "baths");
       updateFilterOptions(selectedPrice, "price");
-      setIsFilterButtonClicked(false);
+      setIsFilterButtonClicked("false");
     }, 3000);
   };
 
   return (
     <>
       <div className="px-4 max-h-[87%] big-screen-mobile-below:max-h-[85%] overflow-y-scroll z-20 no-scrollbar">
-        {isFilterButtonClicked && (
-          <div className="absolute top-0 left-0 bg-black/50 z-50 w-[100%] h-[100%] flex justify-center items-center">
-            <WaveFormLoader />
-          </div>
-        )}
         {/*  */}
         <FilterByLocation
           handleCitySelect={handleCitySelect}

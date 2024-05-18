@@ -40,7 +40,7 @@ export const Input = ({
     <>
       <div className="relative">
         <label
-          className="mb-1 capitalize text-secondaryColor-light font-bold dark:text-gray-400 big-screen-mobile-below:text-[17px] between-mobile-and-tablet:text-[19px] tablet-above:text-[17px]"
+          className="capitalize text-secondaryColor-light font-bold dark:text-gray-400 big-screen-mobile-below:text-[17px] between-mobile-and-tablet:text-[19px] tablet-above:text-[17px]"
           htmlFor={htmlFor}
         >
           {nameOfInput}

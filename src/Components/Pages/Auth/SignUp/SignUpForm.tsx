@@ -1,12 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IUser } from "../../../../base/interface/IUser";
 import { FormButton } from "../../../Global/FormComponents/Button";
 import { Input } from "../../../Global/FormComponents/Input";
+import { WaveFormLoader } from "../../../Global/Loaders/WaveFormLoader";
 import { signUpFormValidator } from "./signUpFormValidator";
 
 export const SignUpForm = () => {
+  //
+  const [isSignUpButtonClicked, setIsSignUpButtonClicked] = useState(false);
+  // 
+  const redirect = useNavigate()
   //
   const {
     register,
@@ -18,16 +24,27 @@ export const SignUpForm = () => {
   });
   //
   const handleCreateAccount: SubmitHandler<IUser> = (userData) => {
-    reset();
-    console.log(userData);
+    setIsSignUpButtonClicked(true);
+
+    setTimeout(() => {
+      reset();
+      redirect('/auth/login')
+      console.log(userData);
+      setIsSignUpButtonClicked(false)
+    }, 2000);
   };
 
   return (
     <form
-      className="px-6 pt-5 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5 dark:bg-secondaryColor-light/40"
+      className="px-6 pt-2 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5 dark:bg-secondaryColor-light/40 relative"
       noValidate
       onSubmit={handleSubmit(handleCreateAccount)}
     >
+      {isSignUpButtonClicked && (
+        <div className="absolute top-0 left-0 bg-black/50 z-50 w-[100%] h-[100%] flex justify-center items-center rounded-lg">
+          <WaveFormLoader />
+        </div>
+      )}
       <div className="text-center text-2xl font-semibold text-secondaryColor-dark capitalize dark:text-gray-400">
         <h1>Create account</h1>
       </div>
@@ -48,7 +65,7 @@ export const SignUpForm = () => {
           }`}
         />
         {errors.fullname && (
-          <p className="text-right mt-1 text-sm text-red-500">
+          <p className="text-right text-sm text-red-500">
             {errors?.fullname.message}
           </p>
         )}
@@ -70,7 +87,7 @@ export const SignUpForm = () => {
           }`}
         />
         {errors.email_address && (
-          <p className="text-right mt-1 text-sm text-red-500">
+          <p className="text-right text-sm text-red-500">
             {errors?.email_address.message}
           </p>
         )}
@@ -92,7 +109,7 @@ export const SignUpForm = () => {
           }`}
         />
         {errors.password && (
-          <p className="text-right mt-1 text-sm text-red-500">
+          <p className="text-right text-sm text-red-500">
             {errors?.password.message}
           </p>
         )}
@@ -114,7 +131,7 @@ export const SignUpForm = () => {
           }`}
         />
         {errors.confirm_password && (
-          <p className="text-right mt-1 text-sm text-red-500">
+          <p className="text-right text-sm text-red-500">
             {errors?.confirm_password.message}
           </p>
         )}

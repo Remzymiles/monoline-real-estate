@@ -1,7 +1,12 @@
 export interface IFilterStore {
   filterOptions: Partial<IFilterOptions>;
-  updateFilterOptions: (value: string | number | { min: number; max: number }, type: IValueType) => void;
+  updateFilterOptions: (
+    value: string | number | { min: number; max: number },
+    type: IValueType
+  ) => void;
   clearFilterOptions: () => void;
+  isFilterButtonClicked: string;
+  setIsFilterButtonClicked: (value: string) => void;
 }
 
 export interface IFilterOptions {
@@ -9,7 +14,7 @@ export interface IFilterOptions {
   selectedBaths: number;
   selectedCity: string;
   selectedState: string;
-  selectedPrice: string | { min: number, max: number };
+  selectedPrice: string | { min: number; max: number };
 }
 
 type IValueType = "bed" | "baths" | "city" | "state" | "price";
