@@ -25,7 +25,7 @@ export const PropertyOrderHistory = () => {
       {orderHistoryProperties.length > 0 ? (
         <div className="max-w-[1100px] m-auto w-full bg-primaryColor-lightCream dark:bg-secondaryColor-light/70 shadow-xl rounded-md px-4 py-2 pb-3">
           <div
-            className={`absolute bg-black/30 w-[100%] h-[1000vh] z-50 top-0 left-0 flex justify-center items-center ${
+            className={`absolute bg-black/50 w-[100%] h-[1000vh] z-50 top-0 left-0 flex justify-center items-center ${
               isClearPropertyHistoryWarningVisible ? "block" : "hidden"
             }`}
           >

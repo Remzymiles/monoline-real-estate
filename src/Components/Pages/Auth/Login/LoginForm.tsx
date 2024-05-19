@@ -12,8 +12,8 @@ export const LoginForm = () => {
   //
   const [isLoginButtonClicked, setIsLoginButtonClicked] = useState(false);
   //
-  const redirect = useNavigate()
-  // 
+  const redirect = useNavigate();
+  //
   const {
     register,
     formState: { errors },
@@ -32,21 +32,16 @@ export const LoginForm = () => {
       reset();
       console.log(userData);
       setIsLoginButtonClicked(false);
-      redirect('/')
+      redirect("/");
     }, 2000);
   };
 
   return (
     <form
-      className="px-6 pt-5 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5 dark:bg-secondaryColor-light/40 relative"
+      className="px-6 pt-5 pb-2 mb-1 shadow-2xl mobile:shadow-none rounded-lg flex flex-col gap-5 dark:bg-secondaryColor-light/40 big-screen-mobile-below:dark:bg-secondaryColor-light/0"
       noValidate
       onSubmit={handleSubmit(handleLogin)}
     >
-      {isLoginButtonClicked && (
-        <div className="absolute top-0 left-0 bg-black/50 z-50 w-[100%] h-[100%] flex justify-center items-center rounded-lg">
-          <WaveFormLoader />
-        </div>
-      )}
       <div className="text-center text-2xl font-semibold text-secondaryColor-dark capitalize dark:text-gray-400">
         <h1>Login</h1>
       </div>
@@ -60,6 +55,7 @@ export const LoginForm = () => {
           placeholder="email address"
           inputType="text"
           register={register}
+          disabled={isLoginButtonClicked}
           extraStyle={`${
             errors.email_address
               ? "border-b-2 border-red-600 focus:border-red-600"
@@ -82,6 +78,7 @@ export const LoginForm = () => {
           placeholder="password"
           inputType="password"
           register={register}
+          disabled={isLoginButtonClicked}
           extraStyle={`${
             errors.password
               ? "border-b-2 border-red-600 focus:border-red-600"
@@ -95,7 +92,7 @@ export const LoginForm = () => {
         )}
       </div>
       {/*  */}
-      <FormButton name="Login" />
+      <FormButton name={isLoginButtonClicked ? <WaveFormLoader /> : "Login"} />
       {/*  */}
       <p className="text-center text-secondaryColor-light text-sm dark:text-gray-400">
         don't have an account?{" "}

@@ -12,4 +12,5 @@ export interface IInput {
   value?: string;
   onChange?: (e: string | ChangeEvent<HTMLInputElement>) => void;
   maxLength?: number;
+  disabled?: boolean
 }

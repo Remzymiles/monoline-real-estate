@@ -14,7 +14,8 @@ export const Input = ({
   register,
   extraStyle,
   maxLength,
-  onChange
+  onChange,
+  disabled
 }: IInput) => {
   //
   const { togglePasswordVisibility, passwordVisibility } = useTogglePassword();
@@ -55,6 +56,7 @@ export const Input = ({
           maxLength={maxLength}
           value={inputValue}
           onChange={(e) => handleChange(e)}
+          disabled={disabled}
         />
         {inputType === "password" ? (
           <button
