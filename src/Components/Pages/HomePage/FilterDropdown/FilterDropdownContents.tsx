@@ -21,8 +21,6 @@ export const FilterDropdownContents = () => {
     { min: number; max: number } | string
   >("");
   //
-  // const [isFilterButtonClicked, setIsFilterButtonClicked] = useState(false);
-  //
   const handleCitySelect = (city: string) => {
     setSelectedCity(city);
     setIsCitiesDropDownOpen(false);
