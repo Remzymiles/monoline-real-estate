@@ -4,6 +4,7 @@ import { ToggleDarkModeIcon } from "../Components/Icons/ToggleDarkModeIcon";
 import { AuthFooter } from "../Components/Pages/Auth/Footer";
 import { AuthHeader } from "../Components/Pages/Auth/Header";
 import { useDarkModeStore } from "../base/store/useDarkModeStore";
+import { Toaster, toast } from "sonner";
 
 export const AuthLayout = () => {
   //
@@ -27,15 +28,16 @@ export const AuthLayout = () => {
   }, [theme]);
   // 
   return (
-    <div className="flex flex-col h-[100vh] min-w-[320px] dark:bg-secondaryColor-dark/95">
+    <div className="flex flex-col min-h-[100vh] min-w-[320px] dark:bg-secondaryColor-dark/95">
       <AuthHeader />
       <div className="absolute right-2 top-2">
         <ToggleDarkModeIcon />
       </div>
-      <main className="flex-1 min-h-fit">
+      <main className="flex-1">
         <Outlet />
       </main>
       <AuthFooter />
+      <Toaster closeButton={true}  />
     </div>
   );
 };

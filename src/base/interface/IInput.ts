@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { UseFormReturn } from "react-hook-form";
 
 export interface IInput {
   inputType: string;
@@ -13,4 +14,6 @@ export interface IInput {
   onChange?: (e: string | ChangeEvent<HTMLInputElement>) => void;
   maxLength?: number;
   disabled?: boolean
+  methods?: UseFormReturn<any, any, undefined>
+
 }

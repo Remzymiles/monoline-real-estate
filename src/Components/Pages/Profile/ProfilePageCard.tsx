@@ -56,7 +56,7 @@ export const ProfilePageCard = () => {
             </div>
             {/*  */}
             <div className="mb-3">
-              <FormButton name="save profile" />
+              <FormButton children="save profile" />
             </div>
           </form>
         </div>

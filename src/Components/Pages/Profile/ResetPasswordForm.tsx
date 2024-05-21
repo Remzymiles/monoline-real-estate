@@ -123,7 +123,7 @@ export const ResetPasswordForm = ({
             </p>
           )}
         </div>
-        <FormButton name="reset password" />
+        <FormButton children="reset password" />
       </form>
     </>
   );

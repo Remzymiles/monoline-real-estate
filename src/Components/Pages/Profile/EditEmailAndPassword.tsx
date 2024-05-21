@@ -13,6 +13,8 @@ interface IEditEmailForm {
 
 export const EditEmailAndPassword = () => {
   //
+  
+
   const {
     handleEditEmail,
     isEditEmailVisible,
@@ -102,7 +104,7 @@ export const EditEmailAndPassword = () => {
             </p>
           )}
         </div>
-        <FormButton name="change email" />
+        <FormButton children="change email" />
       </form>
 
       {/*  */}

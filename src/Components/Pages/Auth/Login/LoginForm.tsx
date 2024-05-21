@@ -92,7 +92,9 @@ export const LoginForm = () => {
         )}
       </div>
       {/*  */}
-      <FormButton name={isLoginButtonClicked ? <WaveFormLoader /> : "Login"} />
+      <FormButton
+        children={isLoginButtonClicked ? <WaveFormLoader /> : "Login"}
+      />
       {/*  */}
       <p className="text-center text-secondaryColor-light text-sm dark:text-gray-400">
         don't have an account?{" "}

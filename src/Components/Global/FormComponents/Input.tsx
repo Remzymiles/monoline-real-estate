@@ -15,24 +15,29 @@ export const Input = ({
   extraStyle,
   maxLength,
   onChange,
-  disabled
+  disabled,
+  value,
 }: IInput) => {
   //
   const { togglePasswordVisibility, passwordVisibility } = useTogglePassword();
   //
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState(value);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     let updatedValue: string = e.target.value;
 
-    if (id === "card_number" && updatedValue.length > 4 && updatedValue.length !== 19 ) {
+    if (
+      id === "card_number" &&
+      updatedValue.length > 4 &&
+      updatedValue.length !== 19
+    ) {
       updatedValue = updatedValue.replace(/\D/g, "").replace(/(.{4})/g, "$1-");
     }
 
-    setInputValue(updatedValue); 
+    setInputValue(updatedValue);
 
     if (onChange) {
-      onChange(updatedValue); 
+      onChange(updatedValue);
     }
   };
 
@@ -52,11 +57,14 @@ export const Input = ({
           placeholder={placeholder}
           className={`px-4 py-3 my-1 bg-gray-100 dark:bg-secondaryColor-lighter/30 w-full focus:border-b-2 focus:border-secondaryColor-dark dark:focus:border-gray-400 focus:outline-none focus:bg-gray-200 dark:focus:bg-secondaryColor-lighter/40 ${extraStyle}`}
           id={id}
-          {...register(name)}
           maxLength={maxLength}
           value={inputValue}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => {
+            register(name).onChange(e);
+            handleChange(e);
+          }}
           disabled={disabled}
+          {...register(name)}
         />
         {inputType === "password" ? (
           <button

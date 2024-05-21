@@ -10,7 +10,7 @@ import { DebitCardFormValidator } from "./DebitCardFormValidator";
 export const CheckoutForm = ({
   checkoutProperties,
   handleOpenPaymentSuccessModal,
-  setIsPaymentButtonClicked
+  setIsPaymentButtonClicked,
 }: ICheckoutForm) => {
   //
   const { handleOrderHistoryAndClearCartProperties } =
@@ -145,7 +145,7 @@ export const CheckoutForm = ({
           </div>
           {/*  */}
         </div>
-        <FormButton name={`pay $${estimatedTotal.toLocaleString()}`} />
+        <FormButton children={`pay $${estimatedTotal.toLocaleString()}`} />
       </form>
     </div>
   );
