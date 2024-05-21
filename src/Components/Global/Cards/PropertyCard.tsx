@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useHandleFilterProperties } from "../../../base/hooks/useHandleFilterProperties";
@@ -15,6 +15,8 @@ export const PropertyCard = () => {
   const [isPropertiesLoaded, setIsPropertiesLoaded] = useState(false);
   const { filteredProperties, filterOptions } = useHandleFilterProperties();
   //
+  const {pathname} = useLocation()
+  // 
   const {
     wishlistPropertyIds,
     updateWishlistPropertyId,
@@ -36,7 +38,7 @@ export const PropertyCard = () => {
     setTimeout(() => {
       setIsPropertiesLoaded(true);
     }, 1000);
-  }, [filterOptions]);
+  }, [pathname]);
   //
   useLayoutEffect(() => {
     window.scroll({
