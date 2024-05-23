@@ -5,8 +5,6 @@ import { UserProfileIcon } from "../../Icons/UserProfileIcon";
 
 export const ProfileImage = () => {
   //
-  // const [selectedFile, setSelectedFile] = useState<string | File>("");
-
   const { updateProfilePhotoUrl, profilePhotoUrl } = useProfilePhotoStore(
     (state) => ({
       updateProfilePhotoUrl: state.updateProfilePhotoUrl,
@@ -17,7 +15,6 @@ export const ProfileImage = () => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      // setSelectedFile(file);
       updateProfilePhotoUrl(URL.createObjectURL(file));
     } else {
       console.log("No file selected");
