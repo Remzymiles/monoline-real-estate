@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { IShowCheckoutPropertyPicturesModal } from "../../../base/interface/IShowCheckoutPropertyPicturesModal";
 import { useWishListStore } from "../../../base/store/useWishListStore";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -21,9 +22,13 @@ export const ShowCheckoutPropertyPicturesModal = ({
   }));
 
   const handleAddToWishlist = (clickedCheckoutPropertyId: number) => {
-    !wishlistPropertyIds.includes(clickedCheckoutPropertyId)
-      ? updateWishlistPropertyId(clickedCheckoutPropertyId)
-      : removeWishlistPropertyId(clickedCheckoutPropertyId);
+    if (!wishlistPropertyIds.includes(clickedCheckoutPropertyId)) {
+      updateWishlistPropertyId(clickedCheckoutPropertyId);
+      toast.success("Property has been added to Wishlist");
+    } else {
+      removeWishlistPropertyId(clickedCheckoutPropertyId);
+      toast.error("Property has been removed from Wishlist");
+    }
   };
   //
   return (

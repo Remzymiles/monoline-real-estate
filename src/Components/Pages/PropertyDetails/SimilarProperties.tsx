@@ -8,6 +8,7 @@ import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
+import { toast } from "sonner";
 
 export const SimilarProperties = ({
   selectedProperty,
@@ -16,17 +17,21 @@ export const SimilarProperties = ({
   //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   //
-  const { wishlistPropertyIds, updateWishlistPropertyId, removeWishlistId } =
+  const { wishlistPropertyIds, updateWishlistPropertyId, removeWishlistPropertyId } =
     useWishListStore((state) => ({
       wishlistPropertyIds: state.wishlistPropertyIds,
       updateWishlistPropertyId: state.updateWishlistPropertyIds,
-      removeWishlistId: state.removeWishlistPropertyId,
+      removeWishlistPropertyId: state.removeWishlistPropertyId,
     }));
 
   const handleAddToWishlist = (propertyId: number) => {
-    !wishlistPropertyIds.includes(propertyId)
-      ? updateWishlistPropertyId(propertyId)
-      : removeWishlistId(propertyId);
+    if (!wishlistPropertyIds.includes(propertyId)) {
+      updateWishlistPropertyId(propertyId);
+      toast.success("Property has been added to Wishlist");
+    } else {
+      removeWishlistPropertyId(propertyId);
+      toast.error("Property has been removed from Wishlist");
+    }
   };
   //
 

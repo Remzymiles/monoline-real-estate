@@ -8,6 +8,7 @@ import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
+import { toast } from "sonner";
 
 export const SearchedPropertiesCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -26,9 +27,13 @@ export const SearchedPropertiesCard = () => {
   }));
   //
   const handleAddToWishlist = (propertyId: number) => {
-    !wishlistPropertyIds.includes(propertyId)
-      ? updateWishlistPropertyId(propertyId)
-      : removeWishlistPropertyId(propertyId);
+    if (!wishlistPropertyIds.includes(propertyId)) {
+      updateWishlistPropertyId(propertyId);
+      toast.success('Property has been added to Wishlist')
+    } else {
+      removeWishlistPropertyId(propertyId);
+      toast.error('Property has been removed from Wishlist')
+    }
   };
   //
   const filteredSearchedProperties = searchValue

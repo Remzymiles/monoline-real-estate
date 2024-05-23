@@ -6,6 +6,7 @@ export const getAuthData = async () => {
 
   if (response.error) {
     toast.error(response.error.message);
+    return null
   }
 
   return response.data.session;

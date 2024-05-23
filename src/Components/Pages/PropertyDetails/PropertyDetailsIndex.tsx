@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 import properties from "../../../base/dummyData/properties.json";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
@@ -13,7 +13,6 @@ import { ShowAllPicturesModal } from "./ShowAllPicturesModal";
 import { SimilarProperties } from "./SimilarProperties";
 
 export const PropertyDetailsIndex = () => {
-  const [showMessage, setShowMessage] = useState(false);
   const {
     isShowPicturesClicked,
     handleOpenAllPicturesModal,
@@ -45,10 +44,9 @@ export const PropertyDetailsIndex = () => {
   const addPropertyToCart = () => {
     if (!propertyIds.includes(Number(propertyId))) {
       updatePropertyId(Number(propertyId));
-      setShowMessage(true);
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 2000);
+      toast.success("Property Has Been Added To Cart");
+    } else {
+      toast("Property is Already In Cart");
     }
   };
   const { updateCheckoutIds, setIsPropertyFromCart } = useCheckoutStore(
@@ -72,7 +70,6 @@ export const PropertyDetailsIndex = () => {
         <div className="tablet-below:relative">
           <div className="mb-3">
             <PropertyPictures
-              showMessage={showMessage}
               handleOpenAllPicturesModal={handleOpenAllPicturesModal}
               selectedProperty={selectedProperty}
               propertyId={Number(propertyId)}

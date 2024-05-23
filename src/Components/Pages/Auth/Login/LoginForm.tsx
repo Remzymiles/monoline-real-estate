@@ -1,16 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { IUser } from "../../../../base/interface/IUser";
+import supabase from "../../../../config/supabaseClient";
 import { FormButton } from "../../../Global/FormComponents/Button";
 import { Input } from "../../../Global/FormComponents/Input";
 import { WaveFormLoader } from "../../../Global/Loaders/WaveFormLoader";
 import { LoginFormValidator } from "./loginFormValidator";
 
+type ILoginUser = Pick<IUser, "email_address" | "password">;
+
 export const LoginForm = () => {
-  //
-  const [isLoginButtonClicked, setIsLoginButtonClicked] = useState(false);
   //
   const redirect = useNavigate();
   //
@@ -19,21 +21,31 @@ export const LoginForm = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<Pick<IUser, "email_address" | "password">>({
+  } = useForm<ILoginUser>({
     resolver: yupResolver(LoginFormValidator),
   });
   //
-  const handleLogin: SubmitHandler<
-    Pick<IUser, "email_address" | "password">
-  > = (userData) => {
-    setIsLoginButtonClicked(true);
-
-    setTimeout(() => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (data: ILoginUser) => {
+      const response = await supabase.auth.signInWithPassword({
+        email: data.email_address,
+        password: data.password,
+      });
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+      return response;
+    },
+    onSuccess: () => {
       reset();
-      console.log(userData);
-      setIsLoginButtonClicked(false);
       redirect("/");
-    }, 2000);
+    },
+    onError: (error: any) => {
+      toast.error(error.message);
+    },
+  });
+  const handleLogin: SubmitHandler<ILoginUser> = (data) => {
+    mutate(data);
   };
 
   return (
@@ -55,7 +67,7 @@ export const LoginForm = () => {
           placeholder="email address"
           inputType="text"
           register={register}
-          disabled={isLoginButtonClicked}
+          disabled={isPending}
           extraStyle={`${
             errors.email_address
               ? "border-b-2 border-red-600 focus:border-red-600"
@@ -78,7 +90,7 @@ export const LoginForm = () => {
           placeholder="password"
           inputType="password"
           register={register}
-          disabled={isLoginButtonClicked}
+          disabled={isPending}
           extraStyle={`${
             errors.password
               ? "border-b-2 border-red-600 focus:border-red-600"
@@ -92,9 +104,7 @@ export const LoginForm = () => {
         )}
       </div>
       {/*  */}
-      <FormButton
-        children={isLoginButtonClicked ? <WaveFormLoader /> : "Login"}
-      />
+      <FormButton children={isPending ? <WaveFormLoader /> : "Login"} />
       {/*  */}
       <p className="text-center text-secondaryColor-light text-sm dark:text-gray-400">
         don't have an account?{" "}

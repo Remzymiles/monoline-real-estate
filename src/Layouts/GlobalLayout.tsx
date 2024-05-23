@@ -2,6 +2,7 @@ import { useLayoutEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { HomepageFooter } from "../Components/Pages/HomePage/Footer/HomepageFooter";
 import { HomepageHeader } from "../Components/Pages/HomePage/Header/HomepageHeader";
+import { Toaster } from "sonner";
 
 export const GlobalLayout = () => {
   //
@@ -22,6 +23,7 @@ export const GlobalLayout = () => {
         <Outlet />
       </main>
       <HomepageFooter />
+      <Toaster closeButton={true} position="top-center" richColors />
     </div>
   );
 };

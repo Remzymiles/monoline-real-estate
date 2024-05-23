@@ -9,6 +9,7 @@ import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 import { PropertyCardLoadingSkeleton } from "../Loaders/PropertyCardLoadingSkeleton";
+import { toast } from "sonner";
 
 export const PropertyCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
@@ -28,9 +29,13 @@ export const PropertyCard = () => {
   }));
   //
   const handleAddToWishlist = (propertyId: number) => {
-    !wishlistPropertyIds.includes(propertyId)
-      ? updateWishlistPropertyId(propertyId)
-      : removeWishlistPropertyId(propertyId);
+    if (!wishlistPropertyIds.includes(propertyId)) {
+      updateWishlistPropertyId(propertyId);
+      toast.success('Property has been added to Wishlist')
+    } else {
+      removeWishlistPropertyId(propertyId);
+      toast.error('Property has been removed from Wishlist')
+    }
   };
   //
   useEffect(() => {

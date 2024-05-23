@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
 import { ToggleDarkModeIcon } from "../Components/Icons/ToggleDarkModeIcon";
 import { AuthFooter } from "../Components/Pages/Auth/Footer";
 import { AuthHeader } from "../Components/Pages/Auth/Header";
 import { useDarkModeStore } from "../base/store/useDarkModeStore";
-import { Toaster, toast } from "sonner";
 
 export const AuthLayout = () => {
   //
   const { theme } = useDarkModeStore((state) => ({
     theme: state.theme,
   }));
-// 
+  //
   useEffect(() => {
     if (theme === "light") {
       document.documentElement.classList.remove("dark");
@@ -26,7 +26,7 @@ export const AuthLayout = () => {
       document.documentElement.classList.add("dark");
     }
   }, [theme]);
-  // 
+  //
   return (
     <div className="flex flex-col min-h-[100vh] min-w-[320px] dark:bg-secondaryColor-dark/95">
       <AuthHeader />
@@ -37,7 +37,7 @@ export const AuthLayout = () => {
         <Outlet />
       </main>
       <AuthFooter />
-      <Toaster closeButton={true}  />
+      <Toaster closeButton={true} position="top-center" richColors />
     </div>
   );
 };

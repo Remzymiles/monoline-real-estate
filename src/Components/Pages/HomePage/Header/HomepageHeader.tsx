@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import { useCartPropertyIdsStore } from "../../../../base/store/useCartPropertyIdsStore";
 import { useDarkModeStore } from "../../../../base/store/useDarkModeStore";
+import { useIsUserLoggedIn } from "../../../../base/store/useIsUserLoggedIn";
 import { CartIcon } from "../../../Icons/CartIcon";
 import { MonolineLogo } from "../../../Logos/MonolineLogo";
 import { SearchBar } from "./SearchBar";
@@ -12,7 +14,11 @@ export const HomepageHeader = () => {
   const { propertyIds } = useCartPropertyIdsStore((state) => ({
     propertyIds: state.propertyIds,
   }));
-
+  //
+  const { isUserLoggedIn } = useIsUserLoggedIn((state) => ({
+    isUserLoggedIn: state.isUserLoggedIn,
+  }));
+  //
   const { theme } = useDarkModeStore((state) => ({
     theme: state.theme,
     toggleTheme: state.toggleTheme,
@@ -32,7 +38,10 @@ export const HomepageHeader = () => {
       document.documentElement.classList.add("dark");
     }
   }, [theme]);
-
+  //
+  const handleCartIconClick = () => {
+    !isUserLoggedIn && toast.error("Log in or Sign up to view cart");
+  };
   //
   return (
     <header className="border-b-4 dark:border-secondaryColor-light/20 border-slate-200 bg-primaryColor-lightCream dark:bg-secondaryColor-dark pb-3 fixed w-full z-30 top-0">
@@ -48,8 +57,9 @@ export const HomepageHeader = () => {
         <div className="flex items-center justify-end gap-2">
           {/*  */}
           <Link
-            to={"/cart-page"}
+            to={`${isUserLoggedIn ? "/cart-page" : "/"}`}
             className="hidden relative tablet-above:block bg-white px-2 py-1.5 rounded-xl big-screen-mobile-below:rounded-full border hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black"
+            onClick={handleCartIconClick}
           >
             <CartIcon extraStyle="fill-black/80" />
             {propertyIds.length > 0 && (

@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { IPropertyPictures } from "../../../base/interface/IPropertyPictures";
 import { useWishListStore } from "../../../base/store/useWishListStore";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -7,7 +8,6 @@ export const PropertyPictures = ({
   handleOpenAllPicturesModal,
   selectedProperty,
   propertyId,
-  showMessage,
 }: IPropertyPictures) => {
   //
   const {
@@ -21,9 +21,13 @@ export const PropertyPictures = ({
   }));
 
   const handleAddToWishlist = (propertyId: number) => {
-    !wishlistPropertyIds.includes(propertyId)
-      ? updateWishlistPropertyIds(propertyId)
-      : removeWishlistPropertyId(propertyId);
+    if (!wishlistPropertyIds.includes(propertyId)) {
+      updateWishlistPropertyIds(propertyId);
+      toast.success("Property has been added to Wishlist");
+    } else {
+      removeWishlistPropertyId(propertyId);
+      toast.error("Property has been removed from Wishlist");
+    }
   };
   //
   return (
@@ -70,11 +74,6 @@ export const PropertyPictures = ({
             alt="img"
             className="w-[100%] h-[100%] rounded-l-lg tablet-below:rounded-md big-screen-mobile-below:object-cover"
           />
-          {showMessage && (
-            <div className="absolute top-[50%] big-screen-mobile-below:left-[25%] left-[35%] bg-primaryColor-light/80 dark:bg-primaryColorDarkMode rounded-md capitalize text-lg text-white px-2 py-2">
-              Property added to cart
-            </div>
-          )}
         </div>
         <div className="flex flex-col items-center gap-3">
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">

@@ -1,12 +1,39 @@
-import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useIsUserLoggedIn } from "../../../../../base/store/useIsUserLoggedIn";
 import { useWishListStore } from "../../../../../base/store/useWishListStore";
+import { getAuthData } from "../../../../../base/utlils/getAuthData";
+import supabase from "../../../../../config/supabaseClient";
 
 export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
+  //
+  const redirect = useNavigate();
+  const { isUserLoggedIn, setIsUserLoggedIn } = useIsUserLoggedIn((state) => ({
+    isUserLoggedIn: state.isUserLoggedIn,
+    setIsUserLoggedIn: state.setIsUserLoggedIn,
+  }));
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setIsUserLoggedIn(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+  //
   const { WishlistPropertyIds } = useWishListStore((state) => ({
     WishlistPropertyIds: state.wishlistPropertyIds,
   }));
   //
   const currentLocation = useLocation();
+  //
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    redirect("/auth/login");
+  };
   //
   return (
     <div
@@ -14,48 +41,77 @@ export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
     >
       <Link
         to={"/auth/sign-up"}
-        className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className={`${isUserLoggedIn ? "hidden" : "block"}`}
       >
-        sign up
+        <div className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2 hover:rounded-t-lg">
+          sign up
+        </div>
+        <hr />
       </Link>
-      <hr />
+      {/*  */}
       <Link
         to={"/auth/login"}
-        className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className={`${isUserLoggedIn ? "hidden" : "block"}`}
       >
-        login
+        <div className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2">
+          login
+        </div>
+        <hr className={`${!isUserLoggedIn && "hidden"}`} />
       </Link>
-      <hr />
+      {/*  */}
       <Link
         to={"/wishlist"}
-        className="relative capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className={`${isUserLoggedIn ? "block" : "hidden"}`}
       >
-        wishlist
-        {WishlistPropertyIds.length > 0 && (
-          <div
-            className={`${
-              currentLocation.pathname === "/wishlist" ? "hidden" : "block"
-            }`}
-          >
-            <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primaryColor-light opacity-75 top-3 right-3"></span>
-            <span className="h-2 w-2 bg-primaryColor-light rounded-full absolute top-3 right-3"></span>
-          </div>
-        )}
+        <div
+          className={`capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2 ${
+            isUserLoggedIn && "hover:rounded-t-xl"
+          }`}
+        >
+          wishlist
+          {WishlistPropertyIds.length > 0 && (
+            <div
+              className={`${
+                currentLocation.pathname === "/wishlist" ? "hidden" : "block"
+              }`}
+            >
+              <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primaryColor-light opacity-75 top-3 right-3"></span>
+              <span className="h-2 w-2 bg-primaryColor-light rounded-full absolute top-3 right-3"></span>
+            </div>
+          )}
+        </div>
+        <hr />
       </Link>
-      <hr />
+      {/*  */}
       <Link
         to={"/profile"}
-        className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className={`${isUserLoggedIn ? "block" : "hidden"}`}
       >
-        profile
-      </Link>{" "}
-      <hr />
+        <div className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2">
+          profile
+        </div>
+        <hr />
+      </Link>
+      {/*  */}
       <Link
         to={"/order-history"}
-        className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2"
+        className={`${isUserLoggedIn ? "block" : "hidden"}`}
       >
-        order history
+        <div className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 transition-colors duration-300 px-2">
+          order history
+        </div>
+        <hr />
       </Link>
+      {/*  */}
+      <div
+        className={`${isUserLoggedIn ? "block" : "hidden"}`}
+        onClick={handleLogout}
+      >
+        <div className="capitalize font-semibold pl-4 text-md text-secondaryColor-dark py-1.5 hover:bg-slate-100 hover:rounded-b-xl transition-colors duration-300 px-2">
+          logout
+        </div>
+      </div>
+      {/*  */}
     </div>
   );
 };

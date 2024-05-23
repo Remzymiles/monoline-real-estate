@@ -1,16 +1,16 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { IEditPassword } from "../../../base/interface/IEditPassword";
+import { IUser } from "../../../base/interface/IUser";
+import supabase from "../../../config/supabaseClient";
 import { FormButton } from "../../Global/FormComponents/Button";
 import { Input } from "../../Global/FormComponents/Input";
 import { EditPasswordValidator } from "./EditPasswordValidator";
+import { toast } from "sonner";
 
-interface IEditPassword {
-  current_password: string;
-  new_password: string;
-  confirm_password: string;
-}
 
-export const ResetPasswordForm = ({
+export const EditPasswordForm = ({
   handleEditPassword,
   isEditPasswordVisible,
 }: {
@@ -24,8 +24,27 @@ export const ResetPasswordForm = ({
     reset,
     handleSubmit,
   } = useForm<IEditPassword>({ resolver: yupResolver(EditPasswordValidator) });
-  const handleSubmitForm = () => {
-    reset();
+  // 
+  const {mutate} = useMutation({
+    mutationFn: async (data:IEditPassword)=>{
+      const response = await supabase.auth.updateUser({
+        password: data.new_password
+      })
+      if(response.error){
+        throw new Error(response.error.message)
+      }
+      return response
+    },
+    onSuccess:()=>{
+      reset()
+      toast.success('New Password Has Been Updated')
+    },
+    onError:(error:any)=>{
+      toast.error(error.message)
+    }
+  })
+  const handleSubmitForm = (data:IEditPassword) => {
+    mutate(data)
   };
   //
   return (

@@ -1,10 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHandleEditEmailAndPassword } from "../../../base/hooks/useHandleEditEmailAndPassword";
+import { getAuthData } from "../../../base/utlils/getAuthData";
 import { FormButton } from "../../Global/FormComponents/Button";
 import { Input } from "../../Global/FormComponents/Input";
 import { EditEmailFormValidator } from "./EditEmailFormValidator";
-import { ResetPasswordForm } from "./ResetPasswordForm";
+import { EditPasswordForm } from "./EditPasswordForm";
 
 interface IEditEmailForm {
   email_address: string;
@@ -13,7 +15,19 @@ interface IEditEmailForm {
 
 export const EditEmailAndPassword = () => {
   //
-  
+
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data?.user?.email) {
+        setUserEmail(data.user.email);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const {
     handleEditEmail,
@@ -40,7 +54,7 @@ export const EditEmailAndPassword = () => {
       <div className="mb-3">
         <h1 className="capitalize font-bold text-lg">email</h1>
         <div className="flex gap-x-5 items-end">
-          <p className="text-sm tracking-wide">remzymiles@gmail.com</p>
+          <p className="text-sm tracking-wide">{userEmail}</p>
           <button
             className="text-xs text-primaryColor-light"
             onClick={handleEditEmail}
@@ -109,7 +123,7 @@ export const EditEmailAndPassword = () => {
 
       {/*  */}
 
-      <ResetPasswordForm
+      <EditPasswordForm
         handleEditPassword={handleEditPassword}
         isEditPasswordVisible={isEditPasswordVisible}
       />
