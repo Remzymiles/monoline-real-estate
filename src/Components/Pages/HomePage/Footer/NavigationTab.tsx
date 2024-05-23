@@ -1,5 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
+import { toast } from "sonner";
 import { useCartPropertyIdsStore } from "../../../../base/store/useCartPropertyIdsStore";
+import { useIsUserLoggedIn } from "../../../../base/store/useIsUserLoggedIn";
 import { useWishListStore } from "../../../../base/store/useWishListStore";
 import { CartIcon } from "../../../Icons/CartIcon";
 import { HeartIcon } from "../../../Icons/HeartIcon";
@@ -17,6 +19,16 @@ export const NavigationTab = () => {
   const { WishlistPropertyIds } = useWishListStore((state) => ({
     WishlistPropertyIds: state.wishlistPropertyIds,
   }));
+  //
+  const { isUserLoggedIn } = useIsUserLoggedIn((state) => ({
+    isUserLoggedIn: state.isUserLoggedIn,
+  }));
+  const handleCartIconClick = () => {
+    !isUserLoggedIn && toast.error("Log in or Sign up to view Cart");
+  };
+  const handleWishlistIconClick = () => {
+    !isUserLoggedIn && toast.error("Log in or Sign up to view Wishlist");
+  };
 
   //
   return (
@@ -43,12 +55,13 @@ export const NavigationTab = () => {
       {/*  */}
       <div className="">
         <NavLink
-          to={"/cart-page"}
+          to={`${isUserLoggedIn ? "/cart-page" : `${location.search}`}`}
           className={`relative font-semibold text-sm ${
             location.pathname === "/cart-page"
               ? "text-primaryColor-light dark:text-primaryColorDarkMode"
               : "text-black dark:text-gray-400"
           }`}
+          onClick={handleCartIconClick}
         >
           <CartIcon
             extraStyle={` text-center ${
@@ -68,12 +81,13 @@ export const NavigationTab = () => {
       {/*  */}
       <div className="relative">
         <NavLink
-          to={"/wishlist"}
+          to={`${isUserLoggedIn ? "/wishlist" : `${location.search}`}`}
           className={`text-center font-semibold text-sm ${
             location.pathname === "/wishlist"
               ? "text-primaryColor-light dark:text-primaryColorDarkMode"
               : "text-black dark:text-gray-400"
           }`}
+          onClick={handleWishlistIconClick}
         >
           <HeartIcon
             color={`${
@@ -98,7 +112,7 @@ export const NavigationTab = () => {
       {/*  */}
       <div className="-translate-y-[2px]">
         <NavLink
-          to={"/profile"}
+          to={`${isUserLoggedIn ? "/profile" : "/auth/login"}`}
           className={`flex flex-col items-center gap-0 ${
             location.pathname === "/profile"
               ? "text-primaryColor-light dark:text-primaryColorDarkMode"

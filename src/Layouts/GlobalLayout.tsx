@@ -23,7 +23,7 @@ export const GlobalLayout = () => {
         <Outlet />
       </main>
       <HomepageFooter />
-      <Toaster closeButton={true} position="top-center" richColors />
+      <Toaster closeButton={true} position="top-center" richColors duration={2000} />
     </div>
   );
 };
