@@ -42,7 +42,7 @@ export const PropertyCard = () => {
     setIsPropertiesLoaded(false);
     setTimeout(() => {
       setIsPropertiesLoaded(true);
-    }, 1000);
+    }, 500);
   }, [pathname]);
   //
   useLayoutEffect(() => {

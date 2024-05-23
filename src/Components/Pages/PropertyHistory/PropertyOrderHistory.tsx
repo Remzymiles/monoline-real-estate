@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import { useHandleClearPropertyHistoryWarningModal } from "../../../base/hooks/useHandleClearPropertyHistoryWarningModal";
 import { useOrderHistoryStore } from "../../../base/store/useOrderHistoryStore";
 
@@ -39,7 +40,10 @@ export const PropertyOrderHistory = () => {
               <div className="flex justify-between">
                 <button
                   className="capitalize py-1 px-2 text-sm w-[40%] bg-red-500 transition-colors duration-300 hover:bg-red-700 text-white rounded font-bold"
-                  onClick={clearOrderHistoryProperties}
+                  onClick={() => {
+                    clearOrderHistoryProperties();
+                    toast.success("Order History Has Been Cleared");
+                  }}
                 >
                   clear history
                 </button>

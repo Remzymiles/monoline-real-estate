@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import Properties from "../../../base/dummyData/properties.json";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
@@ -44,9 +45,13 @@ export const CartPropertyCard = () => {
   }));
 
   const handleAddToWishlist = (propertyId: number) => {
-    !wishlistPropertyIds.includes(propertyId)
-      ? updateWishlistPropertyId(propertyId)
-      : removeWishlistPropertyId(propertyId);
+    if (!wishlistPropertyIds.includes(propertyId)) {
+      updateWishlistPropertyId(propertyId);
+      toast.success("Property has been added to Wishlist");
+    } else {
+      removeWishlistPropertyId(propertyId);
+      toast.error("Property has been removed from Wishlist");
+    }
   };
   useEffect(() => {
     window.scroll({
@@ -92,11 +97,13 @@ export const CartPropertyCard = () => {
                       className="w-fit big-screen-mobile-below:flex big-screen-mobile-below:w-full bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 big-screen-mobile-below:py-2 big-screen-mobile-below:justify-center big-screen-mobile-below:gap-x-3 big-screen-mobile-below:items-center big-screen-mobile-below:rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold rounded-full px-[7px] hover:bg-primaryColor-dark transition-colors duration-300"
                       onClick={() => {
                         removePropertyId(cartProperty.property_id);
+                        toast.success('Property Has Been Removed From Cart')
                       }}
                     >
                       <TrashCanIcon
                         clicked={() => {
                           removePropertyId(cartProperty.property_id);
+                          toast.success('Property Has Been Removed From Cart')
                         }}
                         extraStyle="text-white dark:text-gray-200"
                       />{" "}
@@ -123,13 +130,12 @@ export const CartPropertyCard = () => {
             );
           })}
         </div>
-        {
-          cartProperties.length > 0 && <CartSummary
-          cartProperties={cartProperties}
-          handleCheckoutPropertyIds={handleCheckoutPropertyIds}
-        />
-        }
-        
+        {cartProperties.length > 0 && (
+          <CartSummary
+            cartProperties={cartProperties}
+            handleCheckoutPropertyIds={handleCheckoutPropertyIds}
+          />
+        )}
       </div>
     </>
   );
