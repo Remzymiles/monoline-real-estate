@@ -1,6 +1,6 @@
 import { FormButton } from "../../Global/FormComponents/Button";
 import { Input } from "../../Global/FormComponents/Input";
-import { EditEmailAndPassword } from "./EditEmailAndPassword";
+import { EmailAndEditPassword } from "./EditEmailAndPassword";
 import { ProfileImage } from "./ProfileImage";
 
 export const ProfilePageCard = () => {
@@ -14,7 +14,7 @@ export const ProfilePageCard = () => {
         {/*  */}
         <div className="border dark:border-gray-400 rounded-md w-[600px] mobile:w-full  px-3 py-1">
           {/*  */}
-          <EditEmailAndPassword />
+          <EmailAndEditPassword />
           <form>
             <div className="mb-4">
               <Input
