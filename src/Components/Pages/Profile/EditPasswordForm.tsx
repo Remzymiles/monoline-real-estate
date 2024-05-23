@@ -62,40 +62,18 @@ export const EditPasswordForm = ({
       <form
         className={`border dark:border-gray-400 rounded-md px-3 pt-2 transition-all duration-300 ${
           isEditPasswordVisible
-            ? "h-[49vh] opacity-100 mb-5"
+            ? "h-[35vh] opacity-100 mb-5"
             : "invisible h-0 opacity-0"
         }
         ${
-          errors.confirm_password &&
-          errors.current_password &&
           errors.new_password &&
+          errors.confirm_password &&
           isEditPasswordVisible
-            ? "h-[53vh]"
+            ? "h-[40vh]"
             : null
         }`}
         onSubmit={handleSubmit(handleSubmitForm)}
       >
-        <div className="mb-4">
-          <Input
-            htmlFor="current_password"
-            id="current_password"
-            name="current_password"
-            nameOfInput="current password"
-            placeholder="current password"
-            inputType="password"
-            register={register}
-            extraStyle={`${
-              errors.current_password
-                ? "border-b-2 border-red-600 focus:border-red-600"
-                : "border-black"
-            }`}
-          />
-          {errors.current_password && (
-            <p className="text-right text-xs text-red-500">
-              {errors?.current_password.message}
-            </p>
-          )}
-        </div>
         {/*  */}
         <div className="mb-4">
           <Input
