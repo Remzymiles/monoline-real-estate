@@ -1,8 +1,8 @@
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ITrashCan } from "../../base/interface/ITrashCan";
+import { ITrashCanIcon } from "../../base/interface/ITrashCanIcon";
 
-export const TrashCanIcon = ({ clicked, extraStyle }: ITrashCan) => {
+export const TrashCanIcon = ({ clicked, extraStyle }: ITrashCanIcon) => {
   return (
     <button onClick={clicked}>
       <FontAwesomeIcon icon={faTrashCan} className={`text-sm ${extraStyle}`} />
