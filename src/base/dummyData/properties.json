@@ -101,7 +101,7 @@
     "price": 609999,
     "mortgage": 3425,
     "location": {
-      "address": "7531 E Polk St",
+      "address": "9821 Milton Albert Way",
       "city": "Scottsdale, AZ",
       "state": "Arizona",
       "country": "United States"
@@ -125,7 +125,7 @@
     "price": 519000,
     "mortgage": 3710,
     "location": {
-      "address": "4704 Sunset",
+      "address": "7608 Journeyville Dr",
       "city": "Austin, TX",
       "state": "Texas",
       "country": "United States"
@@ -149,7 +149,7 @@
     "price": 454999,
     "mortgage": 3039,
     "location": {
-      "address": "9821 Milton Albert Way",
+      "address": "510 Sunny Ln A",
       "city": "Austin, TX",
       "state": "Texas",
       "country": "United States"
@@ -173,7 +173,7 @@
     "price": 1399999,
     "mortgage": 8757,
     "location": {
-      "address": "7608 Journeyville Dr",
+      "address": "1491 Arden Ave",
       "city": "Austin, TX",
       "state": "Texas",
       "country": "United States"
@@ -197,7 +197,7 @@
     "price": 809999,
     "mortgage": 4725,
     "location": {
-      "address": "1491 Arden Ave",
+      "address": "12 Nehring Ave 1.webp",
       "city": "Staten Island, NY",
       "state": "New York",
       "country": "United States"
@@ -221,7 +221,7 @@
     "price": 650000,
     "mortgage": 3806,
     "location": {
-      "address": "60 Reading Ave",
+      "address": "15 Kenyon St",
       "city": "Staten Island, NY",
       "state": "New York",
       "country": "United States"
@@ -245,7 +245,7 @@
     "price": 749999,
     "mortgage": 4380,
     "location": {
-      "address": "12 Nehring Ave",
+      "address": "84 Eldredge St",
       "city": "Staten Island, NY",
       "state": "New York",
       "country": "United States"
@@ -269,7 +269,7 @@
     "price": 929000,
     "mortgage": 5568,
     "location": {
-      "address": "15 Kenyon St",
+      "address": "50 Grafton St",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -293,7 +293,7 @@
     "price": 879000,
     "mortgage": 5835,
     "location": {
-      "address": "84 Eldredge St ",
+      "address": "45 Fox Hill Rd ",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -317,7 +317,7 @@
     "price": 1895000,
     "mortgage": 11280,
     "location": {
-      "address": "50 Grafton St",
+      "address": "117 Mount Vernon St",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -341,7 +341,7 @@
     "price": 4188000,
     "mortgage": 24839,
     "location": {
-      "address": "45 Fox Hill Rd",
+      "address": "35 Washburn St",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -365,7 +365,7 @@
     "price": 1598000,
     "mortgage": 9724,
     "location": {
-      "address": "117 Mount Vernon St",
+      "address": "26 Evergreen Ave",
       "city": "West Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -389,7 +389,7 @@
     "price": 999999,
     "mortgage": 5988,
     "location": {
-      "address": "35 Washburn St",
+      "address": "45 Cross Hill Rd",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -413,7 +413,7 @@
     "price": 2299000,
     "mortgage": 13670,
     "location": {
-      "address": "26 Evergreen Ave",
+      "address": "988 Dedham St",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -437,7 +437,7 @@
     "price": 4899000,
     "mortgage": 29044,
     "location": {
-      "address": "45 Cross Hill Rd",
+      "address": "12 Antonellis Cir",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -461,7 +461,7 @@
     "price": 3888000,
     "mortgage": 23066,
     "location": {
-      "address": "988 Dedham St",
+      "address": "1256 Commonwealth Ave",
       "city": "Newton Center, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -485,7 +485,7 @@
     "price": 3499000,
     "mortgage": 20765,
     "location": {
-      "address": "12 Antonellis Cir",
+      "address": "53 Glen Ave",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -509,7 +509,7 @@
     "price": 3749000,
     "mortgage": 22382,
     "location": {
-      "address": "1256 Commonwealth Ave",
+      "address": "75 Clinton Pl",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -533,7 +533,7 @@
     "price": 2188800,
     "mortgage": 13304,
     "location": {
-      "address": "53 Glen Ave",
+      "address": "5335 Mount Vernon Pkwy",
       "city": "Newton Center, MA",
       "state": "Massachusetts",
       "country": "United States"
@@ -557,7 +557,7 @@
     "price": 1995000,
     "mortgage": 11872,
     "location": {
-      "address": "75 Clinton Pl",
+      "address": "624 Windsor Pkwy NE",
       "city": "Newton, MA",
       "state": "Massachusetts",
       "country": "United States"
