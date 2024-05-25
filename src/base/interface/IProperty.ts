@@ -7,6 +7,9 @@ export interface IProperty {
   details: IDetails;
   photos: string[];
   orderDate?: string;
+  images?: {
+    url: string;
+  }[];
 }
 
 export interface IDetails {

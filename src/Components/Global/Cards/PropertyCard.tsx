@@ -1,23 +1,30 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { toast } from "sonner";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useHandleFilterProperties } from "../../../base/hooks/useHandleFilterProperties";
 import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useProperties } from "../../../base/utlils/fetchProperties";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 import { PropertyCardLoadingSkeleton } from "../Loaders/PropertyCardLoadingSkeleton";
-import { toast } from "sonner";
 
 export const PropertyCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   const [isPropertiesLoaded, setIsPropertiesLoaded] = useState(false);
   const { filteredProperties, filterOptions } = useHandleFilterProperties();
   //
-  const {pathname} = useLocation()
-  // 
+  const { pathname } = useLocation();
+  //
+  const { data: properties } = useProperties();
+  useEffect(() => {
+    console.log(properties);
+  }, [properties]);
+
+  //
   const {
     wishlistPropertyIds,
     updateWishlistPropertyId,
@@ -31,10 +38,10 @@ export const PropertyCard = () => {
   const handleAddToWishlist = (propertyId: number) => {
     if (!wishlistPropertyIds.includes(propertyId)) {
       updateWishlistPropertyId(propertyId);
-      toast.success('Property has been added to Wishlist')
+      toast.success("Property has been added to Wishlist");
     } else {
       removeWishlistPropertyId(propertyId);
-      toast.error('Property has been removed from Wishlist')
+      toast.error("Property has been removed from Wishlist");
     }
   };
   //
@@ -59,19 +66,22 @@ export const PropertyCard = () => {
           filteredProperties.map((property, index) => (
             <div
               key={index}
-              className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card relative">
+              className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card relative"
+            >
               <Link
                 to={`/property-details/address=${property.location.address}&city=${property.location.city}&state=${property.location.state}&country=${property.location.country}&?id=${property.property_id}`}
                 className="w-full h-[270px] relative"
                 onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}>
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
                 <div className="w-full h-[270px] relative">
                   <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={10}
                     slidesPerView={1}
                     navigation={hoveredIndex === index}
-                    pagination={{ clickable: true }}>
+                    pagination={{ clickable: true }}
+                  >
                     {property.photos.map((photo, photoIndex) => (
                       <SwiperSlide key={photoIndex}>
                         <img
