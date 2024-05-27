@@ -1,11 +1,13 @@
 import Properties from "../../base/dummyData/properties.json";
 import { useFilterStore } from "../store/useFilterStore";
+import { useProperties } from "../utlils/fetchProperties";
 
 export const useHandleFilterProperties = () => {
   //
   const { filterOptions } = useFilterStore((state) => ({
     filterOptions: state.filterOptions,
   }));
+  const { data: properties, isLoading, error,isError } = useProperties();
   //
   const filterProperties = () => {
     const {
@@ -16,20 +18,22 @@ export const useHandleFilterProperties = () => {
       selectedState,
     } = filterOptions;
 
-    return Properties.filter((property) => {
-      if (selectedCity && property.location.city !== selectedCity) {
+    if (!properties) return [];
+
+    return properties.filter((property) => {
+      if (selectedCity && property.propertyLocation.city !== selectedCity) {
         return;
       }
       //
-      if (selectedState && property.location.state !== selectedState) {
+      if (selectedState && property.propertyLocation.state !== selectedState) {
         return;
       }
       //
-      if (selectedBeds && property.details.beds !== selectedBeds) {
+      if (selectedBeds && property.propertyDetails.beds !== selectedBeds) {
         return;
       }
       //
-      if (selectedBaths && property.details.baths !== selectedBaths) {
+      if (selectedBaths && property.propertyDetails.baths !== selectedBaths) {
         return;
       }
       //
@@ -42,6 +46,7 @@ export const useHandleFilterProperties = () => {
       return true;
     });
   };
+
   const filteredProperties = filterProperties();
-  return { filteredProperties, filterOptions };
+  return { filteredProperties, filterOptions, isLoading, error, isError };
 };

@@ -42,17 +42,17 @@ export const ShowAllPicturesModal = ({
           <div className="tablet-below:w-full dark:bg-secondaryColor-light bg-white  big-screen-mobile-below:h-[87vh] between-mobile-and-tablet:h-[73vh] h-[90vh] tablet-above:w-[95%] overflow-auto">
             <div className="flex justify-between mobile:items-center px-3 py-3 bg-white dark:bg-secondaryColor-light w-full tablet-below:fixed big-screen-mobile-below:top-11 between-mobile-and-tablet:top-[185px] tablet-below:rounded-t-xl">
               <div className="capitalize font-bold text-center hidden mobile:block text-sm">
-                photos ({selectedProperty?.photos.length})
+            ?.propertyPhotos ({selectedProperty?.propertyPhotos.length})
               </div>
               <div className="flex gap-x-1 text-sm items-center mobile:hidden">
                 <p className="font-bold">
-                  {selectedProperty?.location.address} |
+                  {selectedProperty?.propertyLocation.address} |
                 </p>
                 <p className="font-bold">
                   ${selectedProperty?.price.toLocaleString()} |
                 </p>
-                <p className="font-bold">{selectedProperty?.details.beds}bd</p>
-                <p className="font-bold">{selectedProperty?.details.baths}ba</p>
+                <p className="font-bold">{selectedProperty?.propertyDetails.beds}bd</p>
+                <p className="font-bold">{selectedProperty?.propertyDetails.baths}ba</p>
               </div>
               <div className="flex gap-7 justify-center items-center">
                 <div>
@@ -93,7 +93,7 @@ export const ShowAllPicturesModal = ({
             <div className="tablet-below:mt-[25px] px-3 py-3 flex justify-center flex-wrap gap-2">
               <div className="tablet-below:w-full big-screen-mobile-below:h-[250px] tablet:h-[400px] tablet-above:w-[48%] tablet-above:h-[340px]">
                 <img
-                  src={selectedProperty?.photos[0]}
+                  src={selectedProperty?.propertyPhotos[0]}
                   className="w-[100%] h-[100%] object-cover"
                   alt=""
                 />
@@ -101,7 +101,7 @@ export const ShowAllPicturesModal = ({
               {/*  */}
               <div className="tablet-above:w-[48%] tablet:w-[49%] tablet-above:h-[340px]">
                 <img
-                  src={selectedProperty?.photos[1]}
+                  src={selectedProperty?.propertyPhotos[1]}
                   className="w-[100%] h-[100%] object-cover"
                   alt=""
                 />
@@ -109,7 +109,7 @@ export const ShowAllPicturesModal = ({
               {/*  */}
               <div className="tablet-above:w-[31.8%] tablet:h-[300px] tablet:w-[49%] tablet-above:h-[340px]">
                 <img
-                  src={selectedProperty?.photos[2]}
+                  src={selectedProperty?.propertyPhotos[2]}
                   className="w-[100%] h-[100%] object-cover"
                   alt=""
                 />
@@ -117,7 +117,7 @@ export const ShowAllPicturesModal = ({
               {/*  */}
               <div className="tablet-above:w-[31.8%] tablet:h-[300px] tablet:w-[49%] tablet-above:h-[340px]">
                 <img
-                  src={selectedProperty?.photos[3]}
+                  src={selectedProperty?.propertyPhotos[3]}
                   className="w-[100%] h-[100%] object-cover"
                   alt=""
                 />
@@ -125,7 +125,7 @@ export const ShowAllPicturesModal = ({
               {/*  */}
               <div className="tablet-above:w-[31.8%]  tablet:h-[300px] tablet:w-[49%] tablet-above:h-[340px]">
                 <img
-                  src={selectedProperty?.photos[4]}
+                  src={selectedProperty?.propertyPhotos[4]}
                   className="w-[100%] h-[100%] object-cover"
                   alt=""
                 />

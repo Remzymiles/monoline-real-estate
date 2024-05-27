@@ -3,9 +3,9 @@ export interface IProperty {
   description: string;
   price: number;
   mortgage: number;
-  location: ILocation;
-  details: IDetails;
-  photos: string[];
+  propertyLocation: ILocation;
+  propertyDetails: IDetails;
+  propertyPhotos: { url: string[] }[];
   orderDate?: string;
   images?: {
     url: string;

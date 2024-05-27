@@ -1,7 +1,8 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { useProfilePhotoStore } from "../../../base/store/useProfilePhotoStore";
 import { CameraIcon } from "../../Icons/CameraIcon";
 import { UserProfileIcon } from "../../Icons/UserProfileIcon";
+import { useMutation } from "@tanstack/react-query";
 
 export const ProfileImage = () => {
   //
@@ -20,6 +21,13 @@ export const ProfileImage = () => {
       console.log("No file selected");
     }
   };
+  useEffect(()=>{console.log(profilePhotoUrl);
+  },[profilePhotoUrl])
+
+
+  const {} = useMutation({
+    
+  })
 
   //
   return (
