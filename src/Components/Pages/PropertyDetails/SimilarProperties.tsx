@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ISimilarProperty } from "../../../base/interface/ISimilarProperties";
@@ -8,7 +9,6 @@ import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
-import { toast } from "sonner";
 
 export const SimilarProperties = ({
   selectedProperty,
@@ -17,14 +17,17 @@ export const SimilarProperties = ({
   //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   //
-  const { wishlistPropertyIds, updateWishlistPropertyId, removeWishlistPropertyId } =
-    useWishListStore((state) => ({
-      wishlistPropertyIds: state.wishlistPropertyIds,
-      updateWishlistPropertyId: state.updateWishlistPropertyIds,
-      removeWishlistPropertyId: state.removeWishlistPropertyId,
-    }));
+  const {
+    wishlistPropertyIds,
+    updateWishlistPropertyId,
+    removeWishlistPropertyId,
+  } = useWishListStore((state) => ({
+    wishlistPropertyIds: state.wishlistPropertyIds,
+    updateWishlistPropertyId: state.updateWishlistPropertyIds,
+    removeWishlistPropertyId: state.removeWishlistPropertyId,
+  }));
 
-  const handleAddToWishlist = (propertyId: number) => {
+  const handleAddToWishlist = (propertyId: string) => {
     if (!wishlistPropertyIds.includes(propertyId)) {
       updateWishlistPropertyId(propertyId);
       toast.success("Property has been added to Wishlist");
@@ -40,7 +43,7 @@ export const SimilarProperties = ({
     <>
       <div className="mt-5">
         <h1 className="font-bold text-2xl capitalize mb-5">
-          new listings in {selectedProperty?.location.city}
+          new listings in {selectedProperty?.propertyLocation.city}
         </h1>
         <div className="flex min-w-full overflow-auto gap-x-4 pb-5">
           {similarProperties.map((property, index) => {
@@ -50,7 +53,7 @@ export const SimilarProperties = ({
                 className="big-screen-mobile-below:w-[220px] between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card relative"
               >
                 <Link
-                  to={`/property-details/address=${property.location.address}&city=${property.location.city}&state=${property.location.state}&country=${property.location.country}&?id=${property.property_id}`}
+                  to={`/property-details/address=${property.propertyLocation.address}&city=${property.propertyLocation.city}&state=${property.propertyLocation.state}&country=${property.propertyLocation.country}&?id=${property.property_id}`}
                   key={index}
                   className="big-screen-mobile-below:w-[220px] between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card"
                   onMouseEnter={() => setHoveredIndex(index)}
@@ -64,15 +67,20 @@ export const SimilarProperties = ({
                       navigation={hoveredIndex === index}
                       pagination={{ clickable: true }}
                     >
-                      {property.photos.map((photo, photoIndex) => (
-                        <SwiperSlide key={photoIndex}>
-                          <img
-                            src={photo}
-                            alt="image"
-                            className="w-full big-screen-mobile-below:h-[200px] h-[270px] rounded-xl object-cover"
-                          />
-                        </SwiperSlide>
-                      ))}
+                      {property.propertyPhotos?.map((photo) => {
+                        return photo.url
+                          .slice()
+                          .reverse()
+                          .map((url, photoIndex) => (
+                            <SwiperSlide key={photoIndex}>
+                              <img
+                                src={url}
+                                alt="image"
+                                className="w-full big-screen-mobile-below:h-[200px] h-[270px] rounded-xl object-cover"
+                              />
+                            </SwiperSlide>
+                          ));
+                      })}
                     </Swiper>
                   </div>
                   <div className="mt-1 mx-1">
@@ -88,29 +96,31 @@ export const SimilarProperties = ({
                       <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                         <BedIcon extraStyle="text-gray-500 text-[15px]" />{" "}
                         <span className="font-extrabold">
-                          {property.details.beds}
+                          {property.propertyDetails.beds}
                         </span>
                         bd
                       </span>
                       <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                         <BathIcon extraStyle="text-gray-500 text-[15px]" />{" "}
                         <span className="font-extrabold">
-                          {property.details.baths}
+                          {property.propertyDetails.baths}
                         </span>
                         ba
                       </span>
                       <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                         <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
                         <span className="font-extrabold">
-                          {property.details.sqft.toLocaleString()}
+                          {property.propertyDetails.sqft.toLocaleString()}
                         </span>
                         sqft
                       </span>
                     </div>
                     <p className="capitalize text-[15px]">
-                      {property.location.address}
+                      {property.propertyLocation.address}
                     </p>
-                    <p className="text-[15px]">{property.location.city}</p>
+                    <p className="text-[15px]">
+                      {property.propertyLocation.city}
+                    </p>
                   </div>
                 </Link>
                 {/*  */}

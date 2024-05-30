@@ -1,13 +1,14 @@
-import Properties from "../../base/dummyData/properties.json";
 import { useFilterStore } from "../store/useFilterStore";
-import { useProperties } from "../utlils/fetchProperties";
+import { useProperties } from "../utils/fetchProperties";
 
 export const useHandleFilterProperties = () => {
   //
   const { filterOptions } = useFilterStore((state) => ({
     filterOptions: state.filterOptions,
   }));
-  const { data: properties, isLoading, error,isError } = useProperties();
+  const { data: properties, isLoading, error, isError } = useProperties();
+  console.log(properties);
+  
   //
   const filterProperties = () => {
     const {

@@ -1,6 +1,6 @@
 export interface ICartPropertyIdsStore {
-  propertyIds: number[];
-  updateCartPropertyIds: (newPropertyId: number) => void;
-  removePropertyId: (propertyId: number) => void;
+  propertyIds: string[];
+  updateCartPropertyIds: (newPropertyId: string) => void;
+  removePropertyId: (propertyId: string) => void;
   clearCartPropertyIds: () => void;
 }

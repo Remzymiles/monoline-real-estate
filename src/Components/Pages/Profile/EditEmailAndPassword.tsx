@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHandleEditPassword } from "../../../base/hooks/useHandleEditPassword";
-import { getAuthData } from "../../../base/utlils/getAuthData";
+import { getAuthData } from "../../../base/utils/getAuthData";
 import { EditPasswordForm } from "./EditPasswordForm";
 
 export const EmailAndEditPassword = () => {

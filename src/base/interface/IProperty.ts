@@ -1,5 +1,5 @@
 export interface IProperty {
-  property_id: number;
+  property_id: string;
   description: string;
   price: number;
   mortgage: number;

@@ -1,6 +1,6 @@
 export interface IWishlistStore {
-  wishlistPropertyIds: number[];
-  updateWishlistPropertyIds: (newWishlistPropertyId: number) => void;
-  removeWishlistPropertyId: (propertyId: number)=> void
+  wishlistPropertyIds: string[];
+  updateWishlistPropertyIds: (newWishlistPropertyId: string) => void;
+  removeWishlistPropertyId: (propertyId: string)=> void
   clearWishlistPropertyIds: () => void;
 }

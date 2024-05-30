@@ -20,7 +20,7 @@ export const PropertyPictures = ({
     removeWishlistPropertyId: state.removeWishlistPropertyId,
   }));
 
-  const handleAddToWishlist = (propertyId: number) => {
+  const handleAddToWishlist = (propertyId: string) => {
     if (!wishlistPropertyIds.includes(propertyId)) {
       updateWishlistPropertyIds(propertyId);
       toast.success("Property has been added to Wishlist");
@@ -29,6 +29,7 @@ export const PropertyPictures = ({
       toast.error("Property has been removed from Wishlist");
     }
   };
+
   //
   return (
     <>
@@ -40,7 +41,7 @@ export const PropertyPictures = ({
           <div
             className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm tablet-above:hidden ${
               wishlistPropertyIds.includes(
-                Number(selectedProperty?.property_id)
+                String(selectedProperty?.property_id)
               )
                 ? "bg-primaryColor- dark:bg-primaryColorDarkMode text-white"
                 : "bg-white text-primaryColor-dark dark:text-primaryColorDarkMode"
@@ -50,13 +51,13 @@ export const PropertyPictures = ({
             <HeartIcon
               color={`text-sm ${
                 wishlistPropertyIds.includes(
-                  Number(selectedProperty?.property_id)
+                  String(selectedProperty?.property_id)
                 )
                   ? "text-white"
                   : "text-primaryColor-dark dark:text-primaryColorDarkMode"
               }`}
             />
-            {wishlistPropertyIds.includes(Number(selectedProperty?.property_id))
+            {wishlistPropertyIds.includes(String(selectedProperty?.property_id))
               ? "saved"
               : "save"}
           </div>
@@ -70,7 +71,7 @@ export const PropertyPictures = ({
             show all photos
           </div>
           <img
-            src={selectedProperty?.photos[0]}
+            src={selectedProperty?.propertyPhotos[0]?.url[4]}
             alt="img"
             className="w-[100%] h-[100%] rounded-l-lg tablet-below:rounded-md big-screen-mobile-below:object-cover"
           />
@@ -80,7 +81,7 @@ export const PropertyPictures = ({
             <div
               className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm ${
                 wishlistPropertyIds.includes(
-                  Number(selectedProperty?.property_id)
+                  String(selectedProperty?.property_id)
                 )
                   ? "bg-primaryColor-dark dark:bg-primaryColorDarkMode text-white"
                   : "bg-white text-primaryColor-dark dark:text-primaryColorDarkMode"
@@ -90,20 +91,20 @@ export const PropertyPictures = ({
               <HeartIcon
                 color={`text-sm ${
                   wishlistPropertyIds.includes(
-                    Number(selectedProperty?.property_id)
+                    String(selectedProperty?.property_id)
                   )
                     ? "text-white"
                     : "text-primaryColor-dark dark:text-primaryColorDarkMode"
                 }`}
               />
               {wishlistPropertyIds.includes(
-                Number(selectedProperty?.property_id)
+                String(selectedProperty?.property_id)
               )
                 ? "saved"
                 : "save"}
             </div>
             <img
-              src={selectedProperty?.photos[1]}
+              src={selectedProperty?.propertyPhotos[0]?.url[3]}
               alt="img"
               className="w-[100%] h-[100%] rounded-tr-lg"
             />
@@ -119,7 +120,7 @@ export const PropertyPictures = ({
               show all photos
             </div>
             <img
-              src={selectedProperty?.photos[2]}
+              src={selectedProperty?.propertyPhotos[0]?.url[2]}
               alt="img"
               className="w-[100%] h-[100%] rounded-br-lg"
             />

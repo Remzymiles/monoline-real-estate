@@ -27,7 +27,7 @@ export const PropertyCard = () => {
     removeWishlistPropertyId: state.removeWishlistPropertyId,
   }));
   //
-  const handleAddToWishlist = (propertyId: number) => {
+  const handleAddToWishlist = (propertyId: string) => {
     if (!wishlistPropertyIds.includes(propertyId)) {
       updateWishlistPropertyId(propertyId);
       toast.success("Property has been added to Wishlist");
@@ -52,7 +52,7 @@ export const PropertyCard = () => {
           <PropertyCardLoadingSkeleton key={index} />
         ))
       ) : filteredProperties.length > 0 ? (
-        filteredProperties.map((property: IProperty) => (
+        filteredProperties.map((property: IProperty,index) => (
           <div
             key={property.property_id}
             className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card relative"
@@ -60,7 +60,7 @@ export const PropertyCard = () => {
             <Link
               to={`/property-details/address=${property.propertyLocation?.address}&city=${property.propertyLocation?.city}&state=${property.propertyLocation?.state}&country=${property.propertyLocation?.country}&?id=${property.property_id}`}
               className="w-full h-[270px] relative"
-              onMouseEnter={() => setHoveredIndex(property.property_id)}
+              onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <div className="w-full h-[270px] relative">
@@ -68,7 +68,7 @@ export const PropertyCard = () => {
                   modules={[Navigation, Pagination]}
                   spaceBetween={10}
                   slidesPerView={1}
-                  navigation={hoveredIndex === property.property_id}
+                  navigation={hoveredIndex === index}
                   pagination={{ clickable: true }}
                 >
                   {property.propertyPhotos?.map((photo) => {

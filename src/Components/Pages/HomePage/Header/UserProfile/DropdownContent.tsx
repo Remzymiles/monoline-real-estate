@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useIsUserLoggedIn } from "../../../../../base/store/useIsUserLoggedIn";
 import { useWishListStore } from "../../../../../base/store/useWishListStore";
-import { getAuthData } from "../../../../../base/utlils/getAuthData";
+import { getAuthData } from "../../../../../base/utils/getAuthData";
 import supabase from "../../../../../config/supabaseClient";
 
 export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
