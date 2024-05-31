@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import properties from "../../../base/dummyData/properties.json";
 import { IProperty } from "../../../base/interface/IProperty";
 import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useProperties } from "../../../base/utils/fetchProperties";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -23,11 +23,18 @@ export const WishlistCards = () => {
     removeWishlistPropertyId: state.removeWishlistPropertyId,
   }));
   //
-  const handleAddToWishlist = (propertyId: number) => {
+  const handleAddToWishlist = (propertyId: string) => {
     !wishlistPropertyIds.includes(propertyId)
       ? updateWishlistPropertyId(propertyId)
       : removeWishlistPropertyId(propertyId);
   };
+  //
+
+  const { data: properties } = useProperties();
+  if (!properties) {
+    return;
+  }
+  
   const wishlistProperties = properties.filter((property: IProperty) => {
     return wishlistPropertyIds.includes(property.property_id);
   });
@@ -42,10 +49,10 @@ export const WishlistCards = () => {
       }`}
     >
       {wishlistPropertyIds.length > 0 ? (
-        wishlistProperties.map((property, index) => (
+        wishlistProperties.map((property:IProperty, index) => (
           <div className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[235px] tablet-above:w-[400px] relative">
             <Link
-              to={`/property-details/address=${property.location.address}&city=${property.location.city}&state=${property.location.state}&country=${property.location.country}&?id=${property.property_id}`}
+              to={`/property-details/address=${property.propertyLocation.address}&city=${property.propertyLocation.city}&state=${property.propertyLocation.state}&country=${property.propertyLocation.country}&?id=${property.property_id}`}
               className="w-full h-[270px] relative"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -58,15 +65,20 @@ export const WishlistCards = () => {
                   navigation={hoveredIndex === index}
                   pagination={{ clickable: true }}
                 >
-                  {property.photos.map((photo, photoIndex) => (
-                    <SwiperSlide key={photoIndex}>
-                      <img
-                        src={photo}
-                        alt="image"
-                        className="w-full h-[270px] rounded-xl object-cover"
-                      />
-                    </SwiperSlide>
-                  ))}
+                  {property.propertyPhotos?.map((photo) => {
+                    return photo.url
+                      .slice()
+                      .reverse()
+                      .map((url, photoIndex) => (
+                        <SwiperSlide key={photoIndex}>
+                          <img
+                            src={url}
+                            alt="image"
+                            className="w-full h-[270px] rounded-xl object-cover"
+                          />
+                        </SwiperSlide>
+                      ));
+                  })}
                 </Swiper>
               </div>
               <div className="mt-1 mx-1">
@@ -82,29 +94,29 @@ export const WishlistCards = () => {
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <BedIcon extraStyle="text-gray-500 text-[15px]" />{" "}
                     <span className="font-extrabold">
-                      {property.details.beds}
+                      {property.propertyDetails.beds}
                     </span>
                     bd
                   </span>
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <BathIcon extraStyle="text-gray-500 text-[15px]" />{" "}
                     <span className="font-extrabold">
-                      {property.details.baths}
+                      {property.propertyDetails.baths}
                     </span>
                     ba
                   </span>
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
                     <span className="font-extrabold">
-                      {property.details.sqft}
+                      {property.propertyDetails.sqft}
                     </span>
                     sqft
                   </span>
                 </div>
                 <p className="capitalize text-[15px]">
-                  {property.location.address}
+                  {property.propertyLocation.address}
                 </p>
-                <p className="text-[15px]">{property.location.city}</p>
+                <p className="text-[15px]">{property.propertyLocation.city}</p>
               </div>
             </Link>
             <div

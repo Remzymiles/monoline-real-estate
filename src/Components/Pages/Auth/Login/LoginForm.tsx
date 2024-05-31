@@ -104,7 +104,9 @@ export const LoginForm = () => {
         )}
       </div>
       {/*  */}
-      <FormButton children={isPending ? <WaveFormLoader /> : "Login"} />
+      <FormButton type="submit">
+        {isPending ? <WaveFormLoader /> : "login"}
+      </FormButton>
       {/*  */}
       <p className="text-center text-secondaryColor-light text-sm dark:text-gray-400">
         don't have an account?{" "}

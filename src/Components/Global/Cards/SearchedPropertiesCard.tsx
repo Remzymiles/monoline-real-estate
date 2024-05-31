@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import properties from "../../../base/dummyData/properties.json";
+import { IProperty } from "../../../base/interface/IProperty";
 import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useProperties } from "../../../base/utils/fetchProperties";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
-import { toast } from "sonner";
+import { WaveFormLoader } from "../Loaders/WaveFormLoader";
 
 export const SearchedPropertiesCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -26,39 +28,50 @@ export const SearchedPropertiesCard = () => {
     removeWishlistPropertyId: state.removeWishlistPropertyId,
   }));
   //
-  const handleAddToWishlist = (propertyId: number) => {
+  const handleAddToWishlist = (propertyId: string) => {
     if (!wishlistPropertyIds.includes(propertyId)) {
       updateWishlistPropertyId(propertyId);
-      toast.success('Property has been added to Wishlist')
+      toast.success("Property has been added to Wishlist");
     } else {
       removeWishlistPropertyId(propertyId);
-      toast.error('Property has been removed from Wishlist')
+      toast.error("Property has been removed from Wishlist");
     }
   };
   //
+  const { data: properties, isLoading } = useProperties();
+  if (!properties) {
+    return [];
+  }
+  //
   const filteredSearchedProperties = searchValue
-    ? properties.filter((property) => {
+    ? properties.filter((property: IProperty) => {
         return (
-          property.location.state
+          property.propertyLocation.state
             .toLowerCase()
             .includes(searchValue.toLowerCase()) ||
-          property.location.city
+          property.propertyLocation.city
             .toLowerCase()
             .includes(searchValue.toLowerCase())
         );
       })
     : [];
   //
+  //
   return (
     <>
+      {isLoading && (
+        <div>
+          <WaveFormLoader />
+        </div>
+      )}
       {filteredSearchedProperties.length > 0 ? (
-        filteredSearchedProperties.map((property, index) => (
+        filteredSearchedProperties.map((property: IProperty, index) => (
           <div
             key={index}
             className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card relative"
           >
             <Link
-              to={`/property-details/address=${property.location.address}&city=${property.location.city}&state=${property.location.state}&country=${property.location.country}&?id=${property.property_id}`}
+              to={`/property-details/address=${property.propertyLocation.address}&city=${property.propertyLocation.city}&state=${property.propertyLocation.state}&country=${property.propertyLocation.country}&?id=${property.property_id}`}
               className="w-full h-[270px] relative"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -71,15 +84,20 @@ export const SearchedPropertiesCard = () => {
                   navigation={hoveredIndex === index}
                   pagination={{ clickable: true }}
                 >
-                  {property.photos.map((photo, photoIndex) => (
-                    <SwiperSlide key={photoIndex}>
-                      <img
-                        src={photo}
-                        alt="image"
-                        className="w-full h-[270px] rounded-xl object-cover"
-                      />
-                    </SwiperSlide>
-                  ))}
+                  {property.propertyPhotos?.map((photo) => {
+                    return photo.url
+                      .slice()
+                      .reverse()
+                      .map((url, photoIndex) => (
+                        <SwiperSlide key={photoIndex}>
+                          <img
+                            src={url}
+                            alt="image"
+                            className="w-full h-[270px] rounded-xl object-cover"
+                          />
+                        </SwiperSlide>
+                      ));
+                  })}
                 </Swiper>
               </div>
               <div className="mt-1 mx-1">
@@ -95,29 +113,29 @@ export const SearchedPropertiesCard = () => {
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <BedIcon extraStyle="text-gray-500 text-[15px]" />{" "}
                     <span className="font-extrabold">
-                      {property.details.beds}
+                      {property.propertyDetails.beds}
                     </span>
                     bd
                   </span>
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <BathIcon extraStyle="text-gray-500 text-[15px]" />{" "}
                     <span className="font-extrabold">
-                      {property.details.baths}
+                      {property.propertyDetails.baths}
                     </span>
                     ba
                   </span>
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
                     <span className="font-extrabold">
-                      {property.details.sqft.toLocaleString()}
+                      {property.propertyDetails.sqft.toLocaleString()}
                     </span>
                     sqft
                   </span>
                 </div>
                 <p className="capitalize text-[15px]">
-                  {property.location.address}
+                  {property.propertyLocation.address}
                 </p>
-                <p className="text-[15px]">{property.location.city}</p>
+                <p className="text-[15px]">{property.propertyLocation.city}</p>
               </div>
             </Link>
             <div

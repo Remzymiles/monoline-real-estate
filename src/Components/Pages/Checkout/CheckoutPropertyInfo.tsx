@@ -24,7 +24,7 @@ export const CheckoutPropertyInfo = ({
           >
             <div className="w-[300px] h-[150px] between-mobile-and-tablet:h-[200px] big-screen-mobile-below:h-[150px]">
               <img
-                src={checkoutProperty.photos[0]}
+                src={checkoutProperty.propertyPhotos[0].url[4]}
                 alt="image"
                 className="w-[100%] h-[100%] rounded-lg object-cover"
                 onClick={() => {
@@ -35,10 +35,10 @@ export const CheckoutPropertyInfo = ({
             <div className="flex justify-between w-full gap-x-3 big-screen-mobile-below:flex-col big-screen-mobile-below:gap-y-3">
               <div>
                 <p className="font-bold capitalize big-screen-mobile-below:text-[15px] between-mobile-and-tablet:text-[17px] tablet-above:text-[18px]">
-                  {checkoutProperty.location.address}
+                  {checkoutProperty.propertyLocation.address}
                 </p>
                 <p className="font-bold big-screen-mobile-below:text-[15px] between-mobile-and-tablet:text-[17px] tablet-above:text-[18px] capitalize text-gray-400">
-                  {checkoutProperty.location.city}
+                  {checkoutProperty.propertyLocation.city}
                 </p>
               </div>
               {/*  */}

@@ -1,7 +1,7 @@
-import Properties from "../../base/dummyData/properties.json";
 import { useCartPropertyIdsStore } from "../store/useCartPropertyIdsStore";
 import { useCheckoutStore } from "../store/useCheckoutStore";
 import { useOrderHistoryStore } from "../store/useOrderHistoryStore";
+import { useProperties } from "../utils/fetchProperties";
 
 export const useHandleOrderHistoryDateAndTime = () => {
   //
@@ -20,11 +20,19 @@ export const useHandleOrderHistoryDateAndTime = () => {
   const { checkoutIds } = useCheckoutStore((state) => ({
     checkoutIds: state.checkoutIds,
   }));
-  const checkoutProperties = Properties.filter((property) => {
-    return checkoutIds.includes(property.property_id);
-  });
-//   
+
+  const { data: properties } = useProperties();
+  //
   const handleOrderHistoryAndClearCartProperties = () => {
+    if (!properties) {
+      return [];
+    }
+    // 
+    const checkoutProperties = properties.filter((property) => {
+      return checkoutIds.includes(property.property_id);
+    });
+    // 
+    //handle date for order history properties
     const currentDate = new Date();
     const day = currentDate.getDate();
     const month = currentDate.toLocaleString("default", { month: "long" });

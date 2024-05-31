@@ -3,8 +3,9 @@ import * as yup from "yup";
 export const DebitCardFormValidator = yup.object({
   card_number: yup
     .string()
-    .required("Please fill in your card number")
-    .min(19, "card number must be 16 characters"),
+    .min(16, "card number must be 16 characters")
+    .max(19,"m")
+    .required("Please fill in your card number"),
   cardHolder_name: yup
     .string()
     .required("this field name is required")

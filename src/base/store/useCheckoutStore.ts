@@ -14,6 +14,6 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
   updateCheckoutIds: (newCheckoutIds) =>
     set(() => ({
       checkoutIds:
-        typeof newCheckoutIds === "number" ? [newCheckoutIds] : newCheckoutIds,
+        typeof newCheckoutIds === "string" ? [newCheckoutIds] : newCheckoutIds,
     })),
 }));

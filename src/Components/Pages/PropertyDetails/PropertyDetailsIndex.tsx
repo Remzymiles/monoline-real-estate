@@ -1,6 +1,8 @@
 import { Link, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
 import { IProperty } from "../../../base/interface/IProperty";
+import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { useProperties } from "../../../base/utils/fetchProperties";
 import { PropertyPicturesLoadingSkeleton } from "../../Global/Loaders/PropertyPicturesLoadingSkeleton";
@@ -11,8 +13,6 @@ import { PropertyHighlights } from "./PropertyHighlights";
 import { PropertyPictures } from "./PropertyPictures";
 import { ShowAllPicturesModal } from "./ShowAllPicturesModal";
 import { SimilarProperties } from "./SimilarProperties";
-import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
-import { toast } from "sonner";
 
 export const PropertyDetailsIndex = () => {
   const {
@@ -23,7 +23,6 @@ export const PropertyDetailsIndex = () => {
 
   const [query] = useSearchParams();
   const propertyId = query.get("id");
-  console.log(propertyId);
 
   const { data: properties, isLoading, error, isError } = useProperties();
 
@@ -31,6 +30,13 @@ export const PropertyDetailsIndex = () => {
     (state) => ({
       updateCheckoutIds: state.updateCheckoutIds,
       setIsPropertyFromCart: state.setIsPropertyFromCart,
+    })
+  );
+
+  const { propertyIds, updatePropertyId } = useCartPropertyIdsStore(
+    (state) => ({
+      propertyIds: state.propertyIds,
+      updatePropertyId: state.updateCartPropertyIds,
     })
   );
 
@@ -54,13 +60,6 @@ export const PropertyDetailsIndex = () => {
     );
   });
 
-  const { propertyIds, updatePropertyId } = useCartPropertyIdsStore(
-    (state) => ({
-      propertyIds: state.propertyIds,
-      updatePropertyId: state.updateCartPropertyIds,
-    })
-  );
-
   const addPropertyToCart = () => {
     if (!propertyIds.includes(String(propertyId))) {
       updatePropertyId(String(propertyId));
@@ -71,7 +70,7 @@ export const PropertyDetailsIndex = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative min-h-fit">
       <ShowAllPicturesModal
         propertyId={String(propertyId)}
         isShowPicturesClicked={isShowPicturesClicked}
@@ -81,7 +80,7 @@ export const PropertyDetailsIndex = () => {
       <div className="pt-3 mobile:mx-4 tablet:mx-8 big-screen-mobile-below:mt-[150px] tablet-above:mt-[180px] mt-[180px] laptop:mt-[120px] tablet-above:mx-8 laptop:mx-16">
         <div className="tablet-below:relative">
           <div className="mb-3">
-            {isLoading ? (
+            {!properties ? (
               <PropertyPicturesLoadingSkeleton />
             ) : (
               <PropertyPictures
@@ -148,7 +147,7 @@ export const PropertyDetailsIndex = () => {
                   to={"/checkout"}
                   className="capitalize bg-primaryColor-light hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 transition-all duration-300 text-white dark:text-gray-300 font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm text-center"
                   onClick={() => {
-                    updateCheckoutIds(Number(propertyId));
+                    updateCheckoutIds(String(propertyId));
                     setIsPropertyFromCart(false);
                   }}
                 >

@@ -42,7 +42,7 @@ export const ShowAllPicturesModal = ({
           <div className="tablet-below:w-full dark:bg-secondaryColor-light bg-white  big-screen-mobile-below:h-[87vh] between-mobile-and-tablet:h-[73vh] h-[90vh] tablet-above:w-[95%] overflow-auto">
             <div className="flex justify-between mobile:items-center px-3 py-3 bg-white dark:bg-secondaryColor-light w-full tablet-below:fixed big-screen-mobile-below:top-11 between-mobile-and-tablet:top-[185px] tablet-below:rounded-t-xl">
               <div className="capitalize font-bold text-center hidden mobile:block text-sm">
-                ?.propertyPhotos ({selectedProperty?.propertyPhotos.length})
+                Photos ({selectedProperty?.propertyPhotos[0].url.length})
               </div>
               <div className="flex gap-x-1 text-sm items-center mobile:hidden">
                 <p className="font-bold">

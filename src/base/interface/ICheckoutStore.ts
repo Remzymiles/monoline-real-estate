@@ -1,6 +1,6 @@
 export interface ICheckoutStore {
-  checkoutIds: number[];
+  checkoutIds: string[];
   isPropertyFromCart: boolean;
   setIsPropertyFromCart: (value: boolean) => void;
-  updateCheckoutIds: (newCheckoutIds: number | number[]) => void;
+  updateCheckoutIds: (newCheckoutIds: string | string[]) => void;
 }

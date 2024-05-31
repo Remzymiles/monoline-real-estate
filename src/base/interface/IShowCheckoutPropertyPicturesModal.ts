@@ -4,5 +4,5 @@ export interface IShowCheckoutPropertyPicturesModal {
     clickedCheckoutProperty: IProperty | undefined;
     isShowCheckoutPropertyPicturesClicked: boolean;
     handleCloseCheckoutPicturesModal: () => void;
-    clickedCheckoutPropertyId?: number;
+    clickedCheckoutPropertyId?: string;
 }

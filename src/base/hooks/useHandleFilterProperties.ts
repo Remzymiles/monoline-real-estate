@@ -7,7 +7,6 @@ export const useHandleFilterProperties = () => {
     filterOptions: state.filterOptions,
   }));
   const { data: properties, isLoading, error, isError } = useProperties();
-  console.log(properties);
   
   //
   const filterProperties = () => {

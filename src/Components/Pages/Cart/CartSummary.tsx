@@ -23,7 +23,7 @@ export const CartSummary = ({
               className="flex justify-between gap-x-4 my-4"
             >
               <p className="truncate capitalize">
-                {cartProperty.location.address}
+                {cartProperty.propertyLocation.address}
               </p>
               :
               <p className="font-extrabold">

@@ -21,25 +21,6 @@ export const Input = ({
   //
   const { togglePasswordVisibility, passwordVisibility } = useTogglePassword();
   //
-  const [inputValue, setInputValue] = useState(value);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let updatedValue: string = e.target.value;
-
-    if (
-      id === "card_number" &&
-      updatedValue.length > 4 &&
-      updatedValue.length !== 19
-    ) {
-      updatedValue = updatedValue.replace(/\D/g, "").replace(/(.{4})/g, "$1-");
-    }
-
-    setInputValue(updatedValue);
-
-    if (onChange) {
-      onChange(updatedValue);
-    }
-  };
 
 
   return (
@@ -58,10 +39,8 @@ export const Input = ({
           className={`px-4 py-3 my-1 bg-gray-100 dark:bg-secondaryColor-lighter/30 w-full focus:border-b-2 focus:border-secondaryColor-dark dark:focus:border-gray-400 focus:outline-none focus:bg-gray-200 dark:focus:bg-secondaryColor-lighter/40 ${extraStyle}`}
           id={id}
           maxLength={maxLength}
-          value={inputValue}
           onChange={(e) => {
             register(name).onChange(e);
-            handleChange(e);
           }}
           disabled={disabled}
           {...register(name)}

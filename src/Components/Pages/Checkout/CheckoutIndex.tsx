@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Properties from "../../../base/dummyData/properties.json";
 import { useHandleCheckoutPropertyPicturesClick } from "../../../base/hooks/useHandleCheckoutPropertyPicturesClick";
 import { useHandlePaymentSuccessModal } from "../../../base/hooks/useHandlePaymentSuccessModal";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
+import { useProperties } from "../../../base/utils/fetchProperties";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutPropertyInfo } from "./CheckoutPropertyInfo";
@@ -35,11 +35,16 @@ export const CheckoutIndex = () => {
     checkoutIds: state.checkoutIds,
   }));
   //
-  const checkoutProperties = Properties.filter((property) => {
-    return checkoutIds.includes(property.property_id);
-  });
+  const { data: properties } = useProperties();
+
+  if (!properties) {
+    return console.log("No properties available");
+  }
   //
 
+  const checkoutProperties = properties.filter((property) => {
+    return checkoutIds.includes(property.property_id);
+  });
   //
   return (
     <div>
