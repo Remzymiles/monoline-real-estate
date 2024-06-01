@@ -9,8 +9,8 @@ import { UserProfileIcon } from "../../Icons/UserProfileIcon";
 
 export const ProfileImage = () => {
   //
-  const [profilePicture, setProfilePicture] = useState<string>("");
-  const [userId, setUserId] = useState("");
+  // const [profilePicture, setProfilePicture] = useState<string>("");
+  // const [userId, setUserId] = useState("");
   //
   const { updateProfilePhotoUrl, profilePhotoUrl } = useProfilePhotoStore(
     (state) => ({
@@ -19,45 +19,45 @@ export const ProfileImage = () => {
     })
   );
   //
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await getAuthData();
+  //     if (data) {
+  //       setUserId(data.user.id);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
   //
-  const { mutate } = useMutation({
-    mutationFn: async ({ imageUrl }: { imageUrl: string }) => {
-      const { error } = await supabase
-        .from("userProfilePicture")
-        .update({ profile_photo_url: imageUrl })
-        .eq("id", userId);
+  // const { mutate } = useMutation({
+  //   mutationFn: async ({ imageUrl }: { imageUrl: string }) => {
+  //     const { error } = await supabase
+  //       .from("userProfilePicture")
+  //       .update({ profile_photo_url: imageUrl })
+  //       .eq("id", userId);
 
-      if (error) {
-        throw new Error(error.message);
-      }
+  //     if (error) {
+  //       throw new Error(error.message);
+  //     }
 
-      return "Profile image URL updated successfully";
-    },
-    onSuccess: () => {
-      toast.success("Profile image updated successfully!");
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
+  //     return "Profile image URL updated successfully";
+  //   },
+  //   onSuccess: () => {
+  //     toast.success("Profile image updated successfully!");
+  //   },
+  //   onError: (error) => {
+  //     toast.error(error.message);
+  //   },
+  // });
   //
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      mutate({ imageUrl });
+      // const imageUrl = URL.createObjectURL(file);
+      // mutate({ imageUrl });
       updateProfilePhotoUrl(URL.createObjectURL(file));
-      setProfilePicture(URL.createObjectURL(file));
+      // setProfilePicture(URL.createObjectURL(file));
     } else {
       console.log("No file selected");
     }

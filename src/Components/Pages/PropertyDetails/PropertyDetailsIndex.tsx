@@ -13,6 +13,7 @@ import { PropertyHighlights } from "./PropertyHighlights";
 import { PropertyPictures } from "./PropertyPictures";
 import { ShowAllPicturesModal } from "./ShowAllPicturesModal";
 import { SimilarProperties } from "./SimilarProperties";
+import { useHandlePushCartProperties } from "../../../base/hooks/useHandlePushCartProperties";
 
 export const PropertyDetailsIndex = () => {
   const {
@@ -20,11 +21,13 @@ export const PropertyDetailsIndex = () => {
     handleOpenAllPicturesModal,
     handleCloseAllPicturesModal,
   } = useHandleIsShowAllPicturesClicked();
-
+  
+  const { pushCartProperties } = useHandlePushCartProperties();
+  
   const [query] = useSearchParams();
   const propertyId = query.get("id");
 
-  const { data: properties, isLoading, error, isError } = useProperties();
+  const { data: properties, isLoading, isError } = useProperties();
 
   const { updateCheckoutIds, setIsPropertyFromCart } = useCheckoutStore(
     (state) => ({
@@ -33,14 +36,18 @@ export const PropertyDetailsIndex = () => {
     })
   );
 
-  const { propertyIds, updatePropertyId } = useCartPropertyIdsStore(
+  const {  } = useCartPropertyIdsStore(
     (state) => ({
       propertyIds: state.propertyIds,
       updatePropertyId: state.updateCartPropertyIds,
     })
   );
 
-  if (!properties) {
+  if (isLoading) {
+    return <PropertyPicturesLoadingSkeleton />;
+  }
+
+  if (isError || !properties) {
     return <div>No properties available</div>;
   }
 
@@ -60,15 +67,10 @@ export const PropertyDetailsIndex = () => {
     );
   });
 
-  const addPropertyToCart = () => {
-    if (!propertyIds.includes(String(propertyId))) {
-      updatePropertyId(String(propertyId));
-      toast.success("Property Has Been Added To Cart");
-    } else {
-      toast("Property is Already In Cart");
-    }
+  const addPropertyToCart = async () => {
+    await pushCartProperties(propertyId as string);
   };
-
+  // 
   return (
     <div className="relative min-h-fit">
       <ShowAllPicturesModal
@@ -141,7 +143,7 @@ export const PropertyDetailsIndex = () => {
                   className="transition-all capitalize bg-primaryColor-light hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 duration-300 text-white dark:text-gray-300 font-bold mt-2 rounded-md px-10 py-2 text-sm"
                   onClick={addPropertyToCart}
                 >
-                  Add to property cart
+                  Add property to cart
                 </button>
                 <Link
                   to={"/checkout"}

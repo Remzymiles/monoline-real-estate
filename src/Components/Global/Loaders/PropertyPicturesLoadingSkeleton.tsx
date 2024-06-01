@@ -1,6 +1,6 @@
 export const PropertyPicturesLoadingSkeleton = () => {
   return (
-    <div className="flex justify-center items-center gap-3 tablet-below:gap-0 animate-pulse h-fit">
+    <div className="flex justify-center items-center gap-3 tablet-below:gap-0 animate-pulse h-fit pt-3 mobile:mx-4 tablet:mx-8 big-screen-mobile-below:mt-[150px] tablet-above:mt-[180px] mt-[180px] laptop:mt-[120px] tablet-above:mx-8 laptop:mx-16">
       <div className="w-[700px] h-[500px] big-screen-mobile-below:h-[300px] relative tablet-below:w-full bg-gray-300 dark:bg-gray-700 rounded-l-lg tablet-below:rounded-md">
         <p className="uppercase bg-gray-300 dark:bg-gray-700 px-[5px] absolute top-2 left-3 rounded-sm font-bold text-gray-300 text-[10px]">
         </p>

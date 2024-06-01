@@ -1,6 +1,6 @@
-import { IProperty } from "./IProperty";
+import { ICartProperty } from "./ICartProperty";
 
 export interface ICartSummary {
-  cartProperties: IProperty[];
+  cartProperties: ICartProperty[];
   handleCheckoutPropertyIds: () => void;
 }

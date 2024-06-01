@@ -19,11 +19,11 @@ export const CartSummary = ({
         {cartProperties.map((cartProperty) => {
           return (
             <div
-              key={cartProperty.property_id}
+              key={cartProperty.id}
               className="flex justify-between gap-x-4 my-4"
             >
               <p className="truncate capitalize">
-                {cartProperty.propertyLocation.address}
+                {cartProperty.address}
               </p>
               :
               <p className="font-extrabold">
