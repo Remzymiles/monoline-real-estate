@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { toast } from "sonner";
+import { useCartLengthStore } from "../../../../base/store/useCartLengthStore";
 import { useCartPropertyIdsStore } from "../../../../base/store/useCartPropertyIdsStore";
 import { useIsUserLoggedIn } from "../../../../base/store/useIsUserLoggedIn";
 import { useWishListStore } from "../../../../base/store/useWishListStore";
@@ -14,6 +15,10 @@ export const NavigationTab = () => {
   //
   const { propertyIds } = useCartPropertyIdsStore((state) => ({
     propertyIds: state.propertyIds,
+  }));
+  //
+  const { cartLength } = useCartLengthStore((state) => ({
+    cartLength: state.cartLength,
   }));
   //
   const { WishlistPropertyIds } = useWishListStore((state) => ({
@@ -71,9 +76,9 @@ export const NavigationTab = () => {
             }`}
           />
           <p>Cart</p>
-          {propertyIds.length > 0 && (
+          {cartLength > 0 && (
             <p className="absolute -top-2 -right-2 font-extrabold bg-primaryColor-light dark:bg-primaryColorDarkMode dark:text-gray-200 rounded-full px-[5px] text-xs text-white">
-              {propertyIds.length}
+              {cartLength}
             </p>
           )}
         </NavLink>

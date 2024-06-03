@@ -1,6 +1,8 @@
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { IPropertyPictures } from "../../../base/interface/IPropertyPictures";
 import { useWishListStore } from "../../../base/store/useWishListStore";
+import { getAuthData } from "../../../base/utils/getAuthData";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { PhotoIcon } from "../../Icons/PhotoIcon";
 
@@ -10,27 +12,44 @@ export const PropertyPictures = ({
   propertyId,
 }: IPropertyPictures) => {
   //
-  const {
-    wishlistPropertyIds,
-    updateWishlistPropertyIds,
-    removeWishlistPropertyId,
-  } = useWishListStore((state) => ({
-    wishlistPropertyIds: state.wishlistPropertyIds,
-    updateWishlistPropertyIds: state.updateWishlistPropertyIds,
-    removeWishlistPropertyId: state.removeWishlistPropertyId,
-  }));
+  const [userId, setUserId] = useState("");
 
-  const handleAddToWishlist = (propertyId: string) => {
-    if (!wishlistPropertyIds.includes(propertyId)) {
-      updateWishlistPropertyIds(propertyId);
-      toast.success("Property has been added to Wishlist");
-    } else {
-      removeWishlistPropertyId(propertyId);
-      toast.error("Property has been removed from Wishlist");
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setUserId(data.user.id);
+      }
+    };
+
+    fetchData();
+  }, []);
+  //
+  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
+    useHandlePushWishlistProperties();
+  const { wishlistPropertyIds } = useWishListStore((state) => ({
+    wishlistPropertyIds: state.wishlistPropertyIds,
+  }));
+  const [isInWishlist, setIsInWishlist] = useState(false);
+
+  const handleAddToWishlist = async (propertyId: string) => {
+    await pushWishlistProperties(propertyId);
   };
 
-  //
+  useEffect(() => {
+    const fetchWishlistData = async () => {
+      if (!selectedProperty) return;
+
+      const existsInWishlist = await checkIfPropertyExistsInWishlist(
+        userId,
+        selectedProperty.property_id
+      );
+      setIsInWishlist(existsInWishlist);
+    };
+
+    fetchWishlistData();
+  }, [selectedProperty, checkIfPropertyExistsInWishlist]);
+
   return (
     <>
       <div className="flex justify-center items-center gap-3 tablet-below:gap-0">
@@ -40,9 +59,7 @@ export const PropertyPictures = ({
           </p>
           <div
             className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm tablet-above:hidden ${
-              wishlistPropertyIds.includes(
-                String(selectedProperty?.property_id)
-              )
+              isInWishlist
                 ? "bg-primaryColor- dark:bg-primaryColorDarkMode text-white"
                 : "bg-white text-primaryColor-dark dark:text-primaryColorDarkMode"
             }`}
@@ -50,16 +67,12 @@ export const PropertyPictures = ({
           >
             <HeartIcon
               color={`text-sm ${
-                wishlistPropertyIds.includes(
-                  String(selectedProperty?.property_id)
-                )
+                isInWishlist
                   ? "text-white"
                   : "text-primaryColor-dark dark:text-primaryColorDarkMode"
               }`}
             />
-            {wishlistPropertyIds.includes(String(selectedProperty?.property_id))
-              ? "saved"
-              : "save"}
+            {isInWishlist ? "saved" : "save"}
           </div>
           <div
             className="absolute bottom-2 right-2 bg-white/90 text-black text-sm flex gap-2 p-2 capitalize rounded-sm hover:bg-white tablet-above:hidden mobile:text-xs"
@@ -80,9 +93,7 @@ export const PropertyPictures = ({
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">
             <div
               className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm ${
-                wishlistPropertyIds.includes(
-                  String(selectedProperty?.property_id)
-                )
+                isInWishlist
                   ? "bg-primaryColor-dark dark:bg-primaryColorDarkMode text-white"
                   : "bg-white text-primaryColor-dark dark:text-primaryColorDarkMode"
               }`}
@@ -90,18 +101,12 @@ export const PropertyPictures = ({
             >
               <HeartIcon
                 color={`text-sm ${
-                  wishlistPropertyIds.includes(
-                    String(selectedProperty?.property_id)
-                  )
+                  isInWishlist
                     ? "text-white"
                     : "text-primaryColor-dark dark:text-primaryColorDarkMode"
                 }`}
               />
-              {wishlistPropertyIds.includes(
-                String(selectedProperty?.property_id)
-              )
-                ? "saved"
-                : "save"}
+              {isInWishlist ? "saved" : "save"}
             </div>
             <img
               src={selectedProperty?.propertyPhotos[0]?.url[3]}

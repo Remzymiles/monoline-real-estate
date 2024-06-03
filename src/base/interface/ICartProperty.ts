@@ -1,5 +1,5 @@
 export interface ICartProperty{
-    id: string
+    property_id: string
     user_id: string
     description:string
     price: number

@@ -1,8 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { toast } from "sonner";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
+import { useHandlePushCartProperties } from "../../../base/hooks/useHandlePushCartProperties";
 import { IProperty } from "../../../base/interface/IProperty";
-import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { useProperties } from "../../../base/utils/fetchProperties";
 import { PropertyPicturesLoadingSkeleton } from "../../Global/Loaders/PropertyPicturesLoadingSkeleton";
@@ -13,7 +12,6 @@ import { PropertyHighlights } from "./PropertyHighlights";
 import { PropertyPictures } from "./PropertyPictures";
 import { ShowAllPicturesModal } from "./ShowAllPicturesModal";
 import { SimilarProperties } from "./SimilarProperties";
-import { useHandlePushCartProperties } from "../../../base/hooks/useHandlePushCartProperties";
 
 export const PropertyDetailsIndex = () => {
   const {
@@ -21,9 +19,9 @@ export const PropertyDetailsIndex = () => {
     handleOpenAllPicturesModal,
     handleCloseAllPicturesModal,
   } = useHandleIsShowAllPicturesClicked();
-  
+
   const { pushCartProperties } = useHandlePushCartProperties();
-  
+
   const [query] = useSearchParams();
   const propertyId = query.get("id");
 
@@ -33,13 +31,6 @@ export const PropertyDetailsIndex = () => {
     (state) => ({
       updateCheckoutIds: state.updateCheckoutIds,
       setIsPropertyFromCart: state.setIsPropertyFromCart,
-    })
-  );
-
-  const {  } = useCartPropertyIdsStore(
-    (state) => ({
-      propertyIds: state.propertyIds,
-      updatePropertyId: state.updateCartPropertyIds,
     })
   );
 
@@ -70,7 +61,7 @@ export const PropertyDetailsIndex = () => {
   const addPropertyToCart = async () => {
     await pushCartProperties(propertyId as string);
   };
-  // 
+  //
   return (
     <div className="relative min-h-fit">
       <ShowAllPicturesModal

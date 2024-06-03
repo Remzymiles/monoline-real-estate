@@ -19,7 +19,7 @@ export const CartSummary = ({
         {cartProperties.map((cartProperty) => {
           return (
             <div
-              key={cartProperty.id}
+              key={cartProperty.property_id}
               className="flex justify-between gap-x-4 my-4"
             >
               <p className="truncate capitalize">

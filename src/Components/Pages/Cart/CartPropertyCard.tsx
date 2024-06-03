@@ -88,10 +88,10 @@ export const CartPropertyCard = () => {
           {/*  */}
           {cartProperties.map((cartProperty: ICartProperty) => {
             return (
-              <div key={cartProperty?.id}>
+              <div key={cartProperty?.property_id}>
                 <div className="grid grid-cols-4 big-screen-laptop:justify-around gap-x-5 big-screen-mobile-below:flex big-screen-mobile-below:flex-col my-3">
                   <Link
-                    to={`/property-details/address=${cartProperty.address}&city=${cartProperty.city}&state=${cartProperty.state}&country=${cartProperty.country}&?id=${cartProperty.id}`}
+                    to={`/property-details/address=${cartProperty.address}&city=${cartProperty.city}&state=${cartProperty.state}&country=${cartProperty.country}&?id=${cartProperty.property_id}`}
                     className="w-[250px] col-span-2 h-[200px] flex gap-x-4 big-screen-mobile-below:w-[100%] big-screen-mobile-below:h-[250px] big-screen-mobile-below:flex-col big-screen-mobile-below:mb-2"
                   >
                     <img
@@ -112,12 +112,12 @@ export const CartPropertyCard = () => {
                     <div
                       className="w-fit big-screen-mobile-below:flex big-screen-mobile-below:w-full bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 big-screen-mobile-below:py-2 big-screen-mobile-below:justify-center big-screen-mobile-below:gap-x-3 big-screen-mobile-below:items-center big-screen-mobile-below:rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold rounded-full px-[7px] hover:bg-primaryColor-dark transition-colors duration-300"
                       onClick={() => {
-                        handleDeleteCartProperty(cartProperty.id);
+                        handleDeleteCartProperty(cartProperty.property_id);
                       }}
                     >
                       <TrashCanIcon
                         clicked={() => {
-                          handleDeleteCartProperty(cartProperty.id);
+                          handleDeleteCartProperty(cartProperty.property_id);
                         }}
                         extraStyle="text-white dark:text-gray-200"
                       />{" "}
@@ -128,10 +128,10 @@ export const CartPropertyCard = () => {
                     <button
                       className="w-full bg-primaryColor-light big-screen-mobile-below:py-2 py-1 px-2 dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 dark:text-gray-200 hover:bg-primaryColor-dark transition-colors duration-300 rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold"
                       onClick={() => {
-                        handleAddToWishlist(cartProperty.id);
+                        handleAddToWishlist(cartProperty.property_id);
                       }}
                     >
-                      {wishlistPropertyIds.includes(cartProperty.id)
+                      {wishlistPropertyIds.includes(cartProperty.property_id)
                         ? "saved"
                         : "save for later"}
                     </button>

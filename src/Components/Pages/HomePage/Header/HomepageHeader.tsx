@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { useCartPropertyIdsStore } from "../../../../base/store/useCartPropertyIdsStore";
+import { useCartLengthStore } from "../../../../base/store/useCartLengthStore";
 import { useDarkModeStore } from "../../../../base/store/useDarkModeStore";
 import { useIsUserLoggedIn } from "../../../../base/store/useIsUserLoggedIn";
 import { CartIcon } from "../../../Icons/CartIcon";
@@ -11,8 +11,8 @@ import { UserProfileDropdown } from "./UserProfile/UserProfileDropdown";
 
 export const HomepageHeader = () => {
   //
-  const { propertyIds } = useCartPropertyIdsStore((state) => ({
-    propertyIds: state.propertyIds,
+  const { cartLength } = useCartLengthStore((state) => ({
+    cartLength: state.cartLength,
   }));
   //
   const { isUserLoggedIn } = useIsUserLoggedIn((state) => ({
@@ -62,9 +62,9 @@ export const HomepageHeader = () => {
             onClick={handleCartIconClick}
           >
             <CartIcon extraStyle="fill-black/80" />
-            {propertyIds.length > 0 && (
+            {cartLength > 0 && (
               <p className="absolute -top-3 -right-2 font-extrabold text-white bg-primaryColor-light dark:bg-primaryColorDarkMode dark:text-gray-200 rounded-full px-[8px] text-xs py-[2px]">
-                {propertyIds.length}
+                {cartLength}
               </p>
             )}
           </Link>
