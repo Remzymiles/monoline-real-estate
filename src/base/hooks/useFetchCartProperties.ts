@@ -74,6 +74,6 @@ export const useFetchCartProperties = () => {
   return useQuery({
     queryKey: ["cart_properties", userId],
     queryFn: fetchCartProperties,
-    enabled: !!userId, // Ensure the query is not run until the userId is set
+    enabled: !!userId,
   });
 };

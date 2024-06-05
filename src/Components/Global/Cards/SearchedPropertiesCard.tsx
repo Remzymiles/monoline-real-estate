@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { toast } from "sonner";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { IProperty } from "../../../base/interface/IProperty";
-import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useProperties } from "../../../base/utils/fetchProperties";
+import { getAuthData } from "../../../base/utils/getAuthData";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -14,37 +15,35 @@ import { WaveFormLoader } from "../Loaders/WaveFormLoader";
 
 export const SearchedPropertiesCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  //
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setUserId(data.user.id);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
+    useHandlePushWishlistProperties();
+
   const [query] = useSearchParams();
   const searchValue = query.get("search");
 
-  const {
-    wishlistPropertyIds,
-    updateWishlistPropertyId,
-    removeWishlistPropertyId,
-  } = useWishListStore((state) => ({
-    wishlistPropertyIds: state.wishlistPropertyIds,
-    updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    removeWishlistPropertyId: state.removeWishlistPropertyId,
-  }));
-  //
-  const handleAddToWishlist = (propertyId: string) => {
-    if (!wishlistPropertyIds.includes(propertyId)) {
-      updateWishlistPropertyId(propertyId);
-      toast.success("Property has been added to Wishlist");
-    } else {
-      removeWishlistPropertyId(propertyId);
-      toast.error("Property has been removed from Wishlist");
-    }
-  };
-  //
   const { data: properties, isLoading } = useProperties();
-  if (!properties) {
-    return [];
-  }
-  //
+
+  const { propertiesInWishlist, setIsPropertyInWishlist } =
+    useHandleIsPropertyInWishlist((state) => ({
+      propertiesInWishlist: state.propertiesInWishlist,
+      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
+    }));
+
   const filteredSearchedProperties = searchValue
-    ? properties.filter((property: IProperty) => {
+    ? properties?.filter((property: IProperty) => {
         return (
           property.propertyLocation.state
             .toLowerCase()
@@ -55,8 +54,32 @@ export const SearchedPropertiesCard = () => {
         );
       })
     : [];
-  //
-  //
+
+  useEffect(() => {
+    const fetchWishlistStatuses = async () => {
+      if (!filteredSearchedProperties) return;
+      for (const property of filteredSearchedProperties) {
+        if (!userId) return;
+        const exists = await checkIfPropertyExistsInWishlist(
+          userId,
+          property.property_id
+        );
+        setIsPropertyInWishlist(property.property_id, exists);
+      }
+    };
+
+    fetchWishlistStatuses();
+  }, [
+    userId,
+    filteredSearchedProperties,
+    checkIfPropertyExistsInWishlist,
+    setIsPropertyInWishlist,
+  ]);
+
+  const handleAddToWishlist = async (propertyId: string) => {
+    await pushWishlistProperties(propertyId);
+  };
+
   return (
     <>
       {isLoading && (
@@ -64,7 +87,7 @@ export const SearchedPropertiesCard = () => {
           <WaveFormLoader />
         </div>
       )}
-      {filteredSearchedProperties.length > 0 ? (
+      {filteredSearchedProperties && filteredSearchedProperties?.length > 0 ? (
         filteredSearchedProperties.map((property: IProperty, index) => (
           <div
             key={index}
@@ -84,8 +107,8 @@ export const SearchedPropertiesCard = () => {
                   navigation={hoveredIndex === index}
                   pagination={{ clickable: true }}
                 >
-                  {property.propertyPhotos?.map((photo) => {
-                    return photo.url
+                  {property.propertyPhotos?.map((photo) =>
+                    photo.url
                       .slice()
                       .reverse()
                       .map((url, photoIndex) => (
@@ -96,8 +119,8 @@ export const SearchedPropertiesCard = () => {
                             className="w-full h-[270px] rounded-xl object-cover"
                           />
                         </SwiperSlide>
-                      ));
-                  })}
+                      ))
+                  )}
                 </Swiper>
               </div>
               <div className="mt-1 mx-1">
@@ -140,7 +163,7 @@ export const SearchedPropertiesCard = () => {
             </Link>
             <div
               className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
-                wishlistPropertyIds.includes(property.property_id)
+                propertiesInWishlist[property.property_id]
                   ? "bg-white/70"
                   : "bg-white/30"
               }`}
@@ -150,7 +173,7 @@ export const SearchedPropertiesCard = () => {
             >
               <HeartIcon
                 color={`${
-                  wishlistPropertyIds.includes(property.property_id)
+                  propertiesInWishlist[property.property_id]
                     ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                     : "text-white"
                 }`}

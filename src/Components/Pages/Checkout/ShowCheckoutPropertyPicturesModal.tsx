@@ -1,6 +1,8 @@
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { IShowCheckoutPropertyPicturesModal } from "../../../base/interface/IShowCheckoutPropertyPicturesModal";
-import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { getAuthData } from "../../../base/utils/getAuthData";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";
 
@@ -11,25 +13,55 @@ export const ShowCheckoutPropertyPicturesModal = ({
   clickedCheckoutPropertyId,
 }: IShowCheckoutPropertyPicturesModal) => {
   //
-  const {
-    wishlistPropertyIds,
-    updateWishlistPropertyId,
-    removeWishlistPropertyId,
-  } = useWishListStore((state) => ({
-    wishlistPropertyIds: state.wishlistPropertyIds,
-    updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    removeWishlistPropertyId: state.removeWishlistPropertyId,
-  }));
+  const [userId, setUserId] = useState("");
 
-  const handleAddToWishlist = (clickedCheckoutPropertyId: string) => {
-    if (!wishlistPropertyIds.includes(clickedCheckoutPropertyId)) {
-      updateWishlistPropertyId(clickedCheckoutPropertyId);
-      toast.success("Property has been added to Wishlist");
-    } else {
-      removeWishlistPropertyId(clickedCheckoutPropertyId);
-      toast.error("Property has been removed from Wishlist");
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setUserId(data.user.id);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
+    useHandlePushWishlistProperties();
+  //
+  const { propertiesInWishlist, setIsPropertyInWishlist } =
+    useHandleIsPropertyInWishlist((state) => ({
+      propertiesInWishlist: state.propertiesInWishlist,
+      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
+    }));
+
+  useEffect(() => {
+    if (!clickedCheckoutPropertyId) return;
+    const fetchWishlistStatuses = async () => {
+      const exists = await checkIfPropertyExistsInWishlist(
+        userId,
+        clickedCheckoutPropertyId
+      );
+      setIsPropertyInWishlist(clickedCheckoutPropertyId, exists);
+    };
+
+    fetchWishlistStatuses();
+  }, [
+    userId,
+    clickedCheckoutProperty,
+    checkIfPropertyExistsInWishlist,
+    setIsPropertyInWishlist,
+  ]);
+  //
+
+  const handleAddToWishlist = async (propertyId: string) => {
+    await pushWishlistProperties(propertyId);
   };
+
+  const isPropertyInWishlist =
+    clickedCheckoutProperty &&
+    propertiesInWishlist[clickedCheckoutProperty.property_id];
+
   //
   return (
     <>
@@ -62,9 +94,7 @@ export const ShowCheckoutPropertyPicturesModal = ({
                 <div>
                   <div
                     className={`capitalize border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-2 rounded-lg font-bold text-sm ${
-                      wishlistPropertyIds.includes(
-                        String(clickedCheckoutPropertyId)
-                      )
+                      isPropertyInWishlist
                         ? "bg-primaryColor-light text-white hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/90 dark:hover:bg-primaryColorDarkMode"
                         : "bg-white text-primaryColor-dark hover:bg-gray-200"
                     }`}
@@ -74,18 +104,12 @@ export const ShowCheckoutPropertyPicturesModal = ({
                   >
                     <HeartIcon
                       color={`text-sm ${
-                        wishlistPropertyIds.includes(
-                          String(clickedCheckoutProperty?.property_id)
-                        )
+                        isPropertyInWishlist
                           ? "text-white"
                           : "text-primaryColor-dark dark:text-primaryColorDarkMode"
                       }`}
                     />
-                    {wishlistPropertyIds.includes(
-                      String(clickedCheckoutProperty?.property_id)
-                    )
-                      ? "saved"
-                      : "save"}
+                    {isPropertyInWishlist ? "saved" : "save"}
                   </div>
                 </div>
                 <div>

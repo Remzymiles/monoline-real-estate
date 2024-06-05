@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { IProperty } from "../../../base/interface/IProperty";
-import { useWishListStore } from "../../../base/store/useWishListStore";
-import { useProperties } from "../../../base/utils/fetchProperties";
+import { useFetchWishlistProperties } from "../../../base/hooks/useFetchWishlistProperties";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
+import { IWishlistProperty } from "../../../base/interface/IWishlistProperty";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { getAuthData } from "../../../base/utils/getAuthData";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -13,46 +15,71 @@ import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 export const WishlistCards = () => {
   //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
-  const {
-    wishlistPropertyIds,
-    updateWishlistPropertyId,
-    removeWishlistPropertyId,
-  } = useWishListStore((state) => ({
-    wishlistPropertyIds: state.wishlistPropertyIds,
-    updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    removeWishlistPropertyId: state.removeWishlistPropertyId,
-  }));
+  const { data: wishlistProperties } = useFetchWishlistProperties();
   //
-  const handleAddToWishlist = (propertyId: string) => {
-    !wishlistPropertyIds.includes(propertyId)
-      ? updateWishlistPropertyId(propertyId)
-      : removeWishlistPropertyId(propertyId);
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setUserId(data.user.id);
+      }
+    };
+
+    fetchData();
+  }, []);
+  //
+  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
+    useHandlePushWishlistProperties();
+  //
+  const { setIsPropertyInWishlist } = useHandleIsPropertyInWishlist(
+    (state) => ({
+      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
+    })
+  );
+
+  //
+  useEffect(() => {
+    const fetchWishlistStatuses = async () => {
+      if (!wishlistProperties) return;
+      for (const property of wishlistProperties) {
+        if (!userId) return;
+        const exists = await checkIfPropertyExistsInWishlist(
+          userId,
+          property.property_id
+        );
+        setIsPropertyInWishlist(property.property_id, exists);
+      }
+    };
+
+    fetchWishlistStatuses();
+  }, [
+    userId,
+    wishlistProperties,
+    checkIfPropertyExistsInWishlist,
+    setIsPropertyInWishlist,
+  ]);
+  //
+  const handleAddToWishlist = async (propertyId: string) => {
+    await pushWishlistProperties(propertyId);
   };
   //
-
-  const { data: properties } = useProperties();
-  if (!properties) {
-    return;
-  }
-  
-  const wishlistProperties = properties.filter((property: IProperty) => {
-    return wishlistPropertyIds.includes(property.property_id);
-  });
 
   //
   return (
     <div
       className={`tablet-below:flex tablet-below:justify-center tablet-below:flex-wrap tablet-below:gap-5 ${
-        wishlistPropertyIds.length > 0
+        wishlistProperties && wishlistProperties.length > 0
           ? "minMax"
           : " flex justify-center items-center min-h-[30vh]"
       }`}
     >
-      {wishlistPropertyIds.length > 0 ? (
-        wishlistProperties.map((property:IProperty, index) => (
+      {wishlistProperties && wishlistProperties.length > 0 ? (
+        wishlistProperties.map((property: IWishlistProperty, index) => (
           <div className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[235px] tablet-above:w-[400px] relative">
             <Link
-              to={`/property-details/address=${property.propertyLocation.address}&city=${property.propertyLocation.city}&state=${property.propertyLocation.state}&country=${property.propertyLocation.country}&?id=${property.property_id}`}
+              to={`/property-details/address=${property.address}&city=${property.city}&state=${property.state}&country=${property.country}&?id=${property.property_id}`}
               className="w-full h-[270px] relative"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -65,20 +92,20 @@ export const WishlistCards = () => {
                   navigation={hoveredIndex === index}
                   pagination={{ clickable: true }}
                 >
-                  {property.propertyPhotos?.map((photo) => {
-                    return photo.url
-                      .slice()
-                      .reverse()
-                      .map((url, photoIndex) => (
+                  {property.property_photo_urls
+                    .slice()
+                    .reverse()
+                    .map((photo, photoIndex) => {
+                      return (
                         <SwiperSlide key={photoIndex}>
                           <img
-                            src={url}
+                            src={photo}
                             alt="image"
                             className="w-full h-[270px] rounded-xl object-cover"
                           />
                         </SwiperSlide>
-                      ));
-                  })}
+                      );
+                    })}
                 </Swiper>
               </div>
               <div className="mt-1 mx-1">
@@ -93,30 +120,22 @@ export const WishlistCards = () => {
                 <div className="mt-1 flex gap-3">
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <BedIcon extraStyle="text-gray-500 text-[15px]" />{" "}
-                    <span className="font-extrabold">
-                      {property.propertyDetails.beds}
-                    </span>
+                    <span className="font-extrabold">{property.beds}</span>
                     bd
                   </span>
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <BathIcon extraStyle="text-gray-500 text-[15px]" />{" "}
-                    <span className="font-extrabold">
-                      {property.propertyDetails.baths}
-                    </span>
+                    <span className="font-extrabold">{property.baths}</span>
                     ba
                   </span>
                   <span className="flex gap-1 text-sm text-secondaryColor-dark dark:text-gray-400">
                     <SquareFootIcon extraStyle="fill-gray-500 w-[20px] h-[20px] mt-[2px]" />
-                    <span className="font-extrabold">
-                      {property.propertyDetails.sqft}
-                    </span>
+                    <span className="font-extrabold">{property.sqft}</span>
                     sqft
                   </span>
                 </div>
-                <p className="capitalize text-[15px]">
-                  {property.propertyLocation.address}
-                </p>
-                <p className="text-[15px]">{property.propertyLocation.city}</p>
+                <p className="capitalize text-[15px]">{property.address}</p>
+                <p className="text-[15px]">{property.city}</p>
               </div>
             </Link>
             <div

@@ -22,10 +22,7 @@ export const CartSummary = ({
               key={cartProperty.property_id}
               className="flex justify-between gap-x-4 my-4"
             >
-              <p className="truncate capitalize">
-                {cartProperty.address}
-              </p>
-              :
+              <p className="truncate capitalize">{cartProperty.address}</p>:
               <p className="font-extrabold">
                 ${cartProperty.price.toLocaleString()}
               </p>
@@ -59,7 +56,14 @@ export const CartSummary = ({
         {/*  */}
         <Link
           to={`${cartProperties.length > 0 ? "/checkout" : "/cart-page"}`}
-          onClick={handleCheckoutPropertyIds}
+          onClick={() => {
+            const propertyIds: string[] = cartProperties.map(
+              (property) => property.property_id
+            );
+            handleCheckoutPropertyIds(
+              propertyIds.length === 1 ? propertyIds[0] : propertyIds
+            );
+          }}
         >
           <button className="mt-3 bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 dark:text-gary-200 w-full py-2 rounded-md capitalize text-white text-lg font-extrabold hover:bg-primaryColor-dark transition-colors duration-300">
             checkout

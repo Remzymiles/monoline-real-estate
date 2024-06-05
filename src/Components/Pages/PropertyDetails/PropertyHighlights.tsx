@@ -6,12 +6,16 @@ import { ParkingIcon } from "../../Icons/ParkingIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 import { TemperatureIcon } from "../../Icons/TemperatureIcon";
 
-export const PropertyHighlights = ({selectedProperty}:{selectedProperty:IProperty|undefined}) => {
-    const pricePerSquareFoot =
+export const PropertyHighlights = ({
+  selectedProperty,
+}: {
+  selectedProperty: IProperty | undefined;
+}) => {
+  const pricePerSquareFoot =
     selectedProperty &&
-    selectedProperty.details &&
-    selectedProperty.details.sqft
-      ? selectedProperty.price / selectedProperty.details.sqft
+    selectedProperty.propertyDetails &&
+    selectedProperty.propertyDetails.sqft
+      ? selectedProperty.price / selectedProperty.propertyDetails.sqft
       : 0;
   return (
     <>
@@ -54,7 +58,7 @@ export const PropertyHighlights = ({selectedProperty}:{selectedProperty:IPropert
             </span>
             <span className="capitalize font-extrabold text-sm mobile:text-xs">
               {" "}
-              ${Math.round(Math.random()*1000)}/Monthly
+              ${Math.round(Math.random() * 1000)}/Monthly
             </span>
           </div>
           {/*  */}
@@ -75,7 +79,7 @@ export const PropertyHighlights = ({selectedProperty}:{selectedProperty:IPropert
             </span>
             <span className="capitalize font-extrabold text-sm mobile:text-xs">
               {" "}
-              {Math.round(Math.random()*20)} days ago
+              {Math.round(Math.random() * 20)} days ago
             </span>
           </div>
         </div>

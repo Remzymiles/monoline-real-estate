@@ -2,5 +2,5 @@ import { ICartProperty } from "./ICartProperty";
 
 export interface ICartSummary {
   cartProperties: ICartProperty[];
-  handleCheckoutPropertyIds: () => void;
+  handleCheckoutPropertyIds: (value: string | string[]) => void;
 }

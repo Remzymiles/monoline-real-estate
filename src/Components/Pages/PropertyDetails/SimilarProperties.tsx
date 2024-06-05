@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { ISimilarProperty } from "../../../base/interface/ISimilarProperties";
-import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { getAuthData } from "../../../base/utils/getAuthData";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -14,31 +15,51 @@ export const SimilarProperties = ({
   selectedProperty,
   similarProperties,
 }: ISimilarProperty) => {
-  //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
-  //
-  const {
-    wishlistPropertyIds,
-    updateWishlistPropertyId,
-    removeWishlistPropertyId,
-  } = useWishListStore((state) => ({
-    wishlistPropertyIds: state.wishlistPropertyIds,
-    updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    removeWishlistPropertyId: state.removeWishlistPropertyId,
-  }));
+  const [userId, setUserId] = useState("");
 
-  const handleAddToWishlist = (propertyId: string) => {
-    if (!wishlistPropertyIds.includes(propertyId)) {
-      updateWishlistPropertyId(propertyId);
-      toast.success("Property has been added to Wishlist");
-    } else {
-      removeWishlistPropertyId(propertyId);
-      toast.error("Property has been removed from Wishlist");
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setUserId(data.user.id);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
+    useHandlePushWishlistProperties();
+
+  const { setIsPropertyInWishlist, propertiesInWishlist } =
+    useHandleIsPropertyInWishlist((state) => ({
+      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
+      propertiesInWishlist: state.propertiesInWishlist,
+    }));
+
+  useEffect(() => {
+    const fetchWishlistStatuses = async () => {
+      for (const property of similarProperties) {
+        const exists = await checkIfPropertyExistsInWishlist(
+          userId,
+          property.property_id
+        );
+        setIsPropertyInWishlist(property.property_id, exists);
+      }
+    };
+
+    fetchWishlistStatuses();
+  }, [
+    userId,
+    similarProperties,
+    checkIfPropertyExistsInWishlist,
+    setIsPropertyInWishlist,
+  ]);
+
+  const handleAddToWishlist = async (propertyId: string) => {
+    await pushWishlistProperties(propertyId);
   };
-  //
 
-  //
   return (
     <>
       <div className="mt-5">
@@ -47,6 +68,9 @@ export const SimilarProperties = ({
         </h1>
         <div className="flex min-w-full overflow-auto gap-x-4 pb-5">
           {similarProperties.map((property, index) => {
+            const isPropertyInWishlist =
+              propertiesInWishlist[property.property_id];
+
             return (
               <div
                 key={index}
@@ -123,12 +147,9 @@ export const SimilarProperties = ({
                     </p>
                   </div>
                 </Link>
-                {/*  */}
                 <div
                   className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
-                    wishlistPropertyIds.includes(property.property_id)
-                      ? "bg-white/70"
-                      : "bg-white/30"
+                    isPropertyInWishlist ? "bg-white/70" : "bg-white/30"
                   }`}
                   onClick={() => {
                     handleAddToWishlist(property.property_id);
@@ -136,7 +157,7 @@ export const SimilarProperties = ({
                 >
                   <HeartIcon
                     color={`${
-                      wishlistPropertyIds.includes(property.property_id)
+                      isPropertyInWishlist
                         ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                         : "text-white"
                     }`}

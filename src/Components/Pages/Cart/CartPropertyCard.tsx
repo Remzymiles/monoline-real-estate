@@ -1,20 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
 import { useDeleteCartProperty } from "../../../base/hooks/useDeleteCartProperty";
 import { useFetchCartProperties } from "../../../base/hooks/useFetchCartProperties";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { ICartProperty } from "../../../base/interface/ICartProperty";
 import { useCartPropertyIdsStore } from "../../../base/store/useCartPropertyIdsStore";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
-import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { getAuthData } from "../../../base/utils/getAuthData";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { TrashCanIcon } from "../../Icons/TrashCanIcon";
 import { CartSummary } from "./CartSummary";
 
 export const CartPropertyCard = () => {
-  //
   const { data: cartProperties, isLoading } = useFetchCartProperties();
   const { mutate: deleteCartProperty } = useDeleteCartProperty();
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setUserId(data.user.id);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
+    useHandlePushWishlistProperties();
 
   const { propertyIds, removePropertyId } = useCartPropertyIdsStore(
     (state) => ({
@@ -37,43 +52,52 @@ export const CartPropertyCard = () => {
     })
   );
 
-  const {
-    wishlistPropertyIds,
-    updateWishlistPropertyId,
-    removeWishlistPropertyId,
-  } = useWishListStore((state) => ({
-    wishlistPropertyIds: state.wishlistPropertyIds,
-    updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    removeWishlistPropertyId: state.removeWishlistPropertyId,
-  }));
+  const { propertiesInWishlist, setIsPropertyInWishlist } =
+    useHandleIsPropertyInWishlist((state) => ({
+      propertiesInWishlist: state.propertiesInWishlist,
+      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
+    }));
+
+  useEffect(() => {
+    const fetchWishlistStatuses = async () => {
+      if (!cartProperties) return;
+      for (const property of cartProperties) {
+        const exists = await checkIfPropertyExistsInWishlist(
+          userId,
+          property.property_id
+        );
+        setIsPropertyInWishlist(property.property_id, exists);
+      }
+    };
+
+    fetchWishlistStatuses();
+  }, [
+    userId,
+    cartProperties,
+    checkIfPropertyExistsInWishlist,
+    setIsPropertyInWishlist,
+  ]);
 
   if (!cartProperties) {
     return null;
   }
 
-  const handleCheckoutPropertyIds = () => {
+  const handleCheckoutPropertyIds = (propertyIds: string | string[]) => {
     if (cartProperties.length > 0) {
       updateCheckoutIds(propertyIds);
       setIsPropertyFromCart(true);
     }
   };
 
-  const handleAddToWishlist = (propertyId: string) => {
-    if (!wishlistPropertyIds.includes(propertyId)) {
-      updateWishlistPropertyId(propertyId);
-      toast.success("Property has been added to Wishlist");
-    } else {
-      removeWishlistPropertyId(propertyId);
-      toast.error("Property has been removed from Wishlist");
-    }
+  const handleAddToWishlist = async (propertyId: string) => {
+    await pushWishlistProperties(propertyId);
   };
+
   const handleDeleteCartProperty = (id: string) => {
     deleteCartProperty(id);
     removePropertyId(id);
   };
 
-
-  //
   return (
     <>
       <div className="flex flex-col big-screen-laptop:flex-row gap-14">
@@ -83,10 +107,11 @@ export const CartPropertyCard = () => {
               Your cart is empty.
             </p>
           )}
-          {/*  */}
           {isLoading && <WaveFormLoader />}
-          {/*  */}
           {cartProperties.map((cartProperty: ICartProperty) => {
+            const isPropertyInWishlist =
+              propertiesInWishlist[cartProperty.property_id];
+
             return (
               <div key={cartProperty?.property_id}>
                 <div className="grid grid-cols-4 big-screen-laptop:justify-around gap-x-5 big-screen-mobile-below:flex big-screen-mobile-below:flex-col my-3">
@@ -131,9 +156,7 @@ export const CartPropertyCard = () => {
                         handleAddToWishlist(cartProperty.property_id);
                       }}
                     >
-                      {wishlistPropertyIds.includes(cartProperty.property_id)
-                        ? "saved"
-                        : "save for later"}
+                      {isPropertyInWishlist ? "saved" : "save for later"}
                     </button>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
-import { toast } from "sonner";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
+import { useRemovePropertyFromWishlist } from "../../../base/hooks/useRemovePropertyFromWishlist";
 import { IShowAllPicturesModal } from "../../../base/interface/IShowAllPictureModal";
-import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";
 
@@ -11,24 +12,17 @@ export const ShowAllPicturesModal = ({
   propertyId,
 }: IShowAllPicturesModal) => {
   //
-  const {
-    wishlistPropertyIds,
-    updateWishlistPropertyId,
-    removeWishlistPropertyId,
-  } = useWishListStore((state) => ({
-    wishlistPropertyIds: state.wishlistPropertyIds,
-    updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    removeWishlistPropertyId: state.removeWishlistPropertyId,
-  }));
+  const { pushWishlistProperties } = useHandlePushWishlistProperties();
   //
-  const handleAddToWishlist = (propertyId: string) => {
-    if (!wishlistPropertyIds.includes(propertyId)) {
-      updateWishlistPropertyId(propertyId);
-      toast.success("Property has been added to Wishlist");
-    } else {
-      removeWishlistPropertyId(propertyId);
-      toast.error("Property has been removed from Wishlist");
-    }
+  const { mutate: removeWishlistProperty } = useRemovePropertyFromWishlist();
+
+  const { isPropertyInWishlist } = useHandleIsPropertyInWishlist((state) => ({
+    isPropertyInWishlist: state.isPropertyInWishlist,
+  }));
+
+  const handleAddToWishlist = async (propertyId: string) => {
+    await pushWishlistProperties(propertyId);
+    isPropertyInWishlist === true && removeWishlistProperty(propertyId);
   };
   //
   return (
@@ -58,11 +52,11 @@ export const ShowAllPicturesModal = ({
                   {selectedProperty?.propertyDetails.baths}ba
                 </p>
               </div>
-              <div className="flex gap-7 justify-center items-center">
+              <div className="flex gap-7 mobile:gap-5 justify-center items-center">
                 <div>
-                  <div
-                    className={`capitalize border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-2 rounded-lg font-bold text-sm ${
-                      wishlistPropertyIds.includes(propertyId)
+                  <button
+                    className={`capitalize border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-1.5 rounded-lg font-bold text-sm ${
+                      isPropertyInWishlist === true
                         ? "bg-primaryColor-light dark:bg-primaryColorDarkMode/90 text-white hover:bg-primaryColor-dark dark:hover:bg-primaryColorDarkMode"
                         : "bg-white text-primaryColor-dark hover:bg-gray-200"
                     }`}
@@ -70,17 +64,13 @@ export const ShowAllPicturesModal = ({
                   >
                     <HeartIcon
                       color={`text-sm ${
-                        wishlistPropertyIds.includes(
-                          String(selectedProperty?.property_id)
-                        )
+                        isPropertyInWishlist === true
                           ? "text-white"
                           : "text-primaryColor-dark dark:text-primaryColorDarkMode"
                       }`}
                     />
-                    {wishlistPropertyIds.includes(String(selectedProperty?.property_id))
-                      ? "saved"
-                      : "save"}
-                  </div>
+                    {isPropertyInWishlist === true ? "saved" : "save"}
+                  </button>
                 </div>
                 <div>
                   <XIcon

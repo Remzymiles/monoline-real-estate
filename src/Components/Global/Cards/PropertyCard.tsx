@@ -1,11 +1,12 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useHandleFilterProperties } from "../../../base/hooks/useHandleFilterProperties";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { IProperty } from "../../../base/interface/IProperty";
-import { useWishListStore } from "../../../base/store/useWishListStore";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { getAuthData } from "../../../base/utils/getAuthData";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -14,35 +15,63 @@ import { PropertyCardLoadingSkeleton } from "../Loaders/PropertyCardLoadingSkele
 
 export const PropertyCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  //
   const { filteredProperties, filterOptions, isLoading } =
     useHandleFilterProperties();
-  //
-  const {
-    wishlistPropertyIds,
-    updateWishlistPropertyId,
-    removeWishlistPropertyId,
-  } = useWishListStore((state) => ({
-    wishlistPropertyIds: state.wishlistPropertyIds,
-    updateWishlistPropertyId: state.updateWishlistPropertyIds,
-    removeWishlistPropertyId: state.removeWishlistPropertyId,
-  }));
-  //
-  const handleAddToWishlist = (propertyId: string) => {
-    if (!wishlistPropertyIds.includes(propertyId)) {
-      updateWishlistPropertyId(propertyId);
-      toast.success("Property has been added to Wishlist");
-    } else {
-      removeWishlistPropertyId(propertyId);
-      toast.error("Property has been removed from Wishlist");
-    }
-  };
-  //
+
   useLayoutEffect(() => {
     window.scroll({
       top: 0,
       behavior: "smooth",
     });
   }, [filterOptions]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setUserId(data.user.id);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
+    useHandlePushWishlistProperties();
+  //
+  const { propertiesInWishlist, setIsPropertyInWishlist } =
+    useHandleIsPropertyInWishlist((state) => ({
+      propertiesInWishlist: state.propertiesInWishlist,
+      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
+    }));
+
+  useEffect(() => {
+    const fetchWishlistStatuses = async () => {
+      if (!filteredProperties) return;
+      for (const property of filteredProperties) {
+        if (!userId) return;
+        const exists = await checkIfPropertyExistsInWishlist(
+          userId,
+          property.property_id
+        );
+        setIsPropertyInWishlist(property.property_id, exists);
+      }
+    };
+
+    fetchWishlistStatuses();
+  }, [
+    userId,
+    filteredProperties,
+    checkIfPropertyExistsInWishlist,
+    setIsPropertyInWishlist,
+  ]);
+  //
+  const handleAddToWishlist = async (propertyId: string) => {
+    await pushWishlistProperties(propertyId);
+  };
+  //
 
   //
   return (
@@ -52,7 +81,7 @@ export const PropertyCard = () => {
           <PropertyCardLoadingSkeleton key={index} />
         ))
       ) : filteredProperties.length > 0 ? (
-        filteredProperties.map((property: IProperty,index) => (
+        filteredProperties.map((property: IProperty, index) => (
           <div
             key={property.property_id}
             className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[240px] tablet-above:w-[250px] property-card relative"
@@ -127,7 +156,7 @@ export const PropertyCard = () => {
             </Link>
             <div
               className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
-                wishlistPropertyIds.includes(property.property_id)
+                propertiesInWishlist[property.property_id]
                   ? "bg-white/70"
                   : "bg-white/30"
               }`}
@@ -137,7 +166,7 @@ export const PropertyCard = () => {
             >
               <HeartIcon
                 color={`${
-                  wishlistPropertyIds.includes(property.property_id)
+                  propertiesInWishlist[property.property_id]
                     ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                     : "text-white"
                 }`}
