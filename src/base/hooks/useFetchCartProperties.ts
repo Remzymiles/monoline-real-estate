@@ -6,9 +6,7 @@ import { getAuthData } from "../utils/getAuthData";
 
 export const useFetchCartProperties = () => {
   const queryClient = useQueryClient();
-  //
   const [userId, setUserId] = useState("");
-  //
   const { updateCartLength } = useCartLengthStore((state) => ({
     updateCartLength: state.updateCartLength,
   }));
@@ -20,10 +18,8 @@ export const useFetchCartProperties = () => {
         setUserId(data.user.id);
       }
     };
-
     fetchUserId();
   }, []);
-  //
 
   useEffect(() => {
     if (!userId) return;
@@ -42,9 +38,11 @@ export const useFetchCartProperties = () => {
       updateCartLength(count ?? 0);
     };
 
+    // 
     fetchCartLength();
 
-    supabase
+    // 
+    const subscription = supabase
       .channel("custom-all-channel")
       .on(
         "postgres_changes",
@@ -55,8 +53,12 @@ export const useFetchCartProperties = () => {
         }
       )
       .subscribe();
-  }, [userId, updateCartLength]);
-  //
+
+    // 
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [userId, updateCartLength, queryClient]);
 
   const fetchCartProperties = async () => {
     const { data, error } = await supabase

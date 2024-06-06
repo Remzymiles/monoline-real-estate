@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ICartSummary } from "../../../base/interface/ICartSummary";
+import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 
 export const CartSummary = ({
   cartProperties,
@@ -10,6 +11,10 @@ export const CartSummary = ({
     (accumulator, currentValue) => accumulator + currentValue.price,
     0
   );
+  //
+  const { setIsPropertyFromCart } = useCheckoutStore((state) => ({
+    setIsPropertyFromCart: state.setIsPropertyFromCart,
+  }));
   //
   return (
     <div className="px-3 bg-primaryColor-lightCream dark:bg-secondaryColor-dark/10 py-3 big-screen-laptop:w-[30%] h-fit shadow-xl border dark:border-gray-400/80 rounded-lg sticky top-0">
@@ -63,6 +68,7 @@ export const CartSummary = ({
             handleCheckoutPropertyIds(
               propertyIds.length === 1 ? propertyIds[0] : propertyIds
             );
+            setIsPropertyFromCart(true)
           }}
         >
           <button className="mt-3 bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 dark:text-gary-200 w-full py-2 rounded-md capitalize text-white text-lg font-extrabold hover:bg-primaryColor-dark transition-colors duration-300">

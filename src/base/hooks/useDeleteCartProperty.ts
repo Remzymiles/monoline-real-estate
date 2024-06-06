@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import supabase from "../../config/supabaseClient";
 import { getAuthData } from "../utils/getAuthData";
-import { useEffect, useState } from "react";
 
 export const useDeleteCartProperty = () => {
   const queryClient = useQueryClient();
-  // 
   const [userId, setUserId] = useState("");
+  //
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +40,6 @@ export const useDeleteCartProperty = () => {
       toast.error(error.message);
     },
   });
-
 
   return {
     mutate,

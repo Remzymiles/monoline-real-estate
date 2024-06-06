@@ -7,6 +7,7 @@ import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePu
 import { IWishlistProperty } from "../../../base/interface/IWishlistProperty";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { getAuthData } from "../../../base/utils/getAuthData";
+import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -15,7 +16,7 @@ import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 export const WishlistCards = () => {
   //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
-  const { data: wishlistProperties } = useFetchWishlistProperties();
+  const { data: wishlistProperties, isLoading } = useFetchWishlistProperties();
   //
   const [userId, setUserId] = useState<string | null>(null);
 
@@ -72,12 +73,23 @@ export const WishlistCards = () => {
       className={`tablet-below:flex tablet-below:justify-center tablet-below:flex-wrap tablet-below:gap-5 ${
         wishlistProperties && wishlistProperties.length > 0
           ? "minMax"
-          : " flex justify-center items-center min-h-[30vh]"
+          : "flex justify-center items-center min-h-[40vh] relative"
       }`}
     >
-      {wishlistProperties && wishlistProperties.length > 0 ? (
+      <div
+        className={`absolute flex justify-center items-center z-50 top-[50%] left-[50%] ${
+          isLoading ? "block" : "hidden"
+        }`}
+      >
+        <WaveFormLoader />
+      </div>
+      {wishlistProperties &&
+        wishlistProperties.length > 0 &&
         wishlistProperties.map((property: IWishlistProperty, index) => (
-          <div className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[235px] tablet-above:w-[400px] relative">
+          <div
+            className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[235px] tablet-above:w-[400px] relative"
+            key={property.property_id}
+          >
             <Link
               to={`/property-details/address=${property.address}&city=${property.city}&state=${property.state}&country=${property.country}&?id=${property.property_id}`}
               className="w-full h-[270px] relative"
@@ -149,14 +161,15 @@ export const WishlistCards = () => {
               />
             </div>
           </div>
-        ))
-      ) : (
-        <>
-          <p className="text-xl font-extrabold capitalize">
-            wishlist is empty. add properties
-          </p>
-        </>
-      )}
+        ))}
+      {!wishlistProperties ||
+        (wishlistProperties.length <= 0 && (
+          <>
+            <p className="text-xl font-extrabold capitalize">
+              wishlist is empty. add properties
+            </p>
+          </>
+        ))}
 
       {/*  */}
     </div>
