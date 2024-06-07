@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useProperties } from "../../../base/hooks/useFetchAllProperties";
 import { useHandleCheckoutPropertyPicturesClick } from "../../../base/hooks/useHandleCheckoutPropertyPicturesClick";
 import { useHandlePaymentSuccessModal } from "../../../base/hooks/useHandlePaymentSuccessModal";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
-import { useProperties } from "../../../base/utils/fetchProperties";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutPropertyInfo } from "./CheckoutPropertyInfo";
@@ -12,6 +12,8 @@ import { ShowCheckoutPropertyPicturesModal } from "./ShowCheckoutPropertyPicture
 export const CheckoutIndex = () => {
   //
   const [isPaymentButtonClicked, setIsPaymentButtonClicked] = useState(false);
+  const { data: properties } = useProperties();
+  //
   useEffect(() => {
     isPaymentButtonClicked || isPaymentSuccessful
       ? (window.document.body.style.overflow = "hidden")
@@ -35,7 +37,6 @@ export const CheckoutIndex = () => {
     checkoutIds: state.checkoutIds,
   }));
   //
-  const { data: properties } = useProperties();
 
   if (!properties) {
     return console.log("No properties available");
@@ -60,7 +61,7 @@ export const CheckoutIndex = () => {
         )}
 
         {isPaymentSuccessful && (
-          <div className="min-w-[300px] h-[200px] mobile:mx-5 bg-white dark:bg-secondaryColor-dark px-4 py-3 rounded-lg fixed top-[35%] flex flex-col justify-center gap-y-5 capitalize">
+          <div className="min-w-[300px] h-[200px] mobile:mx-5 bg-white dark:bg-secondaryColor-dark px-4 py-3 rounded-lg fixed top-[40%] flex flex-col justify-center text-center gap-y-5 capitalize">
             <p className="font-bold mb-2 dark:text-gray-300">
               payment successful. congrats on your new home
             </p>

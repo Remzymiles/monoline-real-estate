@@ -1,28 +1,21 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { toast } from "sonner";
 import supabase from "../../config/supabaseClient";
 import { IProperty } from "../interface/IProperty";
 import { useHandleIsPropertyInWishlist } from "../store/useHandleIsPropertyInWishlistStore";
-import { useProperties } from "../utils/fetchProperties";
-import { getAuthData } from "../utils/getAuthData";
+import { useUserIdStore } from "../store/useUserIdStore";
+import { useProperties } from "./useFetchAllProperties";
 import { useRemovePropertyFromWishlist } from "./useRemovePropertyFromWishlist";
 
 export const useHandlePushWishlistProperties = () => {
-  const [userId, setUserId] = useState<string | null>(null);
   const { data: properties } = useProperties();
   const { mutate: removeFromWishlist } = useRemovePropertyFromWishlist();
   const { setIsPropertyInWishlist } = useHandleIsPropertyInWishlist();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
+  //
 
   const checkIfPropertyExistsInWishlist = useCallback(
     async (userId: string, propertyId: string) => {
@@ -90,10 +83,8 @@ export const useHandlePushWishlistProperties = () => {
 
       for (const property of wishlistProperties) {
         try {
-          const propertyExistsInWishlist = await checkIfPropertyExistsInWishlist(
-            userId,
-            property.property_id
-          );
+          const propertyExistsInWishlist =
+            await checkIfPropertyExistsInWishlist(userId, property.property_id);
 
           if (propertyExistsInWishlist) {
             removeFromWishlist(property.property_id);
@@ -115,7 +106,10 @@ export const useHandlePushWishlistProperties = () => {
               property_photo_urls: property.propertyPhotos[0].url,
             };
 
-            await insertWishlistProperties("wishlist_properties", propertyToInsert);
+            await insertWishlistProperties(
+              "wishlist_properties",
+              propertyToInsert
+            );
           }
         } catch (error) {
           console.error("Error in pushWishlistProperties:", error);

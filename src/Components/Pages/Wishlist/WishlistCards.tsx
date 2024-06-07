@@ -6,7 +6,7 @@ import { useFetchWishlistProperties } from "../../../base/hooks/useFetchWishlist
 import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { IWishlistProperty } from "../../../base/interface/IWishlistProperty";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
-import { getAuthData } from "../../../base/utils/getAuthData";
+import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
@@ -18,18 +18,9 @@ export const WishlistCards = () => {
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   const { data: wishlistProperties, isLoading } = useFetchWishlistProperties();
   //
-  const [userId, setUserId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
   //
   const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
     useHandlePushWishlistProperties();

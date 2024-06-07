@@ -1,16 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
-import { ChangeEvent, useEffect, useState } from "react";
-import { toast } from "sonner";
+import { ChangeEvent } from "react";
 import { useProfilePhotoStore } from "../../../base/store/useProfilePhotoStore";
-import { getAuthData } from "../../../base/utils/getAuthData";
-import supabase from "../../../config/supabaseClient";
 import { CameraIcon } from "../../Icons/CameraIcon";
 import { UserProfileIcon } from "../../Icons/UserProfileIcon";
 
 export const ProfileImage = () => {
-  //
-  // const [profilePicture, setProfilePicture] = useState<string>("");
-  // const [userId, setUserId] = useState("");
   //
   const { updateProfilePhotoUrl, profilePhotoUrl } = useProfilePhotoStore(
     (state) => ({
@@ -19,45 +12,10 @@ export const ProfileImage = () => {
     })
   );
   //
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getAuthData();
-  //     if (data) {
-  //       setUserId(data.user.id);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-  //
-  // const { mutate } = useMutation({
-  //   mutationFn: async ({ imageUrl }: { imageUrl: string }) => {
-  //     const { error } = await supabase
-  //       .from("userProfilePicture")
-  //       .update({ profile_photo_url: imageUrl })
-  //       .eq("id", userId);
-
-  //     if (error) {
-  //       throw new Error(error.message);
-  //     }
-
-  //     return "Profile image URL updated successfully";
-  //   },
-  //   onSuccess: () => {
-  //     toast.success("Profile image updated successfully!");
-  //   },
-  //   onError: (error) => {
-  //     toast.error(error.message);
-  //   },
-  // });
-  //
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      // const imageUrl = URL.createObjectURL(file);
-      // mutate({ imageUrl });
       updateProfilePhotoUrl(URL.createObjectURL(file));
-      // setProfilePicture(URL.createObjectURL(file));
     } else {
       console.log("No file selected");
     }

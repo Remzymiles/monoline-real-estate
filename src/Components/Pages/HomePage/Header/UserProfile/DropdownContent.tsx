@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuthData } from "../../../../../base/hooks/useGetAuthData";
 import { useIsUserLoggedIn } from "../../../../../base/store/useIsUserLoggedIn";
-import { useWishListStore } from "../../../../../base/store/useWishListStore";
-import { getAuthData } from "../../../../../base/utils/getAuthData";
 import supabase from "../../../../../config/supabaseClient";
 
 export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
@@ -23,12 +22,6 @@ export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
 
     fetchData();
   }, []);
-  //
-  const { WishlistPropertyIds } = useWishListStore((state) => ({
-    WishlistPropertyIds: state.wishlistPropertyIds,
-  }));
-  //
-  const currentLocation = useLocation();
   //
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -69,16 +62,6 @@ export const DropdownContent = ({ extraStyle }: { extraStyle: string }) => {
           }`}
         >
           wishlist
-          {WishlistPropertyIds.length > 0 && (
-            <div
-              className={`${
-                currentLocation.pathname === "/wishlist" ? "hidden" : "block"
-              }`}
-            >
-              <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primaryColor-light opacity-75 top-3 right-3"></span>
-              <span className="h-2 w-2 bg-primaryColor-light rounded-full absolute top-3 right-3"></span>
-            </div>
-          )}
         </div>
         <hr />
       </Link>

@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { ISimilarProperty } from "../../../base/interface/ISimilarProperties";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
-import { getAuthData } from "../../../base/utils/getAuthData";
+import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -15,19 +15,13 @@ export const SimilarProperties = ({
   selectedProperty,
   similarProperties,
 }: ISimilarProperty) => {
+  //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
-  const [userId, setUserId] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
+  //
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
+  //
   const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
     useHandlePushWishlistProperties();
 

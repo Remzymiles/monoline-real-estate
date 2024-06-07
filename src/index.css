@@ -66,7 +66,6 @@
 .bar {
   width: var(--uib-stroke);
   height: 100%;
-  background-color: var(--uib-color);
   transition: background-color 0.3s ease;
 }
 

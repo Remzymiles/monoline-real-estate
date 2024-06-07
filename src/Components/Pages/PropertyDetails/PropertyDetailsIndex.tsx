@@ -1,9 +1,10 @@
 import { Link, useSearchParams } from "react-router-dom";
+import { useProperties } from "../../../base/hooks/useFetchAllProperties";
+import { useFetchCartProperties } from "../../../base/hooks/useFetchCartProperties";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
 import { useHandlePushCartProperties } from "../../../base/hooks/useHandlePushCartProperties";
 import { IProperty } from "../../../base/interface/IProperty";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
-import { useProperties } from "../../../base/utils/fetchProperties";
 import { PropertyPicturesLoadingSkeleton } from "../../Global/Loaders/PropertyPicturesLoadingSkeleton";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
@@ -19,6 +20,8 @@ export const PropertyDetailsIndex = () => {
     handleOpenAllPicturesModal,
     handleCloseAllPicturesModal,
   } = useHandleIsShowAllPicturesClicked();
+  //
+  useFetchCartProperties();
 
   const { pushCartProperties } = useHandlePushCartProperties();
 

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { IShowCheckoutPropertyPicturesModal } from "../../../base/interface/IShowCheckoutPropertyPicturesModal";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
-import { getAuthData } from "../../../base/utils/getAuthData";
+import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";
 
@@ -13,19 +13,10 @@ export const ShowCheckoutPropertyPicturesModal = ({
   clickedCheckoutPropertyId,
 }: IShowCheckoutPropertyPicturesModal) => {
   //
-  const [userId, setUserId] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
+  //
   const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
     useHandlePushWishlistProperties();
   //

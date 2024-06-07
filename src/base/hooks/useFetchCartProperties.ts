@@ -1,25 +1,19 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import supabase from "../../config/supabaseClient";
 import { useCartLengthStore } from "../store/useCartLengthStore";
-import { getAuthData } from "../utils/getAuthData";
+import { useUserIdStore } from "../store/useUserIdStore";
 
 export const useFetchCartProperties = () => {
   const queryClient = useQueryClient();
-  const [userId, setUserId] = useState("");
   const { updateCartLength } = useCartLengthStore((state) => ({
     updateCartLength: state.updateCartLength,
   }));
-
-  useEffect(() => {
-    const fetchUserId = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-    fetchUserId();
-  }, []);
+  // 
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
+  //
 
   useEffect(() => {
     if (!userId) return;
@@ -38,10 +32,10 @@ export const useFetchCartProperties = () => {
       updateCartLength(count ?? 0);
     };
 
-    // 
+    //
     fetchCartLength();
 
-    // 
+    //
     const subscription = supabase
       .channel("custom-all-channel")
       .on(
@@ -54,7 +48,7 @@ export const useFetchCartProperties = () => {
       )
       .subscribe();
 
-    // 
+    //
     return () => {
       subscription.unsubscribe();
     };

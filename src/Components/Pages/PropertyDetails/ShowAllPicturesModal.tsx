@@ -16,10 +16,15 @@ export const ShowAllPicturesModal = ({
   //
   const { mutate: removeWishlistProperty } = useRemovePropertyFromWishlist();
 
-  const { isPropertyInWishlist } = useHandleIsPropertyInWishlist((state) => ({
-    isPropertyInWishlist: state.isPropertyInWishlist,
+  const { propertiesInWishlist } = useHandleIsPropertyInWishlist((state) => ({
+    propertiesInWishlist: state.propertiesInWishlist,
   }));
-
+  //
+  if (!selectedProperty) return;
+  //
+  const isPropertyInWishlist =
+    propertiesInWishlist[selectedProperty?.property_id];
+  //
   const handleAddToWishlist = async (propertyId: string) => {
     await pushWishlistProperties(propertyId);
     isPropertyInWishlist === true && removeWishlistProperty(propertyId);

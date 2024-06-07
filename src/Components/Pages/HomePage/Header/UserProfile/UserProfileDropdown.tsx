@@ -1,7 +1,5 @@
-import { useLocation } from "react-router-dom";
 import { useHandleUserProfileDropdown } from "../../../../../base/hooks/useHandleDropdown";
 import { useProfilePhotoStore } from "../../../../../base/store/useProfilePhotoStore";
-import { useWishListStore } from "../../../../../base/store/useWishListStore";
 import { BarsIcon } from "../../../../Icons/BarsIcon";
 import { ToggleDarkModeIcon } from "../../../../Icons/ToggleDarkModeIcon";
 import { UserProfileIcon } from "../../../../Icons/UserProfileIcon";
@@ -9,7 +7,6 @@ import { DropdownContent } from "./DropdownContent";
 
 export const UserProfileDropdown = () => {
   //
-  const currentLocation = useLocation();
   const {
     isUserProfileVisible,
     handleOpenUserProfileDropDown,
@@ -17,9 +14,6 @@ export const UserProfileDropdown = () => {
     setIsUserProfileVisible,
   } = useHandleUserProfileDropdown();
   //
-  const { WishlistPropertyIds } = useWishListStore((state) => ({
-    WishlistPropertyIds: state.wishlistPropertyIds,
-  }));
   //
   const { profilePhotoUrl } = useProfilePhotoStore((state) => ({
     profilePhotoUrl: state.profilePhotoUrl,
@@ -52,23 +46,13 @@ export const UserProfileDropdown = () => {
           ) : (
             <UserProfileIcon
               iconStyle="text-xs"
-              extraStyle="bg-black/80 h-[30px] w-[30px] big-screen-mobile-below:hidden"
+              extraStyle="bg-black/80 h-[30px] w-[30px] "
             />
           )}
         </button>
         <ToggleDarkModeIcon />
       </div>
       <DropdownContent extraStyle={isUserProfileVisible ? "block" : "hidden"} />
-      {WishlistPropertyIds.length > 0 && (
-        <div
-          className={`absolute top-0 right-0 ${
-            currentLocation.pathname === "/wishlist" ? "hidden" : "block"
-          }`}
-        >
-          <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primaryColor-light dark:bg-primaryColorDarkMode opacity-75 top-0 right-0 big-screen-mobile-below:right-[3px] big-screen-mobile-below:top-[2px]"></span>
-          <span className="h-2 w-2 bg-primaryColor-light dark:bg-primaryColorDarkMode rounded-full absolute top-0 right-0 big-screen-mobile-below:right-[3px] big-screen-mobile-below:top-[2px]"></span>
-        </div>
-      )}
     </div>
   );
 };

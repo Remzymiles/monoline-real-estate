@@ -6,7 +6,7 @@ import { useHandleFilterProperties } from "../../../base/hooks/useHandleFilterPr
 import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { IProperty } from "../../../base/interface/IProperty";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
-import { getAuthData } from "../../../base/utils/getAuthData";
+import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -15,10 +15,13 @@ import { PropertyCardLoadingSkeleton } from "../Loaders/PropertyCardLoadingSkele
 
 export const PropertyCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
-  const [userId, setUserId] = useState<string | null>(null);
   //
   const { filteredProperties, filterOptions, isLoading } =
     useHandleFilterProperties();
+  //
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
 
   useLayoutEffect(() => {
     window.scroll({
@@ -26,17 +29,6 @@ export const PropertyCard = () => {
       behavior: "smooth",
     });
   }, [filterOptions]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
     useHandlePushWishlistProperties();

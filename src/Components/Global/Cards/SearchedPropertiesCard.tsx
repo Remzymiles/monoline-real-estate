@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useProperties } from "../../../base/hooks/useFetchAllProperties";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { IProperty } from "../../../base/interface/IProperty";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
-import { useProperties } from "../../../base/utils/fetchProperties";
-import { getAuthData } from "../../../base/utils/getAuthData";
+import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -15,18 +15,9 @@ import { WaveFormLoader } from "../Loaders/WaveFormLoader";
 
 export const SearchedPropertiesCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
 
   const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
     useHandlePushWishlistProperties();
@@ -83,11 +74,12 @@ export const SearchedPropertiesCard = () => {
   return (
     <>
       {isLoading && (
-        <div>
+        <div className="flex justify-center items-center">
           <WaveFormLoader />
         </div>
       )}
-      {filteredSearchedProperties && filteredSearchedProperties?.length > 0 ? (
+      {filteredSearchedProperties &&
+        filteredSearchedProperties?.length > 0 &&
         filteredSearchedProperties.map((property: IProperty, index) => (
           <div
             key={index}
@@ -180,12 +172,13 @@ export const SearchedPropertiesCard = () => {
               />
             </div>
           </div>
-        ))
-      ) : (
-        <p className="text-lg capitalize font-bold flex justify-center items-center text-center">
-          your search did not match any properties. try again &#128578;
-        </p>
-      )}
+        ))}
+      {!filteredSearchedProperties ||
+        (filteredSearchedProperties.length <= 0 && (
+          <p className="text-lg capitalize font-bold flex justify-center items-center text-center">
+            your search did not match any properties. try again &#128578;
+          </p>
+        ))}
     </>
   );
 };

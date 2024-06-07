@@ -1,24 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import supabase from "../../config/supabaseClient";
-import { getAuthData } from "../utils/getAuthData";
+import { useUserIdStore } from "../store/useUserIdStore";
 
 export const useDeleteCartProperty = () => {
   const queryClient = useQueryClient();
-  const [userId, setUserId] = useState("");
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
   //
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const { mutate, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: async (cartPropertyId: string): Promise<void> => {

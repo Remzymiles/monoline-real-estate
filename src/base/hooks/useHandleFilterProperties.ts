@@ -1,5 +1,5 @@
 import { useFilterStore } from "../store/useFilterStore";
-import { useProperties } from "../utils/fetchProperties";
+import { useProperties } from "./useFetchAllProperties";
 
 export const useHandleFilterProperties = () => {
   //
@@ -7,7 +7,7 @@ export const useHandleFilterProperties = () => {
     filterOptions: state.filterOptions,
   }));
   const { data: properties, isLoading, error, isError } = useProperties();
-  
+
   //
   const filterProperties = () => {
     const {

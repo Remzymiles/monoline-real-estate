@@ -1,25 +1,16 @@
-import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import supabase from "../../config/supabaseClient";
 import { IProperty } from "../interface/IProperty";
-import { useProperties } from "../utils/fetchProperties";
-import { getAuthData } from "../utils/getAuthData";
+import { useUserIdStore } from "../store/useUserIdStore";
+import { useProperties } from "./useFetchAllProperties";
 
 export const useHandlePushCartProperties = () => {
-  const [userId, setUserId] = useState("");
   const { data: properties } = useProperties();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
+  //
   const pushCartProperties = async (propertyId: string) => {
     const cartProperties = properties?.filter(
       (property: IProperty) => property.property_id === propertyId

@@ -1,4 +1,5 @@
-import { IProperty } from "../interface/IProperty";
+import { IProperty } from "./IProperty";
+
 export interface IOrderHistoryStore {
   orderHistoryProperties: IProperty[];
   updateOrderHistoryProperties: (newProperty: IProperty) => void;

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDeleteCartProperty } from "../../../base/hooks/useDeleteCartProperty";
 import { useFetchCartProperties } from "../../../base/hooks/useFetchCartProperties";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
-import { getAuthData } from "../../../base/utils/getAuthData";
+import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CartProperty } from "./CartProperty";
 import { CartSummary } from "./CartSummary";
@@ -12,18 +12,11 @@ import { CartSummary } from "./CartSummary";
 export const CartPropertyCard = () => {
   const { data: cartProperties, isLoading } = useFetchCartProperties();
   const { mutate: deleteCartProperty } = useDeleteCartProperty();
-  const [userId, setUserId] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data) {
-        setUserId(data.user.id);
-      }
-    };
-
-    fetchData();
-  }, []);
+  //
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
+  //
 
   const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
     useHandlePushWishlistProperties();
@@ -33,10 +26,10 @@ export const CartPropertyCard = () => {
       propertiesInWishlist: state.propertiesInWishlist,
       setIsPropertyInWishlist: state.setIsPropertyInWishlist,
     }));
-    //
-    useEffect(() => {
-      window.scroll({
-        top: 0,
+  //
+  useEffect(() => {
+    window.scroll({
+      top: 0,
       behavior: "smooth",
     });
   }, [cartProperties]);

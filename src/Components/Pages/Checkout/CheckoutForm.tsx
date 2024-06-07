@@ -1,6 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useHandleOrderHistoryDateAndTime } from "../../../base/hooks/useHandleOrderHistoryDateAndTime";
+import { useClearCartProperties } from "../../../base/hooks/useClearCartProperties";
+import { useHandleOrderHistory } from "../../../base/hooks/useHandleOrderHistoryDateAndTime";
+import { useHandlePushOrderHistoryProperties } from "../../../base/hooks/useHandlePushOrderHistoryProperties";
 import { ICheckoutForm } from "../../../base/interface/ICheckoutForm";
 import { IDebitCard } from "../../../base/interface/IDebitCard";
 import { FormButton } from "../../Global/FormComponents/Button";
@@ -13,8 +15,9 @@ export const CheckoutForm = ({
   setIsPaymentButtonClicked,
 }: ICheckoutForm) => {
   //
-  const { handleOrderHistoryAndClearCartProperties } =
-    useHandleOrderHistoryDateAndTime();
+  const { mutate: clearCartProperties } = useClearCartProperties();
+  const { pushOrderHistoryProperties } = useHandlePushOrderHistoryProperties();
+  const { handleOrderHistoryAndClearCartProperties } = useHandleOrderHistory();
   //
   const {
     register,
@@ -27,8 +30,10 @@ export const CheckoutForm = ({
     setIsPaymentButtonClicked(true);
 
     setTimeout(() => {
+      clearCartProperties();
       handleOrderHistoryAndClearCartProperties();
       handleOpenPaymentSuccessModal();
+      pushOrderHistoryProperties()
       reset();
       setIsPaymentButtonClicked(false);
     }, 2000);

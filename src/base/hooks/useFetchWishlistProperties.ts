@@ -1,25 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import supabase from "../../config/supabaseClient";
-import { getAuthData } from "../utils/getAuthData";
+import { useUserIdStore } from "../store/useUserIdStore";
 
 export const useFetchWishlistProperties = () => {
-  const [userId, setUserId] = useState("");
-
-  useEffect(() => {
-    const fetchUserId = async () => {
-      try {
-        const data = await getAuthData();
-        if (data && data.user) {
-          setUserId(data.user.id);
-        }
-      } catch (error) {
-        console.error("Failed to fetch user ID", error);
-      }
-    };
-
-    fetchUserId();
-  }, []);
+  const { userId } = useUserIdStore((state) => ({
+    userId: state.userId,
+  }));
   //
   const fetchWishlistProperties = async () => {
     if (!userId) {
@@ -41,6 +27,6 @@ export const useFetchWishlistProperties = () => {
   return useQuery({
     queryKey: ["wishlist_properties", userId],
     queryFn: fetchWishlistProperties,
-    enabled: !!userId, 
+    enabled: !!userId,
   });
 };
