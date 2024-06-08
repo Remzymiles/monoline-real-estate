@@ -64,7 +64,7 @@ export const CartPropertyCard = () => {
   if (isLoading) {
     return (
       <div className="absolute top-[40%] left-[50%]">
-        <WaveFormLoader />
+        <WaveFormLoader extraStyle="bg-black dark:bg-white" />
       </div>
     );
   }

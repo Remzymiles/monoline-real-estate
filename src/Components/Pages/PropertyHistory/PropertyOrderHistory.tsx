@@ -22,18 +22,18 @@ export const PropertyOrderHistory = () => {
   const { clearOrderHistoryProperties } = useOrderHistoryStore((state) => ({
     clearOrderHistoryProperties: state.clearOrderHistoryProperties,
   }));
-  //
+
   useLayoutEffect(() => {
     window.scroll({
       top: 0,
       behavior: "smooth",
     });
   }, [orderHistoryProperties]);
-  //
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[40vh]">
-        <WaveFormLoader />
+        <WaveFormLoader extraStyle="bg-black dark:bg-white" />
       </div>
     );
   }
@@ -45,14 +45,44 @@ export const PropertyOrderHistory = () => {
       </div>
     );
   }
-  //
 
   const handleClearOrderHistory = () => {
     clearOrderHistory();
     clearOrderHistoryProperties();
     toast.success("Order History Has Been Cleared");
   };
+  //
+  const formatDateTime = (dateString?: string): string => {
+    if (!dateString) return "Invalid date";
 
+    const date = new Date(dateString);
+
+    // Get the current offset from UTC in minutes and convert it to milliseconds
+    const offset = date.getTimezoneOffset() * 60000;
+
+    // Adjust the date object to account for the time zone difference
+    const localDate = new Date(date.getTime() - offset);
+
+    // Format the date and time components
+    const formattedDate = localDate.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    const formattedTime = localDate.toLocaleTimeString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+
+    return `${formattedDate} ${formattedTime}`;
+  };
+  //
+  const purchaseId = Math.floor(Math.random() * 10000);
+
+  //
   return (
     <div className="flex items-center justify-center min-h-[40vh]">
       <div className="max-w-[1100px] m-auto w-full bg-primaryColor-lightCream dark:bg-secondaryColor-light/70 shadow-xl rounded-md px-4 py-2 pb-3">
@@ -73,13 +103,13 @@ export const PropertyOrderHistory = () => {
                 className="capitalize py-1 px-2 text-sm w-[40%] bg-red-500 transition-colors duration-300 hover:bg-red-700 text-white rounded font-bold"
                 onClick={handleClearOrderHistory}
               >
-                clear history
+                Clear History
               </button>
               <button
                 className="capitalize py-1 px-2 text-sm w-[40%] bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
                 onClick={handleCloseClearPropertyHistoryWarning}
               >
-                don't clear
+                Don't Clear
               </button>
             </div>
           </div>
@@ -90,10 +120,11 @@ export const PropertyOrderHistory = () => {
               <div>
                 <div className="flex justify-between mb-1">
                   <p className="text-xs font-bold text-gray-500">
-                    Purchased On: {orderHistoryProperty.order_date}
+                    Purchased On:{" "}
+                    {formatDateTime(orderHistoryProperty.order_date)}
                   </p>
                   <p className="text-xs py-1 text-gray-500 capitalize font-bold">
-                    PID: MR{Math.floor(Math.random() * 10000)}
+                    PID: MR{purchaseId}
                   </p>
                 </div>
                 <div className="flex items-center gap-x-4 big-screen-mobile-below:gap-x-3">
@@ -115,7 +146,7 @@ export const PropertyOrderHistory = () => {
                       to={`/property-details/address=${orderHistoryProperty.address}&city=${orderHistoryProperty.city}&state=${orderHistoryProperty.state}&country=${orderHistoryProperty.country}&?id=${orderHistoryProperty.property_id}`}
                       className="capitalize text-center py-1 px-1 sm:px-2 tablet-below:py-0.5 text-sm bg-primaryColor-light dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 transition-colors duration-300 hover:bg-primaryColor-dark text-white rounded font-bold"
                     >
-                      view property
+                      View Property
                     </Link>
                   </div>
                 </div>
@@ -129,7 +160,7 @@ export const PropertyOrderHistory = () => {
             className="capitalize py-1 px-2 text-sm bg-red-500 transition-colors duration-300 hover:bg-red-700 text-white rounded font-bold"
             onClick={handleShowClearPropertyHistoryWarning}
           >
-            clear history
+            Clear History
           </button>
         </div>
       </div>

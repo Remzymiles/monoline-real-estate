@@ -75,7 +75,7 @@ export const SearchedPropertiesCard = () => {
     <>
       {isLoading && (
         <div className="flex justify-center items-center">
-          <WaveFormLoader />
+          <WaveFormLoader extraStyle="bg-black dark:bg-white"/>
         </div>
       )}
       {filteredSearchedProperties &&

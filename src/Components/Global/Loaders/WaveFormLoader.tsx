@@ -1,10 +1,10 @@
-export const WaveFormLoader = () => {
+export const WaveFormLoader = ({ extraStyle }: { extraStyle: string }) => {
   return (
     <div className="container">
-      <div className="bar bg-black dark:bg-white"></div>
-      <div className="bar bg-black dark:bg-white"></div>
-      <div className="bar bg-black dark:bg-white"></div>
-      <div className="bar bg-black dark:bg-white"></div>
+      <div className={`bar ${extraStyle}`}></div>
+      <div className={`bar ${extraStyle}`}></div>
+      <div className={`bar ${extraStyle}`}></div>
+      <div className={`bar ${extraStyle}`}></div>
     </div>
   );
 };

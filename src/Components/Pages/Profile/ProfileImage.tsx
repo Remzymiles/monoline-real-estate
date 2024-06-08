@@ -1,5 +1,8 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
+import { getAuthData } from "../../../base/hooks/useGetAuthData";
+import { uploadProfilePicture } from "../../../base/hooks/useUploadProfilePicture";
 import { useProfilePhotoStore } from "../../../base/store/useProfilePhotoStore";
+import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { CameraIcon } from "../../Icons/CameraIcon";
 import { UserProfileIcon } from "../../Icons/UserProfileIcon";
 
@@ -12,10 +15,29 @@ export const ProfileImage = () => {
     })
   );
   //
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const { userId, setUserId } = useUserIdStore((state) => ({
+    userId: state.userId,
+    setUserId: state.setUserId,
+  }));
+  //
+  useEffect(() => {
+    const fetchUserId = async () => {
+      const data = await getAuthData();
+      if (data) {
+        setUserId(data.user.id);
+      }
+    };
+    fetchUserId();
+  }, []);
+  //
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       updateProfilePhotoUrl(URL.createObjectURL(file));
+      const newProfilePictureUrl = await uploadProfilePicture(userId, file);
+      if (newProfilePictureUrl) {
+        updateProfilePhotoUrl(newProfilePictureUrl);
+      }
     } else {
       console.log("No file selected");
     }

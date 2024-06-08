@@ -152,7 +152,7 @@ export const SignUpForm = () => {
       </div>
       {/*  */}
       <FormButton type="submit">
-        {isPending ? <WaveFormLoader /> : "sign up"}
+        {isPending ? <WaveFormLoader extraStyle="bg-white" /> : "sign up"}
       </FormButton>
       <p className="text-center text-secondaryColor-light dark:text-gray-400 text-sm">
         already have an account?{" "}

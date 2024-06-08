@@ -72,7 +72,7 @@ export const WishlistCards = () => {
           isLoading ? "block" : "hidden"
         }`}
       >
-        <WaveFormLoader />
+        <WaveFormLoader extraStyle="bg-black dark:bg-white" />
       </div>
       {wishlistProperties &&
         wishlistProperties.length > 0 &&

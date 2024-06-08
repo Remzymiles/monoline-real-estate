@@ -26,7 +26,7 @@ export const HomePageIndex = () => {
         {isFilterButtonClicked === "true" && (
           <div className="absolute top-0 left-0 bg-black/50 z-50 w-[100%] h-[1000vh] flex justify-center items-center">
             <div className="fixed top-[50%]">
-              <WaveFormLoader />
+              <WaveFormLoader extraStyle="bg-black dark:bg-white" />
             </div>
           </div>
         )}

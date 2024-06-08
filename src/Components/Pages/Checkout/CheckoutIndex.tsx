@@ -56,7 +56,7 @@ export const CheckoutIndex = () => {
       >
         {isPaymentButtonClicked && (
           <div className="fixed top-[50%]">
-            <WaveFormLoader />
+            <WaveFormLoader extraStyle="bg-black dark:bg-white" />
           </div>
         )}
 
