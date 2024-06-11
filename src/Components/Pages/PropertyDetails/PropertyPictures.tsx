@@ -76,7 +76,7 @@ export const PropertyPictures = ({
             {isPropertyInWishlist ? "saved" : "save"}
             {/*  */}
             {IsPushWishlistPropertiesLoading[propertyId] && (
-              <div className="absolute top-0 left-0 bg-black/80 w-[100%] flex justify-center items-center py-1">
+              <div className="absolute top-0 left-0 bg-black/80 w-[100%] flex justify-center items-center py-1 rounded-sm">
                 <TailSpinLoader color="white" />
               </div>
             )}
@@ -116,7 +116,7 @@ export const PropertyPictures = ({
               {isPropertyInWishlist ? "saved" : "save"}
               {/*  */}
               {IsPushWishlistPropertiesLoading[propertyId] && (
-                <div className="absolute top-0 left-0 bg-black/80 w-[100%] flex justify-center items-center py-1">
+                <div className="absolute top-0 left-0 bg-black/80 w-[100%] flex justify-center items-center py-1 rounded-sm">
                   <TailSpinLoader color="white" />
                 </div>
               )}
