@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDeleteCartProperty } from "../../../base/hooks/useDeleteCartProperty";
 import { useFetchCartProperties } from "../../../base/hooks/useFetchCartProperties";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
+import { useCartLengthStore } from "../../../base/store/useCartLengthStore";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
@@ -13,27 +14,30 @@ export const CartPropertyCard = () => {
   const { data: cartProperties, isLoading } = useFetchCartProperties();
   const { mutate: deleteCartProperty } = useDeleteCartProperty();
   //
+  const { updateCartLength } = useCartLengthStore((state) => ({
+    updateCartLength: state.updateCartLength,
+  }));
+
   const { userId } = useUserIdStore((state) => ({
     userId: state.userId,
   }));
-  //
 
   const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
     useHandlePushWishlistProperties();
-  //
+
   const { propertiesInWishlist, setIsPropertyInWishlist } =
     useHandleIsPropertyInWishlist((state) => ({
       propertiesInWishlist: state.propertiesInWishlist,
       setIsPropertyInWishlist: state.setIsPropertyInWishlist,
     }));
-  //
+
   useEffect(() => {
     window.scroll({
       top: 0,
       behavior: "smooth",
     });
   }, [cartProperties]);
-  //
+
   const { updateCheckoutIds, setIsPropertyFromCart } = useCheckoutStore(
     (state) => ({
       setIsPropertyFromCart: state.setIsPropertyFromCart,
@@ -88,8 +92,8 @@ export const CartPropertyCard = () => {
     await pushWishlistProperties(propertyId);
   };
 
-  const handleDeleteCartProperty = (id: string) => {
-    deleteCartProperty(id);
+  const handleDeleteCartProperty = (propertyId: string) => {
+    deleteCartProperty(propertyId);
   };
 
   return (

@@ -1,25 +1,28 @@
 import { ChangeEvent, useEffect } from "react";
+import { useFetchProfilePicture } from "../../../base/hooks/useFetchProfilePicture";
+import { useFetchUserProfileInfo } from "../../../base/hooks/useFetchUserProfile";
 import { getAuthData } from "../../../base/hooks/useGetAuthData";
 import { uploadProfilePicture } from "../../../base/hooks/useUploadProfilePicture";
-import { useProfilePhotoStore } from "../../../base/store/useProfilePhotoStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { useQueryClient } from "@tanstack/react-query";
+import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CameraIcon } from "../../Icons/CameraIcon";
 import { UserProfileIcon } from "../../Icons/UserProfileIcon";
 
 export const ProfileImage = () => {
-  //
-  const { updateProfilePhotoUrl, profilePhotoUrl } = useProfilePhotoStore(
-    (state) => ({
-      updateProfilePhotoUrl: state.updateProfilePhotoUrl,
-      profilePhotoUrl: state.profilePhotoUrl,
-    })
-  );
-  //
+  const { data: profilePhotoUrl, isLoading, refetch: refetchProfilePicture } = useFetchProfilePicture();
+  const { data: userProfileInfo } = useFetchUserProfileInfo();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    console.log(userProfileInfo);
+  }, [userProfileInfo]);
+
   const { userId, setUserId } = useUserIdStore((state) => ({
     userId: state.userId,
     setUserId: state.setUserId,
   }));
-  //
+
   useEffect(() => {
     const fetchUserId = async () => {
       const data = await getAuthData();
@@ -28,30 +31,31 @@ export const ProfileImage = () => {
       }
     };
     fetchUserId();
-  }, []);
-  //
+  }, [setUserId]);
+
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      updateProfilePhotoUrl(URL.createObjectURL(file));
-      const newProfilePictureUrl = await uploadProfilePicture(userId, file);
-      if (newProfilePictureUrl) {
-        updateProfilePhotoUrl(newProfilePictureUrl);
-      }
+      await uploadProfilePicture(userId, file);
+      refetchProfilePicture();
     } else {
       console.log("No file selected");
     }
   };
-  //
+
   return (
     <div className="flex flex-col gap-y-16 items-center">
-      <div className="tablet-above:w-[300px] tablet-above:h-[300px] w-[250px] h-[250px] bg-black rounded-full flex justify-center relative">
+      <div className="tablet-above:w-[300px] tablet-above:h-[300px] w-[250px] h-[250px] bg-black/80 rounded-full flex justify-center relative">
         <div className="text-9xl text-white">
-          {profilePhotoUrl ? (
+          {isLoading ? (
+            <div className="w-[250px] h-[250px] tablet-above:w-[300px] tablet-above:h-[300px] flex justify-center items-center">
+              <WaveFormLoader extraStyle="bg-white" />
+            </div>
+          ) : profilePhotoUrl ? (
             <div className="w-[250px] h-[250px] tablet-above:w-[300px] tablet-above:h-[300px]">
               <img
                 src={profilePhotoUrl}
-                alt="img"
+                alt="Profile"
                 className="w-[100%] h-[100%] object-cover rounded-full"
               />
             </div>
@@ -76,24 +80,31 @@ export const ProfileImage = () => {
           onChange={handleFileChange}
         />
       </div>
-      <div className="hidden">
-        <div className="flex gap-x-2 mb-2">
-          <p className="text-lg font-extrabold capitalize">name</p>:
-          <p className="text-lg font-bold capitalize">
-            Nwankwo Somtochukwu Stanley
-          </p>
+      {userProfileInfo && (
+        <div>
+          <div className="flex gap-x-1.5 mb-2 items-center">
+            <p className="font-extrabold capitalize">name</p>:
+            <p className="text-sm font-bold capitalize">
+              {userProfileInfo?.fullName}
+            </p>
+          </div>
+          {/*  */}
+          <div className="flex gap-x-1.5 mb-2 items-center">
+            <p className="font-extrabold capitalize">phone number</p>:
+            <p className="text-sm font-bold capitalize">
+              {userProfileInfo?.mobile_number}
+            </p>
+          </div>
+          {/*  */}
+          <div className="flex gap-x-1.5 mb-2 items-center">
+            <p className="font-extrabold capitalize">address</p>:
+            <p className="text-sm font-bold capitalize">
+              {userProfileInfo?.location}
+            </p>
+          </div>
+          {/*  */}
         </div>
-        <div className="flex gap-x-2 mb-2">
-          <p className="text-lg font-extrabold capitalize">phone number</p>:
-          <p className="text-lg font-bold capitalize">08164228668</p>
-        </div>
-        <div className="flex gap-x-2 mb-2">
-          <p className="text-lg font-extrabold capitalize">address</p>:
-          <p className="text-lg font-bold capitalize">
-            no 1 amaigbo lane, ziks avenue, enugu
-          </p>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

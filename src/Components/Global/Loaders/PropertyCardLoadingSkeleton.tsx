@@ -15,6 +15,9 @@ export const PropertyCardLoadingSkeleton = () => {
         <div className="w-40 h-5 bg-gray-300 dark:bg-gray-700 rounded mt-1"></div>
         <div className="w-24 h-5 bg-gray-300 dark:bg-gray-700 rounded mt-1"></div>
       </div>
+      <style>
+        
+      </style>
     </div>
   );
 };

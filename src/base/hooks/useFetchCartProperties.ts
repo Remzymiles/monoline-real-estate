@@ -9,11 +9,10 @@ export const useFetchCartProperties = () => {
   const { updateCartLength } = useCartLengthStore((state) => ({
     updateCartLength: state.updateCartLength,
   }));
-  // 
+
   const { userId } = useUserIdStore((state) => ({
     userId: state.userId,
   }));
-  //
 
   useEffect(() => {
     if (!userId) return;
@@ -32,10 +31,8 @@ export const useFetchCartProperties = () => {
       updateCartLength(count ?? 0);
     };
 
-    //
     fetchCartLength();
 
-    //
     const subscription = supabase
       .channel("custom-all-channel")
       .on(
@@ -43,12 +40,13 @@ export const useFetchCartProperties = () => {
         { event: "*", schema: "public", table: "cart_properties" },
         async () => {
           await fetchCartLength();
-          queryClient.invalidateQueries({ queryKey: ["cart_properties"] });
+          queryClient.invalidateQueries({
+            queryKey: ["cart_properties", userId],
+          });
         }
       )
       .subscribe();
 
-    //
     return () => {
       subscription.unsubscribe();
     };
@@ -63,6 +61,8 @@ export const useFetchCartProperties = () => {
     if (error) {
       throw new Error(error.message);
     }
+
+    updateCartLength(data.length);
 
     return data;
   };

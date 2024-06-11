@@ -19,7 +19,7 @@ export const useFetchOrderHistoryProperties = () => {
       }
     };
     fetchUserId();
-  }, []);
+  }, [setUserId]);
   // 
   useFetchCartProperties();
   //

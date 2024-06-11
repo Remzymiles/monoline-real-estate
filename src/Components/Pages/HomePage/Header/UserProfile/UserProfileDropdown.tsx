@@ -1,11 +1,14 @@
+import { useFetchProfilePicture } from "../../../../../base/hooks/useFetchProfilePicture";
 import { useHandleUserProfileDropdown } from "../../../../../base/hooks/useHandleDropdown";
-import { useProfilePhotoStore } from "../../../../../base/store/useProfilePhotoStore";
+import { LineSpinner } from "../../../../Global/Loaders/LineSpinner";
 import { BarsIcon } from "../../../../Icons/BarsIcon";
 import { ToggleDarkModeIcon } from "../../../../Icons/ToggleDarkModeIcon";
 import { UserProfileIcon } from "../../../../Icons/UserProfileIcon";
 import { DropdownContent } from "./DropdownContent";
 
 export const UserProfileDropdown = () => {
+  //
+  const { data: profilePhotoUrl, isLoading } = useFetchProfilePicture();
   //
   const {
     isUserProfileVisible,
@@ -14,10 +17,6 @@ export const UserProfileDropdown = () => {
     setIsUserProfileVisible,
   } = useHandleUserProfileDropdown();
   //
-  //
-  const { profilePhotoUrl } = useProfilePhotoStore((state) => ({
-    profilePhotoUrl: state.profilePhotoUrl,
-  }));
 
   //
   return (
@@ -35,7 +34,11 @@ export const UserProfileDropdown = () => {
         >
           <BarsIcon />
 
-          {profilePhotoUrl ? (
+          {isLoading ? (
+            <div className="h-[32px] w-[32px] bg-black/80 rounded-full">
+              <LineSpinner extraStyle="mt-[3px] ml-[1px]" />
+            </div>
+          ) : profilePhotoUrl ? (
             <div className="h-[32px] w-[32px]">
               <img
                 src={profilePhotoUrl}

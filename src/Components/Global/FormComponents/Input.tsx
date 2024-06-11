@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from "react";
 import { useTogglePassword } from "../../../base/hooks/useTogglePassword";
 import { IInput } from "../../../base/interface/IInput";
 import { PasswordVisibilityIcon } from "../../Icons/PasswordVisibilityIcon";
@@ -14,14 +13,12 @@ export const Input = ({
   register,
   extraStyle,
   maxLength,
-  onChange,
   disabled,
-  value,
+  // value,
 }: IInput) => {
   //
   const { togglePasswordVisibility, passwordVisibility } = useTogglePassword();
   //
-
 
   return (
     <>

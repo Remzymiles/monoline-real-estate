@@ -3,7 +3,7 @@ import { getAuthData } from "../../../base/hooks/useGetAuthData";
 import { useHandleEditPassword } from "../../../base/hooks/useHandleEditPassword";
 import { EditPasswordForm } from "./EditPasswordForm";
 
-export const EmailAndEditPassword = () => {
+export const EditPassword = () => {
   //
   const { handleEditPassword, isEditPasswordVisible } = useHandleEditPassword();
   //

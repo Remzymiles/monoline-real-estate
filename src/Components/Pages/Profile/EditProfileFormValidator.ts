@@ -1,10 +1,10 @@
 import * as yup from "yup";
 
 export const EditProfileFormValidator = yup.object({
-  fullname: yup.string().required("Full name is required"),
-  phone: yup
+  fullName: yup.string().required("full name is required"),
+  mobile_number: yup
     .string()
-    .required("Phone number is required")
-    .length(11, "Phone number must have 11 characters"),
+    .required("mobile number is required")
+    .min(11, "mobile number must have 11 characters"),
   location: yup.string().required("Location is required"),
 });

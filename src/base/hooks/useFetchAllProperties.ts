@@ -18,7 +18,7 @@ export const useProperties = () => {
       }
     };
     fetchUserId();
-  }, []);
+  }, [setUserId]);
   //
   const fetchProperties = async () => {
     const { data, error } = await supabase.from("properties").select(`*`);

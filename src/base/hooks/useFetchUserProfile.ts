@@ -3,21 +3,18 @@ import { useEffect } from "react";
 import supabase from "../../config/supabaseClient";
 import { useUserIdStore } from "../store/useUserIdStore";
 
-export const useFetchProfilePicture = () => {
-  //
-  const queryClient = useQueryClient();
-  //
+export const useFetchUserProfileInfo = () => {
   const { userId } = useUserIdStore((state) => ({
     userId: state.userId,
   }));
-  //
+  const queryClient = useQueryClient();
 
-  const fetchProfilePicture = async () => {
+  const fetchUserProfileInfo = async () => {
     if (!userId) throw new Error("User ID is missing");
 
     const { data, error } = await supabase
       .from("user_profile")
-      .select("profile_picture_url")
+      .select("fullName, mobile_number, location")
       .eq("user_id", userId)
       .single();
 
@@ -25,9 +22,10 @@ export const useFetchProfilePicture = () => {
       throw new Error(error.message);
     }
 
-    return data?.profile_picture_url || "";
+    console.log('Fetched user profile data:', data);  // Debug log
+
+    return data;  // Return the entire data object
   };
-  //
 
   useEffect(() => {
     if (!userId) return;
@@ -43,10 +41,8 @@ export const useFetchProfilePicture = () => {
           filter: `user_id=eq.${userId}`,
         },
         (payload) => {
-          console.log("Profile picture updated:", payload);
-          queryClient.invalidateQueries({
-            queryKey: ["user_profile_picture_url", userId],
-          });
+          console.log("Profile Info updated:", payload);
+          queryClient.invalidateQueries({ queryKey: ["user_profile_info", userId] });
         }
       )
       .subscribe();
@@ -55,11 +51,10 @@ export const useFetchProfilePicture = () => {
       supabase.removeChannel(subscription);
     };
   }, [userId, queryClient]);
-  //
 
   return useQuery({
-    queryKey: ["user_profile_picture_url", userId],
-    queryFn: fetchProfilePicture,
+    queryKey: ["user_profile_info", userId],
+    queryFn: fetchUserProfileInfo,
     enabled: !!userId,
     retry: 3,
     refetchOnWindowFocus: false,
