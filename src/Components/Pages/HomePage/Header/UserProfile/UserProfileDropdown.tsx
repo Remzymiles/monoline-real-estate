@@ -1,6 +1,6 @@
 import { useFetchProfilePicture } from "../../../../../base/hooks/useFetchProfilePicture";
 import { useHandleUserProfileDropdown } from "../../../../../base/hooks/useHandleDropdown";
-import { LineSpinner } from "../../../../Global/Loaders/LineSpinner";
+import { TailSpinLoader } from "../../../../Global/Loaders/TailSpinLoader";
 import { BarsIcon } from "../../../../Icons/BarsIcon";
 import { ToggleDarkModeIcon } from "../../../../Icons/ToggleDarkModeIcon";
 import { UserProfileIcon } from "../../../../Icons/UserProfileIcon";
@@ -35,8 +35,8 @@ export const UserProfileDropdown = () => {
           <BarsIcon />
 
           {isLoading ? (
-            <div className="h-[32px] w-[32px] bg-black/80 rounded-full">
-              <LineSpinner extraStyle="mt-[3px] ml-[1px]" />
+            <div className="h-[32px] w-[32px] bg-black/70 rounded-full">
+              <TailSpinLoader extraStyle="mt-[3px] ml-[1px]" color="white" />
             </div>
           ) : profilePhotoUrl ? (
             <div className="h-[32px] w-[32px]">

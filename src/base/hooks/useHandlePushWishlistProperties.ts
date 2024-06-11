@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import supabase from "../../config/supabaseClient";
 import { IProperty } from "../interface/IProperty";
 import { useHandleIsPropertyInWishlist } from "../store/useHandleIsPropertyInWishlistStore";
+import { useIsPushWishlistPropertiesLoadingStore } from "../store/useIsPushWishlistPropertiesLoadingStore";
 import { useUserIdStore } from "../store/useUserIdStore";
 import { useProperties } from "./useFetchAllProperties";
 import { useRemovePropertyFromWishlist } from "./useRemovePropertyFromWishlist";
@@ -11,9 +12,16 @@ export const useHandlePushWishlistProperties = () => {
   const { data: properties } = useProperties();
   const { mutate: removeFromWishlist } = useRemovePropertyFromWishlist();
   const { setIsPropertyInWishlist } = useHandleIsPropertyInWishlist();
-
-  const { userId } = useUserIdStore((state) => ({
-    userId: state.userId,
+  //
+  const { userId } = useUserIdStore((state) => ({ userId: state.userId }));
+  //
+  const {
+    setIsPushWishlistPropertiesLoading,
+    IsPushWishlistPropertiesLoading,
+  } = useIsPushWishlistPropertiesLoadingStore((state) => ({
+    IsPushWishlistPropertiesLoading: state.IsPushWishlistPropertiesLoading,
+    setIsPushWishlistPropertiesLoading:
+      state.setIsPushWishlistPropertiesLoading,
   }));
   //
 
@@ -55,6 +63,7 @@ export const useHandlePushWishlistProperties = () => {
           console.error("Error inserting data:", error.message);
           return;
         }
+        console.log(insertedWishlistProperties);
 
         toast.success("Property has been added to Wishlist");
         setIsPropertyInWishlist(data.property_id, true);
@@ -67,6 +76,8 @@ export const useHandlePushWishlistProperties = () => {
 
   const pushWishlistProperties = useCallback(
     async (propertyId: string) => {
+      setIsPushWishlistPropertiesLoading(propertyId, true);
+      // 
       if (!userId) {
         console.error("User ID is not set");
         return;
@@ -88,6 +99,7 @@ export const useHandlePushWishlistProperties = () => {
 
           if (propertyExistsInWishlist) {
             removeFromWishlist(property.property_id);
+            setIsPushWishlistPropertiesLoading(propertyId, false)
             setIsPropertyInWishlist(property.property_id, false);
           } else {
             const propertyToInsert = {
@@ -113,8 +125,12 @@ export const useHandlePushWishlistProperties = () => {
           }
         } catch (error) {
           console.error("Error in pushWishlistProperties:", error);
+          setIsPushWishlistPropertiesLoading(propertyId, false)
+          toast.error("couldn't add property to wishlist")
         }
       }
+      setIsPushWishlistPropertiesLoading(propertyId, false)
+      // 
     },
     [
       userId,
@@ -123,7 +139,9 @@ export const useHandlePushWishlistProperties = () => {
       insertWishlistProperties,
       removeFromWishlist,
       setIsPropertyInWishlist,
+      setIsPushWishlistPropertiesLoading,
     ]
+    // 
   );
 
   useEffect(() => {
@@ -148,5 +166,9 @@ export const useHandlePushWishlistProperties = () => {
     };
   }, [setIsPropertyInWishlist]);
 
-  return { pushWishlistProperties, checkIfPropertyExistsInWishlist };
+  return {
+    pushWishlistProperties,
+    checkIfPropertyExistsInWishlist,
+    IsPushWishlistPropertiesLoading,
+  };
 };

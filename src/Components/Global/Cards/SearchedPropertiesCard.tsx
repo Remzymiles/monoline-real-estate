@@ -12,6 +12,7 @@ import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 import { WaveFormLoader } from "../Loaders/WaveFormLoader";
+import { TailSpinLoader } from "../Loaders/TailSpinLoader";
 
 export const SearchedPropertiesCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -19,8 +20,11 @@ export const SearchedPropertiesCard = () => {
     userId: state.userId,
   }));
 
-  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
-    useHandlePushWishlistProperties();
+  const {
+    pushWishlistProperties,
+    checkIfPropertyExistsInWishlist,
+    IsPushWishlistPropertiesLoading,
+  } = useHandlePushWishlistProperties();
 
   const [query] = useSearchParams();
   const searchValue = query.get("search");
@@ -75,7 +79,7 @@ export const SearchedPropertiesCard = () => {
     <>
       {isLoading && (
         <div className="flex justify-center items-center">
-          <WaveFormLoader extraStyle="bg-black dark:bg-white"/>
+          <WaveFormLoader extraStyle="bg-black dark:bg-white" />
         </div>
       )}
       {filteredSearchedProperties &&
@@ -170,6 +174,11 @@ export const SearchedPropertiesCard = () => {
                     : "text-white"
                 }`}
               />
+              {IsPushWishlistPropertiesLoading[property.property_id] && (
+                <div className="absolute top-0 bg-slate-100 w-[100%] h-[100%] flex justify-center items-center rounded-full right-[1px]">
+                  <TailSpinLoader extraStyle="" color="#6C744A" />
+                </div>
+              )}
             </div>
           </div>
         ))}

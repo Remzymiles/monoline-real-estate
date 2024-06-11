@@ -5,4 +5,5 @@ export interface IShowAllPicturesModal {
   isShowPicturesClicked: boolean;
   handleCloseAllPicturesModal: () => void;
   propertyId: string;
+  
 }

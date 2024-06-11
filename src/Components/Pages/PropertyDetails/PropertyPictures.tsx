@@ -3,6 +3,7 @@ import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePu
 import { IPropertyPictures } from "../../../base/interface/IPropertyPictures";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { PhotoIcon } from "../../Icons/PhotoIcon";
 
@@ -16,8 +17,11 @@ export const PropertyPictures = ({
     userId: state.userId,
   }));
 
-  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
-    useHandlePushWishlistProperties();
+  const {
+    pushWishlistProperties,
+    checkIfPropertyExistsInWishlist,
+    IsPushWishlistPropertiesLoading,
+  } = useHandlePushWishlistProperties();
 
   const { propertiesInWishlist, setIsPropertyInWishlist } =
     useHandleIsPropertyInWishlist((state) => ({
@@ -70,8 +74,14 @@ export const PropertyPictures = ({
               }`}
             />
             {isPropertyInWishlist ? "saved" : "save"}
+            {/*  */}
+            {IsPushWishlistPropertiesLoading[propertyId] && (
+              <div className="absolute top-0 left-0 bg-black/80 w-[100%] flex justify-center items-center py-1">
+                <TailSpinLoader color="white" />
+              </div>
+            )}
           </div>
-          <div
+          <button
             className="absolute bottom-2 right-2 bg-white/90 text-black text-sm flex gap-2 p-2 capitalize rounded-sm hover:bg-white tablet-above:hidden mobile:text-xs"
             onClick={() => {
               handleOpenAllPicturesModal();
@@ -79,7 +89,7 @@ export const PropertyPictures = ({
           >
             <PhotoIcon extraStyle="text-primaryColor-dark dark:text-primaryColorDarkMode" />
             show all photos
-          </div>
+          </button>
           <img
             src={selectedProperty?.propertyPhotos[0]?.url[4]}
             alt="img"
@@ -88,7 +98,7 @@ export const PropertyPictures = ({
         </div>
         <div className="flex flex-col items-center gap-3">
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">
-            <div
+            <button
               className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm ${
                 isPropertyInWishlist
                   ? "bg-primaryColor-dark dark:bg-primaryColorDarkMode text-white"
@@ -104,7 +114,13 @@ export const PropertyPictures = ({
                 }`}
               />
               {isPropertyInWishlist ? "saved" : "save"}
-            </div>
+              {/*  */}
+              {IsPushWishlistPropertiesLoading[propertyId] && (
+                <div className="absolute top-0 left-0 bg-black/80 w-[100%] flex justify-center items-center py-1">
+                  <TailSpinLoader color="white" />
+                </div>
+              )}
+            </button>
             <img
               src={selectedProperty?.propertyPhotos[0]?.url[3]}
               alt="img"
@@ -112,7 +128,7 @@ export const PropertyPictures = ({
             />
           </div>
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">
-            <div
+            <button
               className="absolute bottom-2 right-2 bg-white/90 text-black text-sm flex gap-2 p-2 capitalize rounded-sm hover:bg-white"
               onClick={() => {
                 handleOpenAllPicturesModal();
@@ -120,7 +136,7 @@ export const PropertyPictures = ({
             >
               <PhotoIcon extraStyle="text-primaryColor-dark dark:text-primaryColorDarkMode" />
               show all photos
-            </div>
+            </button>
             <img
               src={selectedProperty?.propertyPhotos[0]?.url[2]}
               alt="img"

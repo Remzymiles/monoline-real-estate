@@ -6,6 +6,7 @@ import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePu
 import { ISimilarProperty } from "../../../base/interface/ISimilarProperties";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
@@ -22,8 +23,11 @@ export const SimilarProperties = ({
     userId: state.userId,
   }));
   //
-  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
-    useHandlePushWishlistProperties();
+  const {
+    pushWishlistProperties,
+    checkIfPropertyExistsInWishlist,
+    IsPushWishlistPropertiesLoading,
+  } = useHandlePushWishlistProperties();
 
   const { setIsPropertyInWishlist, propertiesInWishlist } =
     useHandleIsPropertyInWishlist((state) => ({
@@ -156,6 +160,11 @@ export const SimilarProperties = ({
                         : "text-white"
                     }`}
                   />
+                  {IsPushWishlistPropertiesLoading[property.property_id] && (
+                    <div className="absolute top-0 bg-slate-100 w-[100%] h-[100%] flex justify-center items-center rounded-full right-[1px]">
+                      <TailSpinLoader extraStyle="" color="#6C744A" />
+                    </div>
+                  )}
                 </div>
               </div>
             );

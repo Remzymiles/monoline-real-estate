@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ICartProperty } from "../../../base/interface/ICartProperty";
+import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { TrashCanIcon } from "../../Icons/TrashCanIcon";
 
 export const CartProperty = ({
@@ -7,11 +8,13 @@ export const CartProperty = ({
   propertiesInWishlist,
   handleDeleteCartProperty,
   handleAddToWishlist,
+  IsPushWishlistPropertiesLoading,
 }: {
   cartProperties: ICartProperty[];
   propertiesInWishlist: { [propertyId: string]: boolean };
   handleDeleteCartProperty: (propertyId: string) => void;
   handleAddToWishlist: (propertyId: string) => void;
+  IsPushWishlistPropertiesLoading: { [propertyId: string]: boolean };
 }) => {
   return (
     <>
@@ -58,12 +61,20 @@ export const CartProperty = ({
                   </span>
                 </div>
                 <button
-                  className="w-full bg-primaryColor-light big-screen-mobile-below:py-2 py-1 px-2 dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 dark:text-gray-200 hover:bg-primaryColor-dark transition-colors duration-300 rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold"
+                  className="w-full relative bg-primaryColor-light big-screen-mobile-below:py-2 py-1 px-2 dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 dark:text-gray-200 hover:bg-primaryColor-dark transition-colors duration-300 rounded-lg big-screen-mobile-below:mb-2 text-white capitalize font-bold"
                   onClick={() => {
                     handleAddToWishlist(cartProperty.property_id);
                   }}
                 >
                   {isPropertyInWishlist ? "saved" : "save for later"}
+                  {/*  */}
+                  {IsPushWishlistPropertiesLoading[
+                    cartProperty.property_id
+                  ] && (
+                    <div className="absolute top-0 bg-black/80 w-[100%] h-[100%] flex justify-center items-center rounded-lg right-0">
+                      <TailSpinLoader color="white" />
+                    </div>
+                  )}
                 </button>
               </div>
             </div>

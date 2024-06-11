@@ -2,6 +2,7 @@ import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePu
 import { useRemovePropertyFromWishlist } from "../../../base/hooks/useRemovePropertyFromWishlist";
 import { IShowAllPicturesModal } from "../../../base/interface/IShowAllPictureModal";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";
 
@@ -12,7 +13,8 @@ export const ShowAllPicturesModal = ({
   propertyId,
 }: IShowAllPicturesModal) => {
   //
-  const { pushWishlistProperties } = useHandlePushWishlistProperties();
+  const { pushWishlistProperties, IsPushWishlistPropertiesLoading } =
+    useHandlePushWishlistProperties();
   //
   const { mutate: removeWishlistProperty } = useRemovePropertyFromWishlist();
 
@@ -60,7 +62,7 @@ export const ShowAllPicturesModal = ({
               <div className="flex gap-7 mobile:gap-5 justify-center items-center">
                 <div>
                   <button
-                    className={`capitalize border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-1.5 rounded-lg font-bold text-sm ${
+                    className={`capitalize relative border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-1.5 rounded-lg font-bold text-sm ${
                       isPropertyInWishlist === true
                         ? "bg-primaryColor-light dark:bg-primaryColorDarkMode/90 text-white hover:bg-primaryColor-dark dark:hover:bg-primaryColorDarkMode"
                         : "bg-white text-primaryColor-dark hover:bg-gray-200"
@@ -75,6 +77,12 @@ export const ShowAllPicturesModal = ({
                       }`}
                     />
                     {isPropertyInWishlist === true ? "saved" : "save"}
+                    {/*  */}
+                    {IsPushWishlistPropertiesLoading[propertyId] && (
+                      <div className="absolute top-0 bg-black/80 w-[100%] h-[100%] flex justify-center items-center rounded-lg right-0">
+                        <TailSpinLoader color="white" />
+                      </div>
+                    )}
                   </button>
                 </div>
                 <div>

@@ -3,6 +3,7 @@ import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePu
 import { IShowCheckoutPropertyPicturesModal } from "../../../base/interface/IShowCheckoutPropertyPicturesModal";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";
 
@@ -17,8 +18,11 @@ export const ShowCheckoutPropertyPicturesModal = ({
     userId: state.userId,
   }));
   //
-  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
-    useHandlePushWishlistProperties();
+  const {
+    pushWishlistProperties,
+    checkIfPropertyExistsInWishlist,
+    IsPushWishlistPropertiesLoading,
+  } = useHandlePushWishlistProperties();
   //
   const { propertiesInWishlist, setIsPropertyInWishlist } =
     useHandleIsPropertyInWishlist((state) => ({
@@ -83,8 +87,8 @@ export const ShowCheckoutPropertyPicturesModal = ({
               </div>
               <div className="flex gap-7 justify-center items-center">
                 <div>
-                  <div
-                    className={`capitalize border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-2 rounded-lg font-bold text-sm ${
+                  <button
+                    className={`capitalize relative border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-2 rounded-lg font-bold text-sm ${
                       isPropertyInWishlist
                         ? "bg-primaryColor-light text-white hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/90 dark:hover:bg-primaryColorDarkMode"
                         : "bg-white text-primaryColor-dark hover:bg-gray-200"
@@ -101,7 +105,13 @@ export const ShowCheckoutPropertyPicturesModal = ({
                       }`}
                     />
                     {isPropertyInWishlist ? "saved" : "save"}
-                  </div>
+                    {/*  */}
+                    {IsPushWishlistPropertiesLoading[String(clickedCheckoutPropertyId)] && (
+                      <div className="absolute top-0 bg-black/80 w-[100%] h-[100%] flex justify-center items-center rounded-lg right-0">
+                        <TailSpinLoader color="white" />
+                      </div>
+                    )}
+                  </button>
                 </div>
                 <div>
                   <XIcon

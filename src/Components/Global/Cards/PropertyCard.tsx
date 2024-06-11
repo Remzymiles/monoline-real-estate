@@ -12,6 +12,7 @@ import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 import { PropertyCardLoadingSkeleton } from "../Loaders/PropertyCardLoadingSkeleton";
+import { TailSpinLoader } from "../Loaders/TailSpinLoader";
 
 export const PropertyCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
@@ -22,6 +23,13 @@ export const PropertyCard = () => {
   const { userId } = useUserIdStore((state) => ({
     userId: state.userId,
   }));
+  //
+  const {
+    pushWishlistProperties,
+    checkIfPropertyExistsInWishlist,
+    IsPushWishlistPropertiesLoading,
+  } = useHandlePushWishlistProperties();
+  //
 
   useLayoutEffect(() => {
     window.scroll({
@@ -29,9 +37,6 @@ export const PropertyCard = () => {
       behavior: "smooth",
     });
   }, [filterOptions]);
-
-  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
-    useHandlePushWishlistProperties();
   //
   const { propertiesInWishlist, setIsPropertyInWishlist } =
     useHandleIsPropertyInWishlist((state) => ({
@@ -163,6 +168,11 @@ export const PropertyCard = () => {
                     : "text-white"
                 }`}
               />
+              {IsPushWishlistPropertiesLoading[property.property_id] && (
+                <div className="absolute top-0 bg-slate-100 w-[100%] h-[100%] flex justify-center items-center rounded-full right-[1px]">
+                  <TailSpinLoader extraStyle="" color="#6C744A" />
+                </div>
+              )}
             </div>
           </div>
         ))

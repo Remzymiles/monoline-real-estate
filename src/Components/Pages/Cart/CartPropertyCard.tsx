@@ -22,7 +22,7 @@ export const CartPropertyCard = () => {
     userId: state.userId,
   }));
 
-  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
+  const { pushWishlistProperties, checkIfPropertyExistsInWishlist,IsPushWishlistPropertiesLoading } =
     useHandlePushWishlistProperties();
 
   const { propertiesInWishlist, setIsPropertyInWishlist } =
@@ -105,6 +105,7 @@ export const CartPropertyCard = () => {
             handleAddToWishlist={handleAddToWishlist}
             handleDeleteCartProperty={handleDeleteCartProperty}
             propertiesInWishlist={propertiesInWishlist}
+            IsPushWishlistPropertiesLoading={IsPushWishlistPropertiesLoading}
           />
         </div>
         <CartSummary
