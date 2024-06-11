@@ -1,16 +1,19 @@
-import { UseHandleAboutMonolineDropdown } from "../../../../base/hooks/useHandleAboutMonolineDropdown";
-import { UseHandleGeneralDropDown } from "../../../../base/hooks/useHandleGeneralDropDown";
-import { UseHandleJoinMonolineDropdown } from "../../../../base/hooks/useHandleJoinMonolineDropdown";
-import { UseHandleResourceDropDown } from "../../../../base/hooks/useHandleResourceDropdown";
+import { UseHandleAboutMonolineDropdown } from "../../../../Layouts/hooks/useHandleAboutMonolineDropdown";
+import { UseHandleGeneralDropDown } from "../../../../Layouts/hooks/useHandleGeneralDropDown";
+import { UseHandleJoinMonolineDropdown } from "../../../../Layouts/hooks/useHandleJoinMonolineDropdown";
+import { UseHandleResourceDropDown } from "../../../../Layouts/hooks/useHandleResourceDropdown";
 import { ChevronArrowDown } from "../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../Icons/ChevronArrowUp";
 
 export const FooterContents = () => {
   //
   const { isGeneralVisible, openGeneralDropDown } = UseHandleGeneralDropDown();
-  const { isResourceVisible, openResourceDropDown } = UseHandleResourceDropDown();
-  const { isAboutMonolineVisible, openAboutMonolineDropDown } = UseHandleAboutMonolineDropdown();
-  const { isJoinMonolineVisible, openJoinMonolineDropDown } = UseHandleJoinMonolineDropdown();
+  const { isResourceVisible, openResourceDropDown } =
+    UseHandleResourceDropDown();
+  const { isAboutMonolineVisible, openAboutMonolineDropDown } =
+    UseHandleAboutMonolineDropdown();
+  const { isJoinMonolineVisible, openJoinMonolineDropDown } =
+    UseHandleJoinMonolineDropdown();
 
   return (
     <div>
@@ -40,7 +43,9 @@ export const FooterContents = () => {
 
           <div
             className={`transition-all duration-300 ${
-              isGeneralVisible ? "visible h-[120px]" : "h-0 tablet-below:invisible tablet-below:opacity-0"
+              isGeneralVisible
+                ? "visible h-[120px]"
+                : "h-0 tablet-below:invisible tablet-below:opacity-0"
             }`}
           >
             <p className="text-xs mb-2 tablet-above:text-center tablet-below:ml-2">
@@ -78,7 +83,9 @@ export const FooterContents = () => {
           </button>
           <div
             className={`transition-all duration-300 ${
-              isResourceVisible ? "visible h-[120px]" : "h-0 tablet-below:invisible tablet-below:opacity-0"
+              isResourceVisible
+                ? "visible h-[120px]"
+                : "h-0 tablet-below:invisible tablet-below:opacity-0"
             }`}
           >
             <p className="text-xs mb-2 tablet-above:text-center tablet-below:ml-2">
@@ -121,7 +128,9 @@ export const FooterContents = () => {
           </button>
           <div
             className={`transition-all duration-300 ${
-              isAboutMonolineVisible ? "visible h-[120px]" : "h-0 tablet-below:invisible tablet-below:opacity-0"
+              isAboutMonolineVisible
+                ? "visible h-[120px]"
+                : "h-0 tablet-below:invisible tablet-below:opacity-0"
             }`}
           >
             <p className="text-xs mb-2 tablet-above:text-center tablet-below:ml-2">
@@ -163,7 +172,9 @@ export const FooterContents = () => {
           </button>
           <div
             className={`transition-all duration-300 ${
-              isJoinMonolineVisible ? "visible h-[90px]" : "h-0 tablet-below:invisible tablet-below:opacity-0"
+              isJoinMonolineVisible
+                ? "visible h-[90px]"
+                : "h-0 tablet-below:invisible tablet-below:opacity-0"
             }`}
           >
             <p className="text-xs mb-2 tablet-above:text-center tablet-below:ml-2">

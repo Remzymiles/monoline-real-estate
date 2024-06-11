@@ -1,12 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useUpdateUserProfileInfo } from "../../../base/hooks/useUpdateUserProfileInfo";
 import { IProfileInfo } from "../../../base/interface/IProfileInfo";
 import { FormButton } from "../../Global/FormComponents/Button";
 import { Input } from "../../Global/FormComponents/Input";
 import { EditPassword } from "./EditPassword";
 import { EditProfileFormValidator } from "./EditProfileFormValidator";
 import { ProfileImage } from "./ProfileImage";
+import { useUpdateUserProfileInfo } from "../../../base/hooks/profilePage/useUpdateUserProfileInfo";
 
 export const ProfilePageCard = () => {
   //

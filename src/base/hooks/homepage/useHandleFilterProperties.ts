@@ -1,5 +1,5 @@
-import { useFilterStore } from "../store/useFilterStore";
-import { useProperties } from "./useFetchAllProperties";
+import { useFilterStore } from "../../store/useFilterStore";
+import { useProperties } from "../useFetchAllProperties";
 
 export const useHandleFilterProperties = () => {
   //

@@ -8,7 +8,7 @@ import { CartIcon } from "../../../Icons/CartIcon";
 import { MonolineLogo } from "../../../Logos/MonolineLogo";
 import { SearchBar } from "./SearchBar";
 import { UserProfileDropdown } from "./UserProfile/UserProfileDropdown";
-import { useFetchCartProperties } from "../../../../base/hooks/useFetchCartProperties";
+import { useFetchCartProperties } from "../../../../base/hooks/cartpage/useFetchCartProperties";
 
 export const HomepageHeader = () => {
   // 

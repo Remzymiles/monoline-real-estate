@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { useHandleFilterModal } from "../../../../base/hooks/useHandleFilterModal";
+import { useHandleFilterModal } from "../../../../base/hooks/homepage/useHandleFilterModal";
 import { SettingsIcon } from "../../../Icons/SettingsIcon";
 import { XIcon } from "../../../Icons/XIcon";
 import { FilterDropdownContents } from "./FilterDropdownContents";
@@ -25,7 +25,9 @@ export const FilterButton = () => {
         <div
           className={`flex justify-between items-center bg-white dark:bg-secondaryColor-dark py-2 border-b-2 dark:border-secondaryColor-light/20 laptop-below:py-3 tablet-above:px-8 laptop:px-28 mobile:px-4 tablet:px-8`}
         >
-          <p className="text-lg font-light capitalize dark:text-gray-400">Filter properties:</p>
+          <p className="text-lg font-light capitalize dark:text-gray-400">
+            Filter properties:
+          </p>
           <button
             className="flex gap-3 items-center bg-white dark:bg-secondaryColor-light px-3 py-1.5 dark:text-gray-400 rounded-xl big-screen-mobile-below:rounded-full border dark:border-gray-400/40 hover:shadow-lg transition-shadow duration-300 hover:outline outline-1 outline-black laptop-below:translate-y-[5px]"
             onClick={() => {

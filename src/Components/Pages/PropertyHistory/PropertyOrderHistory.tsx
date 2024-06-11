@@ -1,12 +1,12 @@
 import { useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { useClearOrderHistory } from "../../../base/hooks/useClearOrderHistory";
-import { useFetchOrderHistoryProperties } from "../../../base/hooks/useFetchOrderHistoryProperties";
-import { useHandleClearPropertyHistoryWarningModal } from "../../../base/hooks/useHandleClearPropertyHistoryWarningModal";
+import { useFetchOrderHistoryProperties } from "../../../base/hooks/propertyHistoryPage/useFetchOrderHistoryProperties";
+import { useHandleClearPropertyHistoryWarningModal } from "../../../base/hooks/propertyHistoryPage/useHandleClearPropertyHistoryWarningModal";
 import { IOrderHistoryProperty } from "../../../base/interface/IOrderHistoryProperty";
 import { useOrderHistoryStore } from "../../../base/store/useOrderHistoryStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
+import { useClearOrderHistory } from "../../../base/hooks/propertyHistoryPage/useClearOrderHistory";
 
 export const PropertyOrderHistory = () => {
   const { data: orderHistoryProperties, isLoading } =

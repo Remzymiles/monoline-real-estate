@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import supabase from "../../config/supabaseClient";
-import { useUserIdStore } from "../store/useUserIdStore";
+import { useUserIdStore } from "../../store/useUserIdStore";
+import supabase from "../../../config/supabaseClient";
 
 export const useFetchWishlistProperties = () => {
   const { userId } = useUserIdStore((state) => ({

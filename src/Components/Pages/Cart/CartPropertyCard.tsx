@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { useDeleteCartProperty } from "../../../base/hooks/useDeleteCartProperty";
-import { useFetchCartProperties } from "../../../base/hooks/useFetchCartProperties";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
 import { useCartLengthStore } from "../../../base/store/useCartLengthStore";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
@@ -9,6 +7,8 @@ import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CartProperty } from "./CartProperty";
 import { CartSummary } from "./CartSummary";
+import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
+import { useDeleteCartProperty } from "../../../base/hooks/cartpage/useDeleteCartProperty";
 
 export const CartPropertyCard = () => {
   const { data: cartProperties, isLoading } = useFetchCartProperties();
@@ -22,8 +22,11 @@ export const CartPropertyCard = () => {
     userId: state.userId,
   }));
 
-  const { pushWishlistProperties, checkIfPropertyExistsInWishlist,IsPushWishlistPropertiesLoading } =
-    useHandlePushWishlistProperties();
+  const {
+    pushWishlistProperties,
+    checkIfPropertyExistsInWishlist,
+    IsPushWishlistPropertiesLoading,
+  } = useHandlePushWishlistProperties();
 
   const { propertiesInWishlist, setIsPropertyInWishlist } =
     useHandleIsPropertyInWishlist((state) => ({

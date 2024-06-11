@@ -1,9 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import supabase from "../../config/supabaseClient";
-import { useUserIdStore } from "../store/useUserIdStore";
+import { useFetchCartProperties } from "../cartpage/useFetchCartProperties";
+import { useUserIdStore } from "../../store/useUserIdStore";
+import supabase from "../../../config/supabaseClient";
 
-export const useRemovePropertyFromWishlist = () => {
+export const useClearOrderHistory = () => {
+  useFetchCartProperties();
+  //
   const queryClient = useQueryClient();
   //
   const { userId } = useUserIdStore((state) => ({
@@ -12,11 +15,10 @@ export const useRemovePropertyFromWishlist = () => {
   //
 
   const { mutate, isPending, isError, error, isSuccess } = useMutation({
-    mutationFn: async (wishlistPropertyId: string): Promise<void> => {
+    mutationFn: async (): Promise<void> => {
       const { error } = await supabase
-        .from("wishlist_properties")
+        .from("order_history_properties")
         .delete()
-        .eq("property_id", wishlistPropertyId)
         .eq("user_id", userId);
 
       if (error) {
@@ -24,8 +26,8 @@ export const useRemovePropertyFromWishlist = () => {
       }
     },
     onSuccess: () => {
-      toast.success("Property has been removed from Wishlist");
-      queryClient.invalidateQueries({ queryKey: ["wishlist_properties"] });
+      toast.success("Order History has been cleared");
+      queryClient.invalidateQueries({ queryKey: ["order_history_properties"] });
     },
     onError: (error) => {
       toast.error(error.message);

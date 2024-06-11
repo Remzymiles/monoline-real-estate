@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { IUseHandleUserProfileDropdown } from "../interface/IUseHandleUserProfileDropdown";
+import { IUseHandleUserProfileDropdown } from "../../base/interface/IUseHandleUserProfileDropdown";
 
 export const useHandleUserProfileDropdown =
   (): IUseHandleUserProfileDropdown => {

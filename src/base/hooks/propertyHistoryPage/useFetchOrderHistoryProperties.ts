@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import supabase from "../../config/supabaseClient";
-import { useUserIdStore } from "../store/useUserIdStore";
-import { getAuthData } from "./useGetAuthData";
-import { useFetchCartProperties } from "./useFetchCartProperties";
+import supabase from "../../../config/supabaseClient";
+import { useUserIdStore } from "../../store/useUserIdStore";
+import { getAuthData } from "../useGetAuthData";
+import { useFetchCartProperties } from "../cartpage/useFetchCartProperties";
 
 export const useFetchOrderHistoryProperties = () => {
   const { userId, setUserId } = useUserIdStore((state) => ({
@@ -20,7 +20,7 @@ export const useFetchOrderHistoryProperties = () => {
     };
     fetchUserId();
   }, [setUserId]);
-  // 
+  //
   useFetchCartProperties();
   //
   const fetchOrderHistoryProperties = async () => {

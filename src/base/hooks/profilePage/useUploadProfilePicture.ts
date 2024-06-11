@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import supabase from "../../config/supabaseClient";
+import supabase from "../../../config/supabaseClient";
 
 export const uploadProfilePicture = async (
   userId: string,

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useFetchWishlistProperties } from "../../../base/hooks/useFetchWishlistProperties";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
+import { useFetchWishlistProperties } from "../../../base/hooks/wishlistPage/useFetchWishlistProperties";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
 import { IWishlistProperty } from "../../../base/interface/IWishlistProperty";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
@@ -76,7 +76,7 @@ export const WishlistCards = () => {
       </div>
       {wishlistProperties &&
         wishlistProperties.length > 0 &&
-        wishlistProperties.map((property: IWishlistProperty, index) => (
+        wishlistProperties.map((property: IWishlistProperty, index: number) => (
           <div
             className="big-screen-mobile-below:w-full between-mobile-and-tablet:w-[235px] tablet-above:w-[400px] relative"
             key={property.property_id}

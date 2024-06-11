@@ -1,5 +1,5 @@
-import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
-import { useRemovePropertyFromWishlist } from "../../../base/hooks/useRemovePropertyFromWishlist";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
+import { useRemovePropertyFromWishlist } from "../../../base/hooks/wishlistPage/useRemovePropertyFromWishlist";
 import { IShowAllPicturesModal } from "../../../base/interface/IShowAllPictureModal";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";

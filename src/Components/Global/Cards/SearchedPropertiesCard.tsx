@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useProperties } from "../../../base/hooks/useFetchAllProperties";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
 import { IProperty } from "../../../base/interface/IProperty";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
@@ -11,8 +11,8 @@ import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
-import { WaveFormLoader } from "../Loaders/WaveFormLoader";
 import { TailSpinLoader } from "../Loaders/TailSpinLoader";
+import { WaveFormLoader } from "../Loaders/WaveFormLoader";
 
 export const SearchedPropertiesCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);

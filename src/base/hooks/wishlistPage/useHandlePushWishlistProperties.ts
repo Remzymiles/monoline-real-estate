@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from "react";
 import { toast } from "sonner";
-import supabase from "../../config/supabaseClient";
-import { IProperty } from "../interface/IProperty";
-import { useHandleIsPropertyInWishlist } from "../store/useHandleIsPropertyInWishlistStore";
-import { useIsPushWishlistPropertiesLoadingStore } from "../store/useIsPushWishlistPropertiesLoadingStore";
-import { useUserIdStore } from "../store/useUserIdStore";
-import { useProperties } from "./useFetchAllProperties";
+import supabase from "../../../config/supabaseClient";
+import { IProperty } from "../../interface/IProperty";
+import { useHandleIsPropertyInWishlist } from "../../store/useHandleIsPropertyInWishlistStore";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../store/useIsPushWishlistPropertiesLoadingStore";
+import { useUserIdStore } from "../../store/useUserIdStore";
+import { useProperties } from "../useFetchAllProperties";
 import { useRemovePropertyFromWishlist } from "./useRemovePropertyFromWishlist";
 
 export const useHandlePushWishlistProperties = () => {
@@ -77,7 +77,7 @@ export const useHandlePushWishlistProperties = () => {
   const pushWishlistProperties = useCallback(
     async (propertyId: string) => {
       setIsPushWishlistPropertiesLoading(propertyId, true);
-      // 
+      //
       if (!userId) {
         console.error("User ID is not set");
         return;
@@ -99,7 +99,7 @@ export const useHandlePushWishlistProperties = () => {
 
           if (propertyExistsInWishlist) {
             removeFromWishlist(property.property_id);
-            setIsPushWishlistPropertiesLoading(propertyId, false)
+            setIsPushWishlistPropertiesLoading(propertyId, false);
             setIsPropertyInWishlist(property.property_id, false);
           } else {
             const propertyToInsert = {
@@ -125,12 +125,12 @@ export const useHandlePushWishlistProperties = () => {
           }
         } catch (error) {
           console.error("Error in pushWishlistProperties:", error);
-          setIsPushWishlistPropertiesLoading(propertyId, false)
-          toast.error("couldn't add property to wishlist")
+          setIsPushWishlistPropertiesLoading(propertyId, false);
+          toast.error("couldn't add property to wishlist");
         }
       }
-      setIsPushWishlistPropertiesLoading(propertyId, false)
-      // 
+      setIsPushWishlistPropertiesLoading(propertyId, false);
+      //
     },
     [
       userId,
@@ -141,7 +141,7 @@ export const useHandlePushWishlistProperties = () => {
       setIsPropertyInWishlist,
       setIsPushWishlistPropertiesLoading,
     ]
-    // 
+    //
   );
 
   useEffect(() => {

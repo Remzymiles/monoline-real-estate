@@ -1,8 +1,8 @@
 import { Link, useSearchParams } from "react-router-dom";
+import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
+import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/cartpage/useHandleIsShowAllPicturesClicked";
+import { useHandlePushCartProperties } from "../../../base/hooks/cartpage/useHandlePushCartProperties";
 import { useProperties } from "../../../base/hooks/useFetchAllProperties";
-import { useFetchCartProperties } from "../../../base/hooks/useFetchCartProperties";
-import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/useHandleIsShowAllPicturesClicked";
-import { useHandlePushCartProperties } from "../../../base/hooks/useHandlePushCartProperties";
 import { IProperty } from "../../../base/interface/IProperty";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { PropertyPicturesLoadingSkeleton } from "../../Global/Loaders/PropertyPicturesLoadingSkeleton";

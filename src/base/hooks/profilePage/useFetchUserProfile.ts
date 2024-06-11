@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import supabase from "../../config/supabaseClient";
-import { useUserIdStore } from "../store/useUserIdStore";
+import { useUserIdStore } from "../../store/useUserIdStore";
+import supabase from "../../../config/supabaseClient";
 
 export const useFetchUserProfileInfo = () => {
   const { userId } = useUserIdStore((state) => ({

@@ -1,5 +1,5 @@
-import { useFetchProfilePicture } from "../../../../../base/hooks/useFetchProfilePicture";
-import { useHandleUserProfileDropdown } from "../../../../../base/hooks/useHandleDropdown";
+import { useHandleUserProfileDropdown } from "../../../../../Layouts/hooks/useHandleDropdown";
+import { useFetchProfilePicture } from "../../../../../base/hooks/profilePage/useFetchProfilePicture";
 import { TailSpinLoader } from "../../../../Global/Loaders/TailSpinLoader";
 import { BarsIcon } from "../../../../Icons/BarsIcon";
 import { ToggleDarkModeIcon } from "../../../../Icons/ToggleDarkModeIcon";

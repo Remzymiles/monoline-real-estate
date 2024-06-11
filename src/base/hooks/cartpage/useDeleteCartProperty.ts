@@ -1,24 +1,21 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import supabase from "../../config/supabaseClient";
-import { useUserIdStore } from "../store/useUserIdStore";
-import { useFetchCartProperties } from "./useFetchCartProperties";
+import { useUserIdStore } from "../../store/useUserIdStore";
+import supabase from "../../../config/supabaseClient";
 
-export const useClearOrderHistory = () => {
-  useFetchCartProperties();
-  //
+export const useDeleteCartProperty = () => {
   const queryClient = useQueryClient();
-  //
   const { userId } = useUserIdStore((state) => ({
     userId: state.userId,
   }));
   //
 
   const { mutate, isPending, isError, error, isSuccess } = useMutation({
-    mutationFn: async (): Promise<void> => {
+    mutationFn: async (cartPropertyId: string): Promise<void> => {
       const { error } = await supabase
-        .from("order_history_properties")
+        .from("cart_properties")
         .delete()
+        .eq("property_id", cartPropertyId)
         .eq("user_id", userId);
 
       if (error) {
@@ -26,8 +23,8 @@ export const useClearOrderHistory = () => {
       }
     },
     onSuccess: () => {
-      toast.success("Order History has been cleared");
-      queryClient.invalidateQueries({ queryKey: ["order_history_properties"] });
+      toast.success("Property has been removed from Cart");
+      queryClient.invalidateQueries({ queryKey: ["cart_properties"] });
     },
     onError: (error) => {
       toast.error(error.message);

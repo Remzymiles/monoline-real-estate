@@ -1,8 +1,8 @@
-import supabase from "../../config/supabaseClient";
-import { useCheckoutStore } from "../store/useCheckoutStore";
-import { useUserIdStore } from "../store/useUserIdStore";
-import { useProperties } from "./useFetchAllProperties";
-import { IProperty } from "../interface/IProperty";
+import supabase from "../../../config/supabaseClient";
+import { IProperty } from "../../interface/IProperty";
+import { useCheckoutStore } from "../../store/useCheckoutStore";
+import { useUserIdStore } from "../../store/useUserIdStore";
+import { useProperties } from "../useFetchAllProperties";
 
 export const useHandlePushOrderHistoryProperties = () => {
   const { data: properties } = useProperties();

@@ -1,18 +1,20 @@
 import { ChangeEvent, useEffect } from "react";
-import { useFetchProfilePicture } from "../../../base/hooks/useFetchProfilePicture";
-import { useFetchUserProfileInfo } from "../../../base/hooks/useFetchUserProfile";
+import { useFetchProfilePicture } from "../../../base/hooks/profilePage/useFetchProfilePicture";
+import { useFetchUserProfileInfo } from "../../../base/hooks/profilePage/useFetchUserProfile";
+import { uploadProfilePicture } from "../../../base/hooks/profilePage/useUploadProfilePicture";
 import { getAuthData } from "../../../base/hooks/useGetAuthData";
-import { uploadProfilePicture } from "../../../base/hooks/useUploadProfilePicture";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
-import { useQueryClient } from "@tanstack/react-query";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CameraIcon } from "../../Icons/CameraIcon";
 import { UserProfileIcon } from "../../Icons/UserProfileIcon";
 
 export const ProfileImage = () => {
-  const { data: profilePhotoUrl, isLoading, refetch: refetchProfilePicture } = useFetchProfilePicture();
+  const {
+    data: profilePhotoUrl,
+    isLoading,
+    refetch: refetchProfilePicture,
+  } = useFetchProfilePicture();
   const { data: userProfileInfo } = useFetchUserProfileInfo();
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     console.log(userProfileInfo);

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/useHandlePushWishlistProperties";
+import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
 import { IShowCheckoutPropertyPicturesModal } from "../../../base/interface/IShowCheckoutPropertyPicturesModal";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
@@ -106,7 +106,9 @@ export const ShowCheckoutPropertyPicturesModal = ({
                     />
                     {isPropertyInWishlist ? "saved" : "save"}
                     {/*  */}
-                    {IsPushWishlistPropertiesLoading[String(clickedCheckoutPropertyId)] && (
+                    {IsPushWishlistPropertiesLoading[
+                      String(clickedCheckoutPropertyId)
+                    ] && (
                       <div className="absolute top-0 bg-black/80 w-[100%] h-[100%] flex justify-center items-center rounded-lg right-0">
                         <TailSpinLoader color="white" />
                       </div>
