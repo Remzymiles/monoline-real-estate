@@ -1,22 +1,18 @@
 import { useEffect } from "react";
+import { useDeleteCartProperty } from "../../../base/hooks/cartpage/useDeleteCartProperty";
+import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
-import { useCartLengthStore } from "../../../base/store/useCartLengthStore";
 import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CartProperty } from "./CartProperty";
 import { CartSummary } from "./CartSummary";
-import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
-import { useDeleteCartProperty } from "../../../base/hooks/cartpage/useDeleteCartProperty";
 
 export const CartPropertyCard = () => {
   const { data: cartProperties, isLoading } = useFetchCartProperties();
   const { mutate: deleteCartProperty } = useDeleteCartProperty();
   //
-  const { updateCartLength } = useCartLengthStore((state) => ({
-    updateCartLength: state.updateCartLength,
-  }));
 
   const { userId } = useUserIdStore((state) => ({
     userId: state.userId,
