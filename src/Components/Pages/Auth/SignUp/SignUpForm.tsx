@@ -1,18 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { Link } from "react-router-dom";
+import { useHandleUserSignUp } from "../../../../base/hooks/authPages/useHandleUserSignUp";
 import { IUser } from "../../../../base/interface/authPages/IUser";
-import supabase from "../../../../config/supabaseClient";
 import { FormButton } from "../../../Global/FormComponents/Button";
 import { Input } from "../../../Global/FormComponents/Input";
 import { WaveFormLoader } from "../../../Global/Loaders/WaveFormLoader";
 import { signUpFormValidator } from "./signUpFormValidator";
 
 export const SignUpForm = () => {
-  //
-  const redirect = useNavigate();
   //
   const {
     register,
@@ -23,30 +19,10 @@ export const SignUpForm = () => {
     resolver: yupResolver(signUpFormValidator),
   });
   //
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (data: IUser) => {
-      const response = await supabase.auth.signUp({
-        email: data.email_address,
-        password: data.password,
-        options: { data: { fullname: data.fullname } },
-      });
-      if (response.error) {
-        throw new Error(response.error.message);
-      }
-      return response;
-    },
-    onSuccess: () => {
-      reset();
-      redirect("/");
-    },
-    onError: (error: any) => {
-      toast.error(error.message);
-    },
-  });
+  const { mutate, isPending } = useHandleUserSignUp(reset);
   //
   const handleCreateAccount: SubmitHandler<IUser> = (data) => {
     mutate(data);
-    //
   };
   //
   return (
