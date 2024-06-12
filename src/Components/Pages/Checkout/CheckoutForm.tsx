@@ -63,12 +63,12 @@ export const CheckoutForm = ({
             placeholder="card number"
             inputType="tel"
             register={register}
+            maxLength={19}
             extraStyle={`${
               errors.card_number
                 ? "border-b-2 border-red-600 focus:border-red-600"
                 : "border-black"
             }`}
-            maxLength={19}
           />
           {errors.card_number && (
             <p className="text-right mt-1 text-xs text-red-500">
