@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { IUseHandleUserProfileDropdown } from "../../base/interface/IUseHandleUserProfileDropdown";
+import { IUseHandleMainLayoutDropdown } from "../interface/IUseHandleMainLayoutDropdown";
 
 export const useHandleUserProfileDropdown =
-  (): IUseHandleUserProfileDropdown => {
+  (): IUseHandleMainLayoutDropdown => {
     const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
     const userProfileDropdownRef = useRef<HTMLDivElement>(null);
 

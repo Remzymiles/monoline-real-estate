@@ -1,8 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useCartLengthStore } from "../../store/useCartLengthStore";
 import { useUserIdStore } from "../../store/useUserIdStore";
 import supabase from "../../../config/supabaseClient";
+import { useCartLengthStore } from "../../store/cartpage/useCartLengthStore";
 
 export const useFetchCartProperties = () => {
   const queryClient = useQueryClient();

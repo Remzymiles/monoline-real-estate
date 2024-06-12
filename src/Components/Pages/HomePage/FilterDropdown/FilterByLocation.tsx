@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import cities from "../../../../base/dummyData/propertyCities.json";
 import states from "../../../../base/dummyData/propertyStates.json";
-import { IFilterByLocation } from "../../../../base/interface/IFilterByLocation";
-import { useFilterStore } from "../../../../base/store/useFilterStore";
+import { IFilterByLocation } from "../../../../base/interface/homepage/IFilterByLocation";
 import { ChevronArrowDown } from "../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../Icons/ChevronArrowUp";
+import { useFilterStore } from "../../../../base/store/homepage/useFilterStore";
 
 export const FilterByLocation = ({
   setIsCitiesDropDownOpen,
@@ -101,7 +101,9 @@ export const FilterByLocation = ({
                 <button
                   key={index}
                   className={`px-3 py-3 w-full text-start dark:hover:bg-secondaryColor-light/30 ${
-                    index === states.length - 1 ? "" : "border-b border-b-black dark:border-gray-400"
+                    index === states.length - 1
+                      ? ""
+                      : "border-b border-b-black dark:border-gray-400"
                   }`}
                   onClick={() => handleStateSelect(state.name)}
                 >

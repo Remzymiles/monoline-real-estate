@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { useCartLengthStore } from "../../../../base/store/useCartLengthStore";
 import { useDarkModeStore } from "../../../../base/store/useDarkModeStore";
 import { useIsUserLoggedIn } from "../../../../base/store/useIsUserLoggedIn";
 import { CartIcon } from "../../../Icons/CartIcon";
@@ -9,6 +8,7 @@ import { MonolineLogo } from "../../../Logos/MonolineLogo";
 import { SearchBar } from "./SearchBar";
 import { UserProfileDropdown } from "./UserProfile/UserProfileDropdown";
 import { useFetchCartProperties } from "../../../../base/hooks/cartpage/useFetchCartProperties";
+import { useCartLengthStore } from "../../../../base/store/cartpage/useCartLengthStore";
 
 export const HomepageHeader = () => {
   // 

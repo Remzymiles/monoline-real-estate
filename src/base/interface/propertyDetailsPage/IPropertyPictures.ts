@@ -1,4 +1,4 @@
-import { IProperty } from "./IProperty";
+import { IProperty } from "../../../Layouts/interface/IProperty";
 
 export interface IPropertyPictures {
   handleOpenAllPicturesModal: () => void;

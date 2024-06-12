@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import prices from "../../../../base/dummyData/propertyPrices.json";
-import { IFilterByPriceRange } from "../../../../base/interface/IFilterByPriceRange";
-import { useFilterStore } from "../../../../base/store/useFilterStore";
+import { IFilterByPriceRange } from "../../../../base/interface/homepage/IFilterByPriceRange";
 import { ChevronArrowDown } from "../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../Icons/ChevronArrowUp";
+import { useFilterStore } from "../../../../base/store/homepage/useFilterStore";
 
 export const FilterByPrice = ({
   setIsPricesDropDownOpen,

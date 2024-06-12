@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useHandleEditPassword = () => {
+export const useHandleEditPasswordForm = () => {
   //
   const [isEditPasswordVisible, setIsEditPasswordVisible] = useState(false);
   //

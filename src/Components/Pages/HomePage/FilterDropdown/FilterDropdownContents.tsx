@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from "react";
-import { useFilterStore } from "../../../../base/store/useFilterStore";
 import { closeFilterModalContext } from "./FilterButton";
 import { FilterByBedsAndBaths } from "./FilterByBedsAndBaths";
 import { FilterByLocation } from "./FilterByLocation";
 import { FilterByPrice } from "./FilterByPrice";
+import { useFilterStore } from "../../../../base/store/homepage/useFilterStore";
 
 export const UseFilterContext = createContext<any>({});
 export const FilterDropdownContents = () => {

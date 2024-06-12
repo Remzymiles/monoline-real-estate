@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ISearchValueStore } from "../interface/ISearchValueStore";
+import { ISearchValueStore } from "../../Layouts/interface/ISearchValueStore";
 
 export const useSearchValueStore = create<ISearchValueStore>((set) => ({
   searchValue: "",

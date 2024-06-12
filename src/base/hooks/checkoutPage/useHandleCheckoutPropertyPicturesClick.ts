@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IProperty } from "../interface/IProperty";
+import { IProperty } from "../../../Layouts/interface/IProperty";
 
 export const useHandleCheckoutPropertyPicturesClick = () => {
   const [isShowCheckoutPropertyPicturesClicked, setIsShowCheckoutPropertyPictureClicked] =

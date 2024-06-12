@@ -1,5 +1,5 @@
 import { useTogglePassword } from "../../../base/hooks/useTogglePassword";
-import { IInput } from "../../../base/interface/IInput";
+import { IInput } from "../../../base/interface/authPages/IInput";
 import { PasswordVisibilityIcon } from "../../Icons/PasswordVisibilityIcon";
 import { PasswordVisibilityOffIcon } from "../../Icons/PasswordVisibilityOffIcon";
 

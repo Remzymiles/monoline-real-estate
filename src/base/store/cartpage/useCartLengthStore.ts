@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ICartLengthStore } from "../interface/ICartLengthStore";
+import { ICartLengthStore } from "../../interface/cartpage/ICartLengthStore";
 
 export const useCartLengthStore = create<ICartLengthStore>((set) => ({
   cartLength: 0,

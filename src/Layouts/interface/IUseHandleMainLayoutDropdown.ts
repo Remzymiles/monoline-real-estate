@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface IUseHandleUserProfileDropdown {
+export interface IUseHandleMainLayoutDropdown {
   isUserProfileVisible: boolean;
   setIsUserProfileVisible: Dispatch<SetStateAction<boolean>>;
   handleOpenUserProfileDropDown: () => void;

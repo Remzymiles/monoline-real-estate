@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
-import { IShowCheckoutPropertyPicturesModal } from "../../../base/interface/IShowCheckoutPropertyPicturesModal";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { IShowCheckoutPropertyPicturesModal } from "../../../base/interface/checkoutPage/IShowCheckoutPropertyPicturesModal";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
 
 export const ShowCheckoutPropertyPicturesModal = ({
   clickedCheckoutProperty,

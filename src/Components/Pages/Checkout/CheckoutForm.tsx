@@ -1,12 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { ICheckoutForm } from "../../../base/interface/ICheckoutForm";
-import { IDebitCard } from "../../../base/interface/IDebitCard";
+import { useClearCartProperties } from "../../../base/hooks/cartpage/useClearCartProperties";
+import { useHandlePushOrderHistoryProperties } from "../../../base/hooks/propertyHistoryPage/useHandlePushOrderHistoryProperties";
+import { IDebitCard } from "../../../base/interface/profilePage/IDebitCard";
+import { ICheckoutForm } from "../../../base/interface/checkoutPage/ICheckoutForm";
 import { FormButton } from "../../Global/FormComponents/Button";
 import { Input } from "../../Global/FormComponents/Input";
 import { DebitCardFormValidator } from "./DebitCardFormValidator";
-import { useClearCartProperties } from "../../../base/hooks/cartpage/useClearCartProperties";
-import { useHandlePushOrderHistoryProperties } from "../../../base/hooks/propertyHistoryPage/useHandlePushOrderHistoryProperties";
 
 export const CheckoutForm = ({
   checkoutProperties,

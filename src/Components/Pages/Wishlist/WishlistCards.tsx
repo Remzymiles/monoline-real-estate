@@ -4,14 +4,14 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useFetchWishlistProperties } from "../../../base/hooks/wishlistPage/useFetchWishlistProperties";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
-import { IWishlistProperty } from "../../../base/interface/IWishlistProperty";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { IWishlistProperty } from "../../../base/interface/wishlistPage/IWishlistProperty";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
 
 export const WishlistCards = () => {
   //

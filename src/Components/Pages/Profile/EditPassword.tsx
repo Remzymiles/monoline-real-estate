@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getAuthData } from "../../../base/hooks/useGetAuthData";
-import { useHandleEditPassword } from "../../../base/hooks/profilePage/useHandleEditPassword";
 import { EditPasswordForm } from "./EditPasswordForm";
+import { useHandleEditPasswordForm } from "../../../base/hooks/profilePage/useHandleEditPasswordForm";
 
 export const EditPassword = () => {
   //
-  const { handleEditPassword, isEditPasswordVisible } = useHandleEditPassword();
+  const { handleEditPassword, isEditPasswordVisible } = useHandleEditPasswordForm();
   //
   const [userEmail, setUserEmail] = useState<string | null>(null);
 

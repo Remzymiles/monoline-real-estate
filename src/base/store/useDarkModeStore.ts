@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { IDarkModeStore } from "../interface/IDarkMode";
+import { IDarkModeStore } from "../../Layouts/interface/IDarkMode";
 
 export const useDarkModeStore = create<
   IDarkModeStore,

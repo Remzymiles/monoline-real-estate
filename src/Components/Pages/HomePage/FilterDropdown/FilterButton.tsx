@@ -11,7 +11,6 @@ export const FilterButton = () => {
     isFilterVisible,
     handleOpenFilterModal,
     handleCloseFilterModal,
-    // filterDropdownRef,
   } = useHandleFilterModal();
   //
 

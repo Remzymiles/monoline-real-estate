@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useUserIdStore } from "../../store/useUserIdStore";
-import { IProfileInfo } from "../../interface/IProfileInfo";
 import supabase from "../../../config/supabaseClient";
+import { IProfileInfo } from "../../interface/profilePage/IProfileInfo";
+import { useUserIdStore } from "../../store/useUserIdStore";
 
 export const useUpdateUserProfileInfo = () => {
   const { userId } = useUserIdStore((state) => ({

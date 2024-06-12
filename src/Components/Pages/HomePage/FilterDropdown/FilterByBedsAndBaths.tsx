@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import propertyBaths from "../../../../base/dummyData/propertyBaths.json";
 import propertyBeds from "../../../../base/dummyData/propertyBeds.json";
-import { IFilterByBedsAndBaths } from "../../../../base/interface/IFilterByBedsAndBaths";
-import { useFilterStore } from "../../../../base/store/useFilterStore";
+import { IFilterByBedsAndBaths } from "../../../../base/interface/homepage/IFilterByBedsAndBaths";
+import { useFilterStore } from "../../../../base/store/homepage/useFilterStore";
 
 export const FilterByBedsAndBaths = ({
   selectedBaths,
@@ -69,8 +69,8 @@ export const FilterByBedsAndBaths = ({
               <div
                 className={`capitalize border dark:border-gray-400 rounded-2xl px-4 py-[5px] ${
                   selectedBaths === 0
-                  ? "bg-black text-white dark:bg-secondaryColor-dark dark:text-white"
-                  : "bg-white text-black dark:bg-secondaryColor-lighter/90 dark:text-gray-300"
+                    ? "bg-black text-white dark:bg-secondaryColor-dark dark:text-white"
+                    : "bg-white text-black dark:bg-secondaryColor-lighter/90 dark:text-gray-300"
                 } hover:border-black dark:hover:border-gray-200`}
                 onClick={() => {
                   setSelectedBaths(0);
@@ -83,8 +83,8 @@ export const FilterByBedsAndBaths = ({
                   key={bath.id}
                   className={`border hover:border-black rounded-2xl px-[23px] py-[5px] ${
                     selectedBaths === bath.baths
-                    ? "bg-black text-white dark:bg-secondaryColor-dark dark:text-white"
-                    : "bg-white text-black dark:bg-secondaryColor-lighter/90 dark:text-gray-300"
+                      ? "bg-black text-white dark:bg-secondaryColor-dark dark:text-white"
+                      : "bg-white text-black dark:bg-secondaryColor-lighter/90 dark:text-gray-300"
                   }`}
                   onClick={() => {
                     setSelectedBaths(bath.baths);

@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { toast } from "sonner";
-import { useCartLengthStore } from "../../../../base/store/useCartLengthStore";
+import { useCartLengthStore } from "../../../../base/store/cartpage/useCartLengthStore";
 import { useIsUserLoggedIn } from "../../../../base/store/useIsUserLoggedIn";
 import { CartIcon } from "../../../Icons/CartIcon";
 import { HeartIcon } from "../../../Icons/HeartIcon";

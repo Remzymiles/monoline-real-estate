@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ICartProperty } from "../../../base/interface/ICartProperty";
+import { ICartProperty } from "../../../base/interface/cartpage/ICartProperty";
 import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { TrashCanIcon } from "../../Icons/TrashCanIcon";
 

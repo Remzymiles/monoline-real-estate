@@ -1,12 +1,13 @@
 import { useCallback, useEffect } from "react";
 import { toast } from "sonner";
+import { IProperty } from "../../../Layouts/interface/IProperty";
 import supabase from "../../../config/supabaseClient";
-import { IProperty } from "../../interface/IProperty";
-import { useHandleIsPropertyInWishlist } from "../../store/useHandleIsPropertyInWishlistStore";
-import { useIsPushWishlistPropertiesLoadingStore } from "../../store/useIsPushWishlistPropertiesLoadingStore";
+import { IWishlistProperty } from "../../interface/wishlistPage/IWishlistProperty";
 import { useUserIdStore } from "../../store/useUserIdStore";
 import { useProperties } from "../useFetchAllProperties";
 import { useRemovePropertyFromWishlist } from "./useRemovePropertyFromWishlist";
+import { useHandleIsPropertyInWishlist } from "../../store/wishlistPage/useHandleIsPropertyInWishlistStore";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 
 export const useHandlePushWishlistProperties = () => {
   const { data: properties } = useProperties();
@@ -39,13 +40,13 @@ export const useHandlePushWishlistProperties = () => {
           .eq("property_id", propertyId);
 
         if (error) {
-          console.error("Error checking property existence:", error.message);
+          // console.error("Error checking property existence:", error.message);
           return false;
         }
 
         return data && data.length > 0;
       } catch (error) {
-        console.error("Error in checkIfPropertyExistsInWishlist:", error);
+        // console.error("Error in checkIfPropertyExistsInWishlist:", error);
         return false;
       }
     },
@@ -53,22 +54,24 @@ export const useHandlePushWishlistProperties = () => {
   );
 
   const insertWishlistProperties = useCallback(
-    async (tableName: string, data: any) => {
+    async (tableName: string, data: IWishlistProperty) => {
       try {
-        const { data: insertedWishlistProperties, error } = await supabase
+        const { data: IWishlistProperty, error } = await supabase
           .from(tableName)
           .insert(data);
 
         if (error) {
-          console.error("Error inserting data:", error.message);
+          // console.error("Error inserting data:", error.message);
           return;
         }
-        console.log(insertedWishlistProperties);
+        // console.log(insertedWishlistProperties);
 
         toast.success("Property has been added to Wishlist");
-        setIsPropertyInWishlist(data.property_id, true);
+        userId
+          ? setIsPropertyInWishlist(data.property_id, true)
+          : setIsPropertyInWishlist(data.property_id, false);
       } catch (error) {
-        console.error("Error in insertWishlistProperties:", error);
+        // console.error("Error in insertWishlistProperties:", error);
       }
     },
     [setIsPropertyInWishlist]
@@ -76,10 +79,13 @@ export const useHandlePushWishlistProperties = () => {
 
   const pushWishlistProperties = useCallback(
     async (propertyId: string) => {
-      setIsPushWishlistPropertiesLoading(propertyId, true);
+      userId
+        ? setIsPushWishlistPropertiesLoading(propertyId, true)
+        : setIsPushWishlistPropertiesLoading(propertyId, false);
       //
       if (!userId) {
-        console.error("User ID is not set");
+        toast.error("Login or Sign up to add to wishlist");
+        setIsPropertyInWishlist(propertyId, false);
         return;
       }
 
@@ -99,7 +105,6 @@ export const useHandlePushWishlistProperties = () => {
 
           if (propertyExistsInWishlist) {
             removeFromWishlist(property.property_id);
-            setIsPushWishlistPropertiesLoading(propertyId, false);
             setIsPropertyInWishlist(property.property_id, false);
           } else {
             const propertyToInsert = {
@@ -124,9 +129,9 @@ export const useHandlePushWishlistProperties = () => {
             );
           }
         } catch (error) {
-          console.error("Error in pushWishlistProperties:", error);
+          // console.error("Error in pushWishlistProperties:", error);
           setIsPushWishlistPropertiesLoading(propertyId, false);
-          toast.error("couldn't add property to wishlist");
+          toast.error("something went wrong. Try again");
         }
       }
       setIsPushWishlistPropertiesLoading(propertyId, false);
@@ -151,12 +156,12 @@ export const useHandlePushWishlistProperties = () => {
         "postgres_changes",
         { event: "*", schema: "public", table: "wishlist_properties" },
         (payload) => {
-          if (payload.eventType === "INSERT") {
+          if (payload.eventType === "INSERT" && userId) {
             setIsPropertyInWishlist(payload.new.property_id, true);
           } else if (payload.eventType === "DELETE") {
             setIsPropertyInWishlist(payload.old.property_id, false);
           }
-          console.log("Change received!", payload);
+          // console.log("Change received!", payload);
         }
       )
       .subscribe();

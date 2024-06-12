@@ -1,4 +1,4 @@
-import { IProperty } from "../../../base/interface/IProperty";
+import { IProperty } from "../../../Layouts/interface/IProperty";
 import { CalculatorIcon } from "../../Icons/CalculatorIcon";
 import { CalenderIcon } from "../../Icons/CalenderIcon";
 import { DeckIcon } from "../../Icons/DeckIcon";

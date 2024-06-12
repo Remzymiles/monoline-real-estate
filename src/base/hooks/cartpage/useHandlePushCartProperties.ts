@@ -1,8 +1,8 @@
 import { toast } from "sonner";
-import { useProperties } from "../useFetchAllProperties";
-import { useUserIdStore } from "../../store/useUserIdStore";
-import { IProperty } from "../../interface/IProperty";
+import { IProperty } from "../../../Layouts/interface/IProperty";
 import supabase from "../../../config/supabaseClient";
+import { useUserIdStore } from "../../store/useUserIdStore";
+import { useProperties } from "../useFetchAllProperties";
 
 export const useHandlePushCartProperties = () => {
   const { data: properties } = useProperties();

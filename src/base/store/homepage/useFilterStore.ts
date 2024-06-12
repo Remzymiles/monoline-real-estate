@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IFilterStore } from "../interface/IFilterStore";
+import { IFilterStore } from "../../interface/homepage/IFilterStore";
 
 export const useFilterStore = create<IFilterStore>((set) => ({
   filterOptions: {
@@ -59,9 +59,9 @@ export const useFilterStore = create<IFilterStore>((set) => ({
         selectedPrice: "",
       },
     }),
-    isFilterButtonClicked: "",
-    setIsFilterButtonClicked: (value) => 
-      set({
-        isFilterButtonClicked: value
-      })
+  isFilterButtonClicked: "",
+  setIsFilterButtonClicked: (value) =>
+    set({
+      isFilterButtonClicked: value,
+    }),
 }));

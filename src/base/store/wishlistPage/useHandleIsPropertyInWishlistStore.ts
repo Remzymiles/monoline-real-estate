@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IIsPropertyInWishlist } from "../interface/IIsPropertyInWishlist";
+import { IIsPropertyInWishlist } from "../../interface/wishlistPage/IIsPropertyInWishlist";
 
 export const useHandleIsPropertyInWishlist = create<IIsPropertyInWishlist>(
   (set) => ({

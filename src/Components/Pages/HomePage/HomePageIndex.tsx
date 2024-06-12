@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useFilterStore } from "../../../base/store/useFilterStore";
 import { PropertyCard } from "../../Global/Cards/PropertyCard";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { FilterButton } from "./FilterDropdown/FilterButton";
+import { useFilterStore } from "../../../base/store/homepage/useFilterStore";
 
 export const HomePageIndex = () => {
   //

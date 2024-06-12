@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IUserIdStore } from "../interface/IUserIdStore";
+import { IUserIdStore } from "../../Layouts/interface/IUserIdStore";
 
 export const useUserIdStore = create<IUserIdStore>((set) => ({
   userId: "",

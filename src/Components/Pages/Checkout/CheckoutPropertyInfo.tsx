@@ -1,10 +1,10 @@
-import { ICheckoutPropertyInfo } from "../../../base/interface/ICheckoutPropertyInfo";
+import { ICheckoutPropertyInfo } from "../../../base/interface/checkoutPage/ICheckoutPropertyInfo";
 
 export const CheckoutPropertyInfo = ({
   checkoutProperties,
   handleOpenCheckoutPicturesModal,
 }: ICheckoutPropertyInfo) => {
-    // 
+  //
   const subTotal = checkoutProperties.reduce((acc, property) => {
     return acc + property.price;
   }, 0);

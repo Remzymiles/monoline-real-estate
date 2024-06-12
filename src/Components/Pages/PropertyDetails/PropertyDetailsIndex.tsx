@@ -1,10 +1,12 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
+import { IProperty } from "../../../Layouts/interface/IProperty";
 import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/cartpage/useHandleIsShowAllPicturesClicked";
 import { useHandlePushCartProperties } from "../../../base/hooks/cartpage/useHandlePushCartProperties";
 import { useProperties } from "../../../base/hooks/useFetchAllProperties";
-import { IProperty } from "../../../base/interface/IProperty";
-import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
+import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
+import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { PropertyPicturesLoadingSkeleton } from "../../Global/Loaders/PropertyPicturesLoadingSkeleton";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
@@ -24,6 +26,10 @@ export const PropertyDetailsIndex = () => {
   useFetchCartProperties();
 
   const { pushCartProperties } = useHandlePushCartProperties();
+  const { userId } = useUserIdStore((state) => ({ userId: state.userId }));
+  // 
+  const location = useLocation()
+  
 
   const [query] = useSearchParams();
   const propertyId = query.get("id");
@@ -135,16 +141,24 @@ export const PropertyDetailsIndex = () => {
               <div className="tablet-below:w-full bg-white tablet-above:border dark:border-gray-400/20 rounded-md tablet-above:px-5 pt-3 flex flex-col dark:bg-secondaryColor-dark/10">
                 <button
                   className="transition-all capitalize bg-primaryColor-light hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 duration-300 text-white dark:text-gray-300 font-bold mt-2 rounded-md px-10 py-2 text-sm"
-                  onClick={addPropertyToCart}
+                  onClick={() => {
+                    userId
+                      ? addPropertyToCart()
+                      : toast.error("Login or Sign up to add to Cart");
+                  }}
                 >
                   Add property to cart
                 </button>
                 <Link
-                  to={"/checkout"}
+                  to={userId ? "/checkout" : `${location.pathname}${location.search}` }
                   className="capitalize bg-primaryColor-light hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 transition-all duration-300 text-white dark:text-gray-300 font-bold mt-2 rounded-md px-10 py-2 mb-3 text-sm text-center"
                   onClick={() => {
-                    updateCheckoutIds(String(propertyId));
-                    setIsPropertyFromCart(false);
+                    if (userId) {
+                      updateCheckoutIds(String(propertyId));
+                      setIsPropertyFromCart(false);
+                    }else{
+                      toast.error("Login or Sign up to buy Property")
+                    }
                   }}
                 >
                   Buy now

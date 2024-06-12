@@ -1,4 +1,4 @@
-import { useFilterStore } from "../../store/useFilterStore";
+import { useFilterStore } from "../../store/homepage/useFilterStore";
 import { useProperties } from "../useFetchAllProperties";
 
 export const useHandleFilterProperties = () => {

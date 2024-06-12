@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useFetchCartProperties } from "./useFetchCartProperties";
-import { useCheckoutStore } from "../../store/useCheckoutStore";
 import { useUserIdStore } from "../../store/useUserIdStore";
 import supabase from "../../../config/supabaseClient";
+import { useCheckoutStore } from "../../store/checkoutPage/useCheckoutStore";
 
 export const useClearCartProperties = () => {
   useFetchCartProperties();

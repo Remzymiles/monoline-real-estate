@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useProperties } from "../../../base/hooks/useFetchAllProperties";
 import { useHandlePaymentSuccessModal } from "../../../base/hooks/checkoutPage/useHandlePaymentSuccessModal";
-import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutPropertyInfo } from "./CheckoutPropertyInfo";
 import { ShowCheckoutPropertyPicturesModal } from "./ShowCheckoutPropertyPicturesModal";
 import { useHandleCheckoutPropertyPicturesClick } from "../../../base/hooks/checkoutPage/useHandleCheckoutPropertyPicturesClick";
+import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
 
 export const CheckoutIndex = () => {
   //

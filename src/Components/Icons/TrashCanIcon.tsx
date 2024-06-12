@@ -1,6 +1,6 @@
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ITrashCanIcon } from "../../base/interface/ITrashCanIcon";
+import { ITrashCanIcon } from "../../Layouts/interface/ITrashCanIcon";
 
 export const TrashCanIcon = ({ clicked, extraStyle }: ITrashCanIcon) => {
   return (

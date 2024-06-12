@@ -1,7 +1,7 @@
 import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
 import { useRemovePropertyFromWishlist } from "../../../base/hooks/wishlistPage/useRemovePropertyFromWishlist";
-import { IShowAllPicturesModal } from "../../../base/interface/IShowAllPictureModal";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { IShowAllPicturesModal } from "../../../base/interface/propertyDetailsPage/IShowAllPictureModal";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
 import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";

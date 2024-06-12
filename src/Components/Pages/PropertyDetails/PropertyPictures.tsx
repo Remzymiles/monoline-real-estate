@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
-import { IPropertyPictures } from "../../../base/interface/IPropertyPictures";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/useHandleIsPropertyInWishlistStore";
+import { IPropertyPictures } from "../../../base/interface/propertyDetailsPage/IPropertyPictures";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { PhotoIcon } from "../../Icons/PhotoIcon";
+import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
 
 export const PropertyPictures = ({
   handleOpenAllPicturesModal,

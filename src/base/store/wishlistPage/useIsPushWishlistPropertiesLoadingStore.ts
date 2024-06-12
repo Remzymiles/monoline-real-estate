@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IIsPushWishlistPropertiesLoadingStore } from "../interface/IIsPushWishlistPropertiesLoadingStore";
+import { IIsPushWishlistPropertiesLoadingStore } from "../../interface/wishlistPage/IIsPushWishlistPropertiesLoadingStore";
 
 export const useIsPushWishlistPropertiesLoadingStore =
   create<IIsPushWishlistPropertiesLoadingStore>((set) => ({

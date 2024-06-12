@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { ICartSummary } from "../../../base/interface/ICartSummary";
-import { useCheckoutStore } from "../../../base/store/useCheckoutStore";
+import { ICartSummary } from "../../../base/interface/cartpage/ICartSummary";
+import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
 
 export const CartSummary = ({
   cartProperties,

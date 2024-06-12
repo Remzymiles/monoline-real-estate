@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { IUser } from "../../../../base/interface/IUser";
+import { IUser } from "../../../../base/interface/authPages/IUser";
 import supabase from "../../../../config/supabaseClient";
 import { FormButton } from "../../../Global/FormComponents/Button";
 import { Input } from "../../../Global/FormComponents/Input";
