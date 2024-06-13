@@ -10,43 +10,44 @@ import { useHandleCheckoutPropertyPicturesClick } from "../../../base/hooks/chec
 import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
 
 export const CheckoutIndex = () => {
-  //
   const [isPaymentButtonClicked, setIsPaymentButtonClicked] = useState(false);
   const { data: properties } = useProperties();
-  //
+  
   useEffect(() => {
     isPaymentButtonClicked || isPaymentSuccessful
       ? (window.document.body.style.overflow = "hidden")
       : (window.document.body.style.overflow = "");
   }, [isPaymentButtonClicked]);
-  //
+  
   const {
     handleOpenPaymentSuccessModal,
     isPaymentSuccessful,
     handleClosePaymentSuccessModal,
   } = useHandlePaymentSuccessModal();
-  //
+  
   const {
     isShowCheckoutPropertyPicturesClicked,
     handleOpenCheckoutPicturesModal,
     handleCloseCheckoutPicturesModal,
     clickedProperty,
   } = useHandleCheckoutPropertyPicturesClick();
-  //
+  
   const { checkoutIds } = useCheckoutStore((state) => ({
     checkoutIds: state.checkoutIds,
   }));
-  //
 
   if (!properties) {
-    return console.log("No properties available");
+    return (
+      <div>
+        <p>No properties available</p>
+      </div>
+    );
   }
-  //
 
   const checkoutProperties = properties.filter((property) => {
     return checkoutIds.includes(property.property_id);
   });
-  //
+  
   return (
     <div>
       <div
@@ -89,7 +90,6 @@ export const CheckoutIndex = () => {
           checkoutProperties={checkoutProperties}
           handleOpenCheckoutPicturesModal={handleOpenCheckoutPicturesModal}
         />
-        {/*  */}
         <CheckoutForm
           checkoutProperties={checkoutProperties}
           handleOpenPaymentSuccessModal={handleOpenPaymentSuccessModal}

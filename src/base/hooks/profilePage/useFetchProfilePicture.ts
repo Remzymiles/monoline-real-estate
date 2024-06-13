@@ -43,7 +43,7 @@ export const useFetchProfilePicture = () => {
           filter: `user_id=eq.${userId}`,
         },
         (payload) => {
-          // console.log("Profile picture updated:", payload);
+          console.log("Profile picture updated:", payload);
           queryClient.invalidateQueries({
             queryKey: ["user_profile_picture_url", userId],
           });

@@ -64,7 +64,7 @@ export const useHandlePushWishlistProperties = () => {
           // console.error("Error inserting data:", error.message);
           return;
         }
-        // console.log(insertedWishlistProperties);
+        console.log(IWishlistProperty);
 
         toast.success("Property has been added to Wishlist");
         userId
