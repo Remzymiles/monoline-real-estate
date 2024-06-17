@@ -2,10 +2,10 @@ import supabase from "../../../config/supabaseClient";
 import { IProperty } from "../../../Layouts/interface/IProperty";
 import { useCheckoutStore } from "../../store/checkoutPage/useCheckoutStore";
 import { useUserIdStore } from "../../store/useUserIdStore";
-import { useProperties } from "../useFetchAllProperties";
+import { useAllProperties } from "../useFetchAllProperties";
 
 export const useHandlePushOrderHistoryProperties = () => {
-  const { data: properties } = useProperties();
+  const { data: properties } = useAllProperties();
   const { userId } = useUserIdStore((state) => ({
     userId: state.userId,
   }));

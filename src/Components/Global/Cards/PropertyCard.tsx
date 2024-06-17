@@ -1,18 +1,17 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IProperty } from "../../../Layouts/interface/IProperty";
 import { useHandleFilterProperties } from "../../../base/hooks/homepage/useHandleFilterProperties";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
-import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { usePushWishlistProperties } from "../../../base/hooks/wishlistPage/usePushWishlistProperties";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../../base/store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 import { PropertyCardLoadingSkeleton } from "../Loaders/PropertyCardLoadingSkeleton";
 import { TailSpinLoader } from "../Loaders/TailSpinLoader";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
 
 export const PropertyCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
@@ -20,15 +19,11 @@ export const PropertyCard = () => {
   const { filteredProperties, filterOptions, isLoading } =
     useHandleFilterProperties();
   //
-  const { userId } = useUserIdStore((state) => ({
-    userId: state.userId,
-  }));
+  const { isPropertyInWishlist, pushWishlistProperties } =
+    usePushWishlistProperties();
   //
-  const {
-    pushWishlistProperties,
-    checkIfPropertyExistsInWishlist,
-    IsPushWishlistPropertiesLoading,
-  } = useHandlePushWishlistProperties();
+  const { IsPushWishlistPropertiesLoading } =
+    useIsPushWishlistPropertiesLoadingStore();
   //
 
   useLayoutEffect(() => {
@@ -37,33 +32,6 @@ export const PropertyCard = () => {
       behavior: "smooth",
     });
   }, [filterOptions]);
-  //
-  const { propertiesInWishlist, setIsPropertyInWishlist } =
-    useHandleIsPropertyInWishlist((state) => ({
-      propertiesInWishlist: state.propertiesInWishlist,
-      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
-    }));
-
-  useEffect(() => {
-    const fetchWishlistStatuses = async () => {
-      if (!filteredProperties) return;
-      for (const property of filteredProperties) {
-        if (!userId) return;
-        const exists = await checkIfPropertyExistsInWishlist(
-          userId,
-          property.property_id
-        );
-        setIsPropertyInWishlist(property.property_id, exists);
-      }
-    };
-
-    fetchWishlistStatuses();
-  }, [
-    userId,
-    filteredProperties,
-    checkIfPropertyExistsInWishlist,
-    setIsPropertyInWishlist,
-  ]);
   //
   const handleAddToWishlist = async (propertyId: string) => {
     await pushWishlistProperties(propertyId);
@@ -153,7 +121,7 @@ export const PropertyCard = () => {
             </Link>
             <div
               className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
-                propertiesInWishlist[property.property_id]
+                isPropertyInWishlist(property.property_id)
                   ? "bg-white/70"
                   : "bg-white/30"
               }`}
@@ -163,7 +131,7 @@ export const PropertyCard = () => {
             >
               <HeartIcon
                 color={`${
-                  propertiesInWishlist[property.property_id]
+                  isPropertyInWishlist(property.property_id)
                     ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                     : "text-white"
                 }`}

@@ -1,16 +1,17 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { IProperty } from "../../../Layouts/interface/IProperty";
 import supabase from "../../../config/supabaseClient";
 import { IWishlistProperty } from "../../interface/wishlistPage/IWishlistProperty";
 import { useUserIdStore } from "../../store/useUserIdStore";
-import { useProperties } from "../useFetchAllProperties";
-import { useRemovePropertyFromWishlist } from "./useRemovePropertyFromWishlist";
 import { useHandleIsPropertyInWishlist } from "../../store/wishlistPage/useHandleIsPropertyInWishlistStore";
 import { useIsPushWishlistPropertiesLoadingStore } from "../../store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
+import { useAllProperties } from "../useFetchAllProperties";
+import { useRemovePropertyFromWishlist } from "./useRemovePropertyFromWishlist";
 
 export const useHandlePushWishlistProperties = () => {
-  const { data: properties } = useProperties();
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const { data: properties } = useAllProperties();
   const { mutate: removeFromWishlist } = useRemovePropertyFromWishlist();
   const { setIsPropertyInWishlist } = useHandleIsPropertyInWishlist();
   //
@@ -43,7 +44,6 @@ export const useHandlePushWishlistProperties = () => {
           // console.error("Error checking property existence:", error.message);
           return false;
         }
-
         return data && data.length > 0;
       } catch (error) {
         // console.error("Error in checkIfPropertyExistsInWishlist:", error);
@@ -175,5 +175,6 @@ export const useHandlePushWishlistProperties = () => {
     pushWishlistProperties,
     checkIfPropertyExistsInWishlist,
     IsPushWishlistPropertiesLoading,
+    isInWishlist,
   };
 };

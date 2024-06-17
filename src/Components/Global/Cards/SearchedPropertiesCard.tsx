@@ -1,41 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IProperty } from "../../../Layouts/interface/IProperty";
-import { useProperties } from "../../../base/hooks/useFetchAllProperties";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
-import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { useAllProperties } from "../../../base/hooks/useFetchAllProperties";
+import { usePushWishlistProperties } from "../../../base/hooks/wishlistPage/usePushWishlistProperties";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../../base/store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
 import { TailSpinLoader } from "../Loaders/TailSpinLoader";
 import { WaveFormLoader } from "../Loaders/WaveFormLoader";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
 
 export const SearchedPropertiesCard = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const { userId } = useUserIdStore((state) => ({
-    userId: state.userId,
-  }));
-
-  const {
-    pushWishlistProperties,
-    checkIfPropertyExistsInWishlist,
-    IsPushWishlistPropertiesLoading,
-  } = useHandlePushWishlistProperties();
+  //
+  const { isPropertyInWishlist, pushWishlistProperties } =
+    usePushWishlistProperties();
+  //
+  const { IsPushWishlistPropertiesLoading } =
+    useIsPushWishlistPropertiesLoadingStore();
+  //
+  const { data: properties, isLoading } = useAllProperties();
 
   const [query] = useSearchParams();
   const searchValue = query.get("search");
-
-  const { data: properties, isLoading } = useProperties();
-
-  const { propertiesInWishlist, setIsPropertyInWishlist } =
-    useHandleIsPropertyInWishlist((state) => ({
-      propertiesInWishlist: state.propertiesInWishlist,
-      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
-    }));
 
   const filteredSearchedProperties = searchValue
     ? properties?.filter((property: IProperty) => {
@@ -49,28 +39,7 @@ export const SearchedPropertiesCard = () => {
         );
       })
     : [];
-
-  useEffect(() => {
-    const fetchWishlistStatuses = async () => {
-      if (!filteredSearchedProperties) return;
-      for (const property of filteredSearchedProperties) {
-        if (!userId) return;
-        const exists = await checkIfPropertyExistsInWishlist(
-          userId,
-          property.property_id
-        );
-        setIsPropertyInWishlist(property.property_id, exists);
-      }
-    };
-
-    fetchWishlistStatuses();
-  }, [
-    userId,
-    filteredSearchedProperties,
-    checkIfPropertyExistsInWishlist,
-    setIsPropertyInWishlist,
-  ]);
-
+  //
   const handleAddToWishlist = async (propertyId: string) => {
     await pushWishlistProperties(propertyId);
   };
@@ -159,7 +128,7 @@ export const SearchedPropertiesCard = () => {
             </Link>
             <div
               className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
-                propertiesInWishlist[property.property_id]
+                isPropertyInWishlist(property.property_id)
                   ? "bg-white/70"
                   : "bg-white/30"
               }`}
@@ -169,7 +138,7 @@ export const SearchedPropertiesCard = () => {
             >
               <HeartIcon
                 color={`${
-                  propertiesInWishlist[property.property_id]
+                  isPropertyInWishlist(property.property_id)
                     ? "text-primaryColor-light dark:text-primaryColorDarkMode"
                     : "text-white"
                 }`}

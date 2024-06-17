@@ -4,8 +4,8 @@ import supabase from "../../config/supabaseClient";
 import { useUserIdStore } from "../store/useUserIdStore";
 import { getAuthData } from "./useGetAuthData";
 
-export const useProperties = () => {
-  // 
+export const useAllProperties = () => {
+  //
   const { setUserId } = useUserIdStore((state) => ({
     setUserId: state.setUserId,
   }));

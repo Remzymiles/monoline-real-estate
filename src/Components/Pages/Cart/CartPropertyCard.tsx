@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDeleteCartProperty } from "../../../base/hooks/cartpage/useDeleteCartProperty";
 import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
+import { usePushWishlistProperties } from "../../../base/hooks/wishlistPage/usePushWishlistProperties";
 import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../../base/store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CartProperty } from "./CartProperty";
 import { CartSummary } from "./CartSummary";
@@ -18,17 +18,11 @@ export const CartPropertyCard = () => {
     userId: state.userId,
   }));
 
-  const {
-    pushWishlistProperties,
-    checkIfPropertyExistsInWishlist,
-    IsPushWishlistPropertiesLoading,
-  } = useHandlePushWishlistProperties();
-
-  const { propertiesInWishlist, setIsPropertyInWishlist } =
-    useHandleIsPropertyInWishlist((state) => ({
-      propertiesInWishlist: state.propertiesInWishlist,
-      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
-    }));
+  const { isPropertyInWishlist, pushWishlistProperties } =
+    usePushWishlistProperties();
+  //
+  const { IsPushWishlistPropertiesLoading } =
+    useIsPushWishlistPropertiesLoadingStore();
 
   useEffect(() => {
     window.scroll({
@@ -43,27 +37,7 @@ export const CartPropertyCard = () => {
       updateCheckoutIds: state.updateCheckoutIds,
     })
   );
-
-  useEffect(() => {
-    const fetchWishlistStatuses = async () => {
-      if (!cartProperties) return;
-      for (const property of cartProperties) {
-        const exists = await checkIfPropertyExistsInWishlist(
-          userId,
-          property.property_id
-        );
-        setIsPropertyInWishlist(property.property_id, exists);
-      }
-    };
-
-    fetchWishlistStatuses();
-  }, [
-    userId,
-    cartProperties,
-    checkIfPropertyExistsInWishlist,
-    setIsPropertyInWishlist,
-  ]);
-
+  //
   if (isLoading) {
     return (
       <div className="absolute top-[40%] left-[50%]">
@@ -103,8 +77,8 @@ export const CartPropertyCard = () => {
             cartProperties={cartProperties}
             handleAddToWishlist={handleAddToWishlist}
             handleDeleteCartProperty={handleDeleteCartProperty}
-            propertiesInWishlist={propertiesInWishlist}
             IsPushWishlistPropertiesLoading={IsPushWishlistPropertiesLoading}
+            isPropertyInWishlist={isPropertyInWishlist}
           />
         </div>
         <CartSummary

@@ -4,6 +4,7 @@ import { IProperty } from "../../../Layouts/interface/IProperty";
 import { useHandlePushCartProperties } from "../../../base/hooks/cartpage/useHandlePushCartProperties";
 import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
@@ -17,7 +18,8 @@ export const PropertyDetails = ({
 }) => {
   //
   const location = useLocation();
-  const { pushCartProperties } = useHandlePushCartProperties();
+  const { pushCartProperties, IsPushCartPropertiesLoading } =
+    useHandlePushCartProperties();
   const { userId } = useUserIdStore((state) => ({ userId: state.userId }));
   //
   const { updateCheckoutIds, setIsPropertyFromCart } = useCheckoutStore(
@@ -80,7 +82,7 @@ export const PropertyDetails = ({
       </div>
       <div className="tablet-below:w-full bg-white tablet-above:border dark:border-gray-400/20 rounded-md tablet-above:px-5 pt-3 flex flex-col dark:bg-secondaryColor-dark/10">
         <button
-          className="transition-all capitalize bg-primaryColor-light hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 duration-300 text-white dark:text-gray-300 font-bold mt-2 rounded-md px-10 py-2 text-sm"
+          className="transition-all relative capitalize bg-primaryColor-light hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/60 dark:hover:bg-primaryColorDarkMode/90 duration-300 text-white dark:text-gray-300 font-bold mt-2 rounded-md px-10 py-2 text-sm"
           onClick={() => {
             userId
               ? addPropertyToCart()
@@ -88,6 +90,12 @@ export const PropertyDetails = ({
           }}
         >
           Add property to cart
+          {IsPushCartPropertiesLoading[String(propertyId)] && (
+            <div className="absolute top-0 right-0  bg-black/70 w-[100%] h-[100%] flex justify-center items-center rounded-md">
+              <WaveFormLoader extraStyle="bg-white" />
+            </div>
+          )}
+          {/*  */}
         </button>
         <Link
           to={userId ? "/checkout" : `${location.pathname}${location.search}`}

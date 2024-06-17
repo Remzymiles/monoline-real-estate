@@ -14,18 +14,17 @@ export const SimilarPropertyCard = ({
   index,
   handleAddToWishlist,
   IsPushWishlistPropertiesLoading,
-  propertiesInWishlist,
+  isPropertyInWishlist,
 }: {
   property: IProperty;
   index: number;
   handleAddToWishlist: (value: string) => void;
   IsPushWishlistPropertiesLoading: { [propertyId: string]: boolean };
-  propertiesInWishlist: { [propertyId: string]: boolean };
+  isPropertyInWishlist: (propertyId: string) => boolean;
 }) => {
   //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
-  //
-  const isPropertyInWishlist = propertiesInWishlist[property.property_id];
+
   //
   return (
     <div
@@ -103,7 +102,7 @@ export const SimilarPropertyCard = ({
       </Link>
       <div
         className={`absolute top-3 right-3 z-10 px-2 py-1 rounded-full cursor-pointer ${
-          isPropertyInWishlist ? "bg-white/70" : "bg-white/30"
+          isPropertyInWishlist(property.property_id) ? "bg-white/70" : "bg-white/30"
         }`}
         onClick={() => {
           handleAddToWishlist(property.property_id);
@@ -111,7 +110,7 @@ export const SimilarPropertyCard = ({
       >
         <HeartIcon
           color={`${
-            isPropertyInWishlist
+            isPropertyInWishlist(property.property_id)
               ? "text-primaryColor-light dark:text-primaryColorDarkMode"
               : "text-white"
           }`}

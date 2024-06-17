@@ -4,13 +4,14 @@ import { useUpdateUserProfileInfo } from "../../../base/hooks/profilePage/useUpd
 import { IProfileInfo } from "../../../base/interface/profilePage/IProfileInfo";
 import { FormButton } from "../../Global/FormComponents/Button";
 import { Input } from "../../Global/FormComponents/Input";
+import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { EditPassword } from "./EditPassword";
 import { EditProfileFormValidator } from "./EditProfileFormValidator";
 import { ProfileImage } from "./ProfileImage";
 
 export const ProfilePageCard = () => {
   //
-  const { mutate } = useUpdateUserProfileInfo();
+  const { mutate, isLoading } = useUpdateUserProfileInfo();
   //
   const {
     register,
@@ -107,7 +108,13 @@ export const ProfilePageCard = () => {
             </div>
             {/*  */}
             <div className="mb-3">
-              <FormButton children="update profile" />
+              <FormButton type="submit">
+                {isLoading ? (
+                  <WaveFormLoader extraStyle="bg-white" />
+                ) : (
+                  "update profile"
+                )}
+              </FormButton>
             </div>
           </form>
         </div>

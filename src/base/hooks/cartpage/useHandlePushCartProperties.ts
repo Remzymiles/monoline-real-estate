@@ -1,17 +1,26 @@
 import { toast } from "sonner";
 import { IProperty } from "../../../Layouts/interface/IProperty";
 import supabase from "../../../config/supabaseClient";
+import { useIsPushCartPropertiesLoadingStore } from "../../store/cartpage/useIsPushCartPropertiesLoadingStore";
 import { useUserIdStore } from "../../store/useUserIdStore";
-import { useProperties } from "../useFetchAllProperties";
+import { useAllProperties } from "../useFetchAllProperties";
 
 export const useHandlePushCartProperties = () => {
-  const { data: properties } = useProperties();
+  const { data: properties } = useAllProperties();
 
   const { userId } = useUserIdStore((state) => ({
     userId: state.userId,
   }));
   //
+  const { IsPushCartPropertiesLoading, setIsPushCartPropertiesLoading } =
+    useIsPushCartPropertiesLoadingStore((state) => ({
+      IsPushCartPropertiesLoading: state.IsPushCartPropertiesLoading,
+      setIsPushCartPropertiesLoading: state.setIsPushCartPropertiesLoading,
+    }));
+  //
   const pushCartProperties = async (propertyId: string) => {
+    setIsPushCartPropertiesLoading(propertyId, true);
+    //
     const cartProperties = properties?.filter(
       (property: IProperty) => property.property_id === propertyId
     );
@@ -81,7 +90,8 @@ export const useHandlePushCartProperties = () => {
         await insertData("cart_properties", dataToInsert);
       }
     }
+    setIsPushCartPropertiesLoading(propertyId, false);
   };
 
-  return { pushCartProperties };
+  return { pushCartProperties, IsPushCartPropertiesLoading };
 };

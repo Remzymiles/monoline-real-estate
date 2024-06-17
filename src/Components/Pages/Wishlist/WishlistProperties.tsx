@@ -1,10 +1,7 @@
-import { useEffect } from "react";
-
 import { useFetchWishlistProperties } from "../../../base/hooks/wishlistPage/useFetchWishlistProperties";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
+import { usePushWishlistProperties } from "../../../base/hooks/wishlistPage/usePushWishlistProperties";
 import { IWishlistProperty } from "../../../base/interface/wishlistPage/IWishlistProperty";
-import { useUserIdStore } from "../../../base/store/useUserIdStore";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../../base/store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { WishlistPropertyCard } from "./WishlistPropertyCard";
 
@@ -13,40 +10,11 @@ export const WishlistProperties = () => {
 
   const { data: wishlistProperties, isLoading } = useFetchWishlistProperties();
   //
-  const { userId } = useUserIdStore((state) => ({
-    userId: state.userId,
-  }));
+  const { pushWishlistProperties } = usePushWishlistProperties();
   //
-  const { pushWishlistProperties, checkIfPropertyExistsInWishlist } =
-    useHandlePushWishlistProperties();
-  //
-  const { setIsPropertyInWishlist } = useHandleIsPropertyInWishlist(
-    (state) => ({
-      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
-    })
-  );
+  const { IsPushWishlistPropertiesLoading } =
+    useIsPushWishlistPropertiesLoadingStore();
 
-  //
-  useEffect(() => {
-    const fetchWishlistStatuses = async () => {
-      if (!wishlistProperties) return;
-      for (const property of wishlistProperties) {
-        if (!userId) return;
-        const exists = await checkIfPropertyExistsInWishlist(
-          userId,
-          property.property_id
-        );
-        setIsPropertyInWishlist(property.property_id, exists);
-      }
-    };
-
-    fetchWishlistStatuses();
-  }, [
-    userId,
-    wishlistProperties,
-    checkIfPropertyExistsInWishlist,
-    setIsPropertyInWishlist,
-  ]);
   //
   const handleAddToWishlist = async (propertyId: string) => {
     await pushWishlistProperties(propertyId);
@@ -78,6 +46,7 @@ export const WishlistProperties = () => {
             index={index}
             property={property}
             key={index}
+            IsPushWishlistPropertiesLoading={IsPushWishlistPropertiesLoading}
           />
         ))}
       {/*  */}

@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { IProperty } from "../../../Layouts/interface/IProperty";
 import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/cartpage/useHandleIsShowAllPicturesClicked";
-import { useProperties } from "../../../base/hooks/useFetchAllProperties";
+import { useAllProperties } from "../../../base/hooks/useFetchAllProperties";
 import { PropertyPicturesLoadingSkeleton } from "../../Global/Loaders/PropertyPicturesLoadingSkeleton";
 import { PropertyDetails } from "./PropertyDetails";
 import { PropertyHighlights } from "./PropertyHighlights";
@@ -22,7 +22,7 @@ export const PropertyDetailsIndex = () => {
   const [query] = useSearchParams();
   const propertyId = query.get("id");
 
-  const { data: properties, isLoading, isError } = useProperties();
+  const { data: properties, isLoading, isError } = useAllProperties();
 
   if (isLoading) {
     return <PropertyPicturesLoadingSkeleton />;

@@ -5,13 +5,13 @@ import { TrashCanIcon } from "../../Icons/TrashCanIcon";
 
 export const CartProperty = ({
   cartProperties,
-  propertiesInWishlist,
+  isPropertyInWishlist,
   handleDeleteCartProperty,
   handleAddToWishlist,
   IsPushWishlistPropertiesLoading,
 }: {
   cartProperties: ICartProperty[];
-  propertiesInWishlist: { [propertyId: string]: boolean };
+  isPropertyInWishlist: (propertyId: string) => boolean;
   handleDeleteCartProperty: (propertyId: string) => void;
   handleAddToWishlist: (propertyId: string) => void;
   IsPushWishlistPropertiesLoading: { [propertyId: string]: boolean };
@@ -19,9 +19,6 @@ export const CartProperty = ({
   return (
     <>
       {cartProperties.map((cartProperty: ICartProperty) => {
-        const isPropertyInWishlist =
-          propertiesInWishlist[cartProperty.property_id];
-
         return (
           <div key={cartProperty?.property_id}>
             <div className="grid grid-cols-4 big-screen-laptop:justify-around gap-x-5 big-screen-mobile-below:flex big-screen-mobile-below:flex-col my-3">
@@ -66,7 +63,9 @@ export const CartProperty = ({
                     handleAddToWishlist(cartProperty.property_id);
                   }}
                 >
-                  {isPropertyInWishlist ? "saved" : "save for later"}
+                  {isPropertyInWishlist(cartProperty.property_id)
+                    ? "saved"
+                    : "save for later"}
                   {/*  */}
                   {IsPushWishlistPropertiesLoading[
                     cartProperty.property_id

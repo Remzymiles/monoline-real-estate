@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
+import { usePushWishlistProperties } from "../../../base/hooks/wishlistPage/usePushWishlistProperties";
 import { ISimilarProperty } from "../../../base/interface/propertyDetailsPage/ISimilarProperties";
-import { useUserIdStore } from "../../../base/store/useUserIdStore";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../../base/store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 import { SimilarPropertyCard } from "./SimilarPropertyCard";
 
 export const SimilarProperties = ({
@@ -11,40 +9,12 @@ export const SimilarProperties = ({
 }: ISimilarProperty) => {
   //
 
-  const { userId } = useUserIdStore((state) => ({
-    userId: state.userId,
-  }));
+  const { isPropertyInWishlist, pushWishlistProperties } =
+    usePushWishlistProperties();
   //
-  const {
-    pushWishlistProperties,
-    checkIfPropertyExistsInWishlist,
-    IsPushWishlistPropertiesLoading,
-  } = useHandlePushWishlistProperties();
-
-  const { setIsPropertyInWishlist, propertiesInWishlist } =
-    useHandleIsPropertyInWishlist((state) => ({
-      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
-      propertiesInWishlist: state.propertiesInWishlist,
-    }));
-
-  useEffect(() => {
-    const fetchWishlistStatuses = async () => {
-      for (const property of similarProperties) {
-        const exists = await checkIfPropertyExistsInWishlist(
-          userId,
-          property.property_id
-        );
-        setIsPropertyInWishlist(property.property_id, exists);
-      }
-    };
-
-    fetchWishlistStatuses();
-  }, [
-    userId,
-    similarProperties,
-    checkIfPropertyExistsInWishlist,
-    setIsPropertyInWishlist,
-  ]);
+  const { IsPushWishlistPropertiesLoading } =
+    useIsPushWishlistPropertiesLoadingStore();
+  //
 
   const handleAddToWishlist = async (propertyId: string) => {
     await pushWishlistProperties(propertyId);
@@ -66,7 +36,7 @@ export const SimilarProperties = ({
                 }
                 handleAddToWishlist={handleAddToWishlist}
                 index={index}
-                propertiesInWishlist={propertiesInWishlist}
+                isPropertyInWishlist={isPropertyInWishlist}
                 property={property}
                 key={index}
               />

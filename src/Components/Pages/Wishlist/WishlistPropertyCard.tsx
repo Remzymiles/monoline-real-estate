@@ -7,15 +7,18 @@ import { BathIcon } from "../../Icons/BathIcon";
 import { BedIcon } from "../../Icons/BedIcon";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { SquareFootIcon } from "../../Icons/SquareMeterIcon";
+import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 
 export const WishlistPropertyCard = ({
   property,
   index,
   handleAddToWishlist,
+  IsPushWishlistPropertiesLoading,
 }: {
   property: IWishlistProperty;
   index: number;
   handleAddToWishlist: (value: string) => void;
+  IsPushWishlistPropertiesLoading: { [propertyId: string]: boolean };
 }) => {
   //
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
@@ -94,6 +97,11 @@ export const WishlistPropertyCard = ({
         <HeartIcon
           color={`text-primaryColor-dark dark:text-primaryColorDarkMode`}
         />
+        {IsPushWishlistPropertiesLoading[property.property_id] && (
+          <div className="absolute top-0 bg-slate-100 w-[100%] h-[100%] flex justify-center items-center rounded-full right-[1px]">
+            <TailSpinLoader extraStyle="" color="#6C744A" />
+          </div>
+        )}
       </div>
     </div>
   );

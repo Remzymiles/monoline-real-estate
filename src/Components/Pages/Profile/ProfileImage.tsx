@@ -82,7 +82,7 @@ export const ProfileImage = () => {
           onChange={handleFileChange}
         />
       </div>
-      {userProfileInfo && (
+      {userProfileInfo?.fullName && (
         <div>
           <div className="flex gap-x-1.5 mb-2 items-center">
             <p className="font-extrabold capitalize">name</p>:

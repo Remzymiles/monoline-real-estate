@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useIsSearchButtonClickedStore } from "../../../../base/store/searchPage/useIsSearchButtonClickedStore";
 import { SearchIcon } from "../../../Icons/SearchIcon";
 
 //
@@ -9,7 +10,10 @@ export const SearchBar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   //
   const currentLocation = useLocation();
-
+// 
+const {setIsSearchButtonClicked} = useIsSearchButtonClickedStore((state)=>({
+  setIsSearchButtonClicked: state.setIsSearchButtonClicked
+}))
   //
   const clearInputValue = () => {
     if (inputRef.current) {
@@ -21,6 +25,7 @@ export const SearchBar = () => {
     window.location.href = `/search-properties/searchDetail/?search=${inputRef.current?.value}`;
     clearInputValue();
     setIsFocused(false);
+    setIsSearchButtonClicked(true)
   };
 
   return (

@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
+import { usePushWishlistProperties } from "../../../base/hooks/wishlistPage/usePushWishlistProperties";
 import { IShowCheckoutPropertyPicturesModal } from "../../../base/interface/checkoutPage/IShowCheckoutPropertyPicturesModal";
-import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../../base/store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { XIcon } from "../../Icons/XIcon";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
 import { ClickedCheckoutPropertyPhotos } from "./ClickedCheckoutPropertyPhotos";
 
 export const ShowCheckoutPropertyPicturesModal = ({
@@ -15,48 +13,16 @@ export const ShowCheckoutPropertyPicturesModal = ({
   clickedCheckoutPropertyId,
 }: IShowCheckoutPropertyPicturesModal) => {
   //
-  const { userId } = useUserIdStore((state) => ({
-    userId: state.userId,
-  }));
+  const { isPropertyInWishlist, pushWishlistProperties } =
+    usePushWishlistProperties();
   //
-  const {
-    pushWishlistProperties,
-    checkIfPropertyExistsInWishlist,
-    IsPushWishlistPropertiesLoading,
-  } = useHandlePushWishlistProperties();
-  //
-  const { propertiesInWishlist, setIsPropertyInWishlist } =
-    useHandleIsPropertyInWishlist((state) => ({
-      propertiesInWishlist: state.propertiesInWishlist,
-      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
-    }));
-
-  useEffect(() => {
-    if (!clickedCheckoutPropertyId) return;
-    const fetchWishlistStatuses = async () => {
-      const exists = await checkIfPropertyExistsInWishlist(
-        userId,
-        clickedCheckoutPropertyId
-      );
-      setIsPropertyInWishlist(clickedCheckoutPropertyId, exists);
-    };
-
-    fetchWishlistStatuses();
-  }, [
-    userId,
-    clickedCheckoutProperty,
-    checkIfPropertyExistsInWishlist,
-    setIsPropertyInWishlist,
-  ]);
+  const { IsPushWishlistPropertiesLoading } =
+    useIsPushWishlistPropertiesLoadingStore();
   //
 
   const handleAddToWishlist = async (propertyId: string) => {
     await pushWishlistProperties(propertyId);
   };
-
-  const isPropertyInWishlist =
-    clickedCheckoutProperty &&
-    propertiesInWishlist[clickedCheckoutProperty.property_id];
 
   //
   return (
@@ -90,7 +56,7 @@ export const ShowCheckoutPropertyPicturesModal = ({
                 <div>
                   <button
                     className={`capitalize relative border border-gray-200 flex gap-2 transition-all duration-300 px-4 py-2 rounded-lg font-bold text-sm ${
-                      isPropertyInWishlist
+                      isPropertyInWishlist(clickedCheckoutPropertyId as string)
                         ? "bg-primaryColor-light text-white hover:bg-primaryColor-dark dark:bg-primaryColorDarkMode/90 dark:hover:bg-primaryColorDarkMode"
                         : "bg-white text-primaryColor-dark hover:bg-gray-200"
                     }`}
@@ -100,12 +66,12 @@ export const ShowCheckoutPropertyPicturesModal = ({
                   >
                     <HeartIcon
                       color={`text-sm ${
-                        isPropertyInWishlist
+                        isPropertyInWishlist(clickedCheckoutPropertyId as string)
                           ? "text-white"
                           : "text-primaryColor-dark dark:text-primaryColorDarkMode"
                       }`}
                     />
-                    {isPropertyInWishlist ? "saved" : "save"}
+                    {isPropertyInWishlist(clickedCheckoutPropertyId as string) ? "saved" : "save"}
                     {/*  */}
                     {IsPushWishlistPropertiesLoading[
                       String(clickedCheckoutPropertyId)
@@ -126,7 +92,9 @@ export const ShowCheckoutPropertyPicturesModal = ({
             </div>
             <hr />
             {/*  */}
-            <ClickedCheckoutPropertyPhotos clickedCheckoutProperty={clickedCheckoutProperty} />
+            <ClickedCheckoutPropertyPhotos
+              clickedCheckoutProperty={clickedCheckoutProperty}
+            />
           </div>
         </div>
       </div>

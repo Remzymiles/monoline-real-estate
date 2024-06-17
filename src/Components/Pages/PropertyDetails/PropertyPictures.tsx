@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import { useHandlePushWishlistProperties } from "../../../base/hooks/wishlistPage/useHandlePushWishlistProperties";
+import { usePushWishlistProperties } from "../../../base/hooks/wishlistPage/usePushWishlistProperties";
 import { IPropertyPictures } from "../../../base/interface/propertyDetailsPage/IPropertyPictures";
-import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { useIsPushWishlistPropertiesLoadingStore } from "../../../base/store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 import { TailSpinLoader } from "../../Global/Loaders/TailSpinLoader";
 import { HeartIcon } from "../../Icons/HeartIcon";
 import { PhotoIcon } from "../../Icons/PhotoIcon";
-import { useHandleIsPropertyInWishlist } from "../../../base/store/wishlistPage/useHandleIsPropertyInWishlistStore";
 
 export const PropertyPictures = ({
   handleOpenAllPicturesModal,
@@ -13,43 +11,16 @@ export const PropertyPictures = ({
   propertyId,
 }: IPropertyPictures) => {
   //
-  const { userId } = useUserIdStore((state) => ({
-    userId: state.userId,
-  }));
-
-  const {
-    pushWishlistProperties,
-    checkIfPropertyExistsInWishlist,
-    IsPushWishlistPropertiesLoading,
-  } = useHandlePushWishlistProperties();
-
-  const { propertiesInWishlist, setIsPropertyInWishlist } =
-    useHandleIsPropertyInWishlist((state) => ({
-      propertiesInWishlist: state.propertiesInWishlist,
-      setIsPropertyInWishlist: state.setIsPropertyInWishlist,
-    }));
-
-  useEffect(() => {
-    const fetchWishlistStatus = async () => {
-      const exists = await checkIfPropertyExistsInWishlist(userId, propertyId);
-      setIsPropertyInWishlist(propertyId, exists);
-    };
-
-    if (userId) {
-      fetchWishlistStatus();
-    }
-  }, [
-    userId,
-    propertyId,
-    checkIfPropertyExistsInWishlist,
-    setIsPropertyInWishlist,
-  ]);
+  const { isPropertyInWishlist, pushWishlistProperties } =
+    usePushWishlistProperties();
+  //
+  const { IsPushWishlistPropertiesLoading } =
+    useIsPushWishlistPropertiesLoadingStore();
+  //
 
   const handleAddToWishlist = async (propertyId: string) => {
     await pushWishlistProperties(propertyId);
   };
-
-  const isPropertyInWishlist = propertiesInWishlist[propertyId];
 
   return (
     <>
@@ -60,7 +31,7 @@ export const PropertyPictures = ({
           </p>
           <div
             className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm tablet-above:hidden ${
-              isPropertyInWishlist
+              isPropertyInWishlist(propertyId)
                 ? "bg-primaryColor-dark dark:bg-primaryColorDarkMode text-white"
                 : "bg-white text-primaryColor-dark dark:text-primaryColorDarkMode"
             }`}
@@ -68,12 +39,12 @@ export const PropertyPictures = ({
           >
             <HeartIcon
               color={`text-sm ${
-                isPropertyInWishlist
+                isPropertyInWishlist(propertyId)
                   ? "text-white"
                   : "text-primaryColor-dark dark:text-primaryColorDarkMode"
               }`}
             />
-            {isPropertyInWishlist ? "saved" : "save"}
+            {isPropertyInWishlist(propertyId) ? "saved" : "save"}
             {/*  */}
             {IsPushWishlistPropertiesLoading[propertyId] && (
               <div className="absolute top-0 left-0 bg-black/80 w-[100%] flex justify-center items-center py-1 rounded-sm">
@@ -100,7 +71,7 @@ export const PropertyPictures = ({
           <div className="w-[300px] h-[243px] relative tablet-below:hidden">
             <button
               className={`capitalize absolute top-2 right-2 flex gap-2 px-3 py-1 rounded-sm font-bold text-sm ${
-                isPropertyInWishlist
+                isPropertyInWishlist(propertyId)
                   ? "bg-primaryColor-dark dark:bg-primaryColorDarkMode text-white"
                   : "bg-white text-primaryColor-dark dark:text-primaryColorDarkMode"
               }`}
@@ -108,12 +79,12 @@ export const PropertyPictures = ({
             >
               <HeartIcon
                 color={`text-sm ${
-                  isPropertyInWishlist
+                  isPropertyInWishlist(propertyId)
                     ? "text-white"
                     : "text-primaryColor-dark dark:text-primaryColorDarkMode"
                 }`}
               />
-              {isPropertyInWishlist ? "saved" : "save"}
+              {isPropertyInWishlist(propertyId) ? "saved" : "save"}
               {/*  */}
               {IsPushWishlistPropertiesLoading[propertyId] && (
                 <div className="absolute top-0 left-0 bg-black/80 w-[100%] flex justify-center items-center py-1 rounded-sm">

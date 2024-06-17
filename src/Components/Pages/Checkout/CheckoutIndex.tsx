@@ -1,37 +1,37 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useProperties } from "../../../base/hooks/useFetchAllProperties";
+import { useHandleCheckoutPropertyPicturesClick } from "../../../base/hooks/checkoutPage/useHandleCheckoutPropertyPicturesClick";
 import { useHandlePaymentSuccessModal } from "../../../base/hooks/checkoutPage/useHandlePaymentSuccessModal";
+import { useAllProperties } from "../../../base/hooks/useFetchAllProperties";
+import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutPropertyInfo } from "./CheckoutPropertyInfo";
 import { ShowCheckoutPropertyPicturesModal } from "./ShowCheckoutPropertyPicturesModal";
-import { useHandleCheckoutPropertyPicturesClick } from "../../../base/hooks/checkoutPage/useHandleCheckoutPropertyPicturesClick";
-import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
 
 export const CheckoutIndex = () => {
   const [isPaymentButtonClicked, setIsPaymentButtonClicked] = useState(false);
-  const { data: properties } = useProperties();
-  
+  const { data: properties } = useAllProperties();
+
   useEffect(() => {
     isPaymentButtonClicked || isPaymentSuccessful
       ? (window.document.body.style.overflow = "hidden")
       : (window.document.body.style.overflow = "");
   }, [isPaymentButtonClicked]);
-  
+
   const {
     handleOpenPaymentSuccessModal,
     isPaymentSuccessful,
     handleClosePaymentSuccessModal,
   } = useHandlePaymentSuccessModal();
-  
+
   const {
     isShowCheckoutPropertyPicturesClicked,
     handleOpenCheckoutPicturesModal,
     handleCloseCheckoutPicturesModal,
     clickedProperty,
   } = useHandleCheckoutPropertyPicturesClick();
-  
+
   const { checkoutIds } = useCheckoutStore((state) => ({
     checkoutIds: state.checkoutIds,
   }));
@@ -47,7 +47,7 @@ export const CheckoutIndex = () => {
   const checkoutProperties = properties.filter((property) => {
     return checkoutIds.includes(property.property_id);
   });
-  
+
   return (
     <div>
       <div
