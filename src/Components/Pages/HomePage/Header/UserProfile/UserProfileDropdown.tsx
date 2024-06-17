@@ -46,7 +46,7 @@ export const UserProfileDropdown = () => {
                 className="h-[100%] w-[100%] rounded-full object-cover border"
               />
             </div>
-          ) : (
+          ) : !profilePhotoUrl &&(
             <UserProfileIcon
               iconStyle="text-xs"
               extraStyle="bg-black/80 h-[30px] w-[30px] "

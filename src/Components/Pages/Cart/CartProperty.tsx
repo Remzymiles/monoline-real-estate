@@ -64,7 +64,7 @@ export const CartProperty = ({
                   }}
                 >
                   {isPropertyInWishlist(cartProperty.property_id)
-                    ? "saved"
+                    ? "saved to wishlist"
                     : "save for later"}
                   {/*  */}
                   {IsPushWishlistPropertiesLoading[

@@ -4,26 +4,33 @@ import { useFetchUserProfileInfo } from "../../../base/hooks/profilePage/useFetc
 import { uploadProfilePicture } from "../../../base/hooks/profilePage/useUploadProfilePicture";
 import { getAuthData } from "../../../base/hooks/useGetAuthData";
 import { useUserIdStore } from "../../../base/store/useUserIdStore";
+import { ProfileInfoLoadingSkeleton } from "../../Global/Loaders/ProfileInfoLoadingSkeleton";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CameraIcon } from "../../Icons/CameraIcon";
 import { UserProfileIcon } from "../../Icons/UserProfileIcon";
 
 export const ProfileImage = () => {
-  const {
-    data: profilePhotoUrl,
-    isLoading,
-    refetch: refetchProfilePicture,
-  } = useFetchProfilePicture();
-  const { data: userProfileInfo } = useFetchUserProfileInfo();
-
-  useEffect(() => {
-    console.log(userProfileInfo);
-  }, [userProfileInfo]);
-
+  //
+  const { data: userProfileInfo, isLoading: isProfileInfoLoading } =
+    useFetchUserProfileInfo();
+  //
   const { userId, setUserId } = useUserIdStore((state) => ({
     userId: state.userId,
     setUserId: state.setUserId,
   }));
+  //
+
+  const {
+    data: profilePhotoUrl,
+    isLoading: isProfilePhotoUrlLoading,
+    refetch: refetchProfilePicture,
+  } = useFetchProfilePicture();
+  //
+
+  useEffect(() => {
+    console.log(userProfileInfo);
+  }, [userProfileInfo]);
+  //
 
   useEffect(() => {
     const fetchUserId = async () => {
@@ -49,7 +56,7 @@ export const ProfileImage = () => {
     <div className="flex flex-col gap-y-16 items-center">
       <div className="tablet-above:w-[300px] tablet-above:h-[300px] w-[250px] h-[250px] bg-black/80 rounded-full flex justify-center relative">
         <div className="text-9xl text-white">
-          {isLoading ? (
+          {isProfilePhotoUrlLoading ? (
             <div className="w-[250px] h-[250px] tablet-above:w-[300px] tablet-above:h-[300px] flex justify-center items-center">
               <WaveFormLoader extraStyle="bg-white" />
             </div>
@@ -62,10 +69,12 @@ export const ProfileImage = () => {
               />
             </div>
           ) : (
-            <UserProfileIcon
-              extraStyle="text"
-              iconStyle="text-9xl translate-y-10"
-            />
+            !profilePhotoUrl && (
+              <UserProfileIcon
+                extraStyle="text"
+                iconStyle="text-9xl translate-y-10"
+              />
+            )
           )}
         </div>
         <label
@@ -82,6 +91,7 @@ export const ProfileImage = () => {
           onChange={handleFileChange}
         />
       </div>
+      {isProfileInfoLoading && <ProfileInfoLoadingSkeleton />}
       {userProfileInfo?.fullName && (
         <div>
           <div className="flex gap-x-1.5 mb-2 items-center">
