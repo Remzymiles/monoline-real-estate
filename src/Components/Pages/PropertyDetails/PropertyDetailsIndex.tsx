@@ -2,13 +2,13 @@ import { useSearchParams } from "react-router-dom";
 import { IProperty } from "../../../Layouts/interface/IProperty";
 import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
 import { useHandleIsShowAllPicturesClicked } from "../../../base/hooks/cartpage/useHandleIsShowAllPicturesClicked";
-import { useAllProperties } from "../../../base/hooks/useFetchAllProperties";
 import { PropertyPicturesLoadingSkeleton } from "../../Global/Loaders/PropertyPicturesLoadingSkeleton";
 import { PropertyDetails } from "./PropertyDetails";
 import { PropertyHighlights } from "./PropertyHighlights";
 import { PropertyPictures } from "./PropertyPictures";
 import { ShowAllPicturesModal } from "./ShowAllPicturesModal";
 import { SimilarProperties } from "./SimilarProperties";
+import { useAllProperties } from "../../../base/hooks/useFetchAllProperties";
 
 export const PropertyDetailsIndex = () => {
   const {
