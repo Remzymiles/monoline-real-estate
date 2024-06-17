@@ -3,7 +3,6 @@ import { useDeleteCartProperty } from "../../../base/hooks/cartpage/useDeleteCar
 import { useFetchCartProperties } from "../../../base/hooks/cartpage/useFetchCartProperties";
 import { usePushWishlistProperties } from "../../../base/hooks/wishlistPage/usePushWishlistProperties";
 import { useCheckoutStore } from "../../../base/store/checkoutPage/useCheckoutStore";
-import { useUserIdStore } from "../../../base/store/useUserIdStore";
 import { useIsPushWishlistPropertiesLoadingStore } from "../../../base/store/wishlistPage/useIsPushWishlistPropertiesLoadingStore";
 import { WaveFormLoader } from "../../Global/Loaders/WaveFormLoader";
 import { CartProperty } from "./CartProperty";
@@ -13,10 +12,6 @@ export const CartPropertyCard = () => {
   const { data: cartProperties, isLoading } = useFetchCartProperties();
   const { mutate: deleteCartProperty } = useDeleteCartProperty();
   //
-
-  const { userId } = useUserIdStore((state) => ({
-    userId: state.userId,
-  }));
 
   const { isPropertyInWishlist, pushWishlistProperties } =
     usePushWishlistProperties();

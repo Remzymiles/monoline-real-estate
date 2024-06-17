@@ -116,7 +116,7 @@ export const usePushWishlistProperties = () => {
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "wishlist_properties" },
-        (payload) => {}
+        () => {}
       )
       .subscribe();
 

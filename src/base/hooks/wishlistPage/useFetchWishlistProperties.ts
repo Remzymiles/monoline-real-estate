@@ -53,10 +53,11 @@ export const useFetchWishlistProperties = () => {
           table: "wishlist_properties",
           filter: `user_id=eq.${userId}`,
         },
-        (payload) => {
+        () => {
           queryClient.invalidateQueries({
             queryKey: ["wishlist_properties", userId],
           });
+          
         }
       )
       .subscribe();
