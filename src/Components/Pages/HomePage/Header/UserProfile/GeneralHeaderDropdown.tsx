@@ -1,4 +1,4 @@
-import { useHandleUserProfileDropdown } from "../../../../../Layouts/hooks/useHandleDropdown";
+import { useHandleGeneralHeaderDropdown } from "../../../../../Layouts/hooks/useHandleDropdown";
 import { useFetchProfilePicture } from "../../../../../base/hooks/profilePage/useFetchProfilePicture";
 import { TailSpinLoader } from "../../../../Global/Loaders/TailSpinLoader";
 import { BarsIcon } from "../../../../Icons/BarsIcon";
@@ -6,31 +6,33 @@ import { ToggleDarkModeIcon } from "../../../../Icons/ToggleDarkModeIcon";
 import { UserProfileIcon } from "../../../../Icons/UserProfileIcon";
 import { DropdownContent } from "./DropdownContent";
 
-export const UserProfileDropdown = () => {
+export const GeneralHeaderDropdown = () => {
   //
   const { data: profilePhotoUrl, isLoading } = useFetchProfilePicture();
   //
   const {
-    isUserProfileVisible,
-    handleOpenUserProfileDropDown,
-    userProfileDropdownRef,
-    setIsUserProfileVisible,
-  } = useHandleUserProfileDropdown();
+    isGeneralHeaderDropdownVisible,
+    handleOpenGeneralHeaderDropdown,
+    generalHeaderDropdownRef,
+    setIsGeneralHeaderDropdownVisible,
+  } = useHandleGeneralHeaderDropdown();
   //
 
   //
   return (
     <div
-      ref={userProfileDropdownRef}
+      ref={generalHeaderDropdownRef}
       onClick={() => {
-        isUserProfileVisible ? setIsUserProfileVisible(false) : null;
+        isGeneralHeaderDropdownVisible
+          ? setIsGeneralHeaderDropdownVisible(false)
+          : null;
       }}
       className="relative"
     >
       <div className="flex gap-x-1 items-center bg-white px-3 py-1.5 big-screen-mobile-below:py-1 rounded-xl big-screen-mobile-below:rounded-full border">
         <button
           className="flex gap-x-2 items-center border-r-2 pr-[5px]"
-          onClick={handleOpenUserProfileDropDown}
+          onClick={handleOpenGeneralHeaderDropdown}
         >
           <BarsIcon />
 
@@ -46,16 +48,20 @@ export const UserProfileDropdown = () => {
                 className="h-[100%] w-[100%] rounded-full object-cover border"
               />
             </div>
-          ) : !profilePhotoUrl &&(
-            <UserProfileIcon
-              iconStyle="text-xs"
-              extraStyle="bg-black/80 h-[30px] w-[30px] "
-            />
+          ) : (
+            !profilePhotoUrl && (
+              <UserProfileIcon
+                iconStyle="text-xs"
+                extraStyle="bg-black/80 h-[30px] w-[30px] "
+              />
+            )
           )}
         </button>
         <ToggleDarkModeIcon />
       </div>
-      <DropdownContent extraStyle={isUserProfileVisible ? "block" : "hidden"} />
+      <DropdownContent
+        extraStyle={isGeneralHeaderDropdownVisible ? "block" : "hidden"}
+      />
     </div>
   );
 };

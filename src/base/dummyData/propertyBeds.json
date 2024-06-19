@@ -1,26 +1,33 @@
 [
   {
     "id": 1,
-    "beds": 2
+    "beds": 2,
+    "cities":["Austin, TX"]
+    
   },
   {
     "id": 2,
-    "beds": 3
+    "beds": 3,
+    "cities":["Scottsdale, AZ","Austin, TX","Staten Island, NY","Newton, MA"]
   },
   {
     "id": 3,
-    "beds": 4
+    "beds": 4,
+    "cities":["Scottsdale, AZ","Newton, MA","Staten Island, NY","Newton Center, MA","West Newton, MA","Austin, TX"]
   },
   {
     "id": 4,
-    "beds": 5
+    "beds": 5,
+    "cities":["Scottsdale, AZ"]
   },
   {
     "id": 5,
-    "beds": 6
+    "beds": 6,
+    "cities":["Newton, MA"]
   },
   {
     "id": 6,
-    "beds": 7
+    "beds": 7,
+    "cities":["Newton Center, MA"]
   }
 ]

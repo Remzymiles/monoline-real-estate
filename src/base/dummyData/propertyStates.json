@@ -1,18 +1,22 @@
 [
   {
     "id": 1,
-    "name": "Arizona"
+    "name": "Arizona",
+    "cities": ["Scottsdale, AZ"]
   },
   {
     "id": 2,
-    "name": "Texas"
+    "name": "Texas",
+    "cities": ["Austin, TX"]
   },
   {
     "id": 3,
-    "name": "New York"
+    "name": "New York",
+    "cities": ["Staten Island, NY"]
   },
   {
     "id": 4,
-    "name": "Massachusetts"
+    "name": "Massachusetts",
+    "cities": ["Newton, MA", "Newton Center, MA", "West Newton, MA"]
   }
 ]

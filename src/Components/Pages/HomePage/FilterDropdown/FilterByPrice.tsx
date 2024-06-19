@@ -1,25 +1,38 @@
 import { useEffect } from "react";
 import prices from "../../../../base/dummyData/propertyPrices.json";
 import { IFilterByPriceRange } from "../../../../base/interface/homepage/IFilterByPriceRange";
+import { useFilterStore } from "../../../../base/store/homepage/useFilterStore";
 import { ChevronArrowDown } from "../../../Icons/ChevronArrowDown";
 import { ChevronArrowUp } from "../../../Icons/ChevronArrowUp";
-import { useFilterStore } from "../../../../base/store/homepage/useFilterStore";
 
 export const FilterByPrice = ({
   setIsPricesDropDownOpen,
   isPricesDropDownOpen,
   selectedPrice,
   setSelectedPrice,
+  selectedCity,
 }: IFilterByPriceRange) => {
   //
   const { filterOptions } = useFilterStore((state) => ({
     filterOptions: state.filterOptions,
   }));
+  //
+
   useEffect(() => {
     filterOptions.selectedPrice
       ? setSelectedPrice(filterOptions.selectedPrice)
       : setSelectedPrice("");
   }, [filterOptions]);
+  //
+
+  const priceOptions = prices.filter((price) => {
+    if (selectedCity) {
+      return price.cities.includes(selectedCity);
+    }
+    return price;
+  });
+
+  //
   return (
     <>
       <div>
@@ -46,14 +59,14 @@ export const FilterByPrice = ({
             </button>
             <div
               className={`absolute flex flex-col items-start mt-1 rounded-lg border bg-white dark:bg-secondaryColor-dark border-black dark:border-gray-400 mobile:w-full w-[500px] transition-all duration-300 ${
-                isPricesDropDownOpen ? "h-48" : "h-0 opacity-0 invisible"
+                isPricesDropDownOpen ? "max-h-48" : "h-0 opacity-0 invisible"
               }`}
             >
-              {prices.map((price, index) => (
+              {priceOptions.map((price, index) => (
                 <button
                   key={price.id}
                   className={`px-3 py-3 w-full text-start dark:hover:bg-secondaryColor-light/30 ${
-                    index === prices.length - 1
+                    index === priceOptions.length - 1
                       ? "border-none"
                       : "border-b border-b-black dark:border-gray-400"
                   }`}

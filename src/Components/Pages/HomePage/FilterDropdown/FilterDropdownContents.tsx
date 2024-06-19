@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from "react";
+import { useFilterStore } from "../../../../base/store/homepage/useFilterStore";
 import { closeFilterModalContext } from "./FilterButton";
 import { FilterByBedsAndBaths } from "./FilterByBedsAndBaths";
 import { FilterByLocation } from "./FilterByLocation";
 import { FilterByPrice } from "./FilterByPrice";
-import { useFilterStore } from "../../../../base/store/homepage/useFilterStore";
 
 export const UseFilterContext = createContext<any>({});
 export const FilterDropdownContents = () => {
@@ -75,6 +75,7 @@ export const FilterDropdownContents = () => {
           selectedPrice={selectedPrice}
           setIsPricesDropDownOpen={setIsPricesDropDownOpen}
           setSelectedPrice={setSelectedPrice}
+          selectedCity={selectedCity}
         />
         {/*  */}
         <FilterByBedsAndBaths
@@ -82,6 +83,7 @@ export const FilterDropdownContents = () => {
           selectedBeds={selectedBeds}
           setSelectedBaths={setSelectedBaths}
           setSelectedBeds={setSelectedBeds}
+          selectedCity={selectedCity}
         />
       </div>
       <div className="absolute mobile:fixed z-40 bg-white dark:bg-secondaryColor-light bottom-4 mobile:bottom-0 border-t border-t-slate-300 dark:border-gray-400 mobile:w-full tablet:w-[540px] tablet-above:w-[540px] laptop:w-[550px] items-center pt-2 pb-5 px-4 flex justify-between mobile:rounded-b-none rounded-b-lg">
@@ -89,6 +91,8 @@ export const FilterDropdownContents = () => {
           className="capitalize font-bold text-lg hover:bg-slate-200 dark:hover:bg-secondaryColor-dark/30  rounded-lg py-2 px-2 transition-colors duration-300"
           onClick={() => {
             clearFilterOptions();
+            setSelectedCity("");
+            setSelectedState("");
           }}
         >
           clear all

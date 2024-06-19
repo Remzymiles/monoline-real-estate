@@ -4,27 +4,31 @@
     "price": {
       "min": 100000,
       "max": 500000
-    }
+    },
+    "cities":["Austin, TX"]
   },
   {
     "id": 2,
     "price": {
       "min": 500000,
       "max": 1000000
-    }
+    },
+    "cities":["Scottsdale, AZ","Newton, MA","Staten Island, NY","Austin, TX"]
   },
   {
     "id": 3,
     "price": {
       "min": 1000000,
       "max": 2000000
-    }
+    },
+    "cities":["West Newton, MA","Scottsdale, AZ","Newton, MA","Austin, TX"]
   },
   {
     "id": 4,
     "price": {
       "min": 2000000,
       "max": 10000000
-    }
+    },
+    "cities":["Newton Center, MA","Newton, MA"]
   }
 ]

@@ -3,4 +3,5 @@ export interface IFilterByBedsAndBaths {
   selectedBeds: number;
   setSelectedBaths: React.Dispatch<number>;
   setSelectedBeds: React.Dispatch<number>;
+  selectedCity: string;
 }

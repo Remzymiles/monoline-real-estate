@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useFetchCartProperties } from "../../../../base/hooks/cartpage/useFetchCartProperties";
+import { useCartLengthStore } from "../../../../base/store/cartpage/useCartLengthStore";
 import { useDarkModeStore } from "../../../../base/store/useDarkModeStore";
 import { useIsUserLoggedIn } from "../../../../base/store/useIsUserLoggedIn";
 import { CartIcon } from "../../../Icons/CartIcon";
 import { MonolineLogo } from "../../../Logos/MonolineLogo";
 import { SearchBar } from "./SearchBar";
-import { UserProfileDropdown } from "./UserProfile/UserProfileDropdown";
-import { useFetchCartProperties } from "../../../../base/hooks/cartpage/useFetchCartProperties";
-import { useCartLengthStore } from "../../../../base/store/cartpage/useCartLengthStore";
+import { GeneralHeaderDropdown } from "./UserProfile/GeneralHeaderDropdown";
 
 export const HomepageHeader = () => {
-  // 
+  //
   useFetchCartProperties();
 
   const { cartLength } = useCartLengthStore((state) => ({
@@ -68,7 +68,7 @@ export const HomepageHeader = () => {
               </p>
             )}
           </Link>
-          <UserProfileDropdown />
+          <GeneralHeaderDropdown />
         </div>
       </div>
     </header>

@@ -59,7 +59,9 @@ export const useFilterStore = create<IFilterStore>((set) => ({
         selectedPrice: "",
       },
     }),
+
   isFilterButtonClicked: "",
+  
   setIsFilterButtonClicked: (value) =>
     set({
       isFilterButtonClicked: value,

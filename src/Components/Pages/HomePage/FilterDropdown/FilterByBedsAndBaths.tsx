@@ -9,12 +9,14 @@ export const FilterByBedsAndBaths = ({
   selectedBeds,
   setSelectedBaths,
   setSelectedBeds,
+  selectedCity
 }: IFilterByBedsAndBaths) => {
   //
   const { filterOptions } = useFilterStore((state) => ({
     filterOptions: state.filterOptions,
     clearFilterOptions: state.clearFilterOptions,
   }));
+  //
 
   useEffect(() => {
     filterOptions.selectedBeds
@@ -24,7 +26,24 @@ export const FilterByBedsAndBaths = ({
       ? setSelectedBaths(filterOptions.selectedBaths)
       : setSelectedBaths(0);
   }, [filterOptions]);
+  //
 
+  const bedsOption = propertyBeds.filter((beds)=>{
+    if(selectedCity){
+      return beds.cities.includes(selectedCity)
+    }
+    return beds
+  })
+  // 
+
+  const bathsOption = propertyBaths.filter((baths)=>{
+    if(selectedCity){
+      return baths.cities.includes(selectedCity)
+    }
+    return baths
+  })
+
+  //
   return (
     <>
       <div className="mt-2">
@@ -45,7 +64,7 @@ export const FilterByBedsAndBaths = ({
               >
                 any
               </div>
-              {propertyBeds.map((bed) => (
+              {bedsOption.map((bed) => (
                 <div
                   key={bed.id}
                   className={`border hover:border-black dark:border-gray-400 dark:hover:border-gray-200 rounded-2xl px-[23px] py-[5px] ${
@@ -78,7 +97,7 @@ export const FilterByBedsAndBaths = ({
               >
                 any
               </div>
-              {propertyBaths.map((bath) => (
+              {bathsOption.map((bath) => (
                 <div
                   key={bath.id}
                   className={`border hover:border-black rounded-2xl px-[23px] py-[5px] ${

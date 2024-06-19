@@ -1,26 +1,27 @@
 import { useEffect, useRef, useState } from "react";
-import { IUseHandleMainLayoutDropdown } from "../interface/IUseHandleMainLayoutDropdown";
+import { IUseHandleGeneralHeaderDropdown } from "../interface/IUseHandleMainLayoutDropdown";
 
-export const useHandleUserProfileDropdown =
-  (): IUseHandleMainLayoutDropdown => {
-    const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
-    const userProfileDropdownRef = useRef<HTMLDivElement>(null);
+export const useHandleGeneralHeaderDropdown =
+  (): IUseHandleGeneralHeaderDropdown => {
+    const [isGeneralHeaderDropdownVisible, setIsGeneralHeaderDropdownVisible] =
+      useState(false);
+    const generalHeaderDropdownRef = useRef<HTMLDivElement>(null);
 
-    const handleOpenUserProfileDropDown = (): void => {
-      setIsUserProfileVisible(true);
+    const handleOpenGeneralHeaderDropdown = (): void => {
+      setIsGeneralHeaderDropdownVisible(true);
     };
 
-    const handleCloseUserProfileDropDown = (): void => {
-      setIsUserProfileVisible(false);
+    const handleCloseGeneralHeaderDropdown = (): void => {
+      setIsGeneralHeaderDropdownVisible(false);
     };
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent | Event): void => {
         if (
-          userProfileDropdownRef.current &&
-          !userProfileDropdownRef.current.contains(event.target as Node)
+          generalHeaderDropdownRef.current &&
+          !generalHeaderDropdownRef.current.contains(event.target as Node)
         ) {
-          handleCloseUserProfileDropDown();
+          handleCloseGeneralHeaderDropdown();
         }
       };
 
@@ -32,10 +33,10 @@ export const useHandleUserProfileDropdown =
     }, []);
 
     return {
-      isUserProfileVisible,
-      handleOpenUserProfileDropDown,
-      handleCloseUserProfileDropDown,
-      userProfileDropdownRef,
-      setIsUserProfileVisible,
+      isGeneralHeaderDropdownVisible,
+      handleOpenGeneralHeaderDropdown,
+      handleCloseGeneralHeaderDropdown,
+      generalHeaderDropdownRef,
+      setIsGeneralHeaderDropdownVisible,
     };
   };

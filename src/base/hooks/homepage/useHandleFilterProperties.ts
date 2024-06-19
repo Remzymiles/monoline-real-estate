@@ -29,11 +29,17 @@ export const useHandleFilterProperties = () => {
         return;
       }
       //
-      if (selectedBeds && property.propertyDetails.beds !== selectedBeds) {
+      if (
+        selectedBeds &&
+        Number(property.propertyDetails.beds) !== selectedBeds
+      ) {
         return;
       }
       //
-      if (selectedBaths && property.propertyDetails.baths !== selectedBaths) {
+      if (
+        selectedBaths &&
+        Number(property.propertyDetails.baths) !== selectedBaths
+      ) {
         return;
       }
       //
@@ -43,6 +49,7 @@ export const useHandleFilterProperties = () => {
           return;
         }
       }
+
       return true;
     });
   };

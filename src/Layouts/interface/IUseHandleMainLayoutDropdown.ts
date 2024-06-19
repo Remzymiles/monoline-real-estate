@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface IUseHandleMainLayoutDropdown {
-  isUserProfileVisible: boolean;
-  setIsUserProfileVisible: Dispatch<SetStateAction<boolean>>;
-  handleOpenUserProfileDropDown: () => void;
-  handleCloseUserProfileDropDown: () => void;
-  userProfileDropdownRef: React.RefObject<HTMLDivElement>;
+export interface IUseHandleGeneralHeaderDropdown {
+  isGeneralHeaderDropdownVisible: boolean;
+  setIsGeneralHeaderDropdownVisible: Dispatch<SetStateAction<boolean>>;
+  handleOpenGeneralHeaderDropdown: () => void;
+  handleCloseGeneralHeaderDropdown: () => void;
+  generalHeaderDropdownRef: React.RefObject<HTMLDivElement>;
 }
