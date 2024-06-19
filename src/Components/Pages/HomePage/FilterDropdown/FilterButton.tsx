@@ -22,7 +22,7 @@ export const FilterButton = () => {
         }`}
       >
         <div
-          className={`flex justify-between items-center bg-white dark:bg-secondaryColor-dark py-2 border-b-2 dark:border-secondaryColor-light/20 laptop-below:py-3 tablet-above:px-8 laptop:px-28 mobile:px-4 tablet:px-8`}
+          className={`flex justify-between items-center bg-white dark:bg-secondaryColor-dark py-2 border-b-2 border-t-2 dark:border-secondaryColor-light/20 laptop-below:py-3 tablet-above:px-8 laptop:px-28 mobile:px-4 tablet:px-8`}
         >
           <p className="text-lg font-light capitalize dark:text-gray-400">
             Filter properties:
