@@ -39,7 +39,7 @@ export const EditPasswordForm = ({
             className="text-xs text-primaryColor-light"
             onClick={handleEditPassword}
           >
-            Edit
+            Edit Password
           </button>
         </div>
       </div>
