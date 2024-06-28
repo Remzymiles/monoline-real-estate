@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect } from "react";
+import { toast } from "sonner";
 import { useFetchProfilePicture } from "../../../base/hooks/profilePage/useFetchProfilePicture";
 import { useFetchUserProfileInfo } from "../../../base/hooks/profilePage/useFetchUserProfile";
 import { uploadProfilePicture } from "../../../base/hooks/profilePage/useUploadProfilePicture";
@@ -28,11 +29,6 @@ export const ProfileImage = () => {
   //
 
   useEffect(() => {
-    console.log(userProfileInfo);
-  }, [userProfileInfo]);
-  //
-
-  useEffect(() => {
     const fetchUserId = async () => {
       const data = await getAuthData();
       if (data) {
@@ -48,7 +44,7 @@ export const ProfileImage = () => {
       await uploadProfilePicture(userId, file);
       refetchProfilePicture();
     } else {
-      console.log("No file selected");
+      toast.error("No file selected");
     }
   };
 

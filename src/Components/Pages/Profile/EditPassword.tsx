@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import { getAuthData } from "../../../base/hooks/useGetAuthData";
-import { EditPasswordForm } from "./EditPasswordForm";
 import { useHandleEditPasswordForm } from "../../../base/hooks/profilePage/useHandleEditPasswordForm";
+import { EditPasswordForm } from "./EditPasswordForm";
 
 export const EditPassword = () => {
   //
-  const { handleEditPassword, isEditPasswordVisible } = useHandleEditPasswordForm();
+  const { handleEditPassword, isEditPasswordVisible } =
+    useHandleEditPasswordForm();
   //
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-
+  const [userEmail, setUserEmail] = useState<string>("");
+  //
+  
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAuthData();
-      if (data?.user?.email) {
-        setUserEmail(data.user.email);
-      }
-    };
-
-    fetchData();
+    const data = localStorage.getItem("sb-xvfhzmjbcswkydirxlry-auth-token");
+    if (data) {
+      let userData = JSON.parse(data);
+      setUserEmail(userData.user.email);
+    }
   }, []);
 
   //

@@ -25,7 +25,6 @@ export const ProfilePageCard = () => {
   const handleEditProfile = (data: IProfileInfo) => {
     reset();
     mutate(data);
-    console.log(data);
   };
   //
   return (

@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useUserIdStore } from "../../store/useUserIdStore";
 import supabase from "../../../config/supabaseClient";
+import { useUserIdStore } from "../../store/useUserIdStore";
 
 export const useFetchUserProfileInfo = () => {
   const { userId } = useUserIdStore((state) => ({
@@ -22,9 +22,7 @@ export const useFetchUserProfileInfo = () => {
       throw new Error(error.message);
     }
 
-    console.log('Fetched user profile data:', data);  // Debug log
-
-    return data;  // Return the entire data object
+    return data;
   };
 
   useEffect(() => {
@@ -42,7 +40,9 @@ export const useFetchUserProfileInfo = () => {
         },
         (payload) => {
           console.log("Profile Info updated:", payload);
-          queryClient.invalidateQueries({ queryKey: ["user_profile_info", userId] });
+          queryClient.invalidateQueries({
+            queryKey: ["user_profile_info", userId],
+          });
         }
       )
       .subscribe();
