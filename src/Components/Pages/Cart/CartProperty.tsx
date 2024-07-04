@@ -16,6 +16,7 @@ export const CartProperty = ({
   handleAddToWishlist: (propertyId: string) => void;
   IsPushWishlistPropertiesLoading: { [propertyId: string]: boolean };
 }) => {
+  
   //
   return (
     <>
